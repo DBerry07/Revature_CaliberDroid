@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.BatchesFragmentBinding
 
 class BatchesFragment : Fragment() {
@@ -28,11 +25,17 @@ class BatchesFragment : Fragment() {
 
         viewModel.getBatches()
 
-        subscribeToBatches()
+        // New way of inserting the data into the ui directly from the view model, all changes are automatically updated on the UI
+        binding.batchesViewModel = viewModel
 
-        findNavController().navigate(BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
-            Batch(1)
-        ))
+        // Make sure to call this method so the UI reflect the changes on the view model
+        binding.setLifecycleOwner(this)
+
+//        subscribeToBatches()
+
+//        findNavController().navigate(BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
+//            Batch(1)
+//        ))
 
         return binding.root
     }
@@ -42,10 +45,10 @@ class BatchesFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    fun subscribeToBatches() {
-        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
-            binding.batch = it
-        })
-    }
+//    fun subscribeToBatches() {
+//        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+//            binding
+//        })
+//    }
 
 }

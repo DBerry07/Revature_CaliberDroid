@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_quality_audit"
+    app:startDestination="@id/batchesFragment">
+    <fragment
+        android:id="@+id/batchesFragment"
+        android:name="com.revature.caliberdroid.ui.batches.BatchesFragment"
+        android:label="batches_fragment"
+        tools:layout="@layout/batches_fragment" >
+        <action
+            android:id="@+id/action_batchesFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.revature.caliberdroid.ui.gallery.GalleryFragment"
+        android:label="GalleryFragment" >
+        <argument
+            android:name="batchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
+    </fragment>
+</navigation>

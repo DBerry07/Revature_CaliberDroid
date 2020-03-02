@@ -4,28 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.revature.caliberdroid.R
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
+import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.databinding.FragmentGalleryBinding
+
+const val name = ""
 
 class GalleryFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    /* Constants */
+    companion object {
+
+    }
+
+    /* variables */
+
+
+    private lateinit var binding : FragmentGalleryBinding
+    private val galleryViewModel: GalleryViewModel by activityViewModels()
+    private val args : GalleryFragmentArgs by navArgs()
+    private lateinit var batchSelect: Batch
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+
+        binding = FragmentGalleryBinding.inflate(layoutInflater)
+
+        binding.galleryViewModel = galleryViewModel
+
+        batchSelect = args.batchSelected
+
+        return binding.root
     }
 }

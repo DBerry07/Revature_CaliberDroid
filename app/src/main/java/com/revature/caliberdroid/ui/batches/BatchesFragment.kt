@@ -40,12 +40,7 @@ class BatchesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
-    }
-
-//    fun subscribeToBatches() {
+    //    fun subscribeToBatches() {
 //        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
 //            binding
 //        })

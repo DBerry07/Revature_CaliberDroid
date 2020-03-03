@@ -13,7 +13,9 @@ import com.revature.caliberdroid.databinding.BatchesFragmentBinding
 
 class BatchesFragment : Fragment() {
 
-    private lateinit var binding: BatchesFragmentBinding
+    private var _binding: BatchesFragmentBinding? = null
+    private val binding
+        get() = _binding!!
     private val viewModel: BatchesViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +27,7 @@ class BatchesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = BatchesFragmentBinding.inflate(layoutInflater)
+        _binding = BatchesFragmentBinding.inflate(layoutInflater)
 
         viewModel.getBatches()
 
@@ -53,4 +55,8 @@ class BatchesFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

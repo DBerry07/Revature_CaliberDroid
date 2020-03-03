@@ -2,14 +2,15 @@ package com.revature.caliberdroid.ui.batches
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.repository.BatchRepository
 
-class BatchesViewModel : ViewModel() {
+class BatchSelectionViewModel : ViewModel() {
 
-    lateinit var batchesLiveData: LiveData<List<Batch>>
+    lateinit var batches: LiveData<List<Batch>>
 
     fun getBatches() {
-        batchesLiveData = BatchRepository.getBatches()
+        batches = BatchRepository.getBatches()
     }
 }

@@ -7,9 +7,9 @@ import com.revature.caliberdroid.data.model.Batch
 
 object BatchRepository {
 
-    fun getBatches(): LiveData<Batch> {
+    fun getBatches(): LiveData<List<Batch>> {
 
-        val liveData = MutableLiveData<Batch>()
+        val liveData = MutableLiveData<List<Batch>>()
 
         APIHandler.getBatches(liveData)
 

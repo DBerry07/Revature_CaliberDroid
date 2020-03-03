@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="batchesViewModel"
-            type="com.revature.caliberdroid.ui.batches.BatchesViewModel" />
+            name="viewModel"
+            type="com.revature.caliberdroid.ui.batches.BatchSelectionViewModel" />
 
     </data>
 
@@ -15,13 +15,13 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.batches.BatchesFragment">
+        tools:context=".ui.batches.BatchSelectionFragment">
 
         <EditText
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@={batchesViewModel.batchesLiveData.trainingName}"
+            android:text="@={viewModel.batches.get(0).trainingName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@{batchesViewModel.batchesLiveData.trainingName}"
+            android:text="@{viewModel.batches.get(0).trainingName}"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/textView2" />

@@ -25,7 +25,7 @@ class GalleryFragment : Fragment() {
     private val binding
         get() = _binding!!
     private val batchesViewModel: BatchesViewModel by activityViewModels()
-    private val args : GalleryFragmentArgs by navArgs()
+    //private val args : GalleryFragmentArgs by navArgs()
     private lateinit var batchSelect: Batch
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class GalleryFragment : Fragment() {
             batchesViewModel = this@GalleryFragment.batchesViewModel
         }
 
-        batchSelect = args.batchSelected
+        //batchSelect = args.batchSelected
 
         return binding.root
     }

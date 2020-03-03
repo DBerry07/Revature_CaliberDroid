@@ -26,7 +26,7 @@ data class Batch (
     @Bindable get() = _trainingName!!
     set(value) {
         _trainingName = value
-        notifyPropertyChanged(BR.trainingName)
+        notifyPropertyChanged(BR._all)
     }
 
     constructor(parcel: Parcel) : this(

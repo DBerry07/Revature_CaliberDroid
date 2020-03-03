@@ -14,7 +14,13 @@
     <string name="menu_locations">Locations</string>
     <string name="menu_trainers">Trainers</string>
     <string name="menu_categories">Categories</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+<!--    Assess Batch-->
+    <string name="assessment_type_label">Type:</string>
+    <string name="assessment_skill_label">Skill Category:</string>
+    <string name="assessment_points_label">Points:</string>
+    <string name="assessment_batch_avg_label">Batch Average:</string>
+    
+    <string name="trainee_name_label">Name:</string>
+    <string name="trainee_notes_label">Trainee Notes:</string>
 </resources>

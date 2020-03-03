@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.databinding.FragmentLocationsBinding
 import kotlinx.android.synthetic.main.fragment_locations.*
@@ -36,6 +37,8 @@ class LocationsFragment : Fragment(){
             setLifecycleOwner(this@LocationsFragment)
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
+
+                    rvLocations.adapter = LocationsAdapter(locations)
                     for (location in locations) {
                         Log.d("Locations", "Location: ${location.toString()}")
                     }

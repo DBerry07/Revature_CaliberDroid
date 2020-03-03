@@ -9,9 +9,12 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.databinding.FragmentLocationsBinding
 
 
-class LocationsFragment : Fragment(), View.OnClickListener{
+class LocationsFragment : Fragment(){
+    private var _binding : FragmentLocationsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -21,17 +24,16 @@ class LocationsFragment : Fragment(), View.OnClickListener{
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ) : View?{
-        val root:ViewGroup = inflater.inflate(R.layout.fragment_locations,container,false) as ViewGroup
-        root.findViewById<Button>(R.id.btnAddLocation).setOnClickListener(this)
-        root.findViewById<Button>(R.id.btnEditLocation).setOnClickListener(this)
-        return root
-    }
-
-    override fun onClick(view : View){
-        when(view.id){
-            R.id.btnAddLocation -> findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
-            R.id.btnEditLocation -> findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
-            else ->{}
+        _binding = FragmentLocationsBinding.inflate(layoutInflater)
+        binding.apply {
+            btnAddLocation.setOnClickListener{
+                findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
+            }
+            btnEditLocation.setOnClickListener{
+                findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
+            }
         }
+
+        return binding.root
     }
 }

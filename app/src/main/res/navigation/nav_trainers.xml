@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/trainersFragment"
         android:name="com.revature.caliberdroid.ui.trainers.TrainersFragment"
-        android:label="fragment_trainers"
-        tools:layout="@layout/fragment_trainers" >
+        android:label="Trainers"
+        tools:layout="@layout/fragment_trainers">
         <action
             android:id="@+id/action_trainersFragment_to_addTrainerFragment"
             app:destination="@id/addTrainerFragment" />
@@ -20,11 +20,11 @@
     <fragment
         android:id="@+id/addTrainerFragment"
         android:name="com.revature.caliberdroid.ui.trainers.AddTrainerFragment"
-        android:label="fragment_add_trainer"
+        android:label="Add Trainer"
         tools:layout="@layout/fragment_add_trainer" />
     <fragment
         android:id="@+id/editTrainerFragment"
         android:name="com.revature.caliberdroid.ui.trainers.EditTrainerFragment"
-        android:label="fragment_edit_trainer"
+        android:label="Edit Trainer"
         tools:layout="@layout/fragment_edit_trainer" />
 </navigation>

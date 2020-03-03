@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/locationsFragment"
         android:name="com.revature.caliberdroid.ui.locations.LocationsFragment"
-        android:label="fragment_locations"
-        tools:layout="@layout/fragment_locations" >
+        android:label="Locations"
+        tools:layout="@layout/fragment_locations">
         <action
             android:id="@+id/action_locationsFragment_to_addLocationFragment"
             app:destination="@id/addLocationFragment" />
@@ -20,11 +20,11 @@
     <fragment
         android:id="@+id/addLocationFragment"
         android:name="com.revature.caliberdroid.ui.locations.AddLocationFragment"
-        android:label="fragment_add_location"
+        android:label="Add Location"
         tools:layout="@layout/fragment_add_location" />
     <fragment
         android:id="@+id/editLocationFragment"
         android:name="com.revature.caliberdroid.ui.locations.EditLocationFragment"
-        android:label="fragment_edit_location"
+        android:label="Edit Location"
         tools:layout="@layout/fragment_edit_location" />
 </navigation>

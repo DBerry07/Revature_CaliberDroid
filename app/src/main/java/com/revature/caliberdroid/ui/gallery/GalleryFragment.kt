@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentGalleryBinding
-import com.revature.caliberdroid.ui.batches.BatchesViewModel
+import com.revature.caliberdroid.ui.batches.BatchSelectionViewModel
 
 class GalleryFragment : Fragment() {
 
@@ -24,8 +24,8 @@ class GalleryFragment : Fragment() {
     private var _binding: FragmentGalleryBinding? = null
     private val binding
         get() = _binding!!
-    private val batchesViewModel: BatchesViewModel by activityViewModels()
     //private val args : GalleryFragmentArgs by navArgs()
+    private val batchesViewModel: BatchSelectionViewModel by activityViewModels()
     private lateinit var batchSelect: Batch
 
     override fun onCreateView(
@@ -36,11 +36,11 @@ class GalleryFragment : Fragment() {
 
         _binding = FragmentGalleryBinding.inflate(layoutInflater)
 
-        binding.apply {
-            batchesViewModel = this@GalleryFragment.batchesViewModel
-        }
 
         //batchSelect = args.batchSelected
+//        binding.apply {
+//            viewModel = this@GalleryFragment.batchesViewModel
+//        }
 
         return binding.root
     }

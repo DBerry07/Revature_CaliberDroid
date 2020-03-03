@@ -67,4 +67,7 @@ dependencies {
 
     // SortedListAdapter
     implementation 'com.github.wrdlbrnft:sorted-list-adapter:0.3.0.27'
+
+    // Logging Class
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

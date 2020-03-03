@@ -22,15 +22,15 @@ class LocationsFragment : Fragment(), View.OnClickListener{
                               savedInstanceState: Bundle?
     ) : View?{
         val root:ViewGroup = inflater.inflate(R.layout.fragment_locations,container,false) as ViewGroup
-        root.findViewById<Button>(R.id.btn_add_location).setOnClickListener(this)
-        root.findViewById<Button>(R.id.btn_edit_location).setOnClickListener(this)
+        root.findViewById<Button>(R.id.btnAddLocation).setOnClickListener(this)
+        root.findViewById<Button>(R.id.btnEditLocation).setOnClickListener(this)
         return root
     }
 
     override fun onClick(view : View){
         when(view.id){
-            R.id.btn_add_location -> findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
-            R.id.btn_edit_location -> findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
+            R.id.btnAddLocation -> findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
+            R.id.btnEditLocation -> findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
             else ->{}
         }
     }

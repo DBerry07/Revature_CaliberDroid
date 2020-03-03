@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.locations.LocationsFragment">
+    tools:context=".ui.trainers.TrainersFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -14,19 +19,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Locations" />
+            android:text="Trainers" />
 
         <Button
-            android:id="@+id/btnAddLocation"
+            android:id="@+id/btnAddTrainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Location" />
+            android:text="Add Trainer" />
 
         <Button
-            android:id="@+id/btnEditLocation"
+            android:id="@+id/btnEditTrainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Location" />
+            android:text="Edit Trainer" />
     </LinearLayout>
 
 </FrameLayout>
+</layout>

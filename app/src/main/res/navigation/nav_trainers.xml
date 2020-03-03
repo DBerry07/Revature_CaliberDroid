@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_trainers">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_trainers"
+    app:startDestination="@id/trainersFragment">
 
+    <fragment
+        android:id="@+id/trainersFragment"
+        android:name="com.revature.caliberdroid.ui.trainers.TrainersFragment"
+        android:label="fragment_trainers"
+        tools:layout="@layout/fragment_trainers" >
+        <action
+            android:id="@+id/action_trainersFragment_to_addTrainerFragment"
+            app:destination="@id/addTrainerFragment" />
+        <action
+            android:id="@+id/action_trainersFragment_to_editTrainerFragment"
+            app:destination="@id/editTrainerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTrainerFragment"
+        android:name="com.revature.caliberdroid.ui.trainers.AddTrainerFragment"
+        android:label="fragment_add_trainer"
+        tools:layout="@layout/fragment_add_trainer" />
+    <fragment
+        android:id="@+id/editTrainerFragment"
+        android:name="com.revature.caliberdroid.ui.trainers.EditTrainerFragment"
+        android:label="fragment_edit_trainer"
+        tools:layout="@layout/fragment_edit_trainer" />
 </navigation>

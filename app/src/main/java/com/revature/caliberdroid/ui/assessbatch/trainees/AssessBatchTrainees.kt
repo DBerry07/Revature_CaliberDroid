@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui
+package com.revature.caliberdroid.ui.assessbatch.trainees
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,7 +12,8 @@ import com.revature.caliberdroid.R
 class AssessBatchTrainees : Fragment() {
 
     companion object {
-        fun newInstance() = AssessBatchTrainees()
+        fun newInstance() =
+            AssessBatchTrainees()
     }
 
     private lateinit var viewModel: AssessBatchTraineesViewModel

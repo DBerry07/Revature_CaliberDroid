@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui
+package com.revature.caliberdroid.ui.assessbatch.trainees
 
 import android.os.Parcel
 import android.os.Parcelable

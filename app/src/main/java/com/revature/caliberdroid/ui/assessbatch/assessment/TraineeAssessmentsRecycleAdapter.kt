@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui
+package com.revature.caliberdroid.ui.assessbatch.assessment
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,11 @@ class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_assessment_trainee_grades,parent,false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_assessment_trainee_grades,
+                parent,
+                false
+            )
         )
     }
 

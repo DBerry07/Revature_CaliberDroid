@@ -1,6 +1,7 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -29,8 +30,6 @@ object APIHandler {
                 Log.d("APIHandler",response.toString())
                 liveData.postValue(JSONParser.parseBatch(response))
             },
-            Response.ErrorListener { error -> Log.d("APIHandler", error.toString()) })
-        // Add the request to the RequestQueue.
             Response.ErrorListener { error -> Timber.d(error.toString()) })
         queue.add(stringRequest)
     }

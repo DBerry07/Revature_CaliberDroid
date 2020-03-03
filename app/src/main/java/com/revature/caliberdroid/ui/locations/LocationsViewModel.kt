@@ -7,7 +7,7 @@ import com.revature.caliberdroid.data.repository.LocationRepository
 
 class LocationsViewModel : ViewModel() {
 
-    lateinit var locationsLiveData: LiveData<Location>
+    lateinit var locationsLiveData: LiveData< ArrayList<Location> >
 
     fun getLocations(){
         locationsLiveData = LocationRepository.getLocations()

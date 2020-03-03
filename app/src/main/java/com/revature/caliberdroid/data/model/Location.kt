@@ -9,4 +9,7 @@ class Location (
     var state: String,
     var active: Boolean
 ){
+    override fun toString(): String {
+        return "Location(locationID=$locationID, name='$name', city='$city', zipcode='$zipcode', address='$address', state='$state', active=$active)"
+    }
 }

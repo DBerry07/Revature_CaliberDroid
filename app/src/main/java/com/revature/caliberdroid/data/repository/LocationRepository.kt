@@ -7,8 +7,8 @@ import com.revature.caliberdroid.data.model.Location
 
 object LocationRepository {
 
-    fun getLocations(): LiveData<Location>{
-        val liveData = MutableLiveData<Location>()
+    fun getLocations(): LiveData< ArrayList<Location> >{
+        val liveData = MutableLiveData< ArrayList<Location> >()
         APIHandler.getLocations(liveData)
         return liveData
     }

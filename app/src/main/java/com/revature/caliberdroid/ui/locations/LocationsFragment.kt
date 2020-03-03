@@ -1,22 +1,26 @@
 package com.revature.caliberdroid.ui.locations
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.databinding.FragmentLocationsBinding
+import kotlinx.android.synthetic.main.fragment_locations.*
 
 
 class LocationsFragment : Fragment(){
     private var _binding : FragmentLocationsBinding? = null
     private val binding get() = _binding!!
-    private val locationModel: LocationsViewModel by activityViewModels()
+    private val locationsViewModel: LocationsViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -26,8 +30,20 @@ class LocationsFragment : Fragment(){
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ) : View?{
+        locationsViewModel.getLocations()
         _binding = FragmentLocationsBinding.inflate(layoutInflater)
         binding.apply {
+            setLifecycleOwner(this@LocationsFragment)
+            locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
+                if(locations != null){
+                    for (location in locations) {
+                        Log.d("Locations", "Location: ${location.toString()}")
+                    }
+                } else {
+                    Log.d("Locations", "locationsViewModel is null")
+                }
+            })
+
             btnAddLocation.setOnClickListener{
                 findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
             }
@@ -35,8 +51,6 @@ class LocationsFragment : Fragment(){
                 findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
             }
         }
-
-        locationModel.getLocations()
 
         return binding.root
     }

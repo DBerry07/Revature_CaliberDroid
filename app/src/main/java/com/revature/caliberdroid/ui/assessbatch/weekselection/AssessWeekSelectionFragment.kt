@@ -11,12 +11,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.databinding.FragmentAssessWeekSelectionBinding
+import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
 
 class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClickListener {
 
     private val assessWeekSelectionViewModel : AssessWeekSelectionViewModel by activityViewModels()
-    private var _assessWeekSelectionBinding: FragmentAssessWeekSelectionBinding? = null
+    private var _assessWeekSelectionBinding: FragmentWeekSelectionBinding? = null
     private val assessWeekSelectionBinding get() = _assessWeekSelectionBinding!!
     private val WEEK_NUMBER_COMPARATOR = Comparator<AssessWeekNotes> { a,b -> a.weekNumber!!.compareTo(b.weekNumber!!)}
 
@@ -33,7 +33,7 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
         savedInstanceState: Bundle?
     ): View? {
 
-        _assessWeekSelectionBinding = FragmentAssessWeekSelectionBinding.inflate(inflater)
+        _assessWeekSelectionBinding = FragmentWeekSelectionBinding.inflate(inflater)
 
         val rvWeeks = assessWeekSelectionBinding.rvAssessweekselectionWeeks
 

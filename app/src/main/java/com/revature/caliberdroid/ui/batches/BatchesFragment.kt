@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.BatchesFragmentBinding
 
 class BatchesFragment : Fragment() {
@@ -21,29 +24,33 @@ class BatchesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = BatchesFragmentBinding.inflate(layoutInflater)
 
         viewModel.getBatches()
 
-        // New way of inserting the data into the ui directly from the view model, all changes are automatically updated on the UI
-        binding.batchesViewModel = viewModel
+        binding.apply {
 
-        // Make sure to call this method so the UI reflect the changes on the view model
-        binding.setLifecycleOwner(this)
+            // New way of inserting the data into the ui directly from the view model, all changes are automatically updated on the UI
+            batchesViewModel = viewModel
 
-//        subscribeToBatches()
+            // Make sure to call this method so the UI reflect the changes on the view model
+            setLifecycleOwner(this@BatchesFragment)
 
-//        findNavController().navigate(BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
-//            Batch(1)
-//        ))
+            viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+
+            })
+
+            btnNextPage.setOnClickListener {
+                findNavController().navigate(
+                    BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
+                        Batch(1)
+                    )
+                )
+            }
+        }
 
         return binding.root
     }
-
-    //    fun subscribeToBatches() {
-//        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
-//            binding
-//        })
-//    }
 
 }

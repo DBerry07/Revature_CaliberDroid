@@ -2,10 +2,14 @@ package com.revature.caliberdroid.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import com.revature.caliberdroid.BR
 
-data class Batch(
+data class Batch (
     val batchID: Long,
-    var trainingName: String? = "",
+    @Bindable
+    var _trainingName: String? = "",
     var trainingType: String? = "",
     var skillType: String? = "",
     var trainerName: String? = "",
@@ -16,7 +20,15 @@ data class Batch(
     var endDate: Long = 0,
     var goodGrade: Int = 0,
     var passingGrade: Int = 0,
-    var weeks: Int = 0): Parcelable {
+    var weeks: Int = 0) : BaseObservable(), Parcelable {
+
+    var trainingName: String
+    @Bindable get() = _trainingName!!
+    set(value) {
+        _trainingName = value
+        notifyPropertyChanged(BR.trainingName)
+    }
+
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString(),

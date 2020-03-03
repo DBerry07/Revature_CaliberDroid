@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="galleryViewModel"
-            type="com.revature.caliberdroid.ui.gallery.GalleryViewModel" />
+            name="batchesViewModel"
+            type="com.revature.caliberdroid.ui.batches.BatchesViewModel" />
 
     </data>
 
@@ -16,14 +16,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.gallery.GalleryFragment">
 
-        <EditText
+        <TextView
             android:id="@+id/text_gallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{galleryViewModel.text}"
+            android:text="@{batchesViewModel.batchesLiveData.trainingName}"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

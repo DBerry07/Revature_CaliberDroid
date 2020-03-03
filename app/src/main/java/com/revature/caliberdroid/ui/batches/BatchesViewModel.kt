@@ -12,5 +12,4 @@ class BatchesViewModel : ViewModel() {
     fun getBatches() {
         batchesLiveData = BatchRepository.getBatches()
     }
-
 }

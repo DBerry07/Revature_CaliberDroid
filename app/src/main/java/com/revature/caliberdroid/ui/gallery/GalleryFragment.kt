@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentGalleryBinding
+import com.revature.caliberdroid.ui.batches.BatchesViewModel
 
 const val name = ""
 
@@ -23,7 +24,7 @@ class GalleryFragment : Fragment() {
 
 
     private lateinit var binding : FragmentGalleryBinding
-    private val galleryViewModel: GalleryViewModel by activityViewModels()
+    private val batchesViewModel: BatchesViewModel by activityViewModels()
     private val args : GalleryFragmentArgs by navArgs()
     private lateinit var batchSelect: Batch
 
@@ -35,7 +36,9 @@ class GalleryFragment : Fragment() {
 
         binding = FragmentGalleryBinding.inflate(layoutInflater)
 
-        binding.galleryViewModel = galleryViewModel
+        binding.apply {
+            batchesViewModel = this@GalleryFragment.batchesViewModel
+        }
 
         batchSelect = args.batchSelected
 

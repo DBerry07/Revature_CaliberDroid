@@ -35,6 +35,7 @@ class GalleryFragment : Fragment() {
 
         _binding = FragmentGalleryBinding.inflate(layoutInflater)
 
+
 //        binding.apply {
 //            viewModel = this@GalleryFragment.batchesViewModel
 //        }

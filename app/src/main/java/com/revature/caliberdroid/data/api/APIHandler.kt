@@ -8,7 +8,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.data.parser.LocationParser
 import org.json.JSONArray
 
 object APIHandler {
@@ -31,5 +33,23 @@ object APIHandler {
             Response.ErrorListener { error -> Log.d("APIHandler", error.toString()) })
 // Add the request to the RequestQueue.
         queue.add(stringRequest)
+    }
+
+    fun getLocations(liveData: MutableLiveData<Location>){
+        var queue = Volley.newRequestQueue(context);
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/location/all/location/all";
+        val locationsRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener<JSONArray>{ response ->
+                Log.d("Locations","This is the response: "+LocationParser.parseLocation(response).toString())
+            },
+            Response.ErrorListener { error ->
+                Log.d("Locations","This is the error: "+error.toString())
+            }
+        )
+        Log.d("Locations","Adding to the locations request queue")
+        queue.add(locationsRequest)
     }
 }

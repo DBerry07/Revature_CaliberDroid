@@ -44,6 +44,7 @@ class BatchesFragment : Fragment() {
             })
 
             btnNextPage.setOnClickListener {
+                viewModel.getBatches()
                 findNavController().navigate(
                     BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
                         Batch(1)

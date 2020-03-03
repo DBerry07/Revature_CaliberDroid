@@ -12,7 +12,7 @@ class LocationsAdapter(val locations:ArrayList<Location>): RecyclerView.Adapter<
 
 //Need to implement data binding in recycler view adapter
     class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val tvLocationName:TextView = itemView.findViewById<TextView>(R.id.tvLocationName)
+        val tvLocationName:TextView = itemView.findViewById<TextView>(R.id.tvLocation)
 
     }
 

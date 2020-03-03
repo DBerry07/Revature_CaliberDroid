@@ -1,6 +1,6 @@
 package com.revature.caliberdroid.data.model
 
-class Location (
+data class Location (
     val locationID: Long,
     var name: String,
     var city: String,

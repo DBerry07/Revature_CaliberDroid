@@ -7,8 +7,13 @@ import com.revature.caliberdroid.data.repository.TrainerRepository
 
 class TrainersViewModel : ViewModel() {
     lateinit var trainerLiveData: MutableLiveData< ArrayList<Trainer> >
+    val selectedTrainerLiveData = MutableLiveData< Trainer >()
 
     fun getTrainers(){
         trainerLiveData = TrainerRepository.getTrainers()
+    }
+
+    fun setSelectedTrainer(trainer:Trainer){
+        selectedTrainerLiveData.value = trainer
     }
 }

@@ -14,8 +14,4 @@ class LocationsViewModel : ViewModel() {
     fun getLocations(){
         locationsLiveData = LocationRepository.getLocations()
     }
-
-    fun setSelectedLocation(location:Location){
-        selectedLocationLiveData.value = location
-    }
 }

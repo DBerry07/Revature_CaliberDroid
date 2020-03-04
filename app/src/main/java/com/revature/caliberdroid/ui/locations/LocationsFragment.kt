@@ -62,7 +62,7 @@ class LocationsFragment : Fragment(){
 
     inner class EditLocationListener: EditLocationInterface {
         override fun onEditLocation(location: Location){
-            locationsViewModel.setSelectedLocation(location)
+            locationsViewModel.selectedLocationLiveData.value = location
             navController?.navigate(R.id.action_locationsFragment_to_editLocationFragment)
         }
     }

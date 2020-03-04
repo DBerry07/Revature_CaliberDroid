@@ -14,9 +14,10 @@ import com.revature.caliberdroid.databinding.FragmentBatchSelectionBinding
 import com.revature.caliberdroid.ui.batchselection.BatchSelectionAdapter
 import com.revature.caliberdroid.ui.batchselection.BatchSelectionAdapter.OnItemClickListener
 import androidx.lifecycle.Observer
+import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekSelectionAdapter
 import java.util.*
 
-class BatchSelectionFragment : Fragment(), OnItemClickListener {
+class BatchSelectionFragment : Fragment() {
 
     private var _binding: FragmentBatchSelectionBinding? = null
     private val binding
@@ -34,7 +35,7 @@ class BatchSelectionFragment : Fragment(), OnItemClickListener {
         _binding = FragmentBatchSelectionBinding.inflate(inflater)
 
         binding.recyclerviewBatchSelectionDisplayBatches.layoutManager = LinearLayoutManager(context)
-        binding.recyclerviewBatchSelectionDisplayBatches.adapter = BatchSelectionAdapter(requireContext(), ALPHABETICAL_COMPARATOR_BATCHES, this)
+        binding.recyclerviewBatchSelectionDisplayBatches.adapter = BatchSelectionAdapter(requireContext(), ALPHABETICAL_COMPARATOR_BATCHES, parentFragment as OnItemClickListener)
 
         batchSelectionViewModel.getBatches()
 
@@ -51,10 +52,6 @@ class BatchSelectionFragment : Fragment(), OnItemClickListener {
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_BATCHES: Comparator<Batch> =
             Comparator<Batch> { a: Batch, b: Batch -> a.trainerName!!.compareTo(b.trainerName!!) }
-    }
-
-    override fun onBatchClick(batchClicked: Batch) {
-        TODO("Not yet implemented")
     }
 
     private fun subscribeToBatchesViewModel() {

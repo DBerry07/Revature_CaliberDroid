@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_assess_batch"
-    app:startDestination="@id/assessWeekSelectionFragment">
+    app:startDestination="@id/assessBatchSelectionFragment">
 
     <fragment
         android:id="@+id/assessWeekSelectionFragment"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_assessWeekSelectionFragment_to_assessWeekViewFragment"
             app:destination="@id/assessWeekViewFragment" />
+        <argument
+            android:name="batchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
     </fragment>
 
     <fragment
@@ -22,5 +25,14 @@
         <argument
             android:name="assessWeekNotesSelected"
             app:argType="com.revature.caliberdroid.data.model.AssessWeekNotes" />
+    </fragment>
+    <fragment
+        android:id="@+id/assessBatchSelectionFragment"
+        android:name="com.revature.caliberdroid.ui.assessbatch.assessment.AssessBatchSelectionFragment"
+        android:label="fragment_assess_batch_selection"
+        tools:layout="@layout/fragment_assess_batch_selection" >
+        <action
+            android:id="@+id/action_assessBatchSelectionFragment_to_assessWeekSelectionFragment"
+            app:destination="@id/assessWeekSelectionFragment" />
     </fragment>
 </navigation>

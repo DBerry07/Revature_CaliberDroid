@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.assessbatch.assessment.AssessmentTraineeGrades" >
+    tools:context=".ui.assessbatch.assessment.AssessmentTraineeGradesFragment" >
 
     <TextView
         android:id="@+id/tv_assessment_trainee_grades_title"

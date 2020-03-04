@@ -15,19 +15,31 @@
     <string name="menu_trainers">Trainers</string>
     <string name="menu_categories">Categories</string>
 
-<!--    Assess Batch-->
+    <!--  Quality Audit & Assess Batch -->
+    <string name="week_number">Week %d</string>
+    <string name="button_add_week">Add week</string>
+    <string name="batch_with_starting_date">%s - %s - %d</string>
+    <string name="batch_with_week">%s - %s - Week %d</string>
+
+    <!--  Quality Audit  -->
+    <string name="overall_qc_status">Overall QC Status:</string>
+    <string name="overall_qc_feedback">Overall QC FeedBack %s</string>
+
+    <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>
     <string name="assessment_skill_label">Skill Category:</string>
     <string name="assessment_points_label">Points:</string>
     <string name="assessment_batch_avg_label">Batch Average:</string>
-    
+
     <string name="trainee_name_label">Name:</string>
     <string name="trainee_notes_label">Trainee Notes:</string>
 
     <string name="tab_assessments">Assessments</string>
     <string name="tab_trainees">Trainees</string>
     <string name="dummy_batch">Nick Jurczak - Java - 1/06/2020</string>
-    <string name="button_add_week">Add week</string>
     <string name="weekly_batch_average_label">Weekly Batch Average:</string>
     <string name="batch_notes_label">Batch notes</string>
+    <string name="save">Save</string>
+
+
 </resources>

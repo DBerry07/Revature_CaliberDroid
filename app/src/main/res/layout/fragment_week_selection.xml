@@ -1,38 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.assessbatch.weekselection.AssessWeekSelectionFragment">
+<layout>
 
-    <TextView
-        android:id="@+id/tv_assessweekselection_batch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/banner_font_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/dummy_batch" />
+    <data>
 
-    <Button
-        android:id="@+id/btn_assessweekselection_addweek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_add_week"
-        app:layout_constraintBottom_toTopOf="@+id/rv_assessweekselection_weeks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_assessweekselection_batch" />
+        <variable
+            name="batch"
+            type="com.revature.caliberdroid.data.model.Batch" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_assessweekselection_weeks"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_assessweekselection_addweek" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        tools:context=".ui.assessbatch.weekselection.AssessWeekSelectionFragment">
+
+        <TextView
+            android:id="@+id/tv_weekselection_batch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/banner_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@{@string/batch_with_starting_date(batch.trainerName, batch.skillType, batch.startDate)}" />
+
+        <Button
+            android:id="@+id/btn_weekselection_addweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/button_add_week"
+            app:layout_constraintBottom_toTopOf="@+id/rv_weekselection_weeks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_weekselection_batch" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_weekselection_weeks"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_weekselection_addweek" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

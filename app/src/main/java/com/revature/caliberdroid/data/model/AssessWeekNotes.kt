@@ -4,22 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
-class AssessWeekNotes() : SortedListAdapter.ViewModel, Parcelable {
+data class AssessWeekNotes(var weekNumber: Int,
+                           var batchAverage: Float,
+                           var notes: String?) : SortedListAdapter.ViewModel, Parcelable {
 
-    var weekNumber: String? = ""
-    var batchAverage: Float = 0f
-    var notes: String? = ""
-
-    constructor(weekNumber: String, batchAverage: Float, notes: String) : this() {
-        this.weekNumber = weekNumber
-        this.batchAverage = batchAverage
-        this.notes = notes
-    }
-
-    constructor(parcel: Parcel) : this() {
-        weekNumber = parcel.readString()
-        batchAverage = parcel.readFloat()
-        notes = parcel.readString()
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readFloat(),
+        parcel.readString()
+    ) {
     }
 
     override fun <T : Any?> isContentTheSameAs(model: T): Boolean {
@@ -31,7 +24,7 @@ class AssessWeekNotes() : SortedListAdapter.ViewModel, Parcelable {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(weekNumber)
+        parcel.writeInt(weekNumber)
         parcel.writeFloat(batchAverage)
         parcel.writeString(notes)
     }

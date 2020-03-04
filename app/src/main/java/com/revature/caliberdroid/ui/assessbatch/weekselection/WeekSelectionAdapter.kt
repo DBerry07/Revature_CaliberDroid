@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.R
@@ -13,8 +12,11 @@ import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.databinding.ItemAssessweekselectionWeekBinding
 
-class WeekSelectionAdapter(context: Context, comparator: Comparator<AssessWeekNotes>, private val onItemClickListener: OnItemClickListener)
-    : SortedListAdapter<AssessWeekNotes>(APIHandler.context, AssessWeekNotes::class.java, comparator) {
+class WeekSelectionAdapter(context: Context,
+    comparator: Comparator<AssessWeekNotes>,
+    private val onItemClickListener: OnItemClickListener
+)
+    : SortedListAdapter<AssessWeekNotes>(context, AssessWeekNotes::class.java, comparator) {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -32,9 +34,10 @@ class WeekSelectionAdapter(context: Context, comparator: Comparator<AssessWeekNo
         }
 
         override fun performBind(item: AssessWeekNotes) {
-            binding.tvAssessweekrecyclerWeeknumber.text = item.weekNumber
-            binding.tvAssessweekrecyclerAverage.text = String.format(" %.2f%%", item.batchAverage)
-            binding.tvAssessweekrecyclerNotes.text = item.notes
+            binding.assesWeekNotes = item
+//            binding.tvAssessweekrecyclerWeeknumber.text = item.weekNumber
+//            binding.tvAssessweekrecyclerAverage.text = String.format(" %.2f%%", item.batchAverage)
+//            binding.tvAssessweekrecyclerNotes.text = item.notes
         }
 
         override fun onClick(v: View?) {

@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.assessbatch.assessment
+package com.revature.caliberdroid.ui.qualityaudit.trainees
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,25 +9,20 @@ import android.view.ViewGroup
 
 import com.revature.caliberdroid.R
 
-class AssessmentTraineeGrades : Fragment() {
+class QualityAuditTraineesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() =
-            AssessmentTraineeGrades()
-    }
-
-    private lateinit var viewModel: AssessmentTraineeGradesViewModel
+    private lateinit var viewModel: QualityAuditTraineesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_assessment_trainee_grades, container, false)
+        return inflater.inflate(R.layout.fragment_quality_audit_trainees, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AssessmentTraineeGradesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(QualityAuditTraineesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

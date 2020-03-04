@@ -1,6 +1,7 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -26,12 +27,11 @@ object APIHandler {
             null,
             Response.Listener<JSONArray> { response ->
                 // Display the first 500 characters of the response string.
-                Log.d("APIHandler",response.toString())
+                Timber.d(response.toString())
                 liveData.postValue(JSONParser.parseBatch(response))
             },
-            Response.ErrorListener { error -> Log.d("APIHandler", error.toString()) })
-        // Add the request to the RequestQueue.
             Response.ErrorListener { error -> Timber.d(error.toString()) })
+
         queue.add(stringRequest)
     }
 }

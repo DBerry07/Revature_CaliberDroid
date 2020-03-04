@@ -8,18 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.databinding.FragmentAssessWeekSelectionBinding
+import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
 
 class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClickListener {
 
-    private val assessWeekSelectionViewModel : AssessWeekSelectionViewModel by activityViewModels()
-    private var _assessWeekSelectionBinding: FragmentAssessWeekSelectionBinding? = null
-    private val assessWeekSelectionBinding get() = _assessWeekSelectionBinding!!
-    private val WEEK_NUMBER_COMPARATOR = Comparator<AssessWeekNotes> { a,b -> a.weekNumber!!.compareTo(b.weekNumber!!)}
-
+    private val assessWeekSelectionViewModel: AssessWeekSelectionViewModel by activityViewModels()
+    private var _binding: FragmentWeekSelectionBinding? = null
+    private val binding get() = _binding!!
+    private val WEEK_NUMBER_COMPARATOR = Comparator<AssessWeekNotes> { a,b -> a.weekNumber.compareTo(b.weekNumber)}
+    private val args: AssessWeekSelectionFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() =
@@ -33,29 +33,24 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
         savedInstanceState: Bundle?
     ): View? {
 
-        _assessWeekSelectionBinding = FragmentAssessWeekSelectionBinding.inflate(inflater)
+        _binding = FragmentWeekSelectionBinding.inflate(inflater)
 
-        val rvWeeks = assessWeekSelectionBinding.rvAssessweekselectionWeeks
+        binding.batch = args.batchSelected
 
-        val linearLayoutManager = LinearLayoutManager(requireContext())
+        binding.rvWeekselectionWeeks.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvWeekselectionWeeks.adapter = WeekSelectionAdapter(requireContext(), WEEK_NUMBER_COMPARATOR, this)
 
-        rvWeeks.layoutManager = linearLayoutManager
+        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great")
+        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward")
 
-        val weekSelectionAdapter = WeekSelectionAdapter(requireContext(),WEEK_NUMBER_COMPARATOR, this)
+        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 
-        rvWeeks.adapter = weekSelectionAdapter
-
-        var week1 = AssessWeekNotes("week 1", 93.2f, "They did so super duper awesome really good and great")
-        var week2 = AssessWeekNotes("week 2", 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward")
-
-        (rvWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
-
-        return assessWeekSelectionBinding.root
+        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _assessWeekSelectionBinding = null
+        _binding = null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

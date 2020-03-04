@@ -3,9 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_quality_audit"
-    app:startDestination="@id/batchSelectionFragment">
+    app:startDestination="@id/qualityAuditBatchSelectionFragment">
     <fragment
-        android:id="@+id/batchSelectionFragment"
-        android:name="com.revature.caliberdroid.ui.batches.BatchSelectionFragment"
-        android:label="BatchSelectionFragment" />
+        android:id="@+id/auditWeekSelectionFragment"
+        android:name="com.revature.caliberdroid.ui.qualityaudit.weekselection.QualityAuditWeekSelectionFragment"
+        android:label="Quality Audit - Select a Week">
+        <argument
+            android:name="batchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
+        <action
+            android:id="@+id/action_auditWeekSelectionFragment_to_qualityAuditOverallFragment"
+            app:destination="@id/qualityAuditOverallFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualityAuditOverallFragment"
+        android:name="com.revature.caliberdroid.ui.qualityaudit.overall.QualityAuditOverallFragment"
+        android:label="Quality Audit"
+        tools:layout="@layout/fragment_quality_audit_overall">
+        <action
+            android:id="@+id/action_qualityAuditOverallFragment_to_qualityAuditTraineesFragment"
+            app:destination="@id/qualityAuditTraineesFragment" />
+        <argument
+            android:name="batchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
+        <argument
+            android:name="auditWeekNotesSelected"
+            app:argType="com.revature.caliberdroid.data.model.AuditWeekNotes" />
+        <action
+            android:id="@+id/action_qualityAuditOverallFragment_to_qualityAuditBatchSelectionFragment"
+            app:popUpTo="@id/qualityAuditBatchSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualityAuditTraineesFragment"
+        android:name="com.revature.caliberdroid.ui.qualityaudit.trainees.QualityAuditTraineesFragment"
+        android:label="Quality Audit - Trainees"
+        tools:layout="@layout/fragment_quality_audit_trainees" />
+    <fragment
+        android:id="@+id/qualityAuditBatchSelectionFragment"
+        android:name="com.revature.caliberdroid.ui.qualityaudit.QualityAuditBatchSelectionFragment"
+        android:label="Quality Audit - Select a Batch"
+        tools:layout="@layout/fragment_quality_audit_batch_selection">
+        <action
+            android:id="@+id/action_qualityAuditBatchSelectionFragment_to_auditWeekSelectionFragment"
+            app:destination="@id/auditWeekSelectionFragment" />
+    </fragment>
 </navigation>

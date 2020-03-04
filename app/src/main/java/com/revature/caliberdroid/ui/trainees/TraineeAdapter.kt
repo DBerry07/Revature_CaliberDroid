@@ -5,17 +5,22 @@ import android.widget.*
 import androidx.core.view.GestureDetectorCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.databinding.FragmentTraineeBinding
+import com.revature.caliberdroid.databinding.TraineeItemBinding
 
 class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var info = data
     lateinit var parent: ViewGroup
 
+    private var _binding: TraineeItemBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var v : View = LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
-        //var viewHolder = MyViewHolder(v)
+        LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
+        _binding = TraineeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         this.parent = parent
-        return MyViewHolder(v)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -56,7 +61,7 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         return info.size
     }
 
-    class MyViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class MyViewHolder(binding: TraineeItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var isExpanded = false
 
@@ -76,20 +81,20 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         var arrow : ImageView
 
         init {
-            this.name = v.findViewById(R.id.TM_name)
-            this.email = v.findViewById(R.id.TM_email)
-            this.status = v.findViewById(R.id.TM_tv_status)
-            this.phone = v.findViewById(R.id.TM_phone)
-            this.skype = v.findViewById(R.id.TM_skype)
-            this.profile = v.findViewById(R.id.TM_profile)
-            this.college = v.findViewById(R.id.TM_college)
-            this.major = v.findViewById(R.id.TM_major)
-            this.recruiter = v.findViewById(R.id.TM_recruiter)
-            this.project = v.findViewById(R.id.TM_project)
-            this.screener = v.findViewById(R.id.TM_screener)
-            this.arrow = v.findViewById(R.id.TM_iv_arrow)
-            this.details = v.findViewById(R.id.expand)
-            this.options = v.findViewById(R.id.TM_options)
+            this.name = binding.TMName
+            this.email = binding.TMEmail
+            this.status = binding.TMTvStatus
+            this.phone = binding.TMPhone
+            this.skype = binding.TMSkype
+            this.profile = binding.TMProfile
+            this.college = binding.TMCollege
+            this.major = binding.TMMajor
+            this.recruiter = binding.TMRecruiter
+            this.project = binding.TMProject
+            this.screener = binding.TMScreener
+            this.arrow = binding.TMIvArrow
+            this.details = binding.expand
+            this.options = binding.TMOptions
         }
 
     }

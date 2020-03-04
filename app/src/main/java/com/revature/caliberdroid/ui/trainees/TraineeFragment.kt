@@ -8,14 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.databinding.FragmentTraineeBinding
 import com.revature.revaturetraineemanagment.TraineeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_trainee.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -24,24 +30,43 @@ class TraineeFragment : Fragment() {
 
     var traineeData : ArrayList<HashMap<String, String>> = ArrayList()
 
+    private var _binding: FragmentTraineeBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: TraineeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view : View = inflater.inflate(R.layout.fragment_trainee, container, false)
+        _binding = FragmentTraineeBinding.inflate(layoutInflater, container, false)
+        val view = binding.root
+
+        val model: TraineeViewModel by viewModels()
+
         createData()
         Log.d("traineeData", traineeData.toString())
-        val traineeLayoutManager = LinearLayoutManager(view.context)
-        val traineeAdapter = TraineeAdapter(traineeData)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.TM_recycler)
 
-        (recyclerView?.itemAnimator as SimpleItemAnimator?)!!.supportsChangeAnimations = false
+        var traineeLayoutManager = LinearLayoutManager(view.context)
+        var traineeAdapter = TraineeAdapter(traineeData)
+        var recyclerView = view.TM_recycler
+
         recyclerView.layoutManager = traineeLayoutManager
         recyclerView.adapter = traineeAdapter
+
+        (recyclerView.itemAnimator as SimpleItemAnimator)!!.supportsChangeAnimations = false
         recyclerView.setHasFixedSize(false);
 
-        val button : Button = view.findViewById(R.id.MB_btn_goto_add_trainee)
+        model.getTrainees()?.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
+            //traineeData = trainees
+            traineeAdapter = TraineeAdapter(traineeData)
+
+            recyclerView.layoutManager = traineeLayoutManager
+            recyclerView.adapter = traineeAdapter
+        })
+
+        val button : Button = view.MB_btn_goto_add_trainee
 
         button.setOnClickListener {
             val navController = Navigation.findNavController(view)
@@ -52,7 +77,12 @@ class TraineeFragment : Fragment() {
         return view
     }
 
-    fun createData(){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun createData(){
         var i = 0
         while (i < 10){
             var list : HashMap<String, String> = HashMap()

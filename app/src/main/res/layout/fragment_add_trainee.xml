@@ -348,6 +348,18 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style = "@style/AddTraineeCard">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 

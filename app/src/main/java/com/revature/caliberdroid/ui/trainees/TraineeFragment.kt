@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.revature.caliberdroid.R
+import com.revature.revaturetraineemanagment.TraineeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**

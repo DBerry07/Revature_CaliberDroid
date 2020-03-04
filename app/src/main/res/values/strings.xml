@@ -18,4 +18,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="batch_dialog_heading_name">Batch Name:</string>
+    <string name="batch_dialog_heading_training_name">Trainer Name:</string>
+    <string name="batch_dialog_heading_location">Location:</string>
+    <string name="batch_dialog_heading_skill">Skill Focus:</string>
+    <string name="batch_dialog_heading_start_date">Start Date:</string>
+    <string name="batch_dialog_heading_end_date">End Date:</string>
+    <string name="batch_dialog_heading_good_grade">Good Grade:</string>
+    <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
+    <string name="batch_dialog_create_button">Create</string>
+    <string name="batch_dialog_img_description">Dialog Header background color block</string>
+    <string name="textview_default">default</string>
+    <string name="batch_info_header_end_date">End Date:</string>
+    <string name="batch_info_header_start_date">Start Date:</string>
+    <string name="batch_info_header_trainer_name">Trainer Name:</string>
+    <string name="batch_info_header_training_name">Training Name:</string>
+    <string name="batch_info_heading_batch_name">Batch Name</string>
+    <string name="batch_info_heading_location">Location:</string>
+    <string name="batch_info_heading_skill">Skill Focus:</string>
+    <string name="Revature_String">Revature</string>
+    <string name="batch_info_heading_good_grade">Good Grade:</string>
+    <string name="batch_info_heading_passing_grade">Passing Grade:</string>
 </resources>

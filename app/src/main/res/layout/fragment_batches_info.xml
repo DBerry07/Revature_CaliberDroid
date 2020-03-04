@@ -7,230 +7,246 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tv_create_batch_name_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_name"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_name" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_name_trainer_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_trainer" />
-
-    <TextView
         android:id="@+id/tv_create_batch_location_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/textview_border"
         android:clickable="false"
         android:fontFamily="sans-serif"
         android:inputType="none"
-        android:text="default"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_location"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_location" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_skill_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_skill"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_skill"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_skill" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_start_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_start"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_start" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_end"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_end" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_good_grade_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_good_grade"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_good_grade"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_good_grade" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_passing_grade_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:text="default"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_passing_grade"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_passing_grade"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_passing_grade" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Batch Name:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/btn_batch_info_view" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_trainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Trainer Name:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_location"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Location:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_skill"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Skill Focus:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_location" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Start Date:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_end"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_skill" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_batch_skill_value"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_location"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_create_batch_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="End Date:"
+        android:text="@string/batch_info_header_end_date"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_good_grade"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_start" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_skill_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_skill_value" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_header_start_date"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_location_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_location_value" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_trainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/batch_info_header_trainer_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_trainer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/batch_info_header_training_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_name_trainer_value2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_name_trainer_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:inputType="none"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_batch_name_trainer_value2"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_trainer"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_name_trainer_value2"
+        android:layout_width="175dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:inputType="none"
+        android:paddingStart="4dp"
+        android:text="@string/Revature_String"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_name_trainer_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer2"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_passing_grade_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_passing_grade"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_passing_grade"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_passing_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_heading_passing_grade"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_value" />
 
     <TextView
         android:id="@+id/tv_create_batch_good_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Good Grade:"
+        android:text="@string/batch_info_heading_good_grade"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_passing_grade"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_end" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_start_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_start_value" />
 
     <TextView
-        android:id="@+id/tv_create_batch_passing_grade"
+        android:id="@+id/tv_create_batch_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_end"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_end"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_start_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_batch_value"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_start"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_good_grade_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_batch_passing_grade_value"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_good_grade"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_good_grade"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_heading_skill"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_name_trainer_value2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name_trainer_value2" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_heading_location"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_name_trainer_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name_trainer_value" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_skill_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:inputType="none"
+        android:paddingStart="4dp"
+        android:text="@string/textview_default"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_skill"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_skill"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="Passsing Grade:"
+        android:text="@string/batch_info_heading_batch_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_good_grade" />
+        app:layout_constraintTop_toTopOf="@+id/btn_batch_info_view" />
 
     <Button
         android:id="@+id/btn_batch_info_edit"

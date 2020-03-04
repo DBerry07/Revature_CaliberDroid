@@ -6,14 +6,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:orientation="vertical">
+        style="@style/settingsCard">
 
     <!-- WRAPPER -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            style="@style/settingsCardContentWrapper">
 
     <!-- LEFT -->
             <androidx.constraintlayout.widget.ConstraintLayout

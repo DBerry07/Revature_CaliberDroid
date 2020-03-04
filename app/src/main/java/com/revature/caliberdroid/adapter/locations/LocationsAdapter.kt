@@ -7,15 +7,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface
 import com.revature.caliberdroid.data.model.Location
 
-class LocationsAdapter(val locations:ArrayList<Location>): RecyclerView.Adapter<LocationsAdapter.LocationsViewHolder>(){
+class LocationsAdapter(val locations:ArrayList<Location>, val editListener:EditLocationInterface): RecyclerView.Adapter<LocationsAdapter.LocationsViewHolder>(){
 
 //Need to implement data binding in recycler view adapter
     class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val tvLocationName:TextView = itemView.findViewById(R.id.tvLocation)
         val tvAddress: TextView = itemView.findViewById(R.id.tvAddress)
         val imgActiveStatus: ImageView = itemView.findViewById(R.id.imgActiveStatus)
+        val imgEdit: ImageView = itemView.findViewById(R.id.imgEdit)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
@@ -32,6 +34,9 @@ class LocationsAdapter(val locations:ArrayList<Location>): RecyclerView.Adapter<
         holder.tvLocationName.text = location.name
         holder.tvAddress.text = formatAddress(location)
         setActiveStatusImage(location, holder.imgActiveStatus)
+        holder.imgEdit.setOnClickListener{
+            editListener.onEditLocation(location)
+        }
     }
 
     private fun formatAddress(location:Location): String{

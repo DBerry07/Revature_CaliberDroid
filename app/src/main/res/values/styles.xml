@@ -28,6 +28,18 @@
         <item name="android:drawablePadding">10dp</item>
     </style>
 
+    <style name="settingsFragmentContentWrapper">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="settingsCard">
+        <item name="android:layout_margin">6dp</item>
+    </style>
+
+    <style name="settingsCardContentWrapper">
+        <item name="android:padding">16dp</item>
+    </style>
+
     <style name="activeCircle">
         <item name="android:background">@drawable/background_active_status</item>
         <item name="android:gravity">center</item>

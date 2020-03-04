@@ -6,7 +6,8 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.locations.LocationsFragment">
+    tools:context=".ui.locations.LocationsFragment"
+    style="@style/settingsFragmentContentWrapper">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

@@ -10,4 +10,8 @@
         android:name="com.revature.caliberdroid.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/traineeFragment"
+        android:name="com.revature.caliberdroid.ui.trainees.TraineeFragment"
+        android:label="TraineeFragment" />
 </navigation>

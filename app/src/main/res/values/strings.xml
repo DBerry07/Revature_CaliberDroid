@@ -39,4 +39,6 @@
     <string name="Revature_String">Revature</string>
     <string name="batch_info_heading_good_grade">Good Grade:</string>
     <string name="batch_info_heading_passing_grade">Passing Grade:</string>
+    <string name="batchesInfo_confirmButton">Confirm</string>
+    <string name="batchesInfo_cancelButton">Edit Batch</string>
 </resources>

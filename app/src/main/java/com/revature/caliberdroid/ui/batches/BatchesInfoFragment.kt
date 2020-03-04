@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.ui.batches
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -42,7 +43,7 @@ class BatchesInfo : Fragment() {
         viewBtn.setOnClickListener { Snackbar.make(view!!,"VIEW ASSOCIATES",Snackbar.LENGTH_SHORT).show() }
 
         editBtn.setOnClickListener {
-            createBatchDialog()
+            createBatchDialog(root)
 
         }
 
@@ -50,20 +51,20 @@ class BatchesInfo : Fragment() {
     }
 
 
-    private fun createBatchDialog() {
+    private fun createBatchDialog(root: View) {
         val dialog = activity?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
-        val root = R.layout.create_batch_dialog
-        dialog?.setContentView(root)
+        dialog?.setContentView(R.layout.create_batch_dialog)
         dialog?.show()
 
-        var header: TextView = dialog!!.findViewById(R.id.tv_create_batch_header)
-        cancelBtn = dialog!!.findViewById(R.id.btn_create_batch_cancel)
-        createBtn = dialog!!.findViewById(R.id.btn_create_batch_create)
+        val header: TextView = dialog!!.findViewById(R.id.tv_create_batch_header)
+        setDialogValues(dialog, root)
+        cancelBtn = dialog.findViewById(R.id.btn_create_batch_cancel)
+        createBtn = dialog.findViewById(R.id.btn_create_batch_create)
 
-        createBtn.text = "Confirm"
-        header.text = "Edit Batch"
+        createBtn.text = getString(R.string.batchesInfo_confirmButton)
+        header.text = getString(R.string.batchesInfo_cancelButton)
 
 
         cancelBtn.setOnClickListener {
@@ -74,5 +75,25 @@ class BatchesInfo : Fragment() {
             Toast.makeText(context,"Batch Updated!", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun setDialogValues(dialog: Dialog, root: View) {
+        val trainerName: TextView = dialog.findViewById(R.id.et_create_batch_name_trainer_input)
+        val batchName: TextView = dialog.findViewById(R.id.et_create_batch_name_input)
+        val locationName: TextView = dialog.findViewById(R.id.et_create_batch_location_input)
+        val skillFocus: TextView = dialog.findViewById(R.id.et_create_batch_skill_input)
+        val startDate: TextView = dialog.findViewById(R.id.et_create_batch_start_input)
+        val endDate: TextView = dialog.findViewById(R.id.et_create_batch_end_input)
+        val goodGrade: TextView = dialog.findViewById(R.id.et_create_batch_good_grade_input)
+        val passingGrade: TextView = dialog.findViewById(R.id.et_create_batch_passing_grade_input)
+
+        trainerName.text = root.findViewById<TextView>(R.id.tv_batch_info_name_trainer_value).text
+        batchName.text = root.findViewById<TextView>(R.id.tv_batch_info_name).text
+        locationName.text = root.findViewById<TextView>(R.id.tv_batch_info_location_value).text
+        skillFocus.text = root.findViewById<TextView>(R.id.tv_batch_info_skill_value).text
+        startDate.text = root.findViewById<TextView>(R.id.tv_batch_info_start_value).text
+        endDate.text = root.findViewById<TextView>(R.id.tv_batch_info_end_value).text
+        goodGrade.text = root.findViewById<TextView>(R.id.tv_batch_info_good_grade_value).text
+        passingGrade.text = root.findViewById<TextView>(R.id.tv_create_batch_passing_grade_value).text
     }
 }

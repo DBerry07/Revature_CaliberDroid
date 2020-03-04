@@ -1,7 +1,6 @@
 package com.revature.caliberdroid.ui.batches
 
 import android.app.Dialog
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.api.APIHandler.context
-import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.BatchesFragmentBinding
 import java.util.*
 
@@ -45,19 +43,13 @@ class BatchesFragment : Fragment() {
         viewModel.getBatches()
         binding.apply {
             // New way of inserting the data into the ui directly from the view model, all changes are automatically updated on the UI
-            //batchesViewModel = viewModel
+            // batchesViewModel= viewModel
             // Make sure to call this method so the UI reflect the changes on the view model
-            //setLifecycleOwner(this@BatchesFragment)
+            // setLifecycleOwner(this@BatchesFragment)
             viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
             })
             btnManageBatchCreateBatch.setOnClickListener {
                 createBatchDialog()
-
-//                findNavController().navigate(
-//                    BatchesFragmentDirections.actionBatchesFragmentToGalleryFragment(
-//                        Batch(1)
-//                    )
-//                )
             }
         }
 
@@ -67,10 +59,9 @@ class BatchesFragment : Fragment() {
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
             // set the custom adapter to the RecyclerView
+            //adapter = BatchesAdapter(context, viewModel.batchesLiveData)
             adapter = CustomAdapter(context, temp)
-
         }
-
         return binding.root
     }
 
@@ -83,7 +74,7 @@ class BatchesFragment : Fragment() {
             dialog?.show()
 
             cancelBtn = dialog!!.findViewById(R.id.btn_create_batch_cancel)
-            createBtn = dialog!!.findViewById(R.id.btn_create_batch_create)
+            createBtn = dialog.findViewById(R.id.btn_create_batch_create)
 
             cancelBtn.setOnClickListener {
                 dialog.dismiss()
@@ -93,7 +84,6 @@ class BatchesFragment : Fragment() {
                 findNavController().navigate(BatchesFragmentDirections.actionBatchesFragmentToBatchesInfo())
                 Toast.makeText(context,"Created Batch!", Toast.LENGTH_SHORT).show()
             }
-
     }
 
     override fun onDestroyView() {

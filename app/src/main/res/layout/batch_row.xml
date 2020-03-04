@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="batchModel"
+            type="com.revature.caliberdroid.data.model.Batch" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_batch_row"
         android:layout_width="fill_parent"
@@ -11,8 +17,10 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="3dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        android:background="@drawable/textview_border"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp"
+        app:cardPreventCornerOverlap="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_room_row"
@@ -50,7 +58,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_batch_row_name_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail"
+                android:id="@+id/tv_batch_row_skill_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -61,57 +69,57 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_name_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail4"
+                android:id="@+id/tv_batch_row_skill_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="Java"
+                android:text="@{batchModel.skillType}"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_detail"
-                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_detail"
-                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_detail" />
+                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_skill_header"
+                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_skill_header"
+                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_skill_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail5"
+                android:id="@+id/tv_batch_row_date_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="01/06/2020"
+                android:text="@{Long.toString(batchModel.startDate)}"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_detail3"
-                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_detail3"
-                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_detail3" />
+                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_start_date_header"
+                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_start_date_header"
+                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_start_date_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail6"
+                android:id="@+id/tv_batch_row_location_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="USF"
+                android:text="@{batchModel.location}"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_detail2"
-                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_detail2"
-                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_detail2" />
+                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_location_header"
+                app:layout_constraintStart_toEndOf="@+id/tv_batch_row_location_header"
+                app:layout_constraintTop_toTopOf="@+id/tv_batch_row_location_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail3"
+                android:id="@+id/tv_batch_row_start_date_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Start Date:"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintEnd_toEndOf="@+id/tv_batch_row_detail"
-                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_detail" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_batch_row_skill_header"
+                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_skill_header" />
 
             <TextView
-                android:id="@+id/tv_batch_row_detail2"
+                android:id="@+id/tv_batch_row_location_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Location:"
                 android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintEnd_toEndOf="@+id/tv_batch_row_detail3"
-                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_detail3" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_batch_row_start_date_header"
+                app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_start_date_header" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

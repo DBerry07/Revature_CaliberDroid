@@ -50,9 +50,6 @@ class LocationsFragment : Fragment(){
             btnAddLocation.setOnClickListener{
                 findNavController().navigate(R.id.action_locationsFragment_to_addLocationFragment)
             }
-            btnEditLocation.setOnClickListener{
-                findNavController().navigate(R.id.action_locationsFragment_to_editLocationFragment)
-            }
         }
 
         return binding.root

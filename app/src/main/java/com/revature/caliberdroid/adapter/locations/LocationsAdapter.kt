@@ -3,6 +3,7 @@ package com.revature.caliberdroid.adapter.locations
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
@@ -12,8 +13,9 @@ class LocationsAdapter(val locations:ArrayList<Location>): RecyclerView.Adapter<
 
 //Need to implement data binding in recycler view adapter
     class LocationsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val tvLocationName:TextView = itemView.findViewById<TextView>(R.id.tvLocation)
-
+        val tvLocationName:TextView = itemView.findViewById(R.id.tvLocation)
+        val tvAddress: TextView = itemView.findViewById(R.id.tvAddress)
+        val imgActiveStatus: ImageView = itemView.findViewById(R.id.imgActiveStatus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
@@ -26,6 +28,25 @@ class LocationsAdapter(val locations:ArrayList<Location>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
-        holder.tvLocationName.text = locations.get(position).toString()
+        val location: Location = locations.get(position)
+        holder.tvLocationName.text = location.name
+        holder.tvAddress.text = formatAddress(location)
+        setActiveStatusImage(location, holder.imgActiveStatus)
+    }
+
+    private fun formatAddress(location:Location): String{
+        var stringText:String = location.address+"\n"
+        stringText+= location.city+", "+location.state+" "+location.zipcode
+        return stringText
+    }
+
+    private fun setActiveStatusImage(location:Location, imgView: ImageView){
+        if(location.active){
+            imgView.setImageResource(R.drawable.ic_active_green)
+            imgView.setBackgroundResource(R.drawable.background_active_status)
+        }else{
+            imgView.setImageResource(R.drawable.ic_inactive_red)
+            imgView.setBackgroundResource(R.drawable.background_inactive_status)
+        }
     }
 }

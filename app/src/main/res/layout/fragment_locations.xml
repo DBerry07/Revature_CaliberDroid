@@ -14,22 +14,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <SearchView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Locations" />
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnAddLocation"
+            style="@style/addBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
             android:text="Add Location" />
-
-        <Button
-            android:id="@+id/btnEditLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Location" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLocations"

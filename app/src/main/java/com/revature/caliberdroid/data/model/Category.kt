@@ -1,12 +1,12 @@
 package com.revature.caliberdroid.data.model
 
 data class Category(
-    val category:Long,
+    val categoryId:Long,
     var skillCategory: String,
     var active: Boolean
 ){
 
     override fun toString(): String {
-        return "Category(category=$category, skillCategory='$skillCategory', active=$active)"
+        return "Category(category=$categoryId, skillCategory='$skillCategory', active=$active)"
     }
 }

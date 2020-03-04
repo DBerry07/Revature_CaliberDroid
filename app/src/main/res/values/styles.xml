@@ -17,4 +17,31 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+<!-- SETTINGS -->
+    <style name="addBtn" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:background">@drawable/background_btn</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="srcCompat">@color/addBtnOrange</item>
+        <item name="drawableEndCompat">@drawable/ic_add_orange</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+    <style name="activeCircle">
+        <item name="android:background">@drawable/background_active_status</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="srcCompat">@drawable/ic_active_green</item>-->
+    </style>
+
+    <style name="inActiveCircle">
+        <item name="android:background">@drawable/background_inactive_status</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="srcCompat">@drawable/ic_inactive_red</item>-->
+    </style>
+
+    <style name="editIcon">
+        <item name="android:gravity">center</item>
+        <item name="srcCompat">@drawable/ic_edit_orange</item>
+    </style>
 </resources>

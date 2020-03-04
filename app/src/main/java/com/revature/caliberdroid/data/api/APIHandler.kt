@@ -8,6 +8,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
@@ -42,5 +43,9 @@ object APIHandler {
 
     fun getTrainers(liveData: MutableLiveData< ArrayList<Trainer> >){
         TrainersAPI.getTrainers(liveData)
+    }
+
+    fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.getCategories(liveData)
     }
 }

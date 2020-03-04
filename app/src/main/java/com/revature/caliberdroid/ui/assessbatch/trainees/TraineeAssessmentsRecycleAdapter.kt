@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.assessbatch.assessment
+package com.revature.caliberdroid.ui.assessbatch.trainees
 
 import android.view.LayoutInflater
 import android.view.View

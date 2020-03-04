@@ -7,7 +7,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
 import org.json.JSONArray
 import timber.log.Timber
@@ -33,5 +33,25 @@ object APIHandler {
             Response.ErrorListener { error -> Timber.d(error.toString()) })
 
         queue.add(stringRequest)
+    }
+
+    fun getAssessments(liveData: MutableLiveData<List<Assessment>>,batchId:Long,weekNumber:Int) {
+        AssessmentAPIHandler.getAssessments(liveData,batchId,weekNumber)
+    }
+
+    fun getGrades(liveData: MutableLiveData<List<Grade>>, batchId:Long, weekNumber:Int) {
+        GradeAPIHandler.getGrades(liveData,batchId,weekNumber)
+    }
+
+    fun getAssessBatchOverallNote(liveData: MutableLiveData<Note>,batchId:Long, weekNumber:Int){
+        NoteAPIHandler.getAssessBatchOverallNote(liveData,batchId,weekNumber)
+    }
+
+    fun getTraineeNotes(liveData: MutableLiveData<List<Note>>, batchId:Long, weekNumber:Int) {
+        NoteAPIHandler.getTraineeNotes(liveData,batchId,weekNumber)
+    }
+
+    fun getTrainees(liveData:MutableLiveData<List<Trainee>>,batchId:Long) {
+        TraineeAPIHandler.getTrainees(liveData,batchId)
     }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.observe
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.databinding.FragmentEditLocationBinding
+import kotlinx.android.synthetic.main.include_location_fields.*
 
 
 class EditLocationFragment : Fragment() {
@@ -29,10 +30,16 @@ class EditLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditLocationBinding.inflate(layoutInflater)
-        locationsViewModel.selectedLocationLiveData.observe(viewLifecycleOwner,{location->
-            Log.d("Locations",location.toString())
-        })
         binding.apply {
+            locationsViewModel.selectedLocationLiveData.observe(viewLifecycleOwner) { location->
+
+                etCompanyName.setText(location.name)
+                etStreetAddress.setText(location.address)
+                etCity.setText(location.city)
+                etState.setText(location.state)
+                etZipCode.setText(location.zipcode)
+
+            }
         }
 
         return binding.root

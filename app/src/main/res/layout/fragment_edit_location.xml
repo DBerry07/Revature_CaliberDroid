@@ -2,16 +2,28 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.locations.EditLocationFragment">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    style="@style/settingsFragmentContentWrapper">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Edit Location" />
+        android:layout_height="wrap_content"
+        android:text="@string/title_edit_location"
+        style="@style/settingsHeading"/>
 
-</FrameLayout>
+    <include layout="@layout/include_location_fields"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|right"
+        android:text="@string/btn_confirm"
+        style="@style/addBtn"/>
+
+
+</LinearLayout>
 </layout>

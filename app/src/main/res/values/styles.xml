@@ -40,6 +40,14 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="settingsHeaderWrapper">
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="settingsRecyclerView">
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
     <style name="activeCircle">
         <item name="android:background">@drawable/background_active_status</item>
         <item name="android:gravity">center</item>
@@ -55,5 +63,10 @@
     <style name="editIcon">
         <item name="android:gravity">center</item>
         <item name="srcCompat">@drawable/ic_edit_orange</item>
+    </style>
+
+    <style name="deleteIcon">
+        <item name="android:gravity">center</item>
+        <item name="srcCompat">@drawable/ic_delete_red</item>
     </style>
 </resources>

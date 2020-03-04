@@ -12,6 +12,9 @@ class TrainersAdapter(val trainers: ArrayList<Trainer>): RecyclerView.Adapter<Tr
 
     class TrainersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val tvTrainerName: TextView = itemView.findViewById<TextView>(R.id.tvTrainer)
+        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
+        val tvEmail: TextView = itemView.findViewById(R.id.tvEmail)
+        val tvTier: TextView = itemView.findViewById(R.id.tvTier)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainersViewHolder {
@@ -24,6 +27,10 @@ class TrainersAdapter(val trainers: ArrayList<Trainer>): RecyclerView.Adapter<Tr
     }
 
     override fun onBindViewHolder(holder: TrainersViewHolder, position: Int) {
-        holder.tvTrainerName.text = trainers.get(position).toString()
+        val trainer: Trainer = trainers.get(position)
+        holder.tvTrainerName.text = trainer.name
+        holder.tvTitle.text = trainer.title
+        holder.tvEmail.text = trainer.email
+        holder.tvTier.text = trainer.tier
     }
 }

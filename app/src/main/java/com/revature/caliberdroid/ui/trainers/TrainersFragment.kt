@@ -38,9 +38,6 @@ class TrainersFragment : Fragment(){
             btnAddTrainer.setOnClickListener{
                 findNavController().navigate(R.id.action_trainersFragment_to_addTrainerFragment)
             }
-            btnEditTrainer.setOnClickListener{
-                findNavController().navigate(R.id.action_trainersFragment_to_editTrainerFragment)
-            }
         }
 
         return binding.root

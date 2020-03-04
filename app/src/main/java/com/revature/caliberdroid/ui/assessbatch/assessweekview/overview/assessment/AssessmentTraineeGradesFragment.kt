@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.assessbatch.assessment
+package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle

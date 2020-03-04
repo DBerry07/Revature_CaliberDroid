@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.assessbatch.assessment
+package com.revature.caliberdroid.ui.assessbatch
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -25,7 +25,11 @@ class AssessBatchSelectionFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onBatchClick(batchClicked: Batch) {
-        findNavController().navigate(AssessBatchSelectionFragmentDirections.actionAssessBatchSelectionFragmentToAssessWeekSelectionFragment(batchClicked))
+        findNavController().navigate(
+            AssessBatchSelectionFragmentDirections.actionAssessBatchSelectionFragmentToAssessWeekSelectionFragment(
+                batchClicked
+            )
+        )
     }
 
 }

@@ -27,17 +27,14 @@ class WeekSelectionAdapter(context: Context,
     }
 
     class WeekViewHolder(val binding: ItemAssessweekselectionWeekBinding, val onItemClickListener: OnItemClickListener)
-        : SortedListAdapter.ViewHolder<AssessWeekNotes>(binding.getRoot()), View.OnClickListener {
+        : SortedListAdapter.ViewHolder<AssessWeekNotes>(binding.root), View.OnClickListener {
 
         init {
             binding.root.setOnClickListener(this)
         }
 
         override fun performBind(item: AssessWeekNotes) {
-            binding.assesWeekNotes = item
-//            binding.tvAssessweekrecyclerWeeknumber.text = item.weekNumber
-//            binding.tvAssessweekrecyclerAverage.text = String.format(" %.2f%%", item.batchAverage)
-//            binding.tvAssessweekrecyclerNotes.text = item.notes
+            binding.assessWeekNotes = item
         }
 
         override fun onClick(v: View?) {

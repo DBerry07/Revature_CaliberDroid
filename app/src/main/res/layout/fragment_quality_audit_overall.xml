@@ -66,7 +66,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/tab_trainees"
+            android:text="@string/title_trainees"
             app:layout_constraintBottom_toTopOf="@+id/tv_auditoverall_overallstatus_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

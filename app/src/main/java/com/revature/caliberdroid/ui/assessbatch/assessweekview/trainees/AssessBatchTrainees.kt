@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.assessbatch.assessweekview
+package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,24 +9,25 @@ import android.view.ViewGroup
 
 import com.revature.caliberdroid.R
 
-class AssessWeekOverviewFragment : Fragment() {
+class AssessBatchTrainees : Fragment() {
 
     companion object {
-        fun newInstance() = AssessWeekOverviewFragment()
+        fun newInstance() =
+            AssessBatchTrainees()
     }
 
-    private lateinit var viewModel: AssessWeekOverviewViewModel
+    private lateinit var viewModel: AssessBatchTraineesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_assess_week_overview, container, false)
+        return inflater.inflate(R.layout.fragment_assess_batch_trainees, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AssessWeekOverviewViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(AssessBatchTraineesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

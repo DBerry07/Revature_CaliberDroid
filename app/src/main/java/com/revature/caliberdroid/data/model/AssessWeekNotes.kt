@@ -6,12 +6,15 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
 data class AssessWeekNotes(var weekNumber: Int,
                            var batchAverage: Float,
-                           var notes: String?) : SortedListAdapter.ViewModel, Parcelable {
+                           var notes: String?,
+                           var batch: Batch?) : SortedListAdapter.ViewModel, Parcelable {
+
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readFloat(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readParcelable(Batch::class.java.classLoader)
     ) {
     }
 
@@ -27,6 +30,7 @@ data class AssessWeekNotes(var weekNumber: Int,
         parcel.writeInt(weekNumber)
         parcel.writeFloat(batchAverage)
         parcel.writeString(notes)
+        parcel.writeParcelable(batch, flags)
     }
 
     override fun describeContents(): Int {
@@ -42,4 +46,5 @@ data class AssessWeekNotes(var weekNumber: Int,
             return arrayOfNulls(size)
         }
     }
+
 }

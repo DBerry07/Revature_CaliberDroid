@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="assesWeekNotes"
+            name="assessWeekNotes"
             type="com.revature.caliberdroid.data.model.AssessWeekNotes" />
 
     </data>
@@ -27,13 +27,35 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
+
             <TextView
                 android:id="@+id/tv_assessweekrecycler_weeknumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/banner_font_size"
+                android:textSize="@dimen/card_title_font_size"
+                android:text="@{@string/week_number(assessWeekNotes.weekNumber)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_assessweek_averagelabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/weekly_batch_average_label"
+                app:layout_constraintStart_toStartOf="@+id/tv_assessweekrecycler_weeknumber"
+                app:layout_constraintTop_toBottomOf="@+id/tv_assessweekrecycler_weeknumber" />
+
+            <TextView
+                android:id="@+id/tv_assessweekselection_average"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{@string/grade_format(assessWeekNotes.batchAverage)}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_assessweek_averagelabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tv_assessweek_averagelabel" />
 
             <TextView
                 android:id="@+id/tv_assessweekrecycler_noteslabel"
@@ -41,28 +63,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/batch_notes_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_assesswee_averagelabel"
-                app:layout_constraintTop_toBottomOf="@+id/tv_assesswee_averagelabel" />
+                app:layout_constraintStart_toStartOf="@+id/tv_assessweek_averagelabel"
+                app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_averagelabel" />
 
             <TextView
                 android:id="@+id/tv_assessweekrecycler_notes"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@{assessWeekNotes.notes}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="@+id/tv_assessweekrecycler_noteslabel"
                 app:layout_constraintTop_toBottomOf="@id/tv_assessweekrecycler_noteslabel" />
-
-            <TextView
-                android:id="@+id/tv_assesswee_averagelabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/weekly_batch_average_label"
-                app:layout_constraintStart_toStartOf="@+id/tv_assessweekrecycler_weeknumber"
-                app:layout_constraintTop_toBottomOf="@+id/tv_assessweekrecycler_weeknumber" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/assessBatchSelectionFragment"
-        android:name="com.revature.caliberdroid.ui.assessbatch.assessment.AssessBatchSelectionFragment"
+        android:name="com.revature.caliberdroid.ui.assessbatch.AssessBatchSelectionFragment"
         android:label="fragment_assess_batch_selection"
         tools:layout="@layout/fragment_assess_batch_selection" >
         <action

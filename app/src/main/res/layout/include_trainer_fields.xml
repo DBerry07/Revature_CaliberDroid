@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--    Company Name -->
+    <!--    Full Name -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Company Name"
+        android:text="Full Name"
         style="@style/settingsFieldHeading"/>
 
     <EditText
@@ -18,25 +18,25 @@
         android:inputType="textPersonName"
         style="@style/settingsFieldEditText" />
 
-    <!--    Street Address -->
+    <!--    Email -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Street Address"
+        android:text="E-mail"
         style="@style/settingsFieldHeading"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         style="@style/settingsFieldEditText" />
 
-    <!--    City -->
+    <!--    Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/settingsFieldHeading"
-        android:text="City" />
+        android:text="Title" />
 
     <EditText
         android:layout_width="match_parent"
@@ -44,32 +44,17 @@
         android:inputType="textPersonName"
         style="@style/settingsFieldEditText"/>
 
-    <!--    State -->
+    <!--    Trainer Tier  -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/settingsFieldHeading"
-        android:text="State" />
-
-    <EditText
+        android:text="Trainer Tier" />
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        style="@style/settingsFieldEditText" />
-
-    <!--    Zip Code -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:text="Zipcode"
-        style="@style/settingsFieldHeading"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        style="@style/settingsFieldEditText"/>
+        style="@style/settingsField"/>
 
 </LinearLayout>
 </layout>

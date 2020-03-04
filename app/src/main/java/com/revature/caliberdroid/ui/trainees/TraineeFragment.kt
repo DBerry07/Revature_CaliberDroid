@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -37,6 +40,13 @@ class TraineeFragment : Fragment() {
         recyclerView.layoutManager = traineeLayoutManager
         recyclerView.adapter = traineeAdapter
         recyclerView.setHasFixedSize(false);
+
+        val button : Button = view.findViewById(R.id.MB_btn_goto_add_trainee)
+
+        button.setOnClickListener {
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.action_traineeFragment_to_addTraineeFragment)
+        }
 
         // Inflate the layout for this fragment
         return view

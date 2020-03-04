@@ -30,6 +30,10 @@ class ManageBatchFragment : Fragment() {
             navController.navigate(R.id.action_manageBatchFragment_to_batchDetailsFragment)
         }
 
+        v.findViewById<Button>(R.id.MB_btn_goto_create_batch).setOnClickListener {
+            Navigation.findNavController(v).navigate(R.id.action_manageBatchFragment_to_createBatchFragment)
+        }
+
         return v
     }
 }

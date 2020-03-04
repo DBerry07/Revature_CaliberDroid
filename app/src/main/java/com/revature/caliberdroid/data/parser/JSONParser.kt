@@ -1,12 +1,14 @@
 package com.revature.caliberdroid.data.parser
 
 import com.revature.caliberdroid.data.model.*
+import com.revature.caliberdroid.data.model.AuditWeekNotes
+import com.revature.caliberdroid.data.model.Batch
 import org.json.JSONArray
 import org.json.JSONObject
 
 object JSONParser {
 
-    fun parseBatch(response: JSONArray): List<Batch> {
+    fun parseBatches(response: JSONArray): List<Batch> {
 
         val batchList = ArrayList<Batch>()
 
@@ -21,6 +23,17 @@ object JSONParser {
         }
 
         return batchList
+    }
+
+    fun parseAuditWeekNotes(response: JSONObject): AuditWeekNotes {
+
+        var auditWeekNotes: AuditWeekNotes
+
+        response.apply {
+            auditWeekNotes = AuditWeekNotes(weekNumber = getInt("week"), overallStatus = getString("technicalStatus"), overallNotes = getString("content"))
+        }
+
+        return auditWeekNotes
     }
 
     fun parseAssessments(response: JSONArray): List<Assessment> {

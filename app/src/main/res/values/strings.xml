@@ -27,7 +27,8 @@
 
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
-    <string name="overall_qc_feedback">Overall QC FeedBack %s</string>
+    <string name="overall_qc_feedback">Overall QC Feedback for %s</string>
+    <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>

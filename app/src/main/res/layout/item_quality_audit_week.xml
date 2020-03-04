@@ -6,9 +6,8 @@
     <data>
 
         <variable
-            name="auditWeekNotes"
-            type="com.revature.caliberdroid.data.model.AuditWeekNotes" />
-
+            name="weekLiveData"
+            type="com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -30,7 +29,7 @@
                 android:id="@+id/tv_auditweek_weeknumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/week_number(auditWeekNotes.weekNumber)}"
+                android:text="@{@string/week_number(weekLiveData.weekNumber)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/overall_qc_feedback"
+                android:text="@{@string/overall_qc_feedback(@string/week_number(weekLiveData.weekNumber))}"
                 app:layout_constraintStart_toStartOf="@+id/tv_auditweek_overall_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_auditweek_overall_label" />
 
@@ -75,10 +74,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/tv_auditweek_overall_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:hint="@{@string/overall_qc_feedback_hint(weekLiveData.weekNumber)}"/>
             </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

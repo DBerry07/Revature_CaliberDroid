@@ -7,7 +7,15 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.revature.caliberdroid.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.revature.caliberdroid.ui.batches.BatchesFragment"
+        android:label="Manage Batches"
+        tools:layout="@layout/batches_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_batchesInfo"
+            app:destination="@id/batchesInfo" />
+    </fragment>
+    <fragment
+        android:id="@+id/batchesInfo"
+        android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
+        android:label="Batch Info" />
 </navigation>

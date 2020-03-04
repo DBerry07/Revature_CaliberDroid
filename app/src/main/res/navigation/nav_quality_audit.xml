@@ -10,15 +10,11 @@
         android:label="batches_fragment"
         tools:layout="@layout/batches_fragment" >
         <action
-            android:id="@+id/action_batchesFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
+            android:id="@+id/action_batchesFragment_to_Batches_info"
+            app:destination="@id/Batches_info" />
     </fragment>
     <fragment
-        android:id="@+id/galleryFragment"
-        android:name="com.revature.caliberdroid.ui.gallery.GalleryFragment"
-        android:label="GalleryFragment" >
-        <argument
-            android:name="batchSelected"
-            app:argType="com.revature.caliberdroid.data.model.Batch" />
-    </fragment>
+        android:id="@+id/Batches_info"
+        android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
+        android:label="Batches Info"/>
 </navigation>

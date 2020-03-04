@@ -10,4 +10,5 @@
     <color name="active">#18ff03</color>
     <color name="inactive">#ff0303</color>
     <color name="addBtnOrange">#FE9A00</color>
+    <color name="dividerGray">#999999</color>
 </resources>

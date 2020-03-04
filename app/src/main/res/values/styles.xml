@@ -48,6 +48,12 @@
         <item name="android:layout_marginTop">6dp</item>
     </style>
 
+    <style name="settingsHeading">
+        <item name="android:padding">5dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
+    </style>
+
+
     <style name="activeCircle">
         <item name="android:background">@drawable/background_active_status</item>
         <item name="android:gravity">center</item>

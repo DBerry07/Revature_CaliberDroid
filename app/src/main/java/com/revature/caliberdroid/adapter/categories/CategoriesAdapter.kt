@@ -24,6 +24,6 @@ class CategoriesAdapter(val categories: ArrayList<Category>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
-        holder.tvCategory.text = categories.get(position).toString()
+        holder.tvCategory.text = categories.get(position).skillCategory
     }
 }

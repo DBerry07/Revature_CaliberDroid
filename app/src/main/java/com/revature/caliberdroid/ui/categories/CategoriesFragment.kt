@@ -1,20 +1,23 @@
 package com.revature.caliberdroid.ui.categories
 
-import android.content.DialogInterface
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
+import android.view.*
+import android.widget.EditText
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.revature.caliberdroid.R
 
 import com.revature.caliberdroid.adapter.categories.CategoriesAdapter
+import com.revature.caliberdroid.adapter.categories.listeners.EditCategoryListenerInterface
+import com.revature.caliberdroid.adapter.categories.listeners.ToggleCategoryListenerInterface
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.databinding.FragmentCategoriesBinding
 
-class CategoriesFragment: Fragment(), CategoriesDialog.CategoriesDialogListener {
+class CategoriesFragment: Fragment() {
     var _binding:FragmentCategoriesBinding? = null
     val binding get() = _binding!!
     private val categoriesViewModel: CategoriesViewModel by activityViewModels()
@@ -36,12 +39,12 @@ class CategoriesFragment: Fragment(), CategoriesDialog.CategoriesDialogListener 
             setLifecycleOwner(this@CategoriesFragment)
             categoriesViewModel.categoryLiveData.observe(viewLifecycleOwner, Observer { categories ->
                 sortCategories(categories)
-                rvActiveCategories.adapter = CategoriesAdapter(activeCategories)
-                rvStaleCategories.adapter = CategoriesAdapter(inactiveCategories)
+                rvActiveCategories.adapter = CategoriesAdapter(activeCategories,EditCategoriesOnClickListener(),ToggleCategoryStatusOnClickListener())
+                rvStaleCategories.adapter = CategoriesAdapter(inactiveCategories,EditCategoriesOnClickListener(),ToggleCategoryStatusOnClickListener())
             })
             btnAddCategory.setOnClickListener{
-                var dialog: CategoriesDialog = CategoriesDialog()
-                dialog.show(parentFragmentManager,"Title")
+                var dialog: CategoriesDialog = CategoriesDialog(AddCategoriesListener(), R.layout.dialog_add_category)
+                dialog.show(parentFragmentManager,"Add Category")
             }
         }
 
@@ -59,14 +62,40 @@ class CategoriesFragment: Fragment(), CategoriesDialog.CategoriesDialogListener 
         }
     }
 
-    override fun onDialogPositiveClick(dialog: DialogFragment){
-
+//DIALOG: OnClick Events for Add Category Dialog Buttons
+    inner class AddCategoriesListener: CategoriesDialog.CategoriesDialogListener{
+        override fun onDialogPositiveClick(dialog: DialogFragment){
+            Log.d("CategoriesFragment","adding a category")
+        }
+        override fun onDialogNegativeClick(dialog: DialogFragment){
+            Log.d("CategoriesFragment","cancel adding a category")
+        }
     }
-    override fun onDialogNegativeClick(dialog: DialogFragment){
 
+//DIALOG: OnClick Events for Edit Category Dialog Buttons
+    inner class EditCategoriesItemListener: CategoriesDialog.CategoriesDialogListener{
+        override fun onDialogPositiveClick(dialog: DialogFragment){
+            Log.d("CategoriesFragment","editing a category")
+        }
+        override fun onDialogNegativeClick(dialog: DialogFragment){
+            Log.d("CategoriesFragment","cancel editing a category")
+        }
     }
 
-    override fun onClick(dialog: DialogInterface?, which: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    inner class ToggleCategoryStatusOnClickListener: ToggleCategoryListenerInterface{
+        override fun onToggleCategory(category: Category) {
+            Log.d("CategoriesFragment","will toggle the category")
+        }
     }
+
+    inner class EditCategoriesOnClickListener: EditCategoryListenerInterface{
+        override fun onEditCategory(category: Category) {
+            var dialog: CategoriesDialog = CategoriesDialog(EditCategoriesItemListener(), R.layout.dialog_edit_category)
+//            var dialogObject = dialog.view!!
+//            var field = dialogObject.findViewById<EditText>(R.id.tvDialogField)!!
+//                field.setText(category.skillCategory)
+            dialog.show(parentFragmentManager,"Edit Category")
+        }
+    }
+
 }

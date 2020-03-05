@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.adapter.categories.listeners.EditTrainerInterface
+import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.adapter.trainers.TrainersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.databinding.FragmentTrainersBinding
@@ -48,7 +48,8 @@ class TrainersFragment : Fragment(){
         return binding.root
     }
 
-    inner class EditTrainerListener: EditTrainerInterface{
+    inner class EditTrainerListener:
+        EditTrainerInterface {
         override fun onEditTrainer(trainer: Trainer) {
             trainersViewModel.selectedTrainerLiveData.value = trainer
             navController?.navigate(R.id.action_trainersFragment_to_editTrainerFragment)

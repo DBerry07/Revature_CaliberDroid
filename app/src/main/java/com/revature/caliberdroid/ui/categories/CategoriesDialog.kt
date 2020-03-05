@@ -10,9 +10,9 @@ import androidx.fragment.app.DialogFragment
 import com.revature.caliberdroid.R
 import java.lang.ClassCastException
 
-class CategoriesDialog(val listener: CategoriesDialogListener): DialogFragment(){
+class CategoriesDialog(val listener: CategoriesDialogListener, val layoutResource: Int): DialogFragment(){
 
-    interface CategoriesDialogListener: DialogInterface.OnClickListener{
+    interface CategoriesDialogListener{
         fun onDialogPositiveClick(dialog: DialogFragment)
         fun onDialogNegativeClick(dialog: DialogFragment)
     }
@@ -31,14 +31,20 @@ class CategoriesDialog(val listener: CategoriesDialogListener): DialogFragment()
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
-            builder.setView(inflater.inflate(R.layout.dialog_add_category,null))
+            builder.setView(inflater.inflate(layoutResource,null))
                 .setPositiveButton(R.string.btn_add,
-                    listener
+                    DialogInterface.OnClickListener { dialog, id ->
+                    listener.onDialogPositiveClick(this)
+                    }
                 )
                 .setNegativeButton(R.string.btn_cancel,
-                    listener
+                    DialogInterface.OnClickListener { dialog, id ->
+                        listener.onDialogNegativeClick(this)
+                    }
                 )
             builder.create()
         }?: throw IllegalStateException("Activity cannot be null")
     }
+
+
 }

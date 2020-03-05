@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.adapter.categories.listeners.EditTrainerInterface
+import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.data.model.Trainer
 
 class TrainersAdapter(val trainers: ArrayList<Trainer>, val editListener: EditTrainerInterface): RecyclerView.Adapter<TrainersAdapter.TrainersViewHolder>(){
@@ -21,7 +21,7 @@ class TrainersAdapter(val trainers: ArrayList<Trainer>, val editListener: EditTr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainersViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.row_trainer,parent,false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_trainer,parent,false)
         return TrainersViewHolder(view)
     }
 

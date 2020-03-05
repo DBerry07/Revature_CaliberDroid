@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_categories">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_categories"
+    app:startDestination="@id/categoriesFragment">
 
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.revature.caliberdroid.ui.categories.CategoriesFragment"
+        android:label="Categories" />
 </navigation>

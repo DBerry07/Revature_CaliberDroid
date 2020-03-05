@@ -18,4 +18,21 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Trainees-->
+    <string name="trainee_name">Trainee Name</string>
+    <string name="trainee_email">Email Address</string>
+    <string name="trainee_batch">Batch</string>
+    <string name="trainee_status">Training Status</string>
+    <string name="trainee_screener">Tech Screener</string>
+    <string name="trainee_recruiter">Recruiter</string>
+    <string name="trainee_college">College/University</string>
+    <string name="trainee_degree">Degree</string>
+    <string name="trainee_major">Major</string>
+    <string name="trainee_profile">Profile URL</string>
+    <string name="trainee_skype">Skype ID</string>
+    <string name="trainee_phone">Phone Number</string>
+    <string name="trainee_project">Project Status</string>
+    <string name="trainee_year">Assigned Year</string>
+    <string name="trainee_quarter">Assigned Quarter</string>
 </resources>

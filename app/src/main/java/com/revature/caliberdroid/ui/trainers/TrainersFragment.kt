@@ -15,7 +15,6 @@ import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.adapter.trainers.TrainersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.databinding.FragmentTrainersBinding
-import kotlinx.android.synthetic.main.fragment_trainers.*
 
 class TrainersFragment : Fragment(){
     private var _binding: FragmentTrainersBinding? = null
@@ -37,7 +36,7 @@ class TrainersFragment : Fragment(){
         _binding = FragmentTrainersBinding.inflate(layoutInflater)
         binding.apply {
             setLifecycleOwner (this@TrainersFragment )
-            trainersViewModel.trainerLiveData.observe(viewLifecycleOwner, Observer { trainers->
+            trainersViewModel.trainersLiveData.observe(viewLifecycleOwner, Observer { trainers->
                 rvTrainers.adapter = TrainersAdapter(trainers, EditTrainerListener())
             })
             btnAddTrainer.setOnClickListener{

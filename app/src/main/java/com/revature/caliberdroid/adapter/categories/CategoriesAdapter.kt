@@ -15,7 +15,7 @@ class CategoriesAdapter(val categories: ArrayList<Category>, val editCategoryLis
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
-        var view:View  = LayoutInflater.from(parent.context).inflate(R.layout.item_category,parent,false)
+        var view:View  = LayoutInflater.from(parent.context).inflate(R.layout.item_settings_category,parent,false)
         return CategoriesViewHolder(view)
     }
 

@@ -11,4 +11,8 @@ object TrainerRepository {
         APIHandler.getTrainers(liveData)
         return liveData
     }
+
+    fun addTrainer(trainer:Trainer,liveData: MutableLiveData< ArrayList<Trainer> >){
+        APIHandler.addTrainer(trainer, liveData)
+    }
 }

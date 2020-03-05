@@ -80,6 +80,10 @@ object APIHandler {
         TrainersAPI.getTrainers(liveData)
     }
 
+    fun addTrainer(trainer:Trainer,liveData: MutableLiveData< ArrayList<Trainer> >){
+        TrainersAPI.addTrainer(trainer,liveData)
+    }
+
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
     }

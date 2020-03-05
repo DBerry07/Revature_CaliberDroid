@@ -21,7 +21,7 @@ class TrainersAdapter(val trainers: ArrayList<Trainer>, val editListener: EditTr
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainersViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_trainer,parent,false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_settings_trainer,parent,false)
         return TrainersViewHolder(view)
     }
 

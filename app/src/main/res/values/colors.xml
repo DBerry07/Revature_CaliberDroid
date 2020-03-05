@@ -5,4 +5,15 @@
     <color name="colorAccent">#0384DA</color>
     <color name="Revature_Orange">#F26925</color>
     <color name="black">#000000</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="black">#000</color>
+
+<!-- SETTINGS -->
+    <color name="active">#18ff03</color>
+    <color name="inactive">#ff0303</color>
+    <color name="addBtnOrange">#FE9A00</color>
+    <color name="dividerGray">#999999</color>
 </resources>

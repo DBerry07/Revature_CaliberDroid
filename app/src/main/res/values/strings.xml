@@ -1,4 +1,5 @@
 <resources>
+    <!--  Common  -->
     <string name="app_name">CaliberDroid</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -6,6 +7,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="button_cancel">Cancel</string>
 
 <!--  Menu Items -->
     <string name="menu_quality_audit">Quality Audit</string>
@@ -17,7 +19,56 @@
     <string name="btn_manage_batch_create_batch">Create Batch</string>
 
     <!-- Manage Batches -->
+    <!--  Quality Audit & Assess Batch -->
+    <string name="week_number">Week %d</string>
+    <string name="button_add_week">Add week</string>
+    <string name="batch_with_starting_date">%s - %s - %d</string>
+    <string name="batch_with_week">%s - %s - Week %d</string>
+    <string name="dialog_add_week_title">Add Week</string>
+    <string name="dialog_add_week_message">Are you sure you want to add a week? This action can not be undone.</string>
+    <string name="add_categories">Add categories</string>
+
+    <!--  Quality Audit  -->
+    <string name="overall_qc_status">Overall QC Status:</string>
+    <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
+    <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
+
+    <!--    Assess Batch-->
+    <string name="assessment_type_label">Type:</string>
+    <string name="assessment_skill_label">Skill Category:</string>
+    <string name="assessment_points_label">Points:</string>
+    <string name="assessment_batch_avg_label">Batch Average:</string>
+    <string name="grade_format">%.2f%%</string>
+
+    <string name="trainee_name_label">Name:</string>
+    <string name="trainee_notes_label">Trainee Notes:</string>
+
+    <string name="title_assessments">Assessments</string>
+    <string name="title_trainees">Trainees</string>
+    <string name="dummy_batch">Nick Jurczak - Java - 1/06/2020</string>
+    <string name="weekly_batch_average_label">Weekly Batch Average:</string>
+    <string name="batch_notes_label">Batch notes</string>
+    <string name="save">Save</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+<!-- SETTINGS -->
+    <string name="title_add_location">Add Location</string>
+    <string name="title_add_category">Add Category</string>
+    <string name="title_add_trainer">Add Trainer</string>
+
+
+    <string name="btn_add_location">Add Location</string>
+    <string name="btn_add_trainer">Add Trainer</string>
+    <string name="btn_add_category">Add Category</string>
+    <string name="title_active_status">Active</string>
+    <string name="title_stale_status">Stale</string>
+    <string name="btn_add">Add</string>
+    <string name="title_edit_location">Edit Location</string>
+    <string name="btn_confirm">Confirm</string>
+    <string name="title_edit_trainer">Edit Trainer</string>
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>

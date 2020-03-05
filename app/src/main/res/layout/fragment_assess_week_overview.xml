@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="assessWeekModel"
+            type="com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel"></variable>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.assessbatch.assessweekview.overview.AssessWeekOverviewFragment">
+
+        <TextView
+            android:id="@+id/tv_assessweek_batchinfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/banner_font_size"
+            android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_assessweek_batchaveragelabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/weekly_batch_average_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchinfo" />
+
+        <TextView
+            android:id="@+id/tv_assessweek_batchaverage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{@string/grade_format(assessWeekModel.assessWeekNotes.batchAverage)}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_assessweek_batchaveragelabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_assessweek_batchaveragelabel" />
+
+        <TextView
+            android:id="@+id/tv_assessweek_batchnoteslabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/batch_notes_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchaveragelabel" />
+
+        <EditText
+            android:id="@+id/et_assessweek_batchnotes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{assessWeekModel.assessWeekNotes.notes}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchnoteslabel" />
+
+        <TextView
+            android:id="@+id/tv_assessweek_assessmentssectiontitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/title_assessments"
+            android:textSize="@dimen/section_title"
+            app:layout_constraintEnd_toStartOf="@+id/btn_assessweek_addassessment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_assessweek_batchnotes" />
+
+        <Button
+            android:id="@+id/btn_assessweek_addassessment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="31dp"
+            android:text="add assessment"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_assessweek_assessmentssectiontitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_assessweek_assessmentssectiontitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_assessweek_assessments"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_assessweek_addassessment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

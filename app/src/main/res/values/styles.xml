@@ -53,4 +53,78 @@
     </style>
 
 
+<!-- SETTINGS -->
+
+    <style name="addBtn" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:background">@drawable/background_btn</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="addBtnWithPlusImg" parent="addBtn">
+        <item name="drawableEndCompat">@drawable/ic_add_orange</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+    <style name="settingsFragmentContentWrapper">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="settingsCard">
+        <item name="android:layout_margin">6dp</item>
+    </style>
+
+    <style name="settingsCardContentWrapper">
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="settingsHeaderWrapper">
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="settingsRecyclerView">
+        <item name="android:layout_marginTop">6dp</item>
+    </style>
+
+    <style name="settingsHeading">
+        <item name="android:padding">5dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
+    </style>
+
+    <style name="settingsFieldHeading">
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
+    <style name="settingsField">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="settingsFieldEditText" parent="settingsField">
+        <item name="android:background">@drawable/background_black_border</item>
+        <item name="android:minHeight">15dp</item>
+    </style>
+
+    <style name="activeCircle">
+        <item name="android:background">@drawable/background_active_status</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="srcCompat">@drawable/ic_active_green</item>-->
+    </style>
+
+    <style name="inActiveCircle">
+        <item name="android:background">@drawable/background_inactive_status</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="srcCompat">@drawable/ic_inactive_red</item>-->
+    </style>
+
+    <style name="editIcon">
+        <item name="android:gravity">center</item>
+        <item name="srcCompat">@drawable/ic_edit_orange</item>
+    </style>
+
+    <style name="deleteIcon">
+        <item name="android:gravity">center</item>
+        <item name="srcCompat">@drawable/ic_delete_red</item>
+    </style>
 </resources>

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.databinding.TraineeItemBinding
+import com.revature.caliberdroid.ui.batches.BatchesInfoDirections
+import com.revature.caliberdroid.ui.batches.ManageBatchFragmentDirections
+import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
 
 
 class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {

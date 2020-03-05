@@ -6,11 +6,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 
 class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var items : List<Grade> = ArrayList()
+    private var grades : List<Grade> = ArrayList()
+    private var assessments: List<Assessment> = ArrayList()
+
+    fun submitGradeList(gradeList: List<Grade>){
+        grades = gradeList
+    }
+
+    fun submitAssessmentList(assessmentList: List<Assessment>){
+        assessments = assessmentList
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
@@ -25,17 +35,24 @@ class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is AssessmentViewHolder ->{
-                holder.bind(items.get(position))
+                holder.bind(grades.get(position),getAssessment(grades.get(position).assessmentId!!)!!)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return grades.size
     }
 
-    fun submitList(gradeList: List<Grade>){
-        items = gradeList
+
+
+    fun getAssessment(assessmentId:Long):Assessment? {
+        for(assessment in assessments){
+            if(assessment.assessmentId==assessmentId){
+                return assessment
+            }
+        }
+        return null
     }
 
     class AssessmentViewHolder constructor(
@@ -43,10 +60,11 @@ class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     ): RecyclerView.ViewHolder(itemView){
         val assessmentType: TextView = itemView.tv_trainee_assessment_item_label
         val assessmentGrade: TextView = itemView.tv_trainee_assessment_item_grade
-        fun bind(grade: Grade){
-            //assessment: Assessment = getAssessment(grade.assessmentId)
-            //assessmentType.setText(assessment.type+": ")
+        fun bind(grade: Grade, assessment: Assessment){
+            assessmentType.setText(assessment.assessmentType+": ")
             assessmentGrade.setText(grade.score!!)
         }
     }
+
+
 }

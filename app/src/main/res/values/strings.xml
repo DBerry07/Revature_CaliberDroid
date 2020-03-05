@@ -16,7 +16,7 @@
     <string name="menu_categories">Categories</string>
     <string name="btn_manage_batch_create_batch">Create Batch</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Manage Batches -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
@@ -41,4 +41,21 @@
     <string name="batch_info_heading_passing_grade">Passing Grade:</string>
     <string name="batchesInfo_confirmButton">Confirm</string>
     <string name="batchesInfo_cancelButton">Edit Batch</string>
+
+    <!--Trainees-->
+    <string name="trainee_name">Trainee Name</string>
+    <string name="trainee_email">Email Address</string>
+    <string name="trainee_batch">Batch</string>
+    <string name="trainee_status">Training Status</string>
+    <string name="trainee_screener">Tech Screener</string>
+    <string name="trainee_recruiter">Recruiter</string>
+    <string name="trainee_college">College/University</string>
+    <string name="trainee_degree">Degree</string>
+    <string name="trainee_major">Major</string>
+    <string name="trainee_profile">Profile URL</string>
+    <string name="trainee_skype">Skype ID</string>
+    <string name="trainee_phone">Phone Number</string>
+    <string name="trainee_project">Project Status</string>
+    <string name="trainee_year">Assigned Year</string>
+    <string name="trainee_quarter">Assigned Quarter</string>
 </resources>

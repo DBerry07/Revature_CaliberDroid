@@ -24,4 +24,33 @@
         <item name="contentPadding">15dp</item>
     </style>
 
+    <style name="importantHeader">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="somewhatImportantHeader">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="littleImportanceHeader">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="veryLittleImportantHeader">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="lessImportantHeader">
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="traineeDetailsHeaderLeft">
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="traineeDetailsHeaderRight">
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+
 </resources>

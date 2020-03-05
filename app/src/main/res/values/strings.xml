@@ -7,7 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <!--  Menu Items -->
+<!--  Menu Items -->
     <string name="menu_quality_audit">Quality Audit</string>
     <string name="menu_assess_batch">Assess Batch</string>
     <string name="menu_manage_batch">Manage Batch</string>

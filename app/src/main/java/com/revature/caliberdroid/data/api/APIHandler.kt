@@ -83,4 +83,13 @@ object APIHandler {
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
     }
+
+    fun addCategory(skillCategory: String, liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.addCategory(skillCategory,liveData)
+    }
+
+    fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.editCategory(category,liveData)
+    }
+
 }

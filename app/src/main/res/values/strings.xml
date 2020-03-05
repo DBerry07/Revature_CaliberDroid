@@ -71,9 +71,12 @@
     <string name="btn_confirm">Confirm</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_add">Add</string>
+    <string name="btn_edit">Edit</string>
 
     <string name="label_dialog_name">Name:</string>
     <string name="title_edit_trainer">Edit Trainer</string>
+
+
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>

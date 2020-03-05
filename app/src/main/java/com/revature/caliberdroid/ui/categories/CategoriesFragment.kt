@@ -1,12 +1,11 @@
 package com.revature.caliberdroid.ui.categories
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.revature.caliberdroid.R
@@ -15,16 +14,21 @@ import com.revature.caliberdroid.adapter.categories.CategoriesAdapter
 import com.revature.caliberdroid.adapter.categories.listeners.EditCategoryListenerInterface
 import com.revature.caliberdroid.adapter.categories.listeners.ToggleCategoryListenerInterface
 import com.revature.caliberdroid.data.model.Category
+import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.databinding.FragmentCategoriesBinding
+import timber.log.Timber
 
-class CategoriesFragment: Fragment() {
-    var _binding:FragmentCategoriesBinding? = null
+class CategoriesFragment : Fragment() {
+    var _binding: FragmentCategoriesBinding? = null
     val binding get() = _binding!!
     private val categoriesViewModel: CategoriesViewModel by activityViewModels()
-    val activeCategories:ArrayList<Category> = ArrayList()
-    val inactiveCategories:ArrayList<Category> = ArrayList()
+    val activeCategories: ArrayList<Category> = ArrayList()
+    val inactiveCategories: ArrayList<Category> = ArrayList()
+    lateinit var addCategoryDialogView: View
+    lateinit var editCategoryDialogView: View
 
-    override fun onCreate(savedInstanceState: Bundle?){
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
@@ -32,69 +36,94 @@ class CategoriesFragment: Fragment() {
         layoutInflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ):View?{
+    ): View? {
         categoriesViewModel.getCategories()
         _binding = FragmentCategoriesBinding.inflate(layoutInflater)
         binding.apply {
             setLifecycleOwner(this@CategoriesFragment)
-            categoriesViewModel.categoryLiveData.observe(viewLifecycleOwner, Observer { categories ->
-                sortCategories(categories)
-                rvActiveCategories.adapter = CategoriesAdapter(activeCategories,EditCategoriesOnClickListener(),ToggleCategoryStatusOnClickListener())
-                rvStaleCategories.adapter = CategoriesAdapter(inactiveCategories,EditCategoriesOnClickListener(),ToggleCategoryStatusOnClickListener())
-            })
-            btnAddCategory.setOnClickListener{
-                var dialog: CategoriesDialog = CategoriesDialog(AddCategoriesListener(), R.layout.dialog_add_category)
-                dialog.show(parentFragmentManager,"Add Category")
+            categoriesViewModel.categoryLiveData.observe(
+                viewLifecycleOwner,
+                Observer { categories ->
+                    sortCategories(categories)
+                    rvActiveCategories.adapter = CategoriesAdapter(
+                        activeCategories,
+                        EditCategoriesOnClickListener(),
+                        ToggleCategoryStatusOnClickListener()
+                    )
+                    rvStaleCategories.adapter = CategoriesAdapter(
+                        inactiveCategories,
+                        EditCategoriesOnClickListener(),
+                        ToggleCategoryStatusOnClickListener()
+                    )
+                })
+            btnAddCategory.setOnClickListener {
+                var builder: AlertDialog.Builder = AlertDialog.Builder(context);
+                addCategoryDialogView = LayoutInflater.from(context).inflate(
+                    R.layout.dialog_add_category,
+                    view!!.findViewById(android.R.id.content)
+                )
+                builder.setView(addCategoryDialogView)
+                    .setPositiveButton(R.string.btn_add,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            var etField = addCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
+                            var entry:String = etField.text.toString()
+                            CategoryRepository.addCategory(entry,categoriesViewModel.categoryLiveData)
+                        }
+                    )
+                    .setNegativeButton(R.string.btn_cancel,
+                        DialogInterface.OnClickListener { dialog, id ->
+
+                        }
+                    )
+                var alertDialog: AlertDialog = builder.create();
+                alertDialog.show()
             }
         }
 
         return binding.root
     }
 
-    fun sortCategories( categories: ArrayList<Category> ){
-
-        for(category in categories){
-            if(category.active){
+    fun sortCategories(categories: ArrayList<Category>) {
+        activeCategories.clear()
+        inactiveCategories.clear()
+        for (category in categories) {
+            if (category.active) {
                 activeCategories.add(category)
-            }else{
+            } else {
                 inactiveCategories.add(category)
             }
         }
     }
 
-//DIALOG: OnClick Events for Add Category Dialog Buttons
-    inner class AddCategoriesListener: CategoriesDialog.CategoriesDialogListener{
-        override fun onDialogPositiveClick(dialog: DialogFragment){
-            Log.d("CategoriesFragment","adding a category")
-        }
-        override fun onDialogNegativeClick(dialog: DialogFragment){
-            Log.d("CategoriesFragment","cancel adding a category")
-        }
-    }
-
-//DIALOG: OnClick Events for Edit Category Dialog Buttons
-    inner class EditCategoriesItemListener: CategoriesDialog.CategoriesDialogListener{
-        override fun onDialogPositiveClick(dialog: DialogFragment){
-            Log.d("CategoriesFragment","editing a category")
-        }
-        override fun onDialogNegativeClick(dialog: DialogFragment){
-            Log.d("CategoriesFragment","cancel editing a category")
-        }
-    }
-
-    inner class ToggleCategoryStatusOnClickListener: ToggleCategoryListenerInterface{
+    inner class ToggleCategoryStatusOnClickListener : ToggleCategoryListenerInterface {
         override fun onToggleCategory(category: Category) {
-            Log.d("CategoriesFragment","will toggle the category")
+            category.active = !category.active
+            CategoryRepository.editCategory(category,categoriesViewModel.categoryLiveData)
         }
     }
 
-    inner class EditCategoriesOnClickListener: EditCategoryListenerInterface{
+    inner class EditCategoriesOnClickListener : EditCategoryListenerInterface {
         override fun onEditCategory(category: Category) {
-            var dialog: CategoriesDialog = CategoriesDialog(EditCategoriesItemListener(), R.layout.dialog_edit_category)
-//            var dialogObject = dialog.view!!
-//            var field = dialogObject.findViewById<EditText>(R.id.tvDialogField)!!
-//                field.setText(category.skillCategory)
-            dialog.show(parentFragmentManager,"Edit Category")
+            var builder: AlertDialog.Builder = AlertDialog.Builder(context);
+            editCategoryDialogView = LayoutInflater.from(context).inflate(
+                R.layout.dialog_edit_category,
+                view!!.findViewById(android.R.id.content)
+            )
+            builder.setView(editCategoryDialogView)
+                .setPositiveButton(R.string.btn_confirm,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        category.skillCategory = editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField).text.toString()
+                        CategoryRepository.editCategory(category,categoriesViewModel.categoryLiveData)
+                    }
+                )
+                .setNegativeButton(R.string.btn_cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+
+                    }
+                )
+            editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField).setText(category.skillCategory)
+            var alertDialog: AlertDialog = builder.create();
+            alertDialog.show()
         }
     }
 

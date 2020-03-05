@@ -22,24 +22,15 @@
         android:id="@+id/manageBatchFragment"
         android:name="com.revature.caliberdroid.ui.batches.ManageBatchFragment"
         android:label="fragment_manage_batch"
-        tools:layout="@layout/fragment_manage_batch" >
-        <action
-            android:id="@+id/action_manageBatchFragment_to_createBatchFragment"
-            app:destination="@id/createBatchFragment" />
+        tools:layout="@layout/fragment_manage_batch">
         <action
             android:id="@+id/action_manageBatchFragment_to_batchDetailsFragment"
             app:destination="@id/batchDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createBatchFragment"
-        android:name="com.revature.caliberdroid.ui.batches.CreateBatchFragment"
-        android:label="fragment_create_batch"
-        tools:layout="@layout/fragment_create_batch" />
-    <fragment
         android:id="@+id/batchDetailsFragment"
-        android:name="com.revature.caliberdroid.ui.batches.BatchDetailsFragment"
-        android:label="fragment_batch_details"
-        tools:layout="@layout/fragment_batch_details" >
+        android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
+        android:label="fragment_batch_details">
         <action
             android:id="@+id/action_batchDetailsFragment_to_traineeFragment"
             app:destination="@id/traineeFragment" />

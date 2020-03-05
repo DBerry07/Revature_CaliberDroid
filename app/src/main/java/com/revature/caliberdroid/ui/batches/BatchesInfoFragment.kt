@@ -40,11 +40,12 @@ class BatchesInfo : Fragment() {
         viewBtn = root.findViewById(R.id.btn_batch_info_view)
 
         deleteBtn.setOnClickListener { Snackbar.make(view!!,"DELETE BUTTON",Snackbar.LENGTH_SHORT).show() }
-        viewBtn.setOnClickListener { Snackbar.make(view!!,"VIEW ASSOCIATES",Snackbar.LENGTH_SHORT).show() }
+        viewBtn.setOnClickListener {
+            findNavController().navigate(BatchesInfoDirections.actionBatchDetailsFragmentToTraineeFragment())
+        }
 
         editBtn.setOnClickListener {
             createBatchDialog(root)
-
         }
 
         return root
@@ -76,6 +77,7 @@ class BatchesInfo : Fragment() {
         }
 
     }
+
 
     private fun setDialogValues(dialog: Dialog, root: View) {
         val trainerName: TextView = dialog.findViewById(R.id.et_create_batch_name_trainer_input)

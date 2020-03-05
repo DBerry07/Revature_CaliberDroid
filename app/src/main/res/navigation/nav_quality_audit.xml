@@ -3,18 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_quality_audit"
-    app:startDestination="@id/batchesFragment">
+    app:startDestination="@id/homeFragment3">
     <fragment
-        android:id="@+id/batchesFragment"
-        android:name="com.revature.caliberdroid.ui.batches.BatchesFragment"
-        android:label="batches_fragment"
-        tools:layout="@layout/batches_fragment" >
-        <action
-            android:id="@+id/action_batchesFragment_to_Batches_info"
-            app:destination="@id/Batches_info" />
-    </fragment>
-    <fragment
-        android:id="@+id/Batches_info"
-        android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
-        android:label="Batches Info"/>
+        android:id="@+id/homeFragment3"
+        android:name="com.revature.caliberdroid.ui.home.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

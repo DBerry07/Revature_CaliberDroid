@@ -32,11 +32,11 @@ class BatchesAdapter(cont: Context, batchesList: LiveData<Batch>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.dateView.text = batches.value?.startDate.toString()
-        holder.locationView.text = batches.value?.location
-        holder.skillFocusView.text = batches.value?.skillType
-        holder.itemView.setOnClickListener( View.OnClickListener {
+        holder.locationView.text = batches.value?.location.toString()
+        holder.skillFocusView.text = batches.value?.skillType.toString()
+        holder.itemView.setOnClickListener {
             Toast.makeText(context,"Batch Adapter Click", Toast.LENGTH_SHORT).show()
-        })
+        }
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {

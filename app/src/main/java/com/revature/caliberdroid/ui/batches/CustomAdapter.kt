@@ -1,13 +1,17 @@
 package com.revature.caliberdroid.ui.batches
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.ui.batches.BatchesFragment.Companion.onClick
+import com.revature.caliberdroid.data.api.APIHandler
+import com.revature.caliberdroid.data.api.APIHandler.context
+import com.revature.caliberdroid.data.model.Batch
 import java.util.*
 
 class CustomAdapter(private val context: Context, private val list: ArrayList<String>) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
@@ -18,9 +22,9 @@ class CustomAdapter(private val context: Context, private val list: ArrayList<St
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.setOnClickListener (View.OnClickListener {
-            Toast.makeText(context,"CUSTOM ITEM SELECTED", Toast.LENGTH_SHORT).show()
-        })
+        holder.itemView.setOnClickListener {
+            Toast.makeText(context, "Batch Click", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -31,3 +35,4 @@ class CustomAdapter(private val context: Context, private val list: ArrayList<St
         RecyclerView.ViewHolder(itemView!!)
 
 }
+

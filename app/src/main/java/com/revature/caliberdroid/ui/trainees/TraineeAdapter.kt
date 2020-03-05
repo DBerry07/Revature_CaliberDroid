@@ -1,25 +1,39 @@
-package com.revature.caliberdroid.ui.trainees
+package com.revature.revaturetraineemanagment
 
 import android.view.*
+import android.view.LayoutInflater
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.APIHandler.context
+import com.revature.caliberdroid.databinding.TraineeItemBinding
+import com.revature.caliberdroid.ui.batches.BatchesInfoDirections
+import com.revature.caliberdroid.ui.batches.ManageBatchFragmentDirections
+import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
+
 
 class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var info = data
     lateinit var parent: ViewGroup
+    lateinit var pop : PopupWindow
+
+    private var _binding: TraineeItemBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val v : View = LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
-        //var viewHolder = MyViewHolder(v)
+        LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
+        _binding = TraineeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        pop = PopupWindow(parent.context)
+
         this.parent = parent
-        return MyViewHolder(v)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = info.get(position)
+        var item = info.get(position)
         holder.name.setText(item.get("name"))
         holder.email.setText(item.get("email"))
         holder.phone.setText(item.get("phone"))
@@ -30,13 +44,25 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         holder.recruiter.setText(item.get("recruiter"))
         holder.project.setText(item.get("project"))
         holder.screener.setText(item.get("screener"))
+        holder.status.setText(item.get("status"))
 
-        val mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
+        var mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
         holder.itemView.setOnTouchListener { v, event ->
             //textView?.setText(event.toString())
             mDetectorCompat.onTouchEvent(event)
             true
         }
+
+        holder.btnSwitch.setOnClickListener {
+            val navController = Navigation.findNavController(parent)
+            navController.navigate(R.id.action_traineeFragment_to_switchTraineeFragment)
+        }
+
+        holder.btnDelete.setOnClickListener {
+            var pop = PopupWindow()
+            pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
+        }
+
         /*holder.button.setOnClickListener (View.OnClickListener {
             if (!holder.isExpanded) {
                 holder.details.visibility = View.VISIBLE
@@ -55,7 +81,7 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         return info.size
     }
 
-    class MyViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class MyViewHolder(binding: TraineeItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var isExpanded = false
 
@@ -71,25 +97,37 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         var project : TextView
         var screener : TextView
         var details : LinearLayout
+        var options : LinearLayout
+        var arrow : ImageView
+        var btnSwitch : Button
+        var btnEdit : Button
+        var btnDelete : Button
 
         init {
-            this.name = v.findViewById(R.id.TM_name)
-            this.email = v.findViewById(R.id.TM_email)
-            this.status = v.findViewById(R.id.TM_status)
-            this.phone = v.findViewById(R.id.TM_phone)
-            this.skype = v.findViewById(R.id.TM_skype)
-            this.profile = v.findViewById(R.id.TM_profile)
-            this.college = v.findViewById(R.id.TM_college)
-            this.major = v.findViewById(R.id.TM_major)
-            this.recruiter = v.findViewById(R.id.TM_recruiter)
-            this.project = v.findViewById(R.id.TM_project)
-            this.screener = v.findViewById(R.id.TM_screener)
-            this.details = v.findViewById(R.id.expand)
+            this.name = binding.TMName
+            this.email = binding.TMEmail
+            this.status = binding.TMTvStatus
+            this.phone = binding.TMPhone
+            this.skype = binding.TMSkype
+            this.profile = binding.TMProfile
+            this.college = binding.TMCollege
+            this.major = binding.TMMajor
+            this.recruiter = binding.TMRecruiter
+            this.project = binding.TMProject
+            this.screener = binding.TMScreener
+            this.arrow = binding.TMIvArrow
+            this.details = binding.traineeDetails
+            this.options = binding.TMOptions
+            this.btnSwitch = binding.TMBtnSwitch
+            this.btnDelete = binding.TMBtnDelete
+            this.btnEdit = binding.TMBtnEdit
         }
 
     }
 
     class MyGestureListener(myHolder: MyViewHolder, myPosition: Int, myAdapter: TraineeAdapter): GestureDetector.OnGestureListener {
+
+        val SWIPE_THRESHOLD = 0.5
 
         val holder = myHolder
         val position = myPosition
@@ -99,21 +137,21 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         }
 
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            if (!holder.isExpanded) {
+            if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.details.visibility = View.VISIBLE
-                holder.isExpanded = !holder.isExpanded
+                holder.isExpanded = !holder.isExpanded;
                 adapter.notifyItemChanged(position)
             }
-            else {
+            else if (holder.isExpanded) {
                 holder.details.visibility = View.GONE
-                holder.isExpanded = !holder.isExpanded
+                holder.isExpanded = !holder.isExpanded;
                 adapter.notifyItemChanged(position)
             }
             return true
         }
 
         override fun onDown(e: MotionEvent?): Boolean {
-           return false
+            return false
         }
 
         override fun onFling(
@@ -122,7 +160,21 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
             velocityX: Float,
             velocityY: Float
         ): Boolean {
-            return false
+            var differY = e2!!.getY() - e1!!.getY()
+            var differX = e2!!.getX() - e1!!.getX()
+
+            if (Math.abs(differX) > differY) {
+                if (Math.abs(differX) > SWIPE_THRESHOLD) {
+                    if (differX > 0) {
+                        swipeRight()
+
+                    } else {
+                        swipeLeft()
+                    }
+                }
+            }
+
+            return true
         }
 
         override fun onScroll(
@@ -135,6 +187,22 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         }
 
         override fun onLongPress(e: MotionEvent?) {
+        }
+
+        fun swipeRight(){
+            Toast.makeText(holder.itemView.context, "Swipe Right", Toast.LENGTH_LONG).show()
+            holder.options.visibility = View.GONE
+            holder.arrow.visibility = View.VISIBLE
+            holder.status.visibility = View.VISIBLE
+        }
+
+        fun swipeLeft(){
+            Toast.makeText(holder.itemView.context, "Swipe LEFT", Toast.LENGTH_LONG).show()
+            if (!holder.isExpanded) {
+                holder.options.visibility = View.VISIBLE
+                holder.arrow.visibility = View.INVISIBLE
+                holder.status.visibility = View.INVISIBLE
+            }
         }
 
     }

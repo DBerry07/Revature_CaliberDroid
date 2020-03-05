@@ -3,11 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_manage_batch"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/manageBatchFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.revature.caliberdroid.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/traineeFragment"
+        android:name="com.revature.caliberdroid.ui.trainees.TraineeFragment"
+        android:label="TraineeFragment" >
+        <action
+            android:id="@+id/action_traineeFragment_to_addTraineeFragment"
+            app:destination="@id/addTraineeFragment" />
+        <action
+            android:id="@+id/action_traineeFragment_to_switchTraineeFragment"
+            app:destination="@id/switchTraineeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/manageBatchFragment"
+        android:name="com.revature.caliberdroid.ui.batches.ManageBatchFragment"
+        android:label="fragment_manage_batch"
+        tools:layout="@layout/fragment_manage_batch">
+        <action
+            android:id="@+id/action_manageBatchFragment_to_batchDetailsFragment"
+            app:destination="@id/batchDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/batchDetailsFragment"
+        android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
+        android:label="fragment_batch_details">
+        <action
+            android:id="@+id/action_batchDetailsFragment_to_traineeFragment"
+            app:destination="@id/traineeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTraineeFragment"
+        android:name="com.revature.caliberdroid.ui.trainees.AddTraineeFragment"
+        android:label="AddTraineeFragment" />
+    <fragment
+        android:id="@+id/switchTraineeFragment"
+        android:name="com.revature.caliberdroid.ui.trainees.SwitchTraineeFragment"
+        android:label="fragment_switch_trainee"
+        tools:layout="@layout/fragment_switch_trainee" />
 </navigation>

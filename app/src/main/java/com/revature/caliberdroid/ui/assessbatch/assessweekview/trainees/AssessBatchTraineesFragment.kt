@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -39,12 +40,16 @@ class AssessBatchTraineesFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(AssessWeekViewModel::class.java)
         viewModel.batchId=50
         viewModel.weekNumber=9
-        viewModel.getWeekData()
+        viewModel.initWeekData()
+        viewModel.getWeekData().observe(this, Observer {
+
+        })
+        initRecyclerView()
 
     }
 
     fun initRecyclerView() {
-        var mAdapter = AssessBatchTraineeRecyclerAdapter()
+        var mAdapter = AssessBatchTraineeRecyclerAdapter(this.context)
         var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
         binding.recycleAssessBatchTrainees.layoutManager = linearLayoutManager
         binding.recycleAssessBatchTrainees.adapter = mAdapter

@@ -106,4 +106,6 @@
     <string name="trainee_year">Assigned Year</string>
     <string name="trainee_quarter">Assigned Quarter</string>
     <string name="batch_row_batch_name_header">Batch Name:</string>
+    <string name="batch_info_co_trainer_heading">Co-Trainer:</string>
+    <string name="batch_info_training_type_heading">Training type:</string>
 </resources>

@@ -18,7 +18,7 @@
         android:id="@+id/tv_batch_info_location_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/textview_border"
         android:clickable="false"
         android:fontFamily="sans-serif"
@@ -27,7 +27,7 @@
         android:text="@{batchModel.location}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_skill_value"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_batch_info_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_location"
         tools:ignore="RtlSymmetry" />
@@ -52,7 +52,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tv_batch_info_location_value"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_location_value" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name_trainer_value" />
 
     <TextView
         android:id="@+id/tv_batch_info_trainer"
@@ -64,17 +64,6 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name" />
-
-    <TextView
-        android:id="@+id/tv_batch_info_training"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/batch_info_header_training_name"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_name_training_value"
         app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name" />
 
     <TextView
@@ -90,28 +79,27 @@
         android:text="@{batchModel.trainerName}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_name_training_value"
+        app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_skill_value"
         app:layout_constraintStart_toStartOf="@+id/tv_batch_info_trainer"
         app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_trainer"
         tools:ignore="RtlSymmetry" />
 
     <TextView
-        android:id="@+id/tv_batch_info_name_training_value"
-        android:layout_width="175dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:id="@+id/tv_batch_info_skill_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/textview_border"
         android:clickable="false"
         android:fontFamily="sans-serif"
         android:inputType="none"
         android:paddingStart="4dp"
-        android:text="@{batchModel.trainingType}"
+        android:text="@{batchModel.skillType}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_batch_info_name_trainer_value"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_training"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_skill"
         tools:ignore="RtlSymmetry" />
 
     <TextView
@@ -123,7 +111,7 @@
         android:clickable="false"
         android:fontFamily="sans-serif"
         android:paddingStart="4dp"
-        android:text="@string/textview_default"
+        android:text="@{Integer.toString(batchModel.passingGrade)}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,6 +140,28 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tv_batch_info_start_value"
         app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_start_value" />
+
+    <TextView
+        android:id="@+id/tv_batch_info_cotrainer_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_co_trainer_heading"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_good_grade_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_good_grade_value" />
+
+    <TextView
+        android:id="@+id/tv_batch_info_training_type_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/batch_info_training_type_heading"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_passing_grade_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_passing_grade_value" />
 
     <TextView
         android:id="@+id/tv_batch_info_end_value"
@@ -205,15 +215,51 @@
         tools:ignore="RtlSymmetry" />
 
     <TextView
+        android:id="@+id/tv_batch_info_cotrainer_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@{batchModel.coTrainerName}"
+        android:textColor="@color/grey_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_batch_passing_grade_value"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_good_grade"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_cotrainer_header"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_training_type_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/textview_border"
+        android:clickable="false"
+        android:fontFamily="sans-serif"
+        android:paddingStart="4dp"
+        android:text="@{batchModel.trainingType}"
+        android:textColor="@color/grey_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_passing_grade"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_training_type_header"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
         android:id="@+id/tv_batch_info_skill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/batch_info_heading_skill"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_name_training_value"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name_training_value" />
+        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_skill_value"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name" />
 
     <TextView
         android:id="@+id/tv_batch_info_location"
@@ -224,25 +270,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tv_batch_info_name_trainer_value"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_name_trainer_value" />
-
-    <TextView
-        android:id="@+id/tv_batch_info_skill_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/textview_border"
-        android:clickable="false"
-        android:fontFamily="sans-serif"
-        android:inputType="none"
-        android:paddingStart="4dp"
-        android:text="@{batchModel.skillType}"
-        android:textColor="@color/grey_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_batch_info_skill"
-        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_skill"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_info_cotrainer_value" />
 
     <TextView
         android:id="@+id/tv_batch_info_name"

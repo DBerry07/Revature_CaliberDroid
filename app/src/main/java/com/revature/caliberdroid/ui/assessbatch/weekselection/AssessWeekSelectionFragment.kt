@@ -21,6 +21,9 @@ import com.android.volley.Response
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.AssessWeekNotes
+import com.revature.caliberdroid.data.model.Assessment
+import com.revature.caliberdroid.data.model.Grade
+import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
 import org.json.JSONException
 import org.json.JSONObject
@@ -49,8 +52,29 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
         binding.rvWeekselectionWeeks.layoutManager = LinearLayoutManager(requireContext())
         binding.rvWeekselectionWeeks.adapter = WeekSelectionAdapter(requireContext(), WEEK_NUMBER_COMPARATOR, this)
 
-        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great",batch)
-        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward",batch)
+        val assessments = arrayListOf(
+            Assessment(1,50,"good title","project",1, 5, 1),
+            Assessment(2,75,"another good title","exam", 1, 5, 1),
+            Assessment(3,25,"yet another good title","verbal", 1, 5, 1)
+        )
+
+        val assessments2 = arrayListOf<Assessment>()
+
+        var grades = arrayListOf(
+            Grade(1, "",50,1,1),
+            Grade(2, "",45,1,2),
+            Grade(3, "",47,1,3),
+            Grade(4, "",70,2,1),
+            Grade(5, "",72,2,2),
+            Grade(6, "",75,2,3),
+            Grade(7, "",15,3,1),
+            Grade(8, "",24,3,2),
+            Grade(9, "",18,3,3)
+        )
+
+        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, assessments, grades)
+        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, arrayListOf(),
+            arrayListOf())
 
         (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 

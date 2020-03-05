@@ -8,22 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
+import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import kotlinx.android.synthetic.main.item_assessment_trainee_grades.view.*
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 
-class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var grades : List<Grade> = ArrayList()
-    private var assessments: List<Assessment> = ArrayList()
-
-    fun submitGradeList(gradeList: List<Grade>){
-        grades = gradeList
-    }
-
-    fun submitAssessmentList(assessmentList: List<Assessment>){
-        assessments = assessmentList
-    }
+class TraineeAssessmentsRecycleAdapter(
+    val assessWeekViewModel: AssessWeekViewModel,
+    val assessment: Assessment
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return AssessmentViewHolder(
+        return TraineeGradeViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_assessment_trainee_grades,
                 parent,
@@ -33,38 +29,37 @@ class TraineeAssessmentsRecycleAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-            is AssessmentViewHolder ->{
-                holder.bind(grades.get(position),getAssessment(grades.get(position).assessmentId!!)!!)
-            }
-        }
+
+        val trainee = assessWeekViewModel.assessWeekNotes.batch!!.trainees!![position]
+        val grade = getGradeForTrainee(trainee)
+
+        (holder as TraineeGradeViewHolder).bind(trainee, grade.score!!)
+
     }
 
     override fun getItemCount(): Int {
-        return grades.size
+        return assessWeekViewModel.assessWeekNotes.batch!!.trainees!!.size
     }
 
+    class TraineeGradeViewHolder constructor( itemView: View): RecyclerView.ViewHolder(itemView){
 
+        val traineeName: TextView = itemView.tv_assessment_trainee_grades_row_trainee_name
+        val assessmentGrade: TextView = itemView.et_assessment_trainee_grades_row_grade
 
-    fun getAssessment(assessmentId:Long):Assessment? {
-        for(assessment in assessments){
-            if(assessment.assessmentId==assessmentId){
-                return assessment
+        fun bind(trainee: Trainee, grade: Int){
+            traineeName.text = trainee.name + ":"
+            assessmentGrade.text = grade.toString()
+        }
+    }
+
+    fun getGradeForTrainee(trainee: Trainee): Grade {
+
+        for(grade in assessWeekViewModel.assessWeekNotes.grades!!){
+            if(grade.traineeId==trainee.traineeId){
+                return grade
             }
         }
-        return null
+
+        return Grade(-1)
     }
-
-    class AssessmentViewHolder constructor(
-        itemView: View
-    ): RecyclerView.ViewHolder(itemView){
-        val assessmentType: TextView = itemView.tv_trainee_assessment_item_label
-        val assessmentGrade: TextView = itemView.tv_trainee_assessment_item_grade
-        fun bind(grade: Grade, assessment: Assessment){
-            assessmentType.setText(assessment.assessmentType+": ")
-            assessmentGrade.setText(grade.score!!)
-        }
-    }
-
-
 }

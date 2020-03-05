@@ -25,6 +25,9 @@
         <argument
             android:name="assessWeekNotesSelected"
             app:argType="com.revature.caliberdroid.data.model.AssessWeekNotes" />
+        <action
+            android:id="@+id/action_assessWeekViewFragment_to_assessmentTraineeGradesFragment"
+            app:destination="@id/assessmentTraineeGradesFragment" />
     </fragment>
     <fragment
         android:id="@+id/assessBatchSelectionFragment"
@@ -34,5 +37,14 @@
         <action
             android:id="@+id/action_assessBatchSelectionFragment_to_assessWeekSelectionFragment"
             app:destination="@id/assessWeekSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/assessmentTraineeGradesFragment"
+        android:name="com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment.AssessmentTraineeGradesFragment"
+        android:label="@string/menu_assess_batch"
+        tools:layout="@layout/fragment_assessment_trainee_grades" >
+        <argument
+            android:name="assessmentId"
+            app:argType="long" />
     </fragment>
 </navigation>

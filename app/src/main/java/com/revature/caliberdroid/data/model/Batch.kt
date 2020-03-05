@@ -17,8 +17,8 @@ data class Batch (
     var coTrainerName: String?,
     var locationID: Long,
     var location: String?,
-    var startDate: Long,
-    var endDate: Long,
+    var startDate: String?,
+    var endDate: String?,
     var goodGrade: Int,
     var passingGrade: Int,
     var weeks: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
@@ -40,8 +40,8 @@ data class Batch (
         parcel.readString(),
         parcel.readLong(),
         parcel.readString(),
-        parcel.readLong(),
-        parcel.readLong(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
@@ -73,8 +73,8 @@ data class Batch (
         parcel.writeString(coTrainerName)
         parcel.writeLong(locationID)
         parcel.writeString(location)
-        parcel.writeLong(startDate)
-        parcel.writeLong(endDate)
+        parcel.writeString(startDate)
+        parcel.writeString(endDate)
         parcel.writeInt(goodGrade)
         parcel.writeInt(passingGrade)
         parcel.writeInt(weeks)

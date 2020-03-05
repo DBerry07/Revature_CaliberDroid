@@ -21,7 +21,7 @@
     <!--  Quality Audit & Assess Batch -->
     <string name="week_number">Week %d</string>
     <string name="button_add_week">Add week</string>
-    <string name="batch_with_starting_date">%s - %s - %d</string>
+    <string name="batch_with_starting_date">%s - %s - %s</string>
     <string name="batch_with_week">%s - %s - Week %d</string>
     <string name="dialog_add_week_title">Add Week</string>
     <string name="dialog_add_week_message">Are you sure you want to add a week? This action can not be undone.</string>

@@ -3,6 +3,7 @@ package com.revature.caliberdroid.data.parser
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.util.DateConverter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -16,7 +17,7 @@ object JSONParser {
         val length = response.length() - 1
         for (i in 0 .. length) {
             response.getJSONObject(i).apply {
-                batch = Batch(getLong("batchId"), getString("trainingName"), getString("trainingType"), getString("skillType"), getString("trainer"), getString("coTrainer"), getLong("locationId"), getString("location"), getLong("startDate"), getLong("endDate"), getInt("goodGrade"), getInt("passingGrade"), getInt("weeks"))
+                batch = Batch(getLong("batchId"), getString("trainingName"), getString("trainingType"), getString("skillType"), getString("trainer"), getString("coTrainer"), getLong("locationId"), getString("location"), DateConverter.getDate(getLong("startDate")), DateConverter.getDate(getLong("endDate")), getInt("goodGrade"), getInt("passingGrade"), getInt("weeks"))
             }
 
             batchList.add(batch)

@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{Long.toString(batchModel.startDate)}"
+                android:text="@{batchModel.startDate}"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_start_date_header"
                 app:layout_constraintStart_toEndOf="@+id/tv_batch_row_start_date_header"

@@ -28,7 +28,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{@string/batch_with_week(batch.trainerName, batch.skillType, batch.startDate)}"
+            android:text="@{@string/batch_with_week(batch.trainerName, batch.skillType, auditWeekNotes.weekNumber)}"
             app:layout_constraintBottom_toTopOf="@+id/rv_auditoverall_categories"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

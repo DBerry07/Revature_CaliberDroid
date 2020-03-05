@@ -21,7 +21,10 @@ data class Batch (
     var endDate: Long,
     var goodGrade: Int,
     var passingGrade: Int,
-    var weeks: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
+    var weeks: Int
+) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
+
+    var trainees: List< Trainee>? = null
 
     var trainingName: String
     @Bindable get() = _trainingName!!
@@ -29,7 +32,6 @@ data class Batch (
         _trainingName = value
         notifyPropertyChanged(BR._all)
     }
-
 
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
@@ -47,6 +49,7 @@ data class Batch (
         parcel.readInt()
     ) {
     }
+
 
     override fun <T> isSameModelAs(model: T): Boolean {
         if (model is Batch) {
@@ -78,6 +81,7 @@ data class Batch (
         parcel.writeInt(goodGrade)
         parcel.writeInt(passingGrade)
         parcel.writeInt(weeks)
+        parcel.writeTypedList(trainees)
     }
 
     override fun describeContents(): Int {
@@ -93,6 +97,7 @@ data class Batch (
             return arrayOfNulls(size)
         }
     }
+
 
 }
 

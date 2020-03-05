@@ -16,7 +16,20 @@ object JSONParser {
         val length = response.length() - 1
         for (i in 0 .. length) {
             response.getJSONObject(i).apply {
-                batch = Batch(getLong("batchId"), getString("trainingName"), getString("trainingType"), getString("skillType"), getString("trainer"), getString("coTrainer"), getLong("locationId"), getString("location"), getLong("startDate"), getLong("endDate"), getInt("goodGrade"), getInt("passingGrade"), getInt("weeks"))
+                batch = Batch(
+                    getLong("batchId"),
+                    getString("trainingName"),
+                    getString("trainingType"),
+                    getString("skillType"),
+                    getString("trainer"),
+                    getString("coTrainer"),
+                    getLong("locationId"),
+                    getString("location"),
+                    getLong("startDate"),
+                    getLong("endDate"),
+                    getInt("goodGrade"),
+                    getInt("passingGrade"),
+                    getInt("weeks"))
             }
 
             batchList.add(batch)

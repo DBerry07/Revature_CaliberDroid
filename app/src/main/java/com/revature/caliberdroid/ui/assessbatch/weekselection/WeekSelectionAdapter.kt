@@ -12,11 +12,11 @@ import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.databinding.ItemAssessweekselectionWeekBinding
 
-class WeekSelectionAdapter(context: Context,
-    comparator: Comparator<AssessWeekNotes>,
+class WeekSelectionAdapter(
+    val context: Context,
+    val comparator: Comparator<AssessWeekNotes>,
     private val onItemClickListener: OnItemClickListener
-)
-    : SortedListAdapter<AssessWeekNotes>(context, AssessWeekNotes::class.java, comparator) {
+    ) : SortedListAdapter<AssessWeekNotes>(context, AssessWeekNotes::class.java, comparator) {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,

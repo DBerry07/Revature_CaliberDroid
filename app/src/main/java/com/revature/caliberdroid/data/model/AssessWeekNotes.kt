@@ -4,17 +4,22 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
-data class AssessWeekNotes(var weekNumber: Int,
-                           var batchAverage: Float,
-                           var notes: String?,
-                           var batch: Batch?) : SortedListAdapter.ViewModel, Parcelable {
-
+data class AssessWeekNotes(
+    var weekNumber: Int,
+    var batchAverage: Float,
+    var notes: String?,
+    var batch: Batch?,
+    var assessments: List<Assessment>?,
+    var grades: List<Grade>?
+    ) : SortedListAdapter.ViewModel, Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readFloat(),
         parcel.readString(),
-        parcel.readParcelable(Batch::class.java.classLoader)
+        parcel.readParcelable(Batch::class.java.classLoader),
+        parcel.createTypedArrayList(Assessment),
+        parcel.createTypedArrayList(Grade)
     ) {
     }
 
@@ -31,6 +36,8 @@ data class AssessWeekNotes(var weekNumber: Int,
         parcel.writeFloat(batchAverage)
         parcel.writeString(notes)
         parcel.writeParcelable(batch, flags)
+        parcel.writeTypedList(assessments)
+        parcel.writeTypedList(grades)
     }
 
     override fun describeContents(): Int {

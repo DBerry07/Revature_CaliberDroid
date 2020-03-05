@@ -45,6 +45,6 @@
         tools:layout="@layout/fragment_assessment_trainee_grades" >
         <argument
             android:name="assessmentId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
 </navigation>

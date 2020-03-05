@@ -9,12 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
 
-class AssessWeekOverviewFragment : Fragment() {
+class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
     companion object {
         fun newInstance() =
@@ -47,6 +51,9 @@ class AssessWeekOverviewFragment : Fragment() {
             builder.show()
         })
 
+        assessWeekOverviewBinding.rvAssessweekAssessments.layoutManager = LinearLayoutManager(requireContext())
+        assessWeekOverviewBinding.rvAssessweekAssessments.adapter = AssessmentsRecyclerAdapter(requireContext(), assessWeekViewModel, this)
+
         return assessWeekOverviewBinding.root
     }
 
@@ -57,5 +64,9 @@ class AssessWeekOverviewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _assessWeekOverviewBinding = null
+    }
+
+    override fun onAssessmentClicked(assessment: Assessment) {
+        findNavController().navigate(AssessWeekFragmentDirections.actionAssessWeekViewFragmentToAssessmentTraineeGradesFragment(assessment.assessmentId))
     }
 }

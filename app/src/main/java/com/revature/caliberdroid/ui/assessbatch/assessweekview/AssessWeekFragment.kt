@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAssessWeekBinding
 
 
@@ -32,6 +33,14 @@ class AssessWeekFragment : Fragment() {
     ): View? {
 
         _assessWeekBinding = FragmentAssessWeekBinding.inflate(inflater)
+
+        var assessWeekNotesSelected = args.assessWeekNotesSelected
+
+        assessWeekNotesSelected.batch!!.trainees = arrayListOf(
+            Trainee(1, "1", "Charles Mersereau"),
+            Trainee(2, "2", "Gavin Mitchell"),
+            Trainee(3,"3", "Thiago Barbosa")
+        )
 
         assessWeekViewModel.assessWeekNotes = args.assessWeekNotesSelected
 

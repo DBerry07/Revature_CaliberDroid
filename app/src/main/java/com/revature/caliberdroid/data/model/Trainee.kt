@@ -29,6 +29,7 @@ data class Trainee(
     var flagAuthor: String? = "",
     var flagTimestamp: String? = ""
 ) : BaseObservable(), Parcelable {
+
     var flagNotes: String
     @Bindable get() = _flagNotes!!
         set(value) {

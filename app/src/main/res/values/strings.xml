@@ -52,6 +52,7 @@
     <string name="button_create_assessment">Create Assessment</string>
     <string name="dialog_create_assessment">Create Assessment</string>
     <string name="button_create">Create</string>
+    <string name="button_trainee_grades">Trainee grades</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

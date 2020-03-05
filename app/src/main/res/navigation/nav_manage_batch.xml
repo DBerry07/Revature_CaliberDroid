@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_batchDetailsFragment_to_traineeFragment"
             app:destination="@id/traineeFragment" />
+        <argument
+            android:name="selectedBatch"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
     </fragment>
     <fragment
         android:id="@+id/addTraineeFragment"

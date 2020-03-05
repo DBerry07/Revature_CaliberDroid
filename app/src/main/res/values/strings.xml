@@ -18,7 +18,6 @@
     <string name="menu_categories">Categories</string>
     <string name="btn_manage_batch_create_batch">Create Batch</string>
 
-    <!-- Manage Batches -->
     <!--  Quality Audit & Assess Batch -->
     <string name="week_number">Week %d</string>
     <string name="button_add_week">Add week</string>
@@ -50,16 +49,10 @@
     <string name="batch_notes_label">Batch notes</string>
     <string name="save">Save</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 <!-- SETTINGS -->
     <string name="title_add_location">Add Location</string>
     <string name="title_add_category">Add Category</string>
     <string name="title_add_trainer">Add Trainer</string>
-
-
     <string name="btn_add_location">Add Location</string>
     <string name="btn_add_trainer">Add Trainer</string>
     <string name="btn_add_category">Add Category</string>
@@ -69,6 +62,9 @@
     <string name="title_edit_location">Edit Location</string>
     <string name="btn_confirm">Confirm</string>
     <string name="title_edit_trainer">Edit Trainer</string>
+
+    <!-- Manage Batches -->
+    <string name="hello_blank_fragment">blank fragment</string>
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>

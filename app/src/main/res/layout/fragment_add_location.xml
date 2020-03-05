@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    >
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.locations.AddLocationFragment">
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    style="@style/settingsFragmentContentWrapper">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add Location" />
+        android:layout_height="wrap_content"
+        android:text="@string/title_add_location"
+        style="@style/settingsHeading"/>
 
-</FrameLayout>
+    <include layout="@layout/include_location_fields"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|right"
+        android:text="@string/btn_add"
+        style="@style/addBtn"/>
+
+</LinearLayout>
+</layout>

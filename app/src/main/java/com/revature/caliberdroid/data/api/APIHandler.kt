@@ -10,7 +10,12 @@ import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Category
+import com.revature.caliberdroid.data.model.Location
+import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.data.parser.LocationParser
+import org.json.JSONArray
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
 import timber.log.Timber
 
@@ -65,5 +70,17 @@ object APIHandler {
 
     fun getTrainees(liveData:MutableLiveData<List<Trainee>>,batchId:Long) {
         TraineeAPIHandler.getTrainees(liveData,batchId)
+    }
+
+    fun getLocations(liveData: MutableLiveData< ArrayList<Location> >){
+        LocationsAPI.getLocations(liveData)
+    }
+
+    fun getTrainers(liveData: MutableLiveData< ArrayList<Trainer> >){
+        TrainersAPI.getTrainers(liveData)
+    }
+
+    fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.getCategories(liveData)
     }
 }

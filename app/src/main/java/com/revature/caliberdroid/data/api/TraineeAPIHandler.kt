@@ -1,6 +1,8 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -32,6 +34,25 @@ object TraineeAPIHandler {
             Response.ErrorListener { error -> Timber.d(error.toString()) })
 
         queue.add(arrayRequest)
+    }
+
+    fun postTrainee(traineeData: JSONObject) {
+        val queue = Volley.newRequestQueue(APIHandler.context)
+
+        Log.d("TraineeRequest", traineeData.toString())
+
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/all/trainee/create"
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.POST,
+            url,
+            traineeData,
+            Response.Listener<JSONObject> {response ->
+                    Toast.makeText(APIHandler.context, "Trainee added successfully!", Toast.LENGTH_LONG).show()
+            },
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
+        queue.add(jsonRequest)
+        Toast.makeText(APIHandler.context, "Processing...", Toast.LENGTH_SHORT)
     }
 
 }

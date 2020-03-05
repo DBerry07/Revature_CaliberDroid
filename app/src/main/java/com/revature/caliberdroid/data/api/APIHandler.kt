@@ -17,6 +17,7 @@ import com.revature.caliberdroid.data.parser.JSONParser
 import com.revature.caliberdroid.data.parser.LocationParser
 import org.json.JSONArray
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
+import org.json.JSONObject
 import timber.log.Timber
 
 object APIHandler {
@@ -70,6 +71,10 @@ object APIHandler {
 
     fun getTrainees(liveData:MutableLiveData<List<Trainee>>,batchId:Long) {
         TraineeAPIHandler.getTrainees(liveData,batchId)
+    }
+
+    fun postTrainee(jsonObject: JSONObject) {
+        TraineeAPIHandler.postTrainee(jsonObject)
     }
 
     fun getLocations(liveData: MutableLiveData< ArrayList<Location> >){

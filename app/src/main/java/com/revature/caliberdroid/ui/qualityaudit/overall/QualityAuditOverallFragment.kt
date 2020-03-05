@@ -47,7 +47,7 @@ class QualityAuditOverallFragment : Fragment() {
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
 
         binding.btnAuditoverallTrainees.setOnClickListener {
-            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment())
+            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment(args.batchSelected, args.auditWeekNotesSelected))
         }
 
         binding.btnAuditoverallSave.setOnClickListener {

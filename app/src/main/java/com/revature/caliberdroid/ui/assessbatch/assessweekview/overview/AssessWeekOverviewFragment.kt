@@ -1,5 +1,7 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,6 +33,19 @@ class AssessWeekOverviewFragment : Fragment() {
         _assessWeekOverviewBinding = FragmentAssessWeekOverviewBinding.inflate(inflater)
 
         assessWeekOverviewBinding.assessWeekModel = assessWeekViewModel
+
+        assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener(View.OnClickListener {
+
+            val builder = AlertDialog.Builder(it.context)
+
+            builder.setTitle(resources.getString(R.string.dialog_create_assessment))
+            builder.setPositiveButton(R.string.button_create, DialogInterface.OnClickListener { dialog, which ->
+
+            })
+            builder.setNegativeButton(R.string.button_cancel, null)
+
+            builder.show()
+        })
 
         return assessWeekOverviewBinding.root
     }

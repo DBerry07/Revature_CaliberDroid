@@ -24,10 +24,11 @@
     <string name="batch_with_week">%s - %s - Week %d</string>
     <string name="dialog_add_week_title">Add Week</string>
     <string name="dialog_add_week_message">Are you sure you want to add a week? This action can not be undone.</string>
+    <string name="add_categories">Add categories</string>
 
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
-    <string name="overall_qc_feedback">Overall QC Feedback for %s</string>
+    <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
     <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
 
     <!--    Assess Batch-->

@@ -1,7 +1,19 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.QualityAuditRepository
 
 class QualityAuditOverallViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+    val skillCategoryLiveData: LiveData<List<SkillCategory>> = MutableLiveData()
+
+    fun getSkillCategories(batch: Batch, weekNumber: Int) {
+        QualityAuditRepository.getSkillCategories(skillCategoryLiveData as MutableLiveData, batch, weekNumber)
+    }
+
 }

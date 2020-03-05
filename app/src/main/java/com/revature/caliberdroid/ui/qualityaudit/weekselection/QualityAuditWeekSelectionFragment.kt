@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
-import com.revature.caliberdroid.ui.batchselection.BatchSelectionAdapter
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekSelectionAdapter.OnItemClickListener
 
 class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
 
     companion object {
-        @JvmField val ALPHABETICAL_COMPARATOR_AUDIT_WEEK_NOTES: java.util.Comparator<WeekLiveData> =
-            Comparator { a, b -> a.value!!.weekNumber.compareTo(b.value!!.weekNumber) }
+        @JvmField val ALPHABETICAL_COMPARATOR_AUDIT_WEEK_NOTES: java.util.Comparator<AuditWeekNotes> =
+            Comparator { a, b -> a.weekNumber.compareTo(b.weekNumber) }
     }
 
     private var _binding: FragmentWeekSelectionBinding? = null
@@ -42,9 +41,13 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
         viewModel.getAuditWeekNotes()
 
         binding.rvWeekselectionWeeks.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvWeekselectionWeeks.adapter = WeekSelectionAdapter(requireContext(), ALPHABETICAL_COMPARATOR_AUDIT_WEEK_NOTES, this, viewLifecycleOwner)
+        binding.rvWeekselectionWeeks.adapter = WeekSelectionAdapter(requireContext(), ALPHABETICAL_COMPARATOR_AUDIT_WEEK_NOTES, this)
 
         subscribeToViewModel()
+
+        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
+            .replaceAll(viewModel.auditWeekNotesLiveData.value!!.list)
+            .commit()
 
         binding.setLifecycleOwner(viewLifecycleOwner)
 
@@ -56,15 +59,24 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
         _binding = null
     }
 
-    override fun onWeekClick(weekClicked: WeekLiveData) {
-        findNavController().navigate(QualityAuditWeekSelectionFragmentDirections.actionAuditWeekSelectionFragmentToQualityAuditOverallFragment(args.batchSelected, weekClicked.value!!))
+    override fun onWeekClick(weekClicked: AuditWeekNotes) {
+        findNavController().navigate(QualityAuditWeekSelectionFragmentDirections.actionAuditWeekSelectionFragmentToQualityAuditOverallFragment(args.batchSelected, weekClicked))
     }
 
     private fun subscribeToViewModel() {
-        viewModel.auditWeekNotesLiveData.observe(viewLifecycleOwner, Observer {
-            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
-                .replaceAll(it)
-                .commit()
+
+        viewModel.auditWeekNotesLiveData.observe(viewLifecycleOwner, Observer { value ->
+            if (value != null) {
+//                (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
+//                    .replaceAll(value.list)
+//                    .commit()
+            binding.rvWeekselectionWeeks.adapter.let {
+                if (it != null) {
+                    value.applyChange(it)
+
+                }
+            }
+            }
         })
     }
 }

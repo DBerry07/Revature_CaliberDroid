@@ -36,6 +36,22 @@ object JSONParser {
         return auditWeekNotes
     }
 
+    fun parseSkillCategories(response: JSONArray) : List<SkillCategory> {
+        val categoryList = ArrayList<SkillCategory>()
+
+        var skillCategory: SkillCategory
+        val length = response.length() - 1
+        for (i in 0 .. length) {
+            response.getJSONObject(i).apply {
+                skillCategory = SkillCategory(getLong("categoryId"), getString("skillCategory"))
+            }
+
+            categoryList.add(skillCategory)
+        }
+
+        return categoryList
+    }
+
     fun parseAssessments(response: JSONArray): List<Assessment> {
         val assessmentList = ArrayList<Assessment>()
 
@@ -91,10 +107,10 @@ object JSONParser {
         val noteList = ArrayList<Note>()
 
         lateinit var note:Note
-        var keys:Iterator<String> = response.keys()
-
+        val keys:Iterator<String> = response.keys()
+        var key:String
         while(keys.hasNext()){
-            var key:String = keys.next()
+            key = keys.next()
             if(response.get(key) is JSONArray) {
                 (response.get(key) as JSONArray).getJSONObject(0).apply {
                     note = parseNote(this)

@@ -10,15 +10,15 @@ import kotlin.properties.Delegates
 
 data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
 
-    var overallStatus: String? = null
+    @Bindable var overallStatus: String? = null
         set(value) {
             field = value
-            notifyPropertyChanged(BR.weekLiveData)
+            notifyPropertyChanged(BR.auditWeekNotes)
         }
-    var overallNotes: String? = null
+    @Bindable var overallNotes: String? = null
         set(value) {
             field = value
-            notifyPropertyChanged(BR.weekLiveData)
+            notifyPropertyChanged(BR.auditWeekNotes)
         }
 
     constructor(parcel: Parcel) : this(

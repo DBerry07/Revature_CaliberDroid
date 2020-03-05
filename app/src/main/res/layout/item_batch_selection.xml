@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{batch.trainingType}"
+                android:text="@{batch.skillType}"
                 app:layout_constraintStart_toStartOf="@+id/tv_item_batch_selection_batch_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_item_batch_selection_batch_name" />
 

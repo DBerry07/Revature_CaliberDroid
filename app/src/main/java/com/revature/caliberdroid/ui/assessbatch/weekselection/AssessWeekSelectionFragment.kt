@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Response
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.AssessWeekNotes
@@ -54,19 +55,14 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
 
         (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 
-        binding.btnWeekselectionAddweek.setOnClickListener(View.OnClickListener {
-
-            val builder = AlertDialog.Builder(it.context)
-
-            builder.setTitle(resources.getString(R.string.dialog_add_week_title))
-            builder.setMessage(resources.getString(R.string.dialog_add_week_message))
-            builder.setPositiveButton(R.string.button_add_week, DialogInterface.OnClickListener { dialog, which ->
-
-            })
-            builder.setNegativeButton(R.string.button_cancel, null)
-
-            builder.show()
-        })
+        binding.btnWeekselectionAddweek.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.dialog_add_week_title))
+                .setMessage(resources.getString(R.string.dialog_add_week_message))
+                .setPositiveButton(R.string.button_add_week) { dialog, which -> }
+                .setNegativeButton(R.string.button_cancel, null)
+                .show()
+        }
 
         return binding.root
     }

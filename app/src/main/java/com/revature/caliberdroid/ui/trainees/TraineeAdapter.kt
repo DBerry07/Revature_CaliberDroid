@@ -1,17 +1,21 @@
 package com.revature.revaturetraineemanagment
 
 import android.view.*
+import android.view.LayoutInflater
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.databinding.FragmentTraineeBinding
+import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.databinding.TraineeItemBinding
+
 
 class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var info = data
     lateinit var parent: ViewGroup
+    lateinit var pop : PopupWindow
 
     private var _binding: TraineeItemBinding? = null
     private val binding get() = _binding!!
@@ -19,6 +23,8 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
         _binding = TraineeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        pop = PopupWindow(parent.context)
+
         this.parent = parent
         return MyViewHolder(binding)
     }
@@ -43,6 +49,17 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
             mDetectorCompat.onTouchEvent(event)
             true
         }
+
+        holder.btnSwitch.setOnClickListener {
+            val navController = Navigation.findNavController(parent)
+            navController.navigate(R.id.action_traineeFragment_to_switchTraineeFragment)
+        }
+
+        holder.btnDelete.setOnClickListener {
+            var pop = PopupWindow()
+            pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
+        }
+
         /*holder.button.setOnClickListener (View.OnClickListener {
             if (!holder.isExpanded) {
                 holder.details.visibility = View.VISIBLE
@@ -79,6 +96,9 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         var details : LinearLayout
         var options : LinearLayout
         var arrow : ImageView
+        var btnSwitch : Button
+        var btnEdit : Button
+        var btnDelete : Button
 
         init {
             this.name = binding.TMName
@@ -93,8 +113,11 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
             this.project = binding.TMProject
             this.screener = binding.TMScreener
             this.arrow = binding.TMIvArrow
-            this.details = binding.expand
+            this.details = binding.traineeDetails
             this.options = binding.TMOptions
+            this.btnSwitch = binding.TMBtnSwitch
+            this.btnDelete = binding.TMBtnDelete
+            this.btnEdit = binding.TMBtnEdit
         }
 
     }

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_traineeFragment_to_addTraineeFragment"
             app:destination="@id/addTraineeFragment" />
+        <action
+            android:id="@+id/action_traineeFragment_to_switchTraineeFragment"
+            app:destination="@id/switchTraineeFragment" />
     </fragment>
     <fragment
         android:id="@+id/manageBatchFragment"
@@ -48,4 +51,9 @@
         android:id="@+id/addTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.AddTraineeFragment"
         android:label="AddTraineeFragment" />
+    <fragment
+        android:id="@+id/switchTraineeFragment"
+        android:name="com.revature.caliberdroid.ui.trainees.SwitchTraineeFragment"
+        android:label="fragment_switch_trainee"
+        tools:layout="@layout/fragment_switch_trainee" />
 </navigation>

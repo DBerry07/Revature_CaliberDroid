@@ -30,7 +30,7 @@ class TraineeAssessmentsRecycleAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        val trainee = assessWeekViewModel.assessWeekNotes.batch!!.trainees!![position]
+        val trainee = assessWeekViewModel.assessWeekNotes.value!!.batch!!.trainees!![position]
         val grade = getGradeForTrainee(trainee)
 
         (holder as TraineeGradeViewHolder).bind(trainee, grade.score!!)
@@ -38,7 +38,7 @@ class TraineeAssessmentsRecycleAdapter(
     }
 
     override fun getItemCount(): Int {
-        return assessWeekViewModel.assessWeekNotes.batch!!.trainees!!.size
+        return assessWeekViewModel.assessWeekNotes.value!!.batch!!.trainees!!.size
     }
 
     class TraineeGradeViewHolder constructor( itemView: View): RecyclerView.ViewHolder(itemView){
@@ -54,7 +54,7 @@ class TraineeAssessmentsRecycleAdapter(
 
     fun getGradeForTrainee(trainee: Trainee): Grade {
 
-        for(grade in assessWeekViewModel.assessWeekNotes.grades!!){
+        for(grade in assessWeekViewModel.assessWeekNotes.value!!.grades.value!!){
             if(grade.traineeId==trainee.traineeId){
                 return grade
             }

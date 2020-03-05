@@ -7,18 +7,16 @@ import com.revature.caliberdroid.data.model.Week
 import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
 
-    val weekData: MutableLiveData<Week> by lazy { MutableLiveData<Week>() }
-    lateinit var assessWeekNotes: AssessWeekNotes
+class AssessWeekViewModel : ViewModel() {
 
-    fun getTrainees(){
-        val weekData:Week? = weekData.value
+    lateinit var assessWeekNotes: MutableLiveData<AssessWeekNotes>
 
-    fun initWeekData() {
-        weekData = AssessWeekRepository.getAssessWeekData(batchId,weekNumber)
+    fun initWeekData(batchId:Long,weekNumber:Int) {
+        assessWeekNotes = AssessWeekRepository.getAssessWeekData(batchId,weekNumber)
     }
 
     fun getWeekData():LiveData<AssessWeekNotes> {
-        return weekData
+        return assessWeekNotes
     }
 
 }

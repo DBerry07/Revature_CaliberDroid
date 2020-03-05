@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.AssessWeekOverviewFragment
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.AssessBatchTrainees
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.AssessBatchTraineesFragment
 
 class AssessWeekViewPagerAdapter(val fm: FragmentManager, val behavior: Int) : FragmentPagerAdapter(fm, behavior) {
 
@@ -12,7 +12,7 @@ class AssessWeekViewPagerAdapter(val fm: FragmentManager, val behavior: Int) : F
 
         return when (position) {
             0 -> AssessWeekOverviewFragment()
-            else -> AssessBatchTrainees()
+            else -> AssessBatchTraineesFragment()
         }
     }
 

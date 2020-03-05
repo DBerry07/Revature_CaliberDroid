@@ -42,7 +42,7 @@ class AssessWeekFragment : Fragment() {
             Trainee(3,"3", "Thiago Barbosa")
         )
 
-        assessWeekViewModel.assessWeekNotes = args.assessWeekNotesSelected
+        assessWeekViewModel.assessWeekNotes.postValue(args.assessWeekNotesSelected)
 
         var viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)

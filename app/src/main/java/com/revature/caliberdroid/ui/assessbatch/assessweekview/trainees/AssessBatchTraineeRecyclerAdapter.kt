@@ -71,8 +71,8 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?) : RecyclerView.Ad
         fun bind(trainee:Trainee,grades:List<Grade>,assessments:List<Assessment>) {
             traineeName.setText(trainee.name)
             var mAdapter = TraineeAssessmentsRecycleAdapter()
-            mAdapter.submitGradeList(grades)
-            mAdapter.submitAssessmentList(assessments)
+//            mAdapter.submitGradeList(grades)
+//            mAdapter.submitAssessmentList(assessments)
             var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
             gradeRecycler.layoutManager = linearLayoutManager
             gradeRecycler.adapter = mAdapter

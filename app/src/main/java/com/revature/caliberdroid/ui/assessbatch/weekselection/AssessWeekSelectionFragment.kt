@@ -72,11 +72,11 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
             Grade(9, "",18,3,3)
         )
 
-        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, assessments, grades)
-        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, arrayListOf(),
-            arrayListOf())
+//        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, assessments, grades)
+//        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, arrayListOf(),
+//            arrayListOf())
 
-        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
+//        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 
         binding.btnWeekselectionAddweek.setOnClickListener(View.OnClickListener {
 

@@ -38,13 +38,13 @@ class AssessBatchTraineesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AssessWeekViewModel::class.java)
-        viewModel.batchId=50
-        viewModel.weekNumber=9
-        viewModel.initWeekData()
-        viewModel.getWeekData().observe(this, Observer {
-
-        })
-        initRecyclerView()
+//        viewModel.batchId=50
+//        viewModel.weekNumber=9
+//        viewModel.initWeekData()
+//        viewModel.getWeekData().observe(this, Observer {
+//
+//        })
+//        initRecyclerView()
 
     }
 

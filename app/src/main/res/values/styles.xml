@@ -70,6 +70,18 @@
         <item name="android:minHeight">15dp</item>
     </style>
 
+    <style name="settingsDialogHeader">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Headline</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <style name="settingsDialogFieldLabel">
+    </style>
+
+    <style name="settingsDialogFieldEditText">
+            <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
     <style name="activeCircle">
         <item name="android:background">@drawable/background_active_status</item>
         <item name="android:gravity">center</item>

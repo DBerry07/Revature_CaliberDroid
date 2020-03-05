@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.adapter.batches.BatchesAdapter
 import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.ui.batches.BatchesViewModel
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class ManageBatchFragment : Fragment() {
 
     private var temp = ArrayList(Arrays.asList("", "", "", "", "", ""))
@@ -54,8 +54,12 @@ class ManageBatchFragment : Fragment() {
 
             // Make sure to call this method so the UI reflect the changes on the view model
             // setLifecycleOwner(this@BatchesFragment)
-            viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+            viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer { batches->
+                recyclerviewManageBatches.adapter = context?.let { BatchesAdapter(it,
+                    batches as ArrayList<Batch>
+                ) }
             })
+
             btnManageBatchCreateBatch.setOnClickListener {
                 createBatchDialog()
             }
@@ -66,9 +70,6 @@ class ManageBatchFragment : Fragment() {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-            //adapter = BatchesAdapter(context, viewModel.batchesLiveData)
-            adapter = CustomAdapter(context, temp)
         }
         return binding.root
     }

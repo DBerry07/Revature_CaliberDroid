@@ -109,4 +109,5 @@
     <string name="trainee_project">Project Status</string>
     <string name="trainee_year">Assigned Year</string>
     <string name="trainee_quarter">Assigned Quarter</string>
+    <string name="batch_row_batch_name_header">Batch Name:</string>
 </resources>

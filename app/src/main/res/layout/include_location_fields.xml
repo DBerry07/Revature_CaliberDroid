@@ -54,19 +54,19 @@
         style="@style/settingsFieldHeading"
         android:text="State" />
 
-    <EditText
-        android:id="@+id/etState"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        style="@style/settingsFieldEditText"/>
-    <!--
+<!--    <EditText-->
+<!--        android:id="@+id/etState"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="textPersonName"-->
+<!--        style="@style/settingsFieldEditText"/>-->
+
     <Spinner
         android:id="@+id/spnState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
         style="@style/settingsField" />
-        -->
 
     <!--    Zip Code -->
     <TextView

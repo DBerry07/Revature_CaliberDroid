@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.ui.trainers
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.R
@@ -15,6 +17,7 @@ import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsAddTrainerBinding
+import com.revature.caliberdroid.util.DialogInvalidInput
 import timber.log.Timber
 
 
@@ -70,6 +73,7 @@ class AddTrainerFragment : Fragment() {
                     findNavController().navigateUp()
                 }else{
                     Timber.d("Validation of fields failed: "+validationString.toString())
+                    DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                 }
             }
         }

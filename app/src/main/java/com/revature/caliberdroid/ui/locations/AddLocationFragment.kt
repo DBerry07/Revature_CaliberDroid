@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.ui.locations
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.core.view.get
+import androidx.navigation.fragment.findNavController
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.adapter.locations.LocationSpinnerAdapter
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 
 import com.revature.caliberdroid.databinding.FragmentSettingsAddLocationBinding
+import com.revature.caliberdroid.util.DialogInvalidInput
 import com.revature.caliberdroid.util.FieldValidator
 import timber.log.Timber
 
@@ -35,6 +40,8 @@ class AddLocationFragment : Fragment() {
         _binding = FragmentSettingsAddLocationBinding.inflate(layoutInflater)
         val context = context!!
         binding.apply {
+
+
             var states = arrayOfNulls<String>(FieldValidator.StatesList.size)
             for (i in 0 until FieldValidator.StatesList.size) {
                 states.set(
@@ -48,17 +55,20 @@ class AddLocationFragment : Fragment() {
                 context,
                 states
             )
-//            val spinner: Spinner = inLocationFields.spnState
-//            spinner.adapter = locationsSpinnerAdapter
-//            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-//                    Timber.d("Item selected: ${spinner.getItemAtPosition(position)}")
-//                    selectedState = spinner.getItemAtPosition(position).toString()
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>) {
-//                }
-//            }
+            val spinner: Spinner = inLocationFields.spnState
+            spinner.adapter = locationsSpinnerAdapter
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    Timber.d("Item selected: ${spinner.getItemAtPosition(position)}")
+                    selectedState = spinner.getItemAtPosition(position).toString()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
+            }
+
+
+
             btnAddLocation.setOnClickListener {
                 Timber.d("Attempting to add location.")
                 if (
@@ -68,7 +78,7 @@ class AddLocationFragment : Fragment() {
                         inLocationFields.etCity,
                         inLocationFields.etZipCode,
                         inLocationFields.etStreetAddress,
-                        inLocationFields.etState
+                        null
                     )
                 ) {
                     Timber.d("Entry passed validation.")
@@ -77,13 +87,15 @@ class AddLocationFragment : Fragment() {
                         inLocationFields.etCity.text.toString(),
                         inLocationFields.etZipCode.text.toString(),
                         inLocationFields.etStreetAddress.text.toString(),
-                        inLocationFields.etState.text.toString(),
+                        selectedState,
                         true
                     )
                     Timber.d("New location to add: ${locationToCreate.toString()}")
                     LocationRepository.addLocation(locationToCreate)
+                    findNavController().navigateUp()
                 } else {
                     Timber.d("Validation of fields failed: "+validationString.toString())
+                    DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                 }
             }
         }

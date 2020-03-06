@@ -35,12 +35,15 @@ class EditLocationFragment : Fragment() {
             inLocationFields.etCompanyName.setText(location.name)
             inLocationFields.etStreetAddress.setText(location.address)
             inLocationFields.etCity.setText(location.city)
-            inLocationFields.etState.setText(location.state)
+            //inLocationFields.etState.setText(location.state)
             inLocationFields.etZipCode.setText(location.zipcode)
 
             btnEditLocation.setOnClickListener {
                 if( validateFields(
-                        inLocationFields.etCompanyName.text.toString()
+                        inLocationFields.etCompanyName,
+                        inLocationFields.etCity,
+                        inLocationFields.etZipCode,
+                        inLocationFields.etStreetAddress
                     )
                 ){
 

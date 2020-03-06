@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.R
 
-import com.revature.caliberdroid.adapter.trainers.TiersAdapter
+import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsAddTrainerBinding
@@ -31,19 +31,23 @@ class AddTrainerFragment : Fragment() {
     ): View? {
         _binding = FragmentSettingsAddTrainerBinding.inflate(layoutInflater)
         val context = context!!
-        val list_of_items = resources.getStringArray(R.array.trainer_tiers)
+        val listOfTiers = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
-            val adapter = TiersAdapter(context, list_of_items)
+            val tiersSpinnerAdapter = SettingsSpinnerItemAdapter(
+                context,
+                listOfTiers
+            )
             val spinner: Spinner = inTrainerFields.spnTier
-            spinner.adapter = adapter
-            spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            spinner.adapter = tiersSpinnerAdapter
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>,view: View?,position: Int,id: Long) {
-                    Timber.d("Item selected: ${list_of_items.get(position)}")
-                    selectedTier = list_of_items.get(position)
+                    Timber.d("Item selected: ${listOfTiers.get(position)}")
+                    selectedTier = listOfTiers.get(position)
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
-            })
+            }
             btnAddTrainer.setOnClickListener {
                 val trainerToCreate = Trainer(
                     inTrainerFields.etFullName.text.toString(),

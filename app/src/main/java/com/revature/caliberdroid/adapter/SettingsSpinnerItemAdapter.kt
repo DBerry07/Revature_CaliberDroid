@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.adapter.trainers
+package com.revature.caliberdroid.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.revature.caliberdroid.R
 
-class TiersAdapter(val context: Context, var listItemsTxt: Array<String>) : BaseAdapter(){
+open class SettingsSpinnerItemAdapter(val context: Context, var listItemsTxt: Array<String?>) : BaseAdapter(){
 
     val mInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -16,8 +16,11 @@ class TiersAdapter(val context: Context, var listItemsTxt: Array<String>) : Base
         val view: View
         val vh: ItemRowHolder
         if (convertView == null) {
-            view = mInflater.inflate(R.layout.item_settings_trainer_tier, parent, false)
-            vh = ItemRowHolder(view)
+            view = mInflater.inflate(R.layout.item_settings_spinner_item, parent, false)
+            vh =
+                ItemRowHolder(
+                    view
+                )
             view?.tag = vh
         } else {
             view = convertView
@@ -28,7 +31,7 @@ class TiersAdapter(val context: Context, var listItemsTxt: Array<String>) : Base
     }
 
     override fun getItem(position: Int): String {
-        return listItemsTxt.get(position)
+        return listItemsTxt.get(position)!!
     }
 
     override fun getItemId(position: Int): Long {
@@ -44,7 +47,7 @@ class TiersAdapter(val context: Context, var listItemsTxt: Array<String>) : Base
         val label: TextView
 
         init {
-            this.label = row?.findViewById(R.id.tvTrainerTier) as TextView
+            this.label = row?.findViewById(R.id.tvItem) as TextView
         }
     }
 }

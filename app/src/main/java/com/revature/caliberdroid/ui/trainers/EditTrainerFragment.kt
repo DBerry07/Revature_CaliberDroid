@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.adapter.trainers.TiersAdapter
+import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditTrainerBinding
@@ -40,7 +38,10 @@ class EditTrainerFragment : Fragment() {
         val context = getContext()!!
         val list_of_items = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
-            val adapter = TiersAdapter(context, list_of_items)
+            val adapter = SettingsSpinnerItemAdapter(
+                context,
+                list_of_items
+            )
 
             val spinner: Spinner = inTrainerFields.spnTier
             spinner.adapter = adapter

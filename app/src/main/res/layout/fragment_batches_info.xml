@@ -8,7 +8,6 @@
             name="batchModel"
             type="com.revature.caliberdroid.data.model.Batch" />
 
-        <import type="com.revature.caliberdroid.util.DateConverter" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,7 +173,7 @@
         android:clickable="false"
         android:fontFamily="sans-serif"
         android:paddingStart="4dp"
-        android:text="@{DateConverter.INSTANCE.getDate(batchModel.endDate)}"
+        android:text="@{batchModel.endDate}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +190,7 @@
         android:clickable="false"
         android:fontFamily="sans-serif"
         android:paddingStart="4dp"
-        android:text="@{DateConverter.INSTANCE.getDate(batchModel.startDate)}"
+        android:text="@{batchModel.startDate}"
         android:textColor="@color/grey_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_batch_info_end_value"

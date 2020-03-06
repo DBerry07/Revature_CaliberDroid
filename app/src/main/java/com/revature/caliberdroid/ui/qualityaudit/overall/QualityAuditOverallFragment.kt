@@ -1,19 +1,15 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
 import com.revature.caliberdroid.util.AuditStatusConverter
@@ -52,7 +48,6 @@ class QualityAuditOverallFragment : Fragment() {
         }
 
         binding.btnAuditoverallSave.setOnClickListener {
-            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditBatchSelectionFragment())
         }
 
         binding.imgAuditoverallOverallstatus.setImageResource(AuditStatusConverter.getImageResourceID(args.auditWeekNotesSelected.overallStatus.get()!!))

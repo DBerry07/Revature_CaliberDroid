@@ -8,12 +8,8 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
-import com.revature.caliberdroid.data.model.AuditWeekNotes
-import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Category
-import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
 
@@ -42,9 +38,10 @@ object APIHandler {
         queue.add(batchesRequest)
     }
 
-    fun addWeek(batch: Batch, liveData: MutableLiveData<ArrayList<AuditWeekNotes>>) {
+    fun addWeek(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        lateinit var data: WeekLiveData
 
         val addWeekRequest = JsonObjectRequest(
             Request.Method.PUT,
@@ -54,7 +51,9 @@ object APIHandler {
                 Timber.d(response.toString())
                 liveData.postValue(liveData.value!!.apply {
                     batch.weeks += 1
-                    this.add(AuditWeekNotes(batch.weeks))
+                    data = WeekLiveData()
+                    data.value = AuditWeekNotes(batch.weeks)
+                    this.add(data)
                 })
             },
             Response.ErrorListener {
@@ -64,11 +63,37 @@ object APIHandler {
         queue.add(addWeekRequest)
     }
 
+    fun getValidYears(liveData: MutableLiveData<List<Int>>) {
+        val queue = Volley.newRequestQueue(context)
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/valid_years"
+        var length: Int
+
+        val validYearsRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                length = response.length()
+                liveData.postValue(liveData.value!!.apply {
+                    for (i in 0 until length) {
+                        (this as ArrayList).add(response.getInt(i))
+                    }
+                })
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            })
+
+        queue.add(validYearsRequest)
+    }
+
     fun getTraineesWithNotes(liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
         AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 
-    fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<AuditWeekNotes>>, batch: Batch) {
+    fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<WeekLiveData>>, batch: Batch) {
         AuditAPIHandler.getAuditWeekNotes(context, liveData, batch)
     }
 

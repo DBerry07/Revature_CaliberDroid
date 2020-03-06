@@ -6,24 +6,21 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableField
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.BR
-import kotlin.properties.Delegates
 
 data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
 
     @Bindable var overallStatus = ObservableField<String?>()
         set(value) {
             field = value
-            notifyPropertyChanged(androidx.databinding.library.baseAdapters.BR.auditWeekNotes)
+            notifyChange()
         }
     @Bindable var overallNotes =  ObservableField<String?>()
         set(value) {
             field = value
-            notifyPropertyChanged(androidx.databinding.library.baseAdapters.BR.auditWeekNotes)
+            notifyChange()
         }
 
-    constructor(parcel: Parcel) : this(parcel.readInt()) {
-    }
+    constructor(parcel: Parcel) : this(parcel.readInt())
 
     constructor(weekNumber: Int, overallStatus: String?, overallNotes: String?) : this(weekNumber) {
         this.overallStatus.set(overallStatus)

@@ -3,20 +3,19 @@ package com.revature.caliberdroid.data.model
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.BR
 
 data class AuditTraineeNotes(val noteId: Long, val weekNumber: Int, val batch: Batch, val traineeId: Long) : BaseObservable(), SortedListAdapter.ViewModel{
 
     @Bindable var content: String = ""
         set(value) {
             field = value
-            notifyPropertyChanged(BR.traineeWithNotes)
+            notifyChange()
         }
 
     @Bindable var technicalStatus: String = "Undefined"
         set(value) {
             field = value
-            notifyPropertyChanged(BR.traineeWithNotes)
+            notifyChange()
         }
 
     constructor(noteId: Long, weekNumber: Int, content: String, technicalStatus: String, batch: Batch, traineeId: Long) : this(noteId, weekNumber, batch, traineeId) {

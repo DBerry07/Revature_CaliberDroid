@@ -5,9 +5,7 @@ import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.BR
 import com.revature.caliberdroid.util.DateConverter
-import java.util.*
 
 data class Batch (
     val batchID: Long,
@@ -35,7 +33,7 @@ data class Batch (
     @Bindable get() = _trainingName!!
     set(value) {
         _trainingName = value
-        notifyPropertyChanged(BR._all)
+        notifyChange()
     }
 
     constructor(parcel: Parcel) : this(

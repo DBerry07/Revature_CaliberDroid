@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.BR
 
 data class Trainee(
     val traineeId: Long,
@@ -35,7 +34,7 @@ data class Trainee(
     @Bindable get() = _flagNotes!!
         set(value) {
             _flagNotes = value
-            notifyPropertyChanged(BR._all)
+            notifyChange()
         }
     constructor(parcel: Parcel) : this(
         parcel.readLong(),

@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_traineeFragment_to_switchTraineeFragment"
             app:destination="@id/switchTraineeFragment" />
+        <argument
+            android:name="BatchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
     </fragment>
     <fragment
         android:id="@+id/manageBatchFragment"

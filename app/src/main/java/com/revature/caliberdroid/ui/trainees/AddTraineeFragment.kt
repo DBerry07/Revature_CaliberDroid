@@ -41,7 +41,7 @@ class AddTraineeFragment() : Fragment() {
         binding.apply {
             TMBtnCreateTrainee.setOnClickListener{
                 createTrainee()
-                findNavController().navigate(R.id.action_addTraineeFragment_to_traineeFragment)
+                    findNavController().navigate(R.id.action_addTraineeFragment_to_traineeFragment)
             }
         }
 

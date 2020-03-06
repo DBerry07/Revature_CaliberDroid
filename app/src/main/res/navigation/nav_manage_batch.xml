@@ -47,7 +47,11 @@
     <fragment
         android:id="@+id/addTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.AddTraineeFragment"
-        android:label="AddTraineeFragment" />
+        android:label="AddTraineeFragment" >
+        <action
+            android:id="@+id/action_addTraineeFragment_to_traineeFragment"
+            app:destination="@id/traineeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/switchTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.SwitchTraineeFragment"

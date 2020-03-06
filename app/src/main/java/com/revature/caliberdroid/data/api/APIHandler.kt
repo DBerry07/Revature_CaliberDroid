@@ -77,6 +77,10 @@ object APIHandler {
         LocationsAPI.addLocation(location)
     }
 
+    fun editLocation(location:Location){
+        LocationsAPI.editLocation(location)
+    }
+
     fun getTrainers(liveData: MutableLiveData< ArrayList<Trainer> >){
         TrainersAPI.getTrainers(liveData)
     }

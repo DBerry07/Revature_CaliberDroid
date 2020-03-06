@@ -15,9 +15,12 @@
         android:text="@string/title_edit_location"
         style="@style/settingsHeading"/>
 
-    <include layout="@layout/include_location_fields"/>
+    <include
+        android:id="@+id/inLocationFields"
+        layout="@layout/include_location_fields"/>
 
     <Button
+        android:id="@+id/btnEditLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|right"

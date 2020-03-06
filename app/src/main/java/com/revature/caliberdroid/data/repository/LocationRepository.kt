@@ -16,4 +16,8 @@ object LocationRepository {
     fun addLocation(location:Location){
         APIHandler.addLocation(location)
     }
+
+    fun editLocation(location:Location){
+        APIHandler.editLocation(location)
+    }
 }

@@ -31,7 +31,9 @@
         tools:layout="@layout/fragment_manage_batch">
         <action
             android:id="@+id/action_manageBatchFragment_to_batchDetailsFragment"
-            app:destination="@id/batchDetailsFragment" />
+            app:destination="@id/batchDetailsFragment"
+            app:enterAnim="@anim/scale"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/batchDetailsFragment"

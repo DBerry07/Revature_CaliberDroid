@@ -11,7 +11,6 @@ import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Note
 import com.revature.caliberdroid.data.model.Trainee
-import com.revature.caliberdroid.ui.assessbatch.trainees.TraineeAssessmentsRecycleAdapter
 import kotlinx.android.synthetic.main.item_assess_batch_trainee.view.*
 
 class AssessBatchTraineeRecyclerAdapter(var context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -70,7 +69,8 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?) : RecyclerView.Ad
         var context = context
         fun bind(trainee:Trainee,grades:List<Grade>,assessments:List<Assessment>) {
             traineeName.setText(trainee.name)
-            var mAdapter = TraineeAssessmentsRecycleAdapter()
+            var mAdapter =
+                TraineeAssessmentsRecycleAdapter()
 //            mAdapter.submitGradeList(grades)
 //            mAdapter.submitAssessmentList(assessments)
             var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)

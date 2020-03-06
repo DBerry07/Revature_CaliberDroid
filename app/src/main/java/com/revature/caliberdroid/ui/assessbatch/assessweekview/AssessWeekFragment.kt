@@ -8,9 +8,11 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAssessWeekBinding
 
@@ -42,7 +44,7 @@ class AssessWeekFragment : Fragment() {
             Trainee(3,"3", "Thiago Barbosa")
         )
 
-        assessWeekViewModel.assessWeekNotes.postValue(args.assessWeekNotesSelected)
+        assessWeekViewModel.assessWeekNotes = MutableLiveData<AssessWeekNotes>(args.assessWeekNotesSelected)
 
         val viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)

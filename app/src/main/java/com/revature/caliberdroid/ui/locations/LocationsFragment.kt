@@ -17,15 +17,18 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface
 import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.databinding.FragmentLocationsBinding
-import timber.log.Timber
+import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
 
 
 class LocationsFragment : Fragment(){
-    private var _binding : FragmentLocationsBinding? = null
+    private var _binding : FragmentSettingsLocationsBinding? = null
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
+
+    override fun onCreate(savedInstanceState: Bundle?){
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -33,19 +36,19 @@ class LocationsFragment : Fragment(){
     ) : View?{
         navController = findNavController()
         locationsViewModel.getLocations()
-        _binding = FragmentLocationsBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsLocationsBinding.inflate(layoutInflater)
 
         binding.apply {
-            lifecycleOwner = this@LocationsFragment
+            setLifecycleOwner(this@LocationsFragment)
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
 
                     rvLocations.adapter = LocationsAdapter(locations, EditLocationListener())
                     for (location in locations) {
-                        Timber.d("Location: $location")
+                        Log.d("Locations", "Location: ${location.toString()}")
                     }
                 } else {
-                    Timber.d("locationsViewModel is null")
+                    Log.d("Locations", "locationsViewModel is null")
                 }
             })
 

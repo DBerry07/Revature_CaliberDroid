@@ -11,4 +11,13 @@ object CategoryRepository {
         APIHandler.getCategories(liveData)
         return liveData
     }
+
+    fun addCategory(skillCategory: String, liveData: MutableLiveData<ArrayList<Category>>): MutableLiveData< ArrayList<Category> >{
+        APIHandler.addCategory(skillCategory,liveData)
+        return liveData
+    }
+
+    fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
+        APIHandler.editCategory(category,liveData)
+    }
 }

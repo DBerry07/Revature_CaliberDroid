@@ -14,6 +14,7 @@ import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
 import timber.log.Timber
 
 object APIHandler {
@@ -99,11 +100,35 @@ object APIHandler {
         LocationsAPI.getLocations(liveData)
     }
 
+    fun addLocation(location:Location){
+        LocationsAPI.addLocation(location)
+    }
+
+    fun editLocation(location:Location){
+        LocationsAPI.editLocation(location)
+    }
+
     fun getTrainers(liveData: MutableLiveData< ArrayList<Trainer> >){
         TrainersAPI.getTrainers(liveData)
     }
 
+    fun addTrainer(trainer: Trainer){
+        TrainersAPI.addTrainer(trainer)
+    }
+
+    fun editTrainer(trainer: Trainer){
+        TrainersAPI.editTrainer(trainer)
+    }
+
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
+    }
+
+    fun addCategory(skillCategory: String, liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.addCategory(skillCategory,liveData)
+    }
+
+    fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
+        CategoriesAPI.editCategory(category,liveData)
     }
 }

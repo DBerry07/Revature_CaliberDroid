@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/manageBatchFragment"
         android:name="com.revature.caliberdroid.ui.batches.ManageBatchFragment"
-        android:label="fragment_manage_batch"
+        android:label="Manage Batch"
         tools:layout="@layout/fragment_manage_batch">
         <action
             android:id="@+id/action_manageBatchFragment_to_batchDetailsFragment"
@@ -33,10 +33,13 @@
     <fragment
         android:id="@+id/batchDetailsFragment"
         android:name="com.revature.caliberdroid.ui.batches.BatchesInfo"
-        android:label="fragment_batch_details">
+        android:label="Batch Details">
         <action
             android:id="@+id/action_batchDetailsFragment_to_traineeFragment"
             app:destination="@id/traineeFragment" />
+        <argument
+            android:name="selectedBatch"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
     </fragment>
     <fragment
         android:id="@+id/addTraineeFragment"

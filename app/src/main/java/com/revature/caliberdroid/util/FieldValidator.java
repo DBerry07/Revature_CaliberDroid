@@ -36,11 +36,17 @@ public class FieldValidator {
     }
 
     //No special characters
+    public static String excludedSpecialCharacters = "<>%$!@#";
     public static boolean isValidPlainText(String input){
+
+        String excludedSpecialCharactersRegEx = "^["+excludedSpecialCharacters+"]*$";
+        Pattern pattern = Pattern.compile(excludedSpecialCharactersRegEx);
+        Matcher matcher = pattern.matcher(input);
+        if(matcher.matches()) return true;
         return false;
     }
 
-    ArrayList<String> TwoLetterStatesList = (ArrayList<String>) Arrays.asList(
+    public static ArrayList<String> TwoLetterStatesList = new ArrayList<> (Arrays.asList(
             "AL",
             "AK",
             "AS",
@@ -96,9 +102,9 @@ public class FieldValidator {
             "WV",
             "WI",
             "WY"
-    );
+    ));
 
-    ArrayList<String> StatesList = (ArrayList<String>) Arrays.asList(
+    public static ArrayList<String> StatesList = new ArrayList<String> (Arrays.asList(
             "Alabama",
             "Alaska",
             "American Samoa",
@@ -149,10 +155,10 @@ public class FieldValidator {
             "Utah",
             "Vermont",
             "Virgin Islands",
-            "VT",
-            "WA",
-            "WV",
-            "WI",
-            "WY"
-    );
+            "Vermont",
+            "Washington",
+            "West Virginia",
+            "Wisconsin",
+            "Wyoming"
+    ));
 }

@@ -12,6 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditLocationBinding
+import com.revature.caliberdroid.ui.locations.LocationsFieldValidator.validateFields
+import com.revature.caliberdroid.util.FieldValidator
+import kotlinx.android.synthetic.main.fragment_settings_add_location.*
+import kotlinx.android.synthetic.main.include_location_fields.view.*
 import timber.log.Timber
 
 
@@ -39,18 +43,26 @@ class EditLocationFragment : Fragment() {
             inLocationFields.etZipCode.setText(location.zipcode)
 
             btnEditLocation.setOnClickListener {
-                location.name = inLocationFields.etCompanyName.text.toString()
-                location.address = inLocationFields.etStreetAddress.text.toString()
-                location.city = inLocationFields.etCity.text.toString()
-                location.state = inLocationFields.etState.text.toString()
-                location.zipcode = inLocationFields.etZipCode.text.toString()
+                if( validateFields(
+                        inLocationFields.etCompanyName.text.toString()
+                    )
+                ){
 
-                Timber.d("Updated location: ${location.toString()}")
-                LocationRepository.editLocation(location)
-
-                findNavController().navigateUp()
+//                    location.name = inLocationFields.etCompanyName.text.toString()
+//                    location.address = inLocationFields.etStreetAddress.text.toString()
+//                    location.city = inLocationFields.etCity.text.toString()
+//                    location.state = inLocationFields.etState.text.toString()
+//                    location.zipcode = inLocationFields.etZipCode.text.toString()
+//
+//                    Timber.d("Updated location: ${location.toString()}")
+//                    LocationRepository.editLocation(location)
+//
+//                    findNavController().navigateUp()
+                }
             }
         }
         return binding.root
     }
+
+
 }

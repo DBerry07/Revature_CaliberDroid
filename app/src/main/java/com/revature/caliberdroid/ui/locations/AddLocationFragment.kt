@@ -28,16 +28,22 @@ class AddLocationFragment : Fragment() {
         binding.apply {
 
             btnAddLocation.setOnClickListener {
-                var locationToCreate = Location(
-                    inLocationFields.etCompanyName.text.toString(),
-                    inLocationFields.etCity.text.toString(),
-                    inLocationFields.etZipCode.text.toString(),
-                    inLocationFields.etStreetAddress.text.toString(),
-                    inLocationFields.etState.text.toString(),
-                    true
-                )
-                Timber.d("New location to add: ${locationToCreate.toString()}")
-                LocationRepository.addLocation(locationToCreate)
+                Timber.d("Attempting to add location.")
+                if(LocationsFieldValidator.validateFields(
+                        inLocationFields.etCompanyName.text.toString()
+                    )
+                ){
+//                var locationToCreate = Location(
+//                    inLocationFields.etCompanyName.text.toString(),
+//                    inLocationFields.etCity.text.toString(),
+//                    inLocationFields.etZipCode.text.toString(),
+//                    inLocationFields.etStreetAddress.text.toString(),
+//                    inLocationFields.etState.text.toString(),
+//                    true
+//                )
+//                Timber.d("New location to add: ${locationToCreate.toString()}")
+//                LocationRepository.addLocation(locationToCreate)
+                }
             }
         }
 

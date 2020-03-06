@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditLocationBinding
-import com.revature.caliberdroid.ui.locations.LocationsFieldValidator.validateFields
 import com.revature.caliberdroid.util.FieldValidator
 import kotlinx.android.synthetic.main.fragment_settings_add_location.*
 import kotlinx.android.synthetic.main.include_location_fields.view.*
@@ -40,7 +39,8 @@ class EditLocationFragment : Fragment() {
             inLocationFields.etZipCode.setText(location.zipcode)
 
             btnEditLocation.setOnClickListener {
-                if (validateFields(
+                if (
+                    LocationsFieldValidator.validateFields(
                         validationString,
                         inLocationFields.etCompanyName,
                         inLocationFields.etCity,

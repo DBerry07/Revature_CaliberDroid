@@ -50,12 +50,14 @@ class AddTrainerFragment : Fragment() {
                 }
             }
             btnAddTrainer.setOnClickListener {
-                if( TrainersFieldValidator.validateFields(
+                if(
+                    TrainersFieldValidator.validateFields(
                         validationString,
                         inTrainerFields.etFullName,
                         inTrainerFields.etEmail,
                         inTrainerFields.etTitle
-                    ) ){
+                    )
+                ){
                     val trainerToCreate = Trainer(
                         inTrainerFields.etFullName.text.toString(),
                         inTrainerFields.etTitle.text.toString(),

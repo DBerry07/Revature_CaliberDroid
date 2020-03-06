@@ -24,6 +24,7 @@ class EditTrainerFragment : Fragment() {
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private lateinit var trainer: Trainer
     private var selectedTier: String = ""
+    private val validationString = StringBuilder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,15 +67,26 @@ class EditTrainerFragment : Fragment() {
             }
 
             btnEditTrainer.setOnClickListener {
-                trainer.name = etFullName.text.toString()
-                trainer.email = etEmail.text.toString()
-                trainer.title = etTitle.text.toString()
-                trainer.tier = selectedTier
+                if(
+                    TrainersFieldValidator.validateFields(
+                        validationString,
+                        inTrainerFields.etFullName,
+                        inTrainerFields.etEmail,
+                        inTrainerFields.etTitle
+                    )
+                ){
+                    trainer.name = etFullName.text.toString()
+                    trainer.email = etEmail.text.toString()
+                    trainer.title = etTitle.text.toString()
+                    trainer.tier = selectedTier
 
-                Timber.d("Updated trainer: ${trainer.toString()}")
-                TrainerRepository.editTrainer(trainer)
+                    Timber.d("Updated trainer: ${trainer.toString()}")
+                    TrainerRepository.editTrainer(trainer)
 
-                findNavController().navigateUp()
+                    findNavController().navigateUp()
+                }else{
+                    Timber.d("Validation of fields failed: "+validationString.toString())
+                }
             }
         }
 

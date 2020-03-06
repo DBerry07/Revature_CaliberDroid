@@ -61,7 +61,8 @@ class AddLocationFragment : Fragment() {
 //            }
             btnAddLocation.setOnClickListener {
                 Timber.d("Attempting to add location.")
-                if (LocationsFieldValidator.validateFields(
+                if (
+                    LocationsFieldValidator.validateFields(
                         validationString,
                         inLocationFields.etCompanyName,
                         inLocationFields.etCity,

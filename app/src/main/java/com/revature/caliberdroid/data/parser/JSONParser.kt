@@ -3,6 +3,7 @@ package com.revature.caliberdroid.data.parser
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.util.DateConverter
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -16,7 +17,20 @@ object JSONParser {
         val length = response.length() - 1
         for (i in 0 .. length) {
             response.getJSONObject(i).apply {
-                batch = Batch(getLong("batchId"), getString("trainingName"), getString("trainingType"), getString("skillType"), getString("trainer"), getString("coTrainer"), getLong("locationId"), getString("location"), getLong("startDate"), getLong("endDate"), getInt("goodGrade"), getInt("passingGrade"), getInt("weeks"))
+                batch = Batch(
+                    batchID = getLong("batchId"),
+                    _trainingName = getString("trainingName"),
+                    trainingType = getString("trainingType"),
+                    skillType = getString("skillType"),
+                    trainerName = getString("trainer"),
+                    coTrainerName = getString("coTrainer"),
+                    locationID = getLong("locationId"),
+                    location = getString("location"),
+                    _startDate = getLong("startDate"),
+                    _endDate = getLong("endDate"),
+                    goodGrade = getInt("goodGrade"),
+                    passingGrade = getInt("passingGrade"),
+                    weeks = getInt("weeks"))
             }
 
             batchList.add(batch)
@@ -30,7 +44,10 @@ object JSONParser {
         var auditWeekNotes: AuditWeekNotes
 
         response.apply {
-            auditWeekNotes = AuditWeekNotes(weekNumber = getInt("week"), overallStatus = getString("technicalStatus"), overallNotes = getString("content"))
+            auditWeekNotes = AuditWeekNotes(
+                weekNumber = getInt("week"),
+                overallStatus = getString("technicalStatus"),
+                overallNotes = getString("content"))
         }
 
         return auditWeekNotes
@@ -144,8 +161,9 @@ object JSONParser {
                     getString("degree"),
                     getString("major"),
                     getString("techScreenerName"),
-                    getLong("techScreenScore"),
-                    getString("projectCompletetion"),
+                    //Had to alter techScreenScore from getLong to get to allow null from API
+                    get("techScreenScore"),
+                    getString("projectCompletion"),
                     getString("flagStatus"),
                     getString("flagNotes"),
                     getString("flagAuthor"),
@@ -155,6 +173,28 @@ object JSONParser {
         }
 
         return traineeList
+    }
+
+    fun getBatchJSONObject(batch: Batch) : JSONObject {
+        val request = JSONObject()
+
+        return request.apply {
+                batch.apply {
+                put("batchId", batchID)
+                put("trainingName", trainingName)
+                put("trainingType", trainingType)
+                put("skillType", skillType)
+                put("trainer", trainerName)
+                put("coTrainer", coTrainerName)
+                put("locationId", locationID)
+                put("location", location)
+                put("startDate", _startDate)
+                put("endDate", _endDate)
+                put("goodGrade", goodGrade)
+                put("passingGrade", passingGrade)
+                put("weeks", weeks)
+            }
+        }
     }
 
 }

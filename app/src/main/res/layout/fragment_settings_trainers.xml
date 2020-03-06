@@ -24,10 +24,12 @@
 
             <Button
                 android:id="@+id/btnAddTrainer"
-                style="@style/addBtnWithPlusImg"
+                app:iconGravity="end"
+                app:icon="@drawable/ic_add"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|end"
+                android:layout_gravity="end"
                 android:text="@string/btn_add_trainer" />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView

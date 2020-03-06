@@ -30,7 +30,7 @@ class AddTrainerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSettingsAddTrainerBinding.inflate(layoutInflater)
-        val context = getContext()!!
+        val context = context!!
         val list_of_items = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
             val adapter = TiersAdapter(context, list_of_items)

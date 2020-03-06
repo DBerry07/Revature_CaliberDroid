@@ -6,10 +6,14 @@
     <color name="Revature_Orange">#F26925</color>
     <color name="black">#000000</color>
 
+<!--  Quality Audit  -->
+    <color name="green_flag">@android:color/holo_green_dark</color>
+    <color name="red_flag">@android:color/holo_red_dark</color>
 
 <!-- SETTINGS -->
     <color name="active">#18ff03</color>
     <color name="inactive">#ff0303</color>
     <color name="addBtnOrange">#FE9A00</color>
     <color name="dividerGray">#999999</color>
+    <color name="grey_dark">#656565</color>
 </resources>

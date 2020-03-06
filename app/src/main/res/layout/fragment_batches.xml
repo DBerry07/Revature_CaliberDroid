@@ -8,19 +8,16 @@
 
     <Button
         android:id="@+id/btn_manage_batch_create_batch"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/create_batch_style"
-        android:drawableEnd="@drawable/create_batch_icon"
-        android:drawablePadding="-5dp"
-        android:paddingStart="10dp"
         android:text="@string/btn_manage_batch_create_batch"
-        android:textSize="13sp"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="end"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="0dp"
@@ -36,6 +33,14 @@
             android:layout_height="match_parent"
             android:layout_marginTop="16dp" />
     </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_goto_trainees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

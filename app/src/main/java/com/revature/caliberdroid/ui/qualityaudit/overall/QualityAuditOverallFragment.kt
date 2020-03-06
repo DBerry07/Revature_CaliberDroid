@@ -16,6 +16,7 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
+import com.revature.caliberdroid.util.AuditStatusConverter
 
 class QualityAuditOverallFragment : Fragment() {
 
@@ -47,12 +48,14 @@ class QualityAuditOverallFragment : Fragment() {
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
 
         binding.btnAuditoverallTrainees.setOnClickListener {
-            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment())
+            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment(args.batchSelected, args.auditWeekNotesSelected))
         }
 
         binding.btnAuditoverallSave.setOnClickListener {
             findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditBatchSelectionFragment())
         }
+
+        binding.imgAuditoverallOverallstatus.setImageResource(AuditStatusConverter.getImageResourceID(args.auditWeekNotesSelected.overallStatus.get()!!))
 
         subscribeToViewModel()
 

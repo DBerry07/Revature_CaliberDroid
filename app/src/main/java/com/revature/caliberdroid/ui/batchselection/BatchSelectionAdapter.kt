@@ -26,7 +26,7 @@ class BatchSelectionAdapter(
     }
 
     class BatchViewHolder(val binding: ItemBatchSelectionBinding, val onItemListener: OnItemClickListener)
-        : SortedListAdapter.ViewHolder<Batch>(binding.getRoot()),
+        : SortedListAdapter.ViewHolder<Batch>(binding.root),
         View.OnClickListener {
 
         init {

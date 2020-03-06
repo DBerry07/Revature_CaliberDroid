@@ -10,13 +10,15 @@ import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.data.model.TraineeWithNotes
+import com.revature.caliberdroid.data.parser.AuditParser
 import com.revature.caliberdroid.data.parser.JSONParser
-import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
+import org.json.JSONArray
 import timber.log.Timber
 
 object AuditAPIHandler {
 
-    fun getAuditWeekNotes(context: Context, liveData: ListLiveData<AuditWeekNotes>, batch: Batch) {
+    fun getAuditWeekNotes(context: Context, liveData: MutableLiveData<ArrayList<AuditWeekNotes>>, batch: Batch) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/notes/overall/${batch.batchID}"
@@ -45,7 +47,7 @@ object AuditAPIHandler {
 //                    })
                     auditWeekNotes = JSONParser.parseAuditWeekNotes(response = it)
 
-                    liveData[i - 1].apply {
+                    liveData.value?.get(i - 1).apply {
                         if (!auditWeekNotes.overallNotes.equals("null")) {
                             this?.overallNotes = auditWeekNotes.overallNotes
                         }
@@ -83,5 +85,41 @@ object AuditAPIHandler {
         )
 
         queue.add(skillCategoriesRequest)
+    }
+
+    fun getTraineesWithNotes(context: Context, liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(context)
+        //response is JSONarray of assessments
+        var url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/all/trainee/?batch=${batch.batchID}"
+        lateinit var traineeWithNotesList: List<TraineeWithNotes>
+        val traineesArrayRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener<JSONArray> { response ->
+                Timber.d(response.toString())
+                traineeWithNotesList = AuditParser.parseTrainees(response)
+
+                url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/trainee/notes/${batch.batchID}/$weekNumber"
+
+                val notesArrayRequest = JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    Response.Listener { response ->
+                        Timber.d(response.toString())
+                        liveData.postValue(AuditParser.parseTraineeNotes(response, traineeWithNotesList, batch, weekNumber))
+                    },
+                    Response.ErrorListener { error ->
+                        Timber.d(error.toString())
+                    }
+                )
+
+                queue.add(notesArrayRequest)
+            },
+            Response.ErrorListener { error -> Timber.d(error.toString()) })
+
+        queue.add(traineesArrayRequest)
     }
 }

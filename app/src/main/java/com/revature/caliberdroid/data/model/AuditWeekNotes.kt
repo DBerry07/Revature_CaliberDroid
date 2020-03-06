@@ -4,39 +4,36 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import androidx.databinding.ObservableField
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
 import kotlin.properties.Delegates
 
 data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
 
-    @Bindable var overallStatus: String? = null
+    @Bindable var overallStatus = ObservableField<String?>()
         set(value) {
             field = value
-            notifyPropertyChanged(BR.auditWeekNotes)
+            notifyPropertyChanged(androidx.databinding.library.baseAdapters.BR.auditWeekNotes)
         }
-    @Bindable var overallNotes: String? = null
+    @Bindable var overallNotes =  ObservableField<String?>()
         set(value) {
             field = value
-            notifyPropertyChanged(BR.auditWeekNotes)
+            notifyPropertyChanged(androidx.databinding.library.baseAdapters.BR.auditWeekNotes)
         }
 
-    constructor(parcel: Parcel) : this(
-        parcel.readInt()
-    ) {
-        overallStatus = parcel.readString()
-        overallNotes = parcel.readString()
+    constructor(parcel: Parcel) : this(parcel.readInt()) {
     }
 
     constructor(weekNumber: Int, overallStatus: String?, overallNotes: String?) : this(weekNumber) {
-        this.overallStatus = overallStatus
-        this.overallNotes = overallNotes
+        this.overallStatus.set(overallStatus)
+        this.overallNotes.set(overallNotes)
     }
 
     override fun <T : Any?> isContentTheSameAs(model: T): Boolean {
         if (model is AuditWeekNotes) {
             val other = model as AuditWeekNotes
-            return overallStatus == other.overallStatus && overallNotes == other.overallNotes
+            return overallStatus.get() == other.overallStatus.get() && overallNotes.get() == other.overallNotes.get()
         }
         return false
     }
@@ -51,8 +48,6 @@ data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAda
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(weekNumber)
-        parcel.writeString(overallStatus)
-        parcel.writeString(overallNotes)
     }
 
     override fun describeContents(): Int {

@@ -35,11 +35,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:tabBackground="@color/colorPrimary"
-            app:tabIndicatorColor="@android:color/white"
+            app:tabBackground="@android:color/white"
+            app:tabIndicatorColor="@color/Revature_Orange"
             app:tabIndicatorHeight="48dp"
-            app:tabSelectedTextColor="@android:color/black"
-            app:tabTextColor="@android:color/white">
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@color/black">
 
         </com.google.android.material.tabs.TabLayout>
 

@@ -8,9 +8,12 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.AssessWeekNotes
+import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAssessWeekBinding
 
 
@@ -33,23 +36,26 @@ class AssessWeekFragment : Fragment() {
 
         _assessWeekBinding = FragmentAssessWeekBinding.inflate(inflater)
 
-        assessWeekViewModel.assessWeekNotes = args.assessWeekNotesSelected
+        var assessWeekNotesSelected = args.assessWeekNotesSelected
 
-        var viewPager = assessWeekBinding.viewpagerWeekview
+        assessWeekNotesSelected.batch!!.trainees = arrayListOf(
+            Trainee(1, "1", "Charles Mersereau"),
+            Trainee(2, "2", "Gavin Mitchell"),
+            Trainee(3,"3", "Thiago Barbosa")
+        )
+
+        assessWeekViewModel.assessWeekNotes = MutableLiveData<AssessWeekNotes>(args.assessWeekNotesSelected)
+
+        val viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-        viewPager.setAdapter(assessWeekViewPagerAdapter)
+        viewPager.adapter = assessWeekViewPagerAdapter
 
         val tabLayout = assessWeekBinding.tabsWeekview
         tabLayout.setupWithViewPager(viewPager)
-        tabLayout.getTabAt(0)!!.setText(requireContext().getString(R.string.title_assessments))
-        tabLayout.getTabAt(1)!!.setText(requireContext().getString(R.string.title_trainees))
+        tabLayout.getTabAt(0)!!.text = requireContext().getString(R.string.title_assessments)
+        tabLayout.getTabAt(1)!!.text = requireContext().getString(R.string.title_trainees)
 
         return assessWeekBinding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
     override fun onDestroyView() {

@@ -5,18 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.Week
 import com.revature.caliberdroid.data.model.AssessWeekNotes
+import com.revature.caliberdroid.data.repository.AssessWeekRepository
 
 class AssessWeekViewModel : ViewModel() {
 
-    val weekData: MutableLiveData<Week> by lazy { MutableLiveData<Week>() }
-    lateinit var assessWeekNotes: AssessWeekNotes
+    lateinit var assessWeekNotes: MutableLiveData<AssessWeekNotes>
 
-    fun getTrainees(){
-        val weekData:Week? = weekData.value
-
+    fun initWeekData() {
+        var batchId:Long = assessWeekNotes.value!!.batch!!.batchID
+        var weekNumber:Int = assessWeekNotes.value!!.weekNumber
+        assessWeekNotes = AssessWeekRepository.getAssessWeekData(batchId,weekNumber)
     }
 
-
-
+    fun getWeekData():LiveData<AssessWeekNotes> {
+        return assessWeekNotes
+    }
 
 }

@@ -7,25 +7,22 @@ import androidx.core.view.GestureDetectorCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.api.APIHandler.context
-import com.revature.caliberdroid.databinding.TraineeItemBinding
-import com.revature.caliberdroid.ui.batches.BatchesInfoDirections
-import com.revature.caliberdroid.ui.batches.ManageBatchFragmentDirections
-import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
+import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.databinding.ItemTraineeBinding
 
 
-class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
+class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
-    var info = data
+    var trainees = data
     lateinit var parent: ViewGroup
     lateinit var pop : PopupWindow
 
-    private var _binding: TraineeItemBinding? = null
+    private var _binding: ItemTraineeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        LayoutInflater.from(parent.context).inflate(R.layout.trainee_item, parent, false)
-        _binding = TraineeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.item_trainee, parent, false)
+        _binding = ItemTraineeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         pop = PopupWindow(parent.context)
 
         this.parent = parent
@@ -33,18 +30,18 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var item = info.get(position)
-        holder.name.setText(item.get("name"))
-        holder.email.setText(item.get("email"))
-        holder.phone.setText(item.get("phone"))
-        holder.skype.setText(item.get("skype"))
-        holder.profile.setText(item.get("profile"))
-        holder.college.setText(item.get("college"))
-        holder.major.setText(item.get("major"))
-        holder.recruiter.setText(item.get("recruiter"))
-        holder.project.setText(item.get("project"))
-        holder.screener.setText(item.get("screener"))
-        holder.status.setText(item.get("status"))
+        var item = trainees.get(position)
+        holder.name.setText(item.name)
+        holder.email.setText(item.email)
+        holder.phone.setText(item.phoneNumber)
+        holder.skype.setText(item.skypeId)
+        holder.profile.setText(item.profileUrl)
+        holder.college.setText(item.college)
+        holder.major.setText(item.major)
+        holder.recruiter.setText(item.recruiterName)
+        holder.project.setText(item.projectCompletion)
+        holder.screener.setText(item.techScreenerName)
+        holder.status.setText(item.trainingStatus)
 
         var mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
         holder.itemView.setOnTouchListener { v, event ->
@@ -78,10 +75,10 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
     }
 
     override fun getItemCount(): Int {
-        return info.size
+        return trainees.size
     }
 
-    class MyViewHolder(binding: TraineeItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(binding: ItemTraineeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var isExpanded = false
 
@@ -141,11 +138,13 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
                 holder.details.visibility = View.VISIBLE
                 holder.isExpanded = !holder.isExpanded;
                 adapter.notifyItemChanged(position)
+                holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
                 holder.details.visibility = View.GONE
                 holder.isExpanded = !holder.isExpanded;
                 adapter.notifyItemChanged(position)
+                holder.arrow.setImageResource(R.drawable.ic_expand_arrow)
             }
             return true
         }
@@ -187,22 +186,30 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         }
 
         override fun onLongPress(e: MotionEvent?) {
+            if (!holder.isExpanded && holder.options.visibility == View.GONE) {
+                holder.options.visibility = View.VISIBLE
+            }
+            else if (!holder.isExpanded && holder.options.visibility == View.VISIBLE){
+                holder.options.visibility = View.GONE
+            }
+
+
         }
 
         fun swipeRight(){
-            Toast.makeText(holder.itemView.context, "Swipe Right", Toast.LENGTH_LONG).show()
-            holder.options.visibility = View.GONE
+            //Toast.makeText(holder.itemView.context, "Swipe Right", Toast.LENGTH_LONG).show()
+            /*holder.options.visibility = View.GONE
             holder.arrow.visibility = View.VISIBLE
-            holder.status.visibility = View.VISIBLE
+            holder.status.visibility = View.VISIBLE*/
         }
 
         fun swipeLeft(){
-            Toast.makeText(holder.itemView.context, "Swipe LEFT", Toast.LENGTH_LONG).show()
-            if (!holder.isExpanded) {
+            //Toast.makeText(holder.itemView.context, "Swipe LEFT", Toast.LENGTH_LONG).show()
+            /*if (!holder.isExpanded) {
                 holder.options.visibility = View.VISIBLE
-                holder.arrow.visibility = View.INVISIBLE
-                holder.status.visibility = View.INVISIBLE
-            }
+                holder.arrow.visibility = View.GONE
+                holder.status.visibility = View.GONE
+            }*/
         }
 
     }

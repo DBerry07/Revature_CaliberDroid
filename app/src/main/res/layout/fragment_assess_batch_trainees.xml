@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.assessbatch.assessweekview.trainees.AssessBatchTrainees" >
+    tools:context=".ui.assessbatch.assessweekview.trainees.AssessBatchTraineesFragment" >
 
     <TextView
         android:id="@+id/tv_assess_batch_trainees_title"
@@ -12,6 +12,7 @@
         android:layout_height="wrap_content" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_assess_batch_trainees"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

@@ -8,27 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
+import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
 import java.util.*
-import kotlin.collections.ArrayList
 
-/**
- * A simple [Fragment] subclass.
- */
-class ManageBatchFragment : Fragment() {
 
-    private var temp = ArrayList(Arrays.asList("", "", "", "", "", ""))
+class ManageBatchFragment : Fragment(), OnItemClickListener {
 
     private var _binding: FragmentBatchesBinding? = null
     private val binding
@@ -38,38 +30,22 @@ class ManageBatchFragment : Fragment() {
     private lateinit var cancelBtn: Button
     private lateinit var createBtn: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentBatchesBinding.inflate(layoutInflater)
+
+        binding.recyclerviewManageBatches.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerviewManageBatches.adapter = BatchAdapter(requireContext(), ALPHABETICAL_COMPARATOR_BATCHES, this)
+
         viewModel.getBatches()
-        binding.apply {
-            // New way of inserting the data into the ui directly from the view model, all changes are automatically updated on the UI
-            // batchesViewModel = viewModel
+        subscribeToViewModel()
 
-            // Make sure to call this method so the UI reflect the changes on the view model
-            // setLifecycleOwner(this@BatchesFragment)
-            viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
-            })
-            btnManageBatchCreateBatch.setOnClickListener {
-                createBatchDialog()
-            }
+        binding.btnManageBatchCreateBatch.setOnClickListener {
+            createBatchDialog()
+        }
 
-        }
-        val mRecyclerView = binding.root.findViewById<RecyclerView>(R.id.recyclerview_manage_batches)
-        mRecyclerView.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-            //adapter = BatchesAdapter(context, viewModel.batchesLiveData)
-            adapter = CustomAdapter(context, temp)
-        }
         return binding.root
     }
 
@@ -89,7 +65,6 @@ class ManageBatchFragment : Fragment() {
         }
         createBtn.setOnClickListener {
             dialog.dismiss()
-            findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToBatchDetailsFragment())
             Toast.makeText(context,"ok", Toast.LENGTH_SHORT).show()
         }
     }
@@ -100,11 +75,22 @@ class ManageBatchFragment : Fragment() {
     }
 
     companion object {
-        @JvmStatic
-        fun onClick() {
-            Toast.makeText(context,"Batch clicked", Toast.LENGTH_SHORT).show()
-        }
+        @JvmField val ALPHABETICAL_COMPARATOR_BATCHES: Comparator<Batch> =
+            Comparator<Batch> { a: Batch, b: Batch -> a.trainerName!!.compareTo(b.trainerName!!) }
+    }
+
+    override fun onBatchClick(batchClicked: Batch) {
+        findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToBatchDetailsFragment(batchClicked))
+    }
+
+    private fun subscribeToViewModel() {
+        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+            (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
+                .replaceAll(it)
+                .commit()
+        })
     }
 }
+
 
 

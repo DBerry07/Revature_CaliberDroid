@@ -22,6 +22,7 @@ class AddLocationFragment : Fragment() {
     private var _binding: FragmentSettingsAddLocationBinding? = null
     private val binding get() = _binding!!
     private var selectedState: String = ""
+    private val validationString = StringBuilder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +62,12 @@ class AddLocationFragment : Fragment() {
             btnAddLocation.setOnClickListener {
                 Timber.d("Attempting to add location.")
                 if (LocationsFieldValidator.validateFields(
+                        validationString,
                         inLocationFields.etCompanyName,
                         inLocationFields.etCity,
                         inLocationFields.etZipCode,
-                        inLocationFields.etStreetAddress
+                        inLocationFields.etStreetAddress,
+                        inLocationFields.etState
                     )
                 ) {
                     Timber.d("Entry passed validation.")
@@ -79,7 +82,7 @@ class AddLocationFragment : Fragment() {
                     Timber.d("New location to add: ${locationToCreate.toString()}")
                     LocationRepository.addLocation(locationToCreate)
                 } else {
-                    Timber.d("Validation of fields failed.")
+                    Timber.d("Validation of fields failed: "+validationString.toString())
                 }
             }
         }

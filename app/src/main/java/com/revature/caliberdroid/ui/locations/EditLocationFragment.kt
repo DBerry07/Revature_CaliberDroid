@@ -24,6 +24,7 @@ class EditLocationFragment : Fragment() {
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private lateinit var location: Location
+    private val validationString = StringBuilder()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,28 +36,32 @@ class EditLocationFragment : Fragment() {
             inLocationFields.etCompanyName.setText(location.name)
             inLocationFields.etStreetAddress.setText(location.address)
             inLocationFields.etCity.setText(location.city)
-            //inLocationFields.etState.setText(location.state)
+            inLocationFields.etState.setText(location.state)
             inLocationFields.etZipCode.setText(location.zipcode)
 
             btnEditLocation.setOnClickListener {
-                if( validateFields(
+                if (validateFields(
+                        validationString,
                         inLocationFields.etCompanyName,
                         inLocationFields.etCity,
                         inLocationFields.etZipCode,
-                        inLocationFields.etStreetAddress
+                        inLocationFields.etStreetAddress,
+                        inLocationFields.etState
                     )
-                ){
+                ) {
+                    Timber.d("Entry passed validation.")
+                    location.name = inLocationFields.etCompanyName.text.toString()
+                    location.address = inLocationFields.etStreetAddress.text.toString()
+                    location.city = inLocationFields.etCity.text.toString()
+                    location.state = inLocationFields.etState.text.toString()
+                    location.zipcode = inLocationFields.etZipCode.text.toString()
 
-//                    location.name = inLocationFields.etCompanyName.text.toString()
-//                    location.address = inLocationFields.etStreetAddress.text.toString()
-//                    location.city = inLocationFields.etCity.text.toString()
-//                    location.state = inLocationFields.etState.text.toString()
-//                    location.zipcode = inLocationFields.etZipCode.text.toString()
-//
-//                    Timber.d("Updated location: ${location.toString()}")
-//                    LocationRepository.editLocation(location)
-//
-//                    findNavController().navigateUp()
+                    Timber.d("Updated location: ${location.toString()}")
+                    LocationRepository.editLocation(location)
+
+                    findNavController().navigateUp()
+                } else {
+                    Timber.d("Validation of fields failed: "+validationString.toString())
                 }
             }
         }

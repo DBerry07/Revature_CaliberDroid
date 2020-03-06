@@ -21,15 +21,15 @@ class AssessmentsRecyclerAdapter(
         return AssessmentViewHolder(ItemAssessweekoverviewAssessmentBinding.inflate(LayoutInflater.from(context)), onItemClickListener)
     }
 
-    override fun getItemCount(): Int = assessWeekViewModel.assessWeekNotes.value!!.assessments.value!!.size
+    override fun getItemCount(): Int = assessWeekViewModel.assessWeekNotes.assessments.size
 
     override fun onBindViewHolder(holder: AssessmentViewHolder, position: Int) {
-        holder.binding.assessment = assessWeekViewModel.assessWeekNotes.value!!.assessments.value!![position]
+        holder.binding.assessment = assessWeekViewModel.assessWeekNotes.assessments[position]
 
         holder.binding.average = 95f
 
         holder.binding.btnAsssessmentsrecyclerTraineegrades.setOnClickListener {
-            onItemClickListener.onAssessmentClicked(assessWeekViewModel.assessWeekNotes.value!!.assessments.value!![position])
+            onItemClickListener.onAssessmentClicked(assessWeekViewModel.assessWeekNotes.assessments[position])
         }
     }
 

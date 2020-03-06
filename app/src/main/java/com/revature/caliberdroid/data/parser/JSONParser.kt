@@ -3,7 +3,6 @@ package com.revature.caliberdroid.data.parser
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.util.DateConverter
 import org.json.JSONArray
 import org.json.JSONObject
 

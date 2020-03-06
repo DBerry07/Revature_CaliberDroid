@@ -50,7 +50,7 @@ class AssessmentTraineeGradesFragment : Fragment() {
     }
 
     fun getAssessment(assessmentId: Long): Assessment {
-        for (assessment in assessWeekViewModel.assessWeekNotes.value!!.assessments.value!!) {
+        for (assessment in assessWeekViewModel.assessWeekNotes.assessments) {
             if (assessment.assessmentId == assessmentId) {
                 return assessment
             }
@@ -63,7 +63,7 @@ class AssessmentTraineeGradesFragment : Fragment() {
         var sum = 0
         var count = 0
 
-        for (grade in assessWeekViewModel.assessWeekNotes.value!!.grades.value!!) {
+        for (grade in assessWeekViewModel.assessWeekNotes.grades) {
             if (grade.assessmentId == assessment.assessmentId) {
                 sum += grade.score!!
                 count++

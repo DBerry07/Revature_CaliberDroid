@@ -22,9 +22,6 @@
         android:id="@+id/assessWeekViewFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragment"
         android:label="Assess Batch" >
-        <argument
-            android:name="assessWeekNotesSelected"
-            app:argType="com.revature.caliberdroid.data.model.AssessWeekNotes" />
         <action
             android:id="@+id/action_assessWeekViewFragment_to_assessmentTraineeGradesFragment"
             app:destination="@id/assessmentTraineeGradesFragment" />

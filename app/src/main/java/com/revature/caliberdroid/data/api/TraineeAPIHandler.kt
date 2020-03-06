@@ -1,6 +1,5 @@
 package com.revature.caliberdroid.data.api
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +8,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.revature.caliberdroid.data.model.Assessment
-import com.revature.caliberdroid.data.model.Note
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.data.parser.JSONParser
 import org.json.JSONArray

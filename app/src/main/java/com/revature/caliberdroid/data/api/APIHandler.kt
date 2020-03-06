@@ -14,7 +14,7 @@ import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
-import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
+//import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
 import org.json.JSONObject
 import timber.log.Timber
 
@@ -77,16 +77,10 @@ object APIHandler {
         AuditAPIHandler.getSkillCategories(context, liveData, batch, weekNumber)
     }
 
-    fun getAssessments(liveData: MutableLiveData<List<Assessment>>,batchId:Long,weekNumber:Int) {
-        AssessmentAPIHandler.getAssessments(liveData,batchId,weekNumber)
-    }
-
-    fun getGrades(liveData: MutableLiveData<List<Grade>>, batchId:Long, weekNumber:Int) {
-        GradeAPIHandler.getGrades(liveData,batchId,weekNumber)
-    }
-
-    fun getAssessBatchOverallNote(liveData: MutableLiveData<Note>,batchId:Long, weekNumber:Int){
-        NoteAPIHandler.getAssessBatchOverallNote(liveData,batchId,weekNumber)
+    fun getAssessWeekNotes(assessWeekNotes: AssessWeekNotes) {
+        GradeAPIHandler.getGrades(assessWeekNotes)
+        AssessmentAPIHandler.getAssessments(assessWeekNotes)
+        NoteAPIHandler.getAssessBatchOverallNote(assessWeekNotes)
     }
 
     fun getTraineeNotes(liveData: MutableLiveData<List<Note>>, batchId:Long, weekNumber:Int) {

@@ -11,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.Observable
+import androidx.databinding.Observable.OnPropertyChangedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,18 +27,18 @@ import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
 import org.json.JSONException
 import org.json.JSONObject
 
 class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClickListener {
 
-    private val assessWeekSelectionViewModel: AssessWeekSelectionViewModel by activityViewModels()
     private var _binding: FragmentWeekSelectionBinding? = null
     private val binding get() = _binding!!
-    private val WEEK_NUMBER_COMPARATOR = Comparator<AssessWeekNotes> { a,b -> a.weekNumber.compareTo(b.weekNumber)}
+    private val WEEK_NUMBER_COMPARATOR = Comparator<AssessWeekLiveData> { a,b -> a.value!!.weekNumber.compareTo(b.value!!.weekNumber)}
     private val args: AssessWeekSelectionFragmentArgs by navArgs()
 
-    private lateinit var viewModel: AssessWeekSelectionViewModel
+    private val assessWeekViewModel: AssessWeekViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,30 +54,14 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
         binding.rvWeekselectionWeeks.layoutManager = LinearLayoutManager(requireContext())
         binding.rvWeekselectionWeeks.adapter = WeekSelectionAdapter(requireContext(), WEEK_NUMBER_COMPARATOR, this)
 
-        val assessments = arrayListOf(
-            Assessment(1,50,"good title","project",1, 5, 1),
-            Assessment(2,75,"another good title","exam", 1, 5, 1),
-            Assessment(3,25,"yet another good title","verbal", 1, 5, 1)
-        )
+        assessWeekViewModel.loadBatchWeeks(batch)
+        assessWeekViewModel.batchAssessWeekNotes.observe(viewLifecycleOwner, Observer {
 
-        val assessments2 = arrayListOf<Assessment>()
+            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(assessWeekViewModel.batchAssessWeekNotes.value!!).commit()
 
-        var grades = arrayListOf(
-            Grade(1, "",50,1,1),
-            Grade(2, "",45,1,2),
-            Grade(3, "",47,1,3),
-            Grade(4, "",70,2,1),
-            Grade(5, "",72,2,2),
-            Grade(6, "",75,2,3),
-            Grade(7, "",15,3,1),
-            Grade(8, "",24,3,2),
-            Grade(9, "",18,3,3)
-        )
+        })
 
-        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, MutableLiveData<List<Assessment>>(assessments), MutableLiveData<List<Grade>>(grades),MutableLiveData<List<Note>>())
-        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, MutableLiveData<List<Assessment>>(), MutableLiveData<List<Grade>>(),MutableLiveData<List<Note>>())
 
-        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 
         binding.btnWeekselectionAddweek.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
@@ -95,12 +82,13 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AssessWeekSelectionViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this).get(AssessWeekSelectionViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
-    override fun onWeekClick(weekClicked: AssessWeekNotes) {
-        findNavController().navigate(AssessWeekSelectionFragmentDirections.actionAssessWeekSelectionFragmentToAssessWeekViewFragment(weekClicked))
+    override fun onWeekClick(weekClicked: AssessWeekLiveData) {
+        assessWeekViewModel.assessWeekNotes = weekClicked.value!!
+        findNavController().navigate(AssessWeekSelectionFragmentDirections.actionAssessWeekSelectionFragmentToAssessWeekViewFragment())
     }
 
 }

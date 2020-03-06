@@ -23,7 +23,6 @@ class AssessWeekFragment : Fragment() {
     private val assessWeekViewModel: AssessWeekViewModel by activityViewModels()
     private var _assessWeekBinding: FragmentAssessWeekBinding? = null
     private val assessWeekBinding get() = _assessWeekBinding!!
-    private val args: AssessWeekFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = AssessWeekFragment()
@@ -36,15 +35,7 @@ class AssessWeekFragment : Fragment() {
 
         _assessWeekBinding = FragmentAssessWeekBinding.inflate(inflater)
 
-        var assessWeekNotesSelected = args.assessWeekNotesSelected
-
-        assessWeekNotesSelected.batch!!.trainees = arrayListOf(
-            Trainee(1, "1", "Charles Mersereau"),
-            Trainee(2, "2", "Gavin Mitchell"),
-            Trainee(3,"3", "Thiago Barbosa")
-        )
-
-        assessWeekViewModel.assessWeekNotes = MutableLiveData<AssessWeekNotes>(args.assessWeekNotesSelected)
+        assessWeekViewModel.loadTrainees()
 
         val viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)

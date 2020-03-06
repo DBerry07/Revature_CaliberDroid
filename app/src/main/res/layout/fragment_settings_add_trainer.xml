@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white"
-        style="@style/settingsFragmentContentWrapper">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/settingsFragmentContentWrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_add_trainer"
-            style="@style/settingsHeading"/>
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/inTrainerFields"
-            layout="@layout/include_trainer_fields" />
+            <TextView
+                style="@style/settingsHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_add_trainer" />
 
-        <Button
-            android:id="@+id/btnAddTrainer"
-            style="@style/addBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|right"
-            android:text="@string/btn_add" />
+            <include
+                android:id="@+id/inTrainerFields"
+                layout="@layout/include_trainer_fields" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnAddTrainer"
+                style="@style/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|right"
+                android:text="@string/btn_add" />
+
+        </LinearLayout>
+    </ScrollView>
 </layout>

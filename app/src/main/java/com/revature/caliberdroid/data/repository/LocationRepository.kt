@@ -12,4 +12,8 @@ object LocationRepository {
         APIHandler.getLocations(liveData)
         return liveData
     }
+
+    fun addLocation(location:Location){
+        APIHandler.addLocation(location)
+    }
 }

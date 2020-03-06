@@ -1,6 +1,5 @@
 package com.revature.caliberdroid.data.api
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -33,7 +32,7 @@ object TrainersAPI {
         queue.add(request)
     }
 
-    fun addTrainer(trainer: Trainer, liveData: MutableLiveData<ArrayList<Trainer>>) {
+    fun addTrainer(trainer: Trainer) {
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/"
         Timber.d("Url being sent: $url")
@@ -63,7 +62,7 @@ object TrainersAPI {
         queue.add(request)
     }
 
-    fun editTrainer(trainer: Trainer, liveData: MutableLiveData<ArrayList<Trainer>>) {
+    fun editTrainer(trainer: Trainer) {
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/" + trainer.trainerID

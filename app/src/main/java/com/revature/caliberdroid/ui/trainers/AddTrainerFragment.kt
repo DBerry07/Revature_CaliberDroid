@@ -15,8 +15,6 @@ import com.revature.caliberdroid.adapter.trainers.TiersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsAddTrainerBinding
-import kotlinx.android.synthetic.main.fragment_settings_add_trainer.*
-import kotlinx.android.synthetic.main.include_trainer_fields.view.*
 import timber.log.Timber
 
 
@@ -55,7 +53,7 @@ class AddTrainerFragment : Fragment() {
                     ""
                 )
                 Timber.d("New trainer: ${trainerToCreate.toString()}")
-                TrainerRepository.addTrainer(trainerToCreate,trainersViewModel.trainersLiveData)
+                TrainerRepository.addTrainer(trainerToCreate)
                 findNavController().navigateUp()
             }
         }

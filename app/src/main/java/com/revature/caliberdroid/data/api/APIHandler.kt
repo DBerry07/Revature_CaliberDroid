@@ -14,7 +14,6 @@ import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.JSONParser
-//import com.revature.caliberdroid.ui.qualityaudit.weekselection.ListLiveData
 import org.json.JSONObject
 import timber.log.Timber
 

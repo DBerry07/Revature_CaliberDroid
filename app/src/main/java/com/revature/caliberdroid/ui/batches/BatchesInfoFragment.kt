@@ -11,48 +11,46 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.databinding.FragmentBatchesBinding
+import com.revature.caliberdroid.databinding.FragmentBatchesInfoBinding
 
 class BatchesInfo : Fragment() {
 
-    private lateinit var editBtn: Button
-    private lateinit var deleteBtn: Button
-    private lateinit var viewBtn: Button
+    private var _binding: FragmentBatchesInfoBinding? = null
+    private val binding
+        get() = _binding!!
+    private val args: BatchesInfoArgs by navArgs()
 
     private lateinit var cancelBtn: Button
     private lateinit var createBtn: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val root = inflater.inflate(R.layout.fragment_batches_info, container, false)
+        //val root = inflater.inflate(R.layout.fragment_batches_info, container, false)
+        _binding = FragmentBatchesInfoBinding.inflate(layoutInflater)
 
-        editBtn = root.findViewById(R.id.btn_batch_info_edit)
-        deleteBtn = root.findViewById(R.id.btn_batch_info_delete)
-        viewBtn = root.findViewById(R.id.btn_batch_info_view)
-
-        deleteBtn.setOnClickListener { Snackbar.make(view!!,"DELETE BUTTON",Snackbar.LENGTH_SHORT).show() }
-        viewBtn.setOnClickListener {
-            findNavController().navigate(BatchesInfoDirections.actionBatchDetailsFragmentToTraineeFragment())
+        binding.btnBatchInfoDelete.setOnClickListener { Snackbar.make(view!!,"DELETE BUTTON",Snackbar.LENGTH_SHORT).show() }
+        binding.btnBatchInfoView.setOnClickListener {
+            findNavController().navigate(BatchesInfoDirections.actionBatchDetailsFragmentToTraineeFragment(args.selectedBatch))
         }
-
-        editBtn.setOnClickListener {
-            createBatchDialog(root)
+        binding.btnBatchInfoEdit.setOnClickListener {
+            createBatchDialog()
         }
+        binding.batchModel = args.selectedBatch
 
-        return root
+        return binding.root
+
     }
 
-
-    private fun createBatchDialog(root: View) {
+    private fun createBatchDialog() {
         val dialog = activity?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
@@ -60,13 +58,12 @@ class BatchesInfo : Fragment() {
         dialog?.show()
 
         val header: TextView = dialog!!.findViewById(R.id.tv_create_batch_header)
-        setDialogValues(dialog, root)
+        setDialogValues(dialog)
         cancelBtn = dialog.findViewById(R.id.btn_create_batch_cancel)
         createBtn = dialog.findViewById(R.id.btn_create_batch_create)
 
         createBtn.text = getString(R.string.batchesInfo_confirmButton)
         header.text = getString(R.string.batchesInfo_cancelButton)
-
 
         cancelBtn.setOnClickListener {
             dialog.dismiss()
@@ -78,8 +75,7 @@ class BatchesInfo : Fragment() {
 
     }
 
-
-    private fun setDialogValues(dialog: Dialog, root: View) {
+    private fun setDialogValues(dialog: Dialog) {
         val trainerName: TextView = dialog.findViewById(R.id.et_create_batch_name_trainer_input)
         val batchName: TextView = dialog.findViewById(R.id.et_create_batch_name_input)
         val locationName: TextView = dialog.findViewById(R.id.et_create_batch_location_input)
@@ -89,13 +85,13 @@ class BatchesInfo : Fragment() {
         val goodGrade: TextView = dialog.findViewById(R.id.et_create_batch_good_grade_input)
         val passingGrade: TextView = dialog.findViewById(R.id.et_create_batch_passing_grade_input)
 
-        trainerName.text = root.findViewById<TextView>(R.id.tv_batch_info_name_trainer_value).text
-        batchName.text = root.findViewById<TextView>(R.id.tv_batch_info_name).text
-        locationName.text = root.findViewById<TextView>(R.id.tv_batch_info_location_value).text
-        skillFocus.text = root.findViewById<TextView>(R.id.tv_batch_info_skill_value).text
-        startDate.text = root.findViewById<TextView>(R.id.tv_batch_info_start_value).text
-        endDate.text = root.findViewById<TextView>(R.id.tv_batch_info_end_value).text
-        goodGrade.text = root.findViewById<TextView>(R.id.tv_batch_info_good_grade_value).text
-        passingGrade.text = root.findViewById<TextView>(R.id.tv_create_batch_passing_grade_value).text
+        trainerName.text = binding.tvBatchInfoNameTrainerValue.text
+        batchName.text = binding.tvBatchInfoName.text
+        locationName.text = binding.tvBatchInfoLocationValue.text
+        skillFocus.text = binding.tvBatchInfoSkillValue.text
+        startDate.text = binding.tvBatchInfoStartValue.text
+        endDate.text = binding.tvBatchInfoEndValue.text
+        goodGrade.text = binding.tvBatchInfoGoodGradeValue.text
+        passingGrade.text = binding.tvCreateBatchPassingGradeValue.text
     }
 }

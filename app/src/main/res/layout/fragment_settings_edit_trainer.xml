@@ -15,9 +15,12 @@
             android:text="@string/title_edit_trainer"
             style="@style/settingsHeading"/>
 
-        <include layout="@layout/include_trainer_fields"/>
+        <include
+            android:id="@+id/inTrainerFields"
+            layout="@layout/include_trainer_fields"/>
 
         <Button
+            android:id="@+id/btnEditTrainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|right"

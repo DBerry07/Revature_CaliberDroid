@@ -17,11 +17,11 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface
 import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.databinding.FragmentLocationsBinding
+import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
 
 
 class LocationsFragment : Fragment(){
-    private var _binding : FragmentLocationsBinding? = null
+    private var _binding : FragmentSettingsLocationsBinding? = null
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
@@ -36,7 +36,7 @@ class LocationsFragment : Fragment(){
     ) : View?{
         navController = findNavController()
         locationsViewModel.getLocations()
-        _binding = FragmentLocationsBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsLocationsBinding.inflate(layoutInflater)
 
         binding.apply {
             setLifecycleOwner(this@LocationsFragment)

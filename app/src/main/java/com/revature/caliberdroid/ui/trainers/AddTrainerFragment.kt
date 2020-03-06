@@ -5,39 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
+import android.widget.Spinner
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
-
+import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.databinding.FragmentAddTrainerBinding
-import kotlinx.android.synthetic.main.include_trainer_fields.*
+
+import com.revature.caliberdroid.adapter.trainers.TiersAdapter
+import com.revature.caliberdroid.data.model.Trainer
+import com.revature.caliberdroid.data.repository.TrainerRepository
+import com.revature.caliberdroid.databinding.FragmentSettingsAddTrainerBinding
+import timber.log.Timber
 
 
 class AddTrainerFragment : Fragment() {
-    private var _binding: FragmentAddTrainerBinding? = null
+    private var _binding: FragmentSettingsAddTrainerBinding? = null
     private val binding get() = _binding!!
     private val trainersViewModel: TrainersViewModel by activityViewModels()
+
+    private var selectedTier:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddTrainerBinding.inflate(layoutInflater)
-        val context = getContext()!!
+        _binding = FragmentSettingsAddTrainerBinding.inflate(layoutInflater)
+        val context = context!!
+        val list_of_items = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
-            trainersViewModel.selectedTrainerLiveData.observe(viewLifecycleOwner) { trainer->
-
-                var list_of_items = arrayOf(
-                    "ROLE_INACTIVE",
-                    "ROLE_QC",
-                    "ROLE_TRAINER",
-                    "ROLE_VP",
-                    "ROLE_PANEL",
-                    "ROLE_STAGING"
+            val adapter = TiersAdapter(context, list_of_items)
+            val spinner: Spinner = inTrainerFields.spnTier
+            spinner.adapter = adapter
+            spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,view: View?,position: Int,id: Long) {
+                    Timber.d("Item selected: ${list_of_items.get(position)}")
+                    selectedTier = list_of_items.get(position)
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
+            })
+            btnAddTrainer.setOnClickListener {
+                val trainerToCreate = Trainer(
+                    inTrainerFields.etFullName.text.toString(),
+                    inTrainerFields.etTitle.text.toString(),
+                    inTrainerFields.etEmail.text.toString(),
+                    selectedTier,
+                    ""
                 )
-                val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list_of_items)
-                spnTier.adapter = adapter
+                Timber.d("New trainer: ${trainerToCreate.toString()}")
+                TrainerRepository.addTrainer(trainerToCreate)
+                findNavController().navigateUp()
             }
         }
         return binding.root

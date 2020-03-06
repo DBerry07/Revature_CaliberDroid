@@ -14,9 +14,7 @@ import com.revature.caliberdroid.ui.batches.BatchSelectionViewModel
 class GalleryFragment : Fragment() {
 
     /* Constants */
-    companion object {
-
-    }
+    companion object;
 
     /* variables */
 

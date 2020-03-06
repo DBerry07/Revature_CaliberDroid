@@ -23,13 +23,13 @@
         app:cardPreventCornerOverlap="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout_room_row"
+            android:id="@+id/constraintLayout_batch_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:paddingBottom="8dp">
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/tv_batch_row_name_header"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Batch Name: "
+                android:text="@string/batch_row_batch_name_header"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="Mobile-Android"
+                android:text="@{batchModel.TrainingName}"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="@{Long.toString(batchModel.startDate)}"
+                android:text="@{batchModel.startDate}"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_start_date_header"
                 app:layout_constraintStart_toEndOf="@+id/tv_batch_row_start_date_header"
@@ -92,12 +92,13 @@
 
             <TextView
                 android:id="@+id/tv_batch_row_location_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:layout_marginEnd="32dp"
                 android:text="@{batchModel.location}"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_batch_row_location_header"
+                android:textColor="#656565"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_batch_row_location_header"
                 app:layout_constraintTop_toTopOf="@+id/tv_batch_row_location_header" />
 

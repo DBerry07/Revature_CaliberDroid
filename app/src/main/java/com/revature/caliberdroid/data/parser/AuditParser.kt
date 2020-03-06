@@ -15,26 +15,16 @@ object AuditParser {
         val length = response.length()
         for(i in 0 until length){
             response.getJSONObject(i).apply {
-                trainee = Trainee(getLong("traineeId"),
-                    getString("resourceId"),
-                    getString("name"),
-                    getString("email"),
-                    getString("trainingStatus"),
-                    getLong("batchId"),
-                    getString("phoneNumber"),
-                    getString("skypeId"),
-                    getString("profileUrl"),
-                    getString("recruiterName"),
-                    getString("college"),
-                    getString("degree"),
-                    getString("major"),
-                    getString("techScreenerName"),
-                    getLong("techScreenScore"),
-                    getString("projectCompletion"),
-                    getString("flagStatus"),
-                    getString("flagNotes"),
-                    getString("flagAuthor"),
-                    getString("flagTimestamp"))
+                trainee = Trainee(
+                    traineeId = getLong("traineeId"),
+                    name = getString("name"),
+                    email = getString("email"),
+                    batchId = getLong("batchId"),
+                    profileUrl = getString("profileUrl"),
+                    flagStatus = getString("flagStatus"),
+                    _flagNotes = getString("flagNotes"),
+                    flagAuthor = getString("flagAuthor"),
+                    flagTimestamp = getString("flagTimestamp"))
             }
             traineeWithNotesList.add(TraineeWithNotes(trainee = trainee))
         }

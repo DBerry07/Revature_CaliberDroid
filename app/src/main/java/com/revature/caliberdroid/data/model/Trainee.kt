@@ -22,7 +22,8 @@ data class Trainee(
     var degree: String? = "",
     var major: String? = "",
     var techScreenerName: String? = "",
-    var techScreenScore: Long? = 0,
+    //Had to alter techScreenScore from Long to Any to allow null from API
+    var techScreenScore: Any? = 0,
     var projectCompletion: String? = "",
     var flagStatus: String? = "",
     @Bindable
@@ -57,8 +58,7 @@ data class Trainee(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(traineeId)

@@ -1,5 +1,7 @@
 package com.revature.caliberdroid.ui.qualityaudit.weekselection
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.revature.caliberdroid.R
 
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
@@ -45,11 +49,18 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
 
         subscribeToViewModel()
 
-        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
-            .replaceAll(viewModel.auditWeekNotesLiveData.value!!.list)
-            .commit()
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.btnWeekselectionAddweek.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.dialog_add_week_title))
+                .setMessage(resources.getString(R.string.dialog_add_week_message))
+                .setPositiveButton(R.string.button_add_week) { dialog, which ->
+                    viewModel.addWeek()
+                }
+                .setNegativeButton(R.string.button_cancel, null)
+                .show()
+        }
 
         return binding.root
     }
@@ -66,17 +77,9 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
     private fun subscribeToViewModel() {
 
         viewModel.auditWeekNotesLiveData.observe(viewLifecycleOwner, Observer { value ->
-            if (value != null) {
-//                (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
-//                    .replaceAll(value.list)
-//                    .commit()
-            binding.rvWeekselectionWeeks.adapter.let {
-                if (it != null) {
-                    value.applyChange(it)
-
-                }
-            }
-            }
+            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
+                .replaceAll(value)
+                .commit()
         })
     }
 }

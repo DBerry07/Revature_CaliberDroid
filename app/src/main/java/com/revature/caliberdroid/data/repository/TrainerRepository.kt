@@ -11,4 +11,12 @@ object TrainerRepository {
         APIHandler.getTrainers(liveData)
         return liveData
     }
+
+    fun addTrainer(trainer: Trainer){
+        APIHandler.addTrainer(trainer)
+    }
+
+    fun editTrainer(trainer: Trainer){
+        APIHandler.editTrainer(trainer)
+    }
 }

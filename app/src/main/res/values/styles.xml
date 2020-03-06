@@ -60,6 +60,7 @@
         <item name="android:padding">12dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="addBtnWithPlusImg" parent="addBtn">

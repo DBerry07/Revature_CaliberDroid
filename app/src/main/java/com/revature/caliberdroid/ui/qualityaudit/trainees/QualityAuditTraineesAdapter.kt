@@ -11,41 +11,32 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
-import com.revature.caliberdroid.data.model.AuditWeekNotes
+import com.revature.caliberdroid.data.model.TraineeWithNotes
+import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
 import com.revature.caliberdroid.databinding.ItemQualityAuditWeekBinding
+import com.revature.caliberdroid.util.AuditStatusConverter
 
 class QualityAuditTraineesAdapter(context: Context,
-                                  comparator: Comparator<AuditWeekNotes>,
-                                  private val onItemClickListener: OnItemClickListener
-) : SortedListAdapter<AuditWeekNotes>(context, AuditWeekNotes::class.java, comparator) {
+                                  comparator: Comparator<TraineeWithNotes>
+) : SortedListAdapter<TraineeWithNotes>(context, TraineeWithNotes::class.java, comparator) {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         viewType: Int
-    ): WeekViewHolder {
-        return WeekViewHolder(ItemQualityAuditWeekBinding.inflate(inflater,parent,false), onItemClickListener)
+    ): TraineeWithNotesViewHolder {
+        return TraineeWithNotesViewHolder(ItemQualityAuditTraineeBinding.inflate(inflater,parent,false))
     }
 
-    class WeekViewHolder(val binding: ItemQualityAuditWeekBinding, val onItemClickListener: OnItemClickListener)
-        : SortedListAdapter.ViewHolder<AuditWeekNotes>(binding.getRoot()), View.OnClickListener {
+    class TraineeWithNotesViewHolder(val binding: ItemQualityAuditTraineeBinding)
+        : SortedListAdapter.ViewHolder<TraineeWithNotes>(binding.root) {
 
-        init {
-            binding.root.setOnClickListener(this)
+
+        override fun performBind(item: TraineeWithNotes) {
+            binding.traineeWithNotes = item
+            binding.imgItemaudittraineeStatus.setImageResource(AuditStatusConverter.getImageResourceID(item.auditTraineeNotes!!.technicalStatus))
         }
 
-        override fun performBind(item: AuditWeekNotes) {
-            binding.auditWeekNotes = item
-        }
-
-        override fun onClick(v: View?) {
-            onItemClickListener.onWeekClick(currentItem)
-        }
-
-    }
-
-    interface OnItemClickListener {
-        fun onWeekClick(weekClicked: AuditWeekNotes)
     }
 
 }

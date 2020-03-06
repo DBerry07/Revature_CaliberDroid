@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
 
 data class Trainee(
@@ -29,7 +30,7 @@ data class Trainee(
     var _flagNotes: String? = "",
     var flagAuthor: String? = "",
     var flagTimestamp: String? = ""
-) : BaseObservable(), Parcelable {
+) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
     var flagNotes: String
     @Bindable get() = _flagNotes!!
         set(value) {
@@ -57,8 +58,7 @@ data class Trainee(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(traineeId)
@@ -95,5 +95,21 @@ data class Trainee(
         override fun newArray(size: Int): Array<Trainee?> {
             return arrayOfNulls(size)
         }
+    }
+
+    override fun <T> isSameModelAs(model: T): Boolean {
+        if (model is Trainee) {
+            val other = model as Trainee
+            return traineeId == other.traineeId
+        }
+        return false
+    }
+
+    override fun <T> isContentTheSameAs(model: T): Boolean {
+        if (model is Trainee) {
+            val other = model as Trainee
+            return this.equals(other)
+        }
+        return false
     }
 }

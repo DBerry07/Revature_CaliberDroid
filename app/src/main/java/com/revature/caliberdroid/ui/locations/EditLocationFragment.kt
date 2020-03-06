@@ -21,10 +21,6 @@ class EditLocationFragment : Fragment() {
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private lateinit var location: Location
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

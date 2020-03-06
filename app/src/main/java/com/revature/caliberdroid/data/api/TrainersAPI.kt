@@ -15,8 +15,8 @@ import java.lang.Exception
 
 object TrainersAPI {
     fun getTrainers(liveData: MutableLiveData<ArrayList<Trainer>>) {
-        var queue = Volley.newRequestQueue(APIHandler.context);
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/";
+        val queue = Volley.newRequestQueue(APIHandler.context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/"
         val request = JsonArrayRequest(
             Request.Method.GET,
             url,
@@ -49,7 +49,7 @@ object TrainersAPI {
             url,
             jsonBody,
             Response.Listener { response ->
-                Timber.d("Response: " + response.toString())
+                Timber.d("Response: $response")
                 try {
                 } catch (e: Exception) {
                     Timber.d("error with live data ${e.toString()}")
@@ -88,10 +88,10 @@ object TrainersAPI {
             url,
             jsonBody,
             Response.Listener { response ->
-                Timber.d("Response: " + response.toString())
+                Timber.d("Response: $response")
             },
             Response.ErrorListener { error ->
-                Timber.d("Error retrieving categories: " + error.toString())
+                Timber.d("Error retrieving categories: $error")
             }
         )
         queue.add(request)

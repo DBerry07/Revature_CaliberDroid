@@ -22,10 +22,6 @@ class TrainersFragment : Fragment(){
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private var navController: NavController? = null
 
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

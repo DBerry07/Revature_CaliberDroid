@@ -37,7 +37,14 @@
         android:id="@+id/qualityAuditTraineesFragment"
         android:name="com.revature.caliberdroid.ui.qualityaudit.trainees.QualityAuditTraineesFragment"
         android:label="Quality Audit - Trainees"
-        tools:layout="@layout/fragment_quality_audit_trainees" />
+        tools:layout="@layout/fragment_quality_audit_trainees" >
+        <argument
+            android:name="batchSelected"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
+        <argument
+            android:name="auditWeekNotesSelected"
+            app:argType="com.revature.caliberdroid.data.model.AuditWeekNotes" />
+    </fragment>
     <fragment
         android:id="@+id/qualityAuditBatchSelectionFragment"
         android:name="com.revature.caliberdroid.ui.qualityaudit.QualityAuditBatchSelectionFragment"

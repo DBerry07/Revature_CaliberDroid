@@ -1,5 +1,7 @@
 package com.revature.caliberdroid.ui.qualityaudit.weekselection
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
@@ -10,15 +12,20 @@ class QualityAuditWeekSelectionViewModel : ViewModel() {
 
     lateinit var batchSelected: Batch
 
-    val auditWeekNotesLiveData = ListLiveData<AuditWeekNotes>()
-
+    lateinit var auditWeekNotesLiveData: MutableLiveData<ArrayList<AuditWeekNotes>>
     fun getAuditWeekNotes() {
-        if (auditWeekNotesLiveData.size == 0) {
+        auditWeekNotesLiveData = MutableLiveData()
+        val auditweekNotesList = ArrayList<AuditWeekNotes>()
             for (i in 1..batchSelected.weeks) {
-                auditWeekNotesLiveData.addItem(AuditWeekNotes(i, overallStatus = null, overallNotes = null))
+                auditweekNotesList.add(AuditWeekNotes(i))
             }
-        }
+
+        auditWeekNotesLiveData.value = auditweekNotesList
         BatchRepository.getAuditWeekNotes(batchSelected, auditWeekNotesLiveData)
+    }
+
+    fun addWeek() {
+        BatchRepository.addWeek(batchSelected, auditWeekNotesLiveData)
     }
 
 }

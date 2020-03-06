@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.model.AuditWeekNotes
@@ -42,7 +43,33 @@ object APIHandler {
         queue.add(batchesRequest)
     }
 
-    fun getAuditWeekNotes(liveData: ListLiveData<AuditWeekNotes>, batch: Batch) {
+    fun addWeek(batch: Batch, liveData: MutableLiveData<ArrayList<AuditWeekNotes>>) {
+        val queue = Volley.newRequestQueue(context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+
+        val addWeekRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            JSONParser.getBatchJSONObject(batch).apply { put("weeks", getInt("weeks") + 1) },
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                liveData.postValue(liveData.value!!.apply {
+                    batch.weeks += 1
+                    this.add(AuditWeekNotes(batch.weeks))
+                })
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            })
+
+        queue.add(addWeekRequest)
+    }
+
+    fun getTraineesWithNotes(liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
+        AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
+    }
+
+    fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<AuditWeekNotes>>, batch: Batch) {
         AuditAPIHandler.getAuditWeekNotes(context, liveData, batch)
     }
 

@@ -1,12 +1,10 @@
 package com.revature.caliberdroid.data.model
 
-class Week {
+class Week() {
     var assessments:ArrayList<Assessment>? = null
     var grades:ArrayList<Grade>? = null
     var overallNote:Note? = null
     var traineeNotes:ArrayList<Note>? = null
-
-    constructor(){}
 
     fun getGradesForAssessment(assessmentId:Long):List<Grade>? {
         if(grades == null) return null

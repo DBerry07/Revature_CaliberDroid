@@ -13,6 +13,7 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.databinding.ItemQualityAuditWeekBinding
+import com.revature.caliberdroid.util.AuditStatusConverter
 
 class WeekSelectionAdapter(context: Context,
                            comparator: Comparator<AuditWeekNotes>,
@@ -28,7 +29,7 @@ class WeekSelectionAdapter(context: Context,
     }
 
     class WeekViewHolder(val binding: ItemQualityAuditWeekBinding, val onItemClickListener: OnItemClickListener)
-        : SortedListAdapter.ViewHolder<AuditWeekNotes>(binding.getRoot()), View.OnClickListener {
+        : SortedListAdapter.ViewHolder<AuditWeekNotes>(binding.root), View.OnClickListener {
 
         init {
             binding.root.setOnClickListener(this)
@@ -36,6 +37,10 @@ class WeekSelectionAdapter(context: Context,
 
         override fun performBind(item: AuditWeekNotes) {
             binding.auditWeekNotes = item
+            if (item.overallStatus.get() == null) {
+                item.overallStatus.set("Undefined")
+            }
+            binding.imgItemauditweekOverallstatus.setImageResource(AuditStatusConverter.getImageResourceID(item.overallStatus.get()!!))
         }
 
         override fun onClick(v: View?) {

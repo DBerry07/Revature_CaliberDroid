@@ -22,7 +22,7 @@ class SkillCategoryAdapter(context: Context,
     }
 
     class SkillCategoryViewHolder(val binding: ItemSkillCategoryBinding)
-        : SortedListAdapter.ViewHolder<SkillCategory>(binding.getRoot()){
+        : SortedListAdapter.ViewHolder<SkillCategory>(binding.root){
 
         override fun performBind(item: SkillCategory) {
             binding.skillCategory = item

@@ -22,6 +22,7 @@ import com.revature.caliberdroid.databinding.FragmentTraineeBinding
 import com.revature.revaturetraineemanagment.TraineeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_trainee.view.*
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -46,17 +47,17 @@ class TraineeFragment : Fragment() {
         val model: TraineeViewModel by viewModels()
 
         createData()
-        Log.d("traineeData", traineeData.toString())
+        Timber.d(traineeData.toString())
 
-        var traineeLayoutManager = LinearLayoutManager(view.context)
+        val traineeLayoutManager = LinearLayoutManager(view.context)
         var traineeAdapter = TraineeAdapter(traineeData)
-        var recyclerView = view.TM_recycler
+        val recyclerView = view.TM_recycler
 
         recyclerView.layoutManager = traineeLayoutManager
         recyclerView.adapter = traineeAdapter
 
-        (recyclerView.itemAnimator as SimpleItemAnimator)!!.supportsChangeAnimations = false
-        recyclerView.setHasFixedSize(false);
+        (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        recyclerView.setHasFixedSize(false)
 
         model.getTrainees()?.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
             //traineeData = trainees
@@ -85,7 +86,7 @@ class TraineeFragment : Fragment() {
     private fun createData(){
         var i = 0
         while (i < 10){
-            var list : HashMap<String, String> = HashMap()
+            val list : HashMap<String, String> = HashMap()
             list.put("name", "trainee #$i")
             list.put("email", "email $i")
             list.put("status", "status #$i")

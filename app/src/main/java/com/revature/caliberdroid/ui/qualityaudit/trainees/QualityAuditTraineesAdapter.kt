@@ -14,6 +14,7 @@ import com.revature.caliberdroid.BR
 import com.revature.caliberdroid.data.model.TraineeWithNotes
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
 import com.revature.caliberdroid.databinding.ItemQualityAuditWeekBinding
+import com.revature.caliberdroid.util.AuditStatusConverter
 
 class QualityAuditTraineesAdapter(context: Context,
                                   comparator: Comparator<TraineeWithNotes>
@@ -28,11 +29,12 @@ class QualityAuditTraineesAdapter(context: Context,
     }
 
     class TraineeWithNotesViewHolder(val binding: ItemQualityAuditTraineeBinding)
-        : SortedListAdapter.ViewHolder<TraineeWithNotes>(binding.getRoot()) {
+        : SortedListAdapter.ViewHolder<TraineeWithNotes>(binding.root) {
 
 
         override fun performBind(item: TraineeWithNotes) {
             binding.traineeWithNotes = item
+            binding.imgItemaudittraineeStatus.setImageResource(AuditStatusConverter.getImageResourceID(item.auditTraineeNotes!!.technicalStatus))
         }
 
     }

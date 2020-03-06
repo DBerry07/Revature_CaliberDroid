@@ -6,6 +6,8 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
+import com.revature.caliberdroid.util.DateConverter
+import java.util.*
 
 data class Batch (
     val batchID: Long,
@@ -17,11 +19,14 @@ data class Batch (
     var coTrainerName: String?,
     var locationID: Long,
     var location: String?,
-    var startDate: String?,
-    var endDate: String?,
+    var _startDate: Long,
+    var _endDate: Long,
     var goodGrade: Int,
     var passingGrade: Int,
     var weeks: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
+
+    val startDate get() = DateConverter.getDate(_startDate)
+    val endDate get() = DateConverter.getDate(_endDate)
 
     var trainingName: String
     @Bindable get() = _trainingName!!
@@ -40,13 +45,12 @@ data class Batch (
         parcel.readString(),
         parcel.readLong(),
         parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readLong(),
+        parcel.readLong(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
-    ) {
-    }
+    )
 
     override fun <T> isSameModelAs(model: T): Boolean {
         if (model is Batch) {
@@ -73,8 +77,8 @@ data class Batch (
         parcel.writeString(coTrainerName)
         parcel.writeLong(locationID)
         parcel.writeString(location)
-        parcel.writeString(startDate)
-        parcel.writeString(endDate)
+        parcel.writeLong(_startDate)
+        parcel.writeLong(_endDate)
         parcel.writeInt(goodGrade)
         parcel.writeInt(passingGrade)
         parcel.writeInt(weeks)

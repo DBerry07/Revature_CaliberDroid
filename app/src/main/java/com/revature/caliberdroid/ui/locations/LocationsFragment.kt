@@ -18,6 +18,7 @@ import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.databinding.FragmentLocationsBinding
+import timber.log.Timber
 
 
 class LocationsFragment : Fragment(){
@@ -25,10 +26,6 @@ class LocationsFragment : Fragment(){
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
-
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -39,16 +36,16 @@ class LocationsFragment : Fragment(){
         _binding = FragmentLocationsBinding.inflate(layoutInflater)
 
         binding.apply {
-            setLifecycleOwner(this@LocationsFragment)
+            lifecycleOwner = this@LocationsFragment
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
 
                     rvLocations.adapter = LocationsAdapter(locations, EditLocationListener())
                     for (location in locations) {
-                        Log.d("Locations", "Location: ${location.toString()}")
+                        Timber.d("Location: $location")
                     }
                 } else {
-                    Log.d("Locations", "locationsViewModel is null")
+                    Timber.d("locationsViewModel is null")
                 }
             })
 

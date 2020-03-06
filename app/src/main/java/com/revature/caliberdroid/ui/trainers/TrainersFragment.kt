@@ -23,10 +23,6 @@ class TrainersFragment : Fragment(){
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private var navController: NavController? = null
 
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,7 +32,7 @@ class TrainersFragment : Fragment(){
         trainersViewModel.getTrainers()
         _binding = FragmentTrainersBinding.inflate(layoutInflater)
         binding.apply {
-            setLifecycleOwner (this@TrainersFragment )
+            lifecycleOwner = this@TrainersFragment
             trainersViewModel.trainerLiveData.observe(viewLifecycleOwner, Observer { trainers->
                 rvTrainers.adapter = TrainersAdapter(trainers, EditTrainerListener())
             })

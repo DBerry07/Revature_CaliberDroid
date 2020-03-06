@@ -10,21 +10,22 @@ import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.parser.LocationParser
 import com.revature.caliberdroid.data.parser.TrainerParser
 import org.json.JSONArray
+import timber.log.Timber
 
 object TrainersAPI {
     fun getTrainers(liveData: MutableLiveData<ArrayList<Trainer>>){
-        var queue = Volley.newRequestQueue(APIHandler.context);
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/";
+        val queue = Volley.newRequestQueue(APIHandler.context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainers/"
         val locationsRequest = JsonArrayRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener<JSONArray>{ response ->
-                Log.d("Locations","This is the response: "+ TrainerParser.parseTrainer(response).toString())
+                Timber.d("This is the response: ${TrainerParser.parseTrainer(response)}" )
                 liveData.postValue(TrainerParser.parseTrainer(response))
             },
             Response.ErrorListener { error ->
-                Log.d("APIHandler","This is the error: "+error.toString())
+                Timber.d("This is the error: $error")
             }
         )
         queue.add(locationsRequest)

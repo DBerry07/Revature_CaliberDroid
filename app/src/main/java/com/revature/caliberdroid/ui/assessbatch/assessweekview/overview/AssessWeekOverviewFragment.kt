@@ -35,10 +35,6 @@ class AssessWeekOverviewFragment : Fragment() {
         return assessWeekOverviewBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _assessWeekOverviewBinding = null

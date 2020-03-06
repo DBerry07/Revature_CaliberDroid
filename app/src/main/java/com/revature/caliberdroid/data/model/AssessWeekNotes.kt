@@ -15,8 +15,7 @@ data class AssessWeekNotes(var weekNumber: Int,
         parcel.readFloat(),
         parcel.readString(),
         parcel.readParcelable(Batch::class.java.classLoader)
-    ) {
-    }
+    )
 
     override fun <T : Any?> isContentTheSameAs(model: T): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

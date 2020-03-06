@@ -8,5 +8,4 @@ data class Assessment(
     var weekNumber:Int? = 0,
     var batchId:Long? = 0,
     var assessmentCategory:Int? = 0
-) {
-}
+)

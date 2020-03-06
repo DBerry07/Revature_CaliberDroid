@@ -1,5 +1,3 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
-class AssessBatchTraineeRecyclerAdapter(){
-
-}
+class AssessBatchTraineeRecyclerAdapter

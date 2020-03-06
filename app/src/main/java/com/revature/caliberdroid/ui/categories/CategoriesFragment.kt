@@ -19,10 +19,6 @@ class CategoriesFragment: Fragment(){
     val activeCategories:ArrayList<Category> = ArrayList()
     val inactiveCategories:ArrayList<Category> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         layoutInflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,7 +27,7 @@ class CategoriesFragment: Fragment(){
         categoriesViewModel.getCategories()
         _binding = FragmentCategoriesBinding.inflate(layoutInflater)
         binding.apply {
-            setLifecycleOwner(this@CategoriesFragment)
+            lifecycleOwner = this@CategoriesFragment
             categoriesViewModel.categoryLiveData.observe(viewLifecycleOwner, Observer { categories ->
                 sortCategories(categories)
                 rvActiveCategories.adapter = CategoriesAdapter(activeCategories)

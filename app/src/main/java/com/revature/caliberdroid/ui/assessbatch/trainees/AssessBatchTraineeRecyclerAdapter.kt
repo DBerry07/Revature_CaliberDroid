@@ -13,7 +13,7 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Trainee
 
-class AssessBatchTraineeRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class AssessBatchTraineeRecyclerAdapter : RecyclerView.Adapter<ViewHolder>(){
 
     private var items : List<Trainee> = ArrayList()
 
@@ -36,7 +36,7 @@ class AssessBatchTraineeRecyclerAdapter() : RecyclerView.Adapter<RecyclerView.Vi
 
     class TraineeViewHolder constructor(
         itemView: View
-    ): RecyclerView.ViewHolder(itemView){
+    ): ViewHolder(itemView){
 
         fun bind(){
 

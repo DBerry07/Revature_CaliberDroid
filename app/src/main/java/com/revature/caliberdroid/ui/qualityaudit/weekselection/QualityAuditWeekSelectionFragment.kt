@@ -49,17 +49,15 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
 
         subscribeToViewModel()
 
-        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
-            .replaceAll(viewModel.auditWeekNotesLiveData.value!!.list)
-            .commit()
-
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.btnWeekselectionAddweek.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(resources.getString(R.string.dialog_add_week_title))
                 .setMessage(resources.getString(R.string.dialog_add_week_message))
-                .setPositiveButton(R.string.button_add_week) { dialog, which -> }
+                .setPositiveButton(R.string.button_add_week) { dialog, which ->
+                    viewModel.addWeek()
+                }
                 .setNegativeButton(R.string.button_cancel, null)
                 .show()
         }
@@ -79,17 +77,9 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
     private fun subscribeToViewModel() {
 
         viewModel.auditWeekNotesLiveData.observe(viewLifecycleOwner, Observer { value ->
-            if (value != null) {
-//                (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
-//                    .replaceAll(value.list)
-//                    .commit()
-            binding.rvWeekselectionWeeks.adapter.let {
-                if (it != null) {
-                    value.applyChange(it)
-
-                }
-            }
-            }
+            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
+                .replaceAll(value)
+                .commit()
         })
     }
 }

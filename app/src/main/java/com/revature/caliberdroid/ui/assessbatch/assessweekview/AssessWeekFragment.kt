@@ -35,21 +35,16 @@ class AssessWeekFragment : Fragment() {
 
         assessWeekViewModel.assessWeekNotes = args.assessWeekNotesSelected
 
-        var viewPager = assessWeekBinding.viewpagerWeekview
+        val viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
-        viewPager.setAdapter(assessWeekViewPagerAdapter)
+        viewPager.adapter = assessWeekViewPagerAdapter
 
         val tabLayout = assessWeekBinding.tabsWeekview
         tabLayout.setupWithViewPager(viewPager)
-        tabLayout.getTabAt(0)!!.setText(requireContext().getString(R.string.title_assessments))
-        tabLayout.getTabAt(1)!!.setText(requireContext().getString(R.string.title_trainees))
+        tabLayout.getTabAt(0)!!.text = requireContext().getString(R.string.title_assessments)
+        tabLayout.getTabAt(1)!!.text = requireContext().getString(R.string.title_trainees)
 
         return assessWeekBinding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
     override fun onDestroyView() {

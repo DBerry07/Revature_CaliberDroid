@@ -13,8 +13,8 @@ import org.json.JSONArray
 object LocationsAPI {
 
     fun getLocations(liveData: MutableLiveData<ArrayList<Location>>){
-        var queue = Volley.newRequestQueue(APIHandler.context);
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/location/all/location/all";
+        var queue = Volley.newRequestQueue(APIHandler.context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/location/all/location/all"
         val locationsRequest = JsonArrayRequest(
             Request.Method.GET,
             url,

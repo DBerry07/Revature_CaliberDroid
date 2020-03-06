@@ -7,5 +7,4 @@ data class Note(
     var weekNumber: Int? = 0,
     var batchId: Long? = 0,
     var traineeId: Long? = 0
-) {
-}
+)

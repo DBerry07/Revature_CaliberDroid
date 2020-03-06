@@ -33,20 +33,20 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var item = info.get(position)
-        holder.name.setText(item.get("name"))
-        holder.email.setText(item.get("email"))
-        holder.phone.setText(item.get("phone"))
-        holder.skype.setText(item.get("skype"))
-        holder.profile.setText(item.get("profile"))
-        holder.college.setText(item.get("college"))
-        holder.major.setText(item.get("major"))
-        holder.recruiter.setText(item.get("recruiter"))
-        holder.project.setText(item.get("project"))
-        holder.screener.setText(item.get("screener"))
-        holder.status.setText(item.get("status"))
+        val item = info.get(position)
+        holder.name.text = item.get("name")
+        holder.email.text = item.get("email")
+        holder.phone.text = item.get("phone")
+        holder.skype.text = item.get("skype")
+        holder.profile.text = item.get("profile")
+        holder.college.text = item.get("college")
+        holder.major.text = item.get("major")
+        holder.recruiter.text = item.get("recruiter")
+        holder.project.text = item.get("project")
+        holder.screener.text = item.get("screener")
+        holder.status.text = item.get("status")
 
-        var mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
+        val mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
         holder.itemView.setOnTouchListener { v, event ->
             //textView?.setText(event.toString())
             mDetectorCompat.onTouchEvent(event)
@@ -59,7 +59,7 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         }
 
         holder.btnDelete.setOnClickListener {
-            var pop = PopupWindow()
+            val pop = PopupWindow()
             pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
         }
 
@@ -139,12 +139,12 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.details.visibility = View.VISIBLE
-                holder.isExpanded = !holder.isExpanded;
+                holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
             }
             else if (holder.isExpanded) {
                 holder.details.visibility = View.GONE
-                holder.isExpanded = !holder.isExpanded;
+                holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
             }
             return true
@@ -160,8 +160,8 @@ class TraineeAdapter(data : ArrayList<HashMap<String, String>>): RecyclerView.Ad
             velocityX: Float,
             velocityY: Float
         ): Boolean {
-            var differY = e2!!.getY() - e1!!.getY()
-            var differX = e2!!.getX() - e1!!.getX()
+            val differY = e2!!.y - e1!!.y
+            val differX = e2.x - e1.x
 
             if (Math.abs(differX) > differY) {
                 if (Math.abs(differX) > SWIPE_THRESHOLD) {

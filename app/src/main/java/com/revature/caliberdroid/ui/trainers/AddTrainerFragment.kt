@@ -24,11 +24,11 @@ class AddTrainerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddTrainerBinding.inflate(layoutInflater)
-        val context = getContext()!!
+        val context = context!!
         binding.apply {
             trainersViewModel.selectedTrainerLiveData.observe(viewLifecycleOwner) { trainer->
 
-                var list_of_items = arrayOf(
+                val list_of_items = arrayOf(
                     "ROLE_INACTIVE",
                     "ROLE_QC",
                     "ROLE_TRAINER",

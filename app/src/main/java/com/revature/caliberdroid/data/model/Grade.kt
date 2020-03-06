@@ -6,5 +6,4 @@ data class Grade(
     var score: Int? = 0,
     var assessmentId: Long? = 0,
     var traineeId: Long? = 0
-) {
-}
+)

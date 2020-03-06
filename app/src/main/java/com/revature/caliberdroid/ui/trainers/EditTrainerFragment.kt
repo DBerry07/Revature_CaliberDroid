@@ -20,20 +20,16 @@ class EditTrainerFragment : Fragment() {
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private var trainer: Trainer? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditTrainerBinding.inflate(layoutInflater)
-        val context = getContext()!!
+        val context = context!!
         binding.apply {
             trainersViewModel.selectedTrainerLiveData.observe(viewLifecycleOwner) { trainer->
 
-                var list_of_items = arrayOf(
+                val list_of_items = arrayOf(
                     "ROLE_INACTIVE",
                     "ROLE_QC",
                     "ROLE_TRAINER",

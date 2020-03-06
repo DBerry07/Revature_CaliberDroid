@@ -21,7 +21,7 @@ class LocationsAdapter(val locations:ArrayList<Location>, val editListener:EditL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
-        var view:View  = LayoutInflater.from(parent.context).inflate(R.layout.row_location,parent,false)
+        var view:View  = LayoutInflater.from(parent.context).inflate(R.layout.item_settings_location,parent,false)
         return LocationsViewHolder(view)
     }
 

@@ -9,7 +9,7 @@
         android:id="@+id/trainersFragment"
         android:name="com.revature.caliberdroid.ui.trainers.TrainersFragment"
         android:label="Trainers"
-        tools:layout="@layout/fragment_trainers">
+        tools:layout="@layout/fragment_settings_trainers">
         <action
             android:id="@+id/action_trainersFragment_to_addTrainerFragment"
             app:destination="@id/addTrainerFragment" />
@@ -21,10 +21,10 @@
         android:id="@+id/addTrainerFragment"
         android:name="com.revature.caliberdroid.ui.trainers.AddTrainerFragment"
         android:label="Add Trainer"
-        tools:layout="@layout/fragment_add_trainer" />
+        tools:layout="@layout/fragment_settings_add_trainer" />
     <fragment
         android:id="@+id/editTrainerFragment"
         android:name="com.revature.caliberdroid.ui.trainers.EditTrainerFragment"
         android:label="Edit Trainer"
-        tools:layout="@layout/fragment_edit_trainer" />
+        tools:layout="@layout/fragment_settings_edit_trainer" />
 </navigation>

@@ -27,8 +27,8 @@ class TiersAdapter(val context: Context, var listItemsTxt: Array<String>) : Base
         return view
     }
 
-    override fun getItem(position: Int): Any? {
-        return null
+    override fun getItem(position: Int): String {
+        return listItemsTxt.get(position)
     }
 
     override fun getItemId(position: Int): Long {

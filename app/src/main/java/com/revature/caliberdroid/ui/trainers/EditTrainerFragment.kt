@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
+import androidx.core.view.get
+import androidx.core.view.size
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 
@@ -54,6 +56,13 @@ class EditTrainerFragment : Fragment() {
             inTrainerFields.etFullName.setText(trainer.name)
             inTrainerFields.etEmail.setText(trainer.email)
             inTrainerFields.etTitle.setText(trainer.title)
+            Timber.d("This is the selected trainer's tier: "+trainer.tier)
+            for(i in 0 until inTrainerFields.spnTier.count){
+                Timber.d("Running through list of spinner: "+inTrainerFields.spnTier.getItemAtPosition(i).toString())
+                if( inTrainerFields.spnTier.getItemAtPosition(i).equals(trainer.tier) ){
+                    inTrainerFields.spnTier.setSelection(i)
+                }
+            }
 
             btnEditTrainer.setOnClickListener {
                 trainer.name = etFullName.text.toString()

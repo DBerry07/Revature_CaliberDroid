@@ -22,7 +22,8 @@ data class Trainee(
     var degree: String? = "",
     var major: String? = "",
     var techScreenerName: String? = "",
-    var techScreenScore: Long? = 0,
+    //Had to alter techScreenScore from Long to Any to allow null from API
+    var techScreenScore: Any? = 0,
     var projectCompletion: String? = "",
     var flagStatus: String? = "",
     @Bindable

@@ -39,19 +39,18 @@ class BatchesInfo : Fragment() {
 
         binding.btnBatchInfoDelete.setOnClickListener { Snackbar.make(view!!,"DELETE BUTTON",Snackbar.LENGTH_SHORT).show() }
         binding.btnBatchInfoView.setOnClickListener {
-            findNavController().navigate(BatchesInfoDirections.actionBatchDetailsFragmentToTraineeFragment())
+            findNavController().navigate(BatchesInfoDirections.actionBatchDetailsFragmentToTraineeFragment(args.selectedBatch))
         }
         binding.btnBatchInfoEdit.setOnClickListener {
-            createBatchDialog(binding.root)
+            createBatchDialog()
         }
         binding.batchModel = args.selectedBatch
 
         return binding.root
+
     }
 
-
-
-    private fun createBatchDialog(root: View) {
+    private fun createBatchDialog() {
         val dialog = activity?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog?.setCancelable(false)
@@ -59,7 +58,7 @@ class BatchesInfo : Fragment() {
         dialog?.show()
 
         val header: TextView = dialog!!.findViewById(R.id.tv_create_batch_header)
-        setDialogValues(dialog, root)
+        setDialogValues(dialog)
         cancelBtn = dialog.findViewById(R.id.btn_create_batch_cancel)
         createBtn = dialog.findViewById(R.id.btn_create_batch_create)
 
@@ -76,8 +75,7 @@ class BatchesInfo : Fragment() {
 
     }
 
-
-    private fun setDialogValues(dialog: Dialog, root: View) {
+    private fun setDialogValues(dialog: Dialog) {
         val trainerName: TextView = dialog.findViewById(R.id.et_create_batch_name_trainer_input)
         val batchName: TextView = dialog.findViewById(R.id.et_create_batch_name_input)
         val locationName: TextView = dialog.findViewById(R.id.et_create_batch_location_input)

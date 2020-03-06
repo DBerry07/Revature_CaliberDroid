@@ -17,12 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.TraineeAPIHandler
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.repository.TraineeRepository.getTrainees
 import com.revature.caliberdroid.databinding.FragmentTraineeBinding
 import com.revature.revaturetraineemanagment.TraineeAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_trainee.view.*
-import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -34,7 +35,7 @@ class TraineeFragment : Fragment() {
     private var _binding: FragmentTraineeBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TraineeViewModel by activityViewModels()
+    private val model: TraineeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,26 +44,25 @@ class TraineeFragment : Fragment() {
 
         _binding = FragmentTraineeBinding.inflate(layoutInflater, container, false)
         val view = binding.root
-
-        val model: TraineeViewModel by viewModels()
-
-        createData()
-        Timber.d(traineeData.toString())
-
-        val traineeLayoutManager = LinearLayoutManager(view.context)
-        var traineeAdapter = TraineeAdapter(traineeData)
-        val recyclerView = view.TM_recycler
+        var batchId : Long = 50
+        model.getTrainees(batchId)
+        var traineeLayoutManager = LinearLayoutManager(view.context)
+        var recyclerView = view.TM_recycler
 
         recyclerView.layoutManager = traineeLayoutManager
-        recyclerView.adapter = traineeAdapter
 
+        //Disable the fade-in/fade-out
         (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-        recyclerView.setHasFixedSize(false)
+        recyclerView.setHasFixedSize(false);
 
-        model.getTrainees()?.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
-            //traineeData = trainees
-            traineeAdapter = TraineeAdapter(traineeData)
 
+
+        model.traineesLiveData.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
+
+            //Sorts trainees by (last) name
+            var myTrainees = trainees.sortedBy { trainee: Trainee -> trainee.name }
+
+            var traineeAdapter = TraineeAdapter(myTrainees)
             recyclerView.layoutManager = traineeLayoutManager
             recyclerView.adapter = traineeAdapter
         })
@@ -81,26 +81,6 @@ class TraineeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun createData(){
-        var i = 0
-        while (i < 10){
-            val list : HashMap<String, String> = HashMap()
-            list.put("name", "trainee #$i")
-            list.put("email", "email $i")
-            list.put("status", "status #$i")
-            list.put("phone", "phone #$i")
-            list.put("skype", "skype #$i")
-            list.put("profile", "profile #$i")
-            list.put("college", "college #$i")
-            list.put("major", "major #$i")
-            list.put("recruiter", "recruiter #$i")
-            list.put("screener", "screener #$i")
-            list.put("project", "project #$i")
-            traineeData.add(list)
-            i++
-        }
     }
 
 }

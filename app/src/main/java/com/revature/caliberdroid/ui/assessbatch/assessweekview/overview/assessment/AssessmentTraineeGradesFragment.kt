@@ -6,8 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Assessment
+import com.revature.caliberdroid.data.model.Grade
+import com.revature.caliberdroid.databinding.FragmentAssessmentTraineeGradesBinding
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
 
 class AssessmentTraineeGradesFragment : Fragment() {
 
@@ -16,19 +23,54 @@ class AssessmentTraineeGradesFragment : Fragment() {
             AssessmentTraineeGradesFragment()
     }
 
-    private lateinit var viewModel: AssessmentTraineeGradesViewModel
+    private val assessWeekViewModel: AssessWeekViewModel by activityViewModels()
+    private var _assessmentTraineeGradesBinding: FragmentAssessmentTraineeGradesBinding? = null
+    private val assessmentTraineeGradesBinding get() = _assessmentTraineeGradesBinding!!
+    private val args: AssessmentTraineeGradesFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_assessment_trainee_grades, container, false)
+        _assessmentTraineeGradesBinding = FragmentAssessmentTraineeGradesBinding.inflate(inflater)
+
+        val assessment = getAssessment(args.assessmentId)
+
+        assessmentTraineeGradesBinding.assessment = assessment
+        assessmentTraineeGradesBinding.average = assessmentAverage(assessment)
+
+        assessmentTraineeGradesBinding.rvAssessmentTraineegrades.layoutManager = LinearLayoutManager(requireContext())
+        assessmentTraineeGradesBinding.rvAssessmentTraineegrades.adapter = TraineeAssessmentsRecycleAdapter(assessWeekViewModel, assessment)
+
+        return assessmentTraineeGradesBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AssessmentTraineeGradesViewModel::class.java)
-        // TODO: Use the ViewModel
+    }
+
+    fun getAssessment(assessmentId: Long): Assessment {
+        for (assessment in assessWeekViewModel.assessWeekNotes.value!!.assessments!!.value!!) {
+            if (assessment.assessmentId == assessmentId) {
+                return assessment
+            }
+        }
+        return Assessment(-1)
+    }
+
+    fun assessmentAverage(assessment: Assessment) : Float {
+
+        var sum = 0
+        var count = 0
+
+        for (grade in assessWeekViewModel.assessWeekNotes.value!!.grades!!.value!!) {
+            if (grade.assessmentId == assessment.assessmentId) {
+                sum += grade.score!!
+                count++
+            }
+        }
+
+        return if (count == 0) 0f else (sum.toFloat()/count)/assessment.rawScore!! * 100
     }
 
 }

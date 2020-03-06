@@ -84,6 +84,10 @@ object APIHandler {
         TrainersAPI.addTrainer(trainer,liveData)
     }
 
+    fun editTrainer(trainer:Trainer,liveData: MutableLiveData< ArrayList<Trainer> >){
+        TrainersAPI.editTrainer(trainer,liveData)
+    }
+
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
     }
@@ -95,5 +99,4 @@ object APIHandler {
     fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.editCategory(category,liveData)
     }
-
 }

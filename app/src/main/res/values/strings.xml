@@ -76,6 +76,15 @@
     <string name="label_dialog_name">Name:</string>
     <string name="title_edit_trainer">Edit Trainer</string>
 
+    <string-array name="trainer_tiers">
+        <item>ROLE_INACTIVE</item>
+        <item>ROLE_QC</item>
+        <item>ROLE_TRAINER</item>
+        <item>ROLE_VP</item>
+        <item>ROLE_PANEL</item>
+        <item>ROLE_STAGING</item>
+    </string-array>
+<!-- END SETTINGS -->
 
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>

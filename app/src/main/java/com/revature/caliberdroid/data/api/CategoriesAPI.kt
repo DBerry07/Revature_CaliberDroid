@@ -37,7 +37,12 @@ object CategoriesAPI {
     fun addCategory(skillCategory: String, liveData: MutableLiveData<ArrayList<Category>>) {
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/category/"
-        val jsonBody = JSONObject(" {\"categoryId\": 0, \"skillCategory\": $skillCategory, \"categoryOwner\": \"1\", \"active\": true} ")
+        val jsonBody =
+            JSONObject(" {\"categoryId\": 0, " +
+                    "\"skillCategory\": $skillCategory, " +
+                    "\"categoryOwner\": \"1\", " +
+                    "\"active\": true} "
+            )
 
         val categoriesRequest = JsonObjectRequest(
             Request.Method.POST,
@@ -46,9 +51,9 @@ object CategoriesAPI {
             Response.Listener { response ->
                 Timber.d("Response: " + response.toString())
                 try {
-                    liveData.value!!.add( CategoryParser.parseSingleCategory(response) )
+                    liveData.value!!.add(CategoryParser.parseSingleCategory(response))
                     liveData.postValue(liveData.value)
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     Timber.d("error with live data ${e.toString()}")
                 }
             },
@@ -59,11 +64,16 @@ object CategoriesAPI {
         queue.add(categoriesRequest)
     }
 
-    fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
+    fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>) {
         val queue = Volley.newRequestQueue(APIHandler.context)
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/category/"+category.categoryId
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/category/" + category.categoryId
         Timber.d("Url being sent: $url")
-        val jsonBody = JSONObject(" {\"categoryId\": \""+category.categoryId+"\", \"skillCategory\": \""+category.skillCategory+"\", \"active\": "+category.active+" } ")
+        val jsonBody = JSONObject(
+            " {\"categoryId\": \"" + category.categoryId + "\"," +
+                    "\"skillCategory\": \"" + category.skillCategory + "\"," +
+                    "\"active\": " + category.active + " } "
+        )
         Timber.d("Request being sent: ${jsonBody.toString()}")
         val categoriesRequest = JsonObjectRequest(
             Request.Method.PUT,
@@ -74,19 +84,19 @@ object CategoriesAPI {
                 try {
                     var returnedCategory = CategoryParser.parseSingleCategory(response)
                     var categories: ArrayList<Category> = liveData.value!!
-                    for(i in 0 until categories.size){
-                        var current:Category = categories.get(i)
-                        if(current.categoryId == returnedCategory.categoryId){
+                    for (i in 0 until categories.size) {
+                        var current: Category = categories.get(i)
+                        if (current.categoryId == returnedCategory.categoryId) {
                             current = returnedCategory
                         }
                     }
-                    liveData.postValue( categories )
-                }catch (e:Exception){
+                    liveData.postValue(categories)
+                } catch (e: Exception) {
                     Timber.d("error with live data ${e.toString()}")
                 }
             },
             Response.ErrorListener { error ->
-                Timber.d("Error retrieving categories:\n"+error.toString())
+                Timber.d("Error retrieving categories:\n" + error.toString())
             }
         )
         queue.add(categoriesRequest)

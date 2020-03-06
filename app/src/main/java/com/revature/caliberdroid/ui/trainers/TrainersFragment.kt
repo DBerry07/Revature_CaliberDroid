@@ -14,10 +14,10 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.adapter.trainers.TrainersAdapter
 import com.revature.caliberdroid.data.model.Trainer
-import com.revature.caliberdroid.databinding.FragmentTrainersBinding
+import com.revature.caliberdroid.databinding.FragmentSettingsTrainersBinding
 
 class TrainersFragment : Fragment(){
-    private var _binding: FragmentTrainersBinding? = null
+    private var _binding: FragmentSettingsTrainersBinding? = null
     private val binding get() = _binding!!
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private var navController: NavController? = null
@@ -33,7 +33,7 @@ class TrainersFragment : Fragment(){
     ):View?{
         navController = findNavController()
         trainersViewModel.getTrainers()
-        _binding = FragmentTrainersBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsTrainersBinding.inflate(layoutInflater)
         binding.apply {
             setLifecycleOwner (this@TrainersFragment )
             trainersViewModel.trainersLiveData.observe(viewLifecycleOwner, Observer { trainers->

@@ -11,12 +11,12 @@ import androidx.lifecycle.observe
 
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.databinding.FragmentEditLocationBinding
+import com.revature.caliberdroid.databinding.FragmentSettingsEditLocationBinding
 import kotlinx.android.synthetic.main.include_location_fields.*
 
 
 class EditLocationFragment : Fragment() {
-    private var _binding: FragmentEditLocationBinding? = null
+    private var _binding: FragmentSettingsEditLocationBinding? = null
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var location: Location? = null
@@ -29,7 +29,7 @@ class EditLocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEditLocationBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsEditLocationBinding.inflate(layoutInflater)
         binding.apply {
             locationsViewModel.selectedLocationLiveData.observe(viewLifecycleOwner) { location->
 

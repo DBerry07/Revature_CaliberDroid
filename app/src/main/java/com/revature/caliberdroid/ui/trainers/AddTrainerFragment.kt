@@ -9,49 +9,40 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.revature.caliberdroid.R
 
 import com.revature.caliberdroid.adapter.trainers.TiersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
-import com.revature.caliberdroid.databinding.FragmentAddTrainerBinding
+import com.revature.caliberdroid.databinding.FragmentSettingsAddTrainerBinding
+import kotlinx.android.synthetic.main.fragment_settings_add_trainer.*
+import kotlinx.android.synthetic.main.include_trainer_fields.view.*
 import timber.log.Timber
 
 
 class AddTrainerFragment : Fragment() {
-    private var _binding: FragmentAddTrainerBinding? = null
+    private var _binding: FragmentSettingsAddTrainerBinding? = null
     private val binding get() = _binding!!
     private val trainersViewModel: TrainersViewModel by activityViewModels()
-    private val list_of_items = arrayOf(
-        "ROLE_INACTIVE",
-        "ROLE_QC",
-        "ROLE_TRAINER",
-        "ROLE_VP",
-        "ROLE_PANEL",
-        "ROLE_STAGING"
-    )
+
     private var selectedTier:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddTrainerBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsAddTrainerBinding.inflate(layoutInflater)
         val context = getContext()!!
+        val list_of_items = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
             val adapter = TiersAdapter(context, list_of_items)
             val spinner: Spinner = inTrainerFields.spnTier
             spinner.adapter = adapter
             spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
+                override fun onItemSelected(parent: AdapterView<*>,view: View?,position: Int,id: Long) {
                     Timber.d("Item selected: ${list_of_items.get(position)}")
                     selectedTier = list_of_items.get(position)
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             })

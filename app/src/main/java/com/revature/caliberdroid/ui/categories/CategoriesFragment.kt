@@ -15,11 +15,12 @@ import com.revature.caliberdroid.adapter.categories.listeners.EditCategoryListen
 import com.revature.caliberdroid.adapter.categories.listeners.ToggleCategoryListenerInterface
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.repository.CategoryRepository
-import com.revature.caliberdroid.databinding.FragmentCategoriesBinding
+import com.revature.caliberdroid.databinding.FragmentSettingsCategoriesBinding
+import kotlinx.android.synthetic.main.fragment_settings_categories.*
 import timber.log.Timber
 
 class CategoriesFragment : Fragment() {
-    var _binding: FragmentCategoriesBinding? = null
+    var _binding: FragmentSettingsCategoriesBinding? = null
     val binding get() = _binding!!
     private val categoriesViewModel: CategoriesViewModel by activityViewModels()
     val activeCategories: ArrayList<Category> = ArrayList()
@@ -38,7 +39,7 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         categoriesViewModel.getCategories()
-        _binding = FragmentCategoriesBinding.inflate(layoutInflater)
+        _binding = FragmentSettingsCategoriesBinding.inflate(layoutInflater)
         binding.apply {
             setLifecycleOwner(this@CategoriesFragment)
             categoriesViewModel.categoryLiveData.observe(

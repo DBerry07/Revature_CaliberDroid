@@ -15,4 +15,8 @@ object TrainerRepository {
     fun addTrainer(trainer:Trainer,liveData: MutableLiveData< ArrayList<Trainer> >){
         APIHandler.addTrainer(trainer, liveData)
     }
+
+    fun editTrainer(trainer:Trainer,liveData: MutableLiveData< ArrayList<Trainer> >){
+        APIHandler.editTrainer(trainer,liveData)
+    }
 }

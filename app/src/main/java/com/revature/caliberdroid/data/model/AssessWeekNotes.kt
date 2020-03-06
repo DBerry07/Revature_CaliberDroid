@@ -8,7 +8,7 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
 data class AssessWeekNotes(var weekNumber: Int,
                            var batchAverage: Float,
-                           var notes: String?,
+                           var batchNote: String?,
                            var batch: Batch?,
                            var assessments: MutableLiveData<List<Assessment>>,
                            var grades: MutableLiveData<List<Grade>>,
@@ -28,7 +28,7 @@ data class AssessWeekNotes(var weekNumber: Int,
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(weekNumber)
         parcel.writeFloat(batchAverage)
-        parcel.writeString(notes)
+        parcel.writeString(batchNote)
         parcel.writeParcelable(batch, flags)
     }
 

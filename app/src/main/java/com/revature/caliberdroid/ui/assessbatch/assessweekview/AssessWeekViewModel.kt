@@ -11,7 +11,9 @@ class AssessWeekViewModel : ViewModel() {
 
     lateinit var assessWeekNotes: MutableLiveData<AssessWeekNotes>
 
-    fun initWeekData(batchId:Long,weekNumber:Int) {
+    fun initWeekData() {
+        var batchId:Long = assessWeekNotes.value!!.batch!!.batchID
+        var weekNumber:Int = assessWeekNotes.value!!.weekNumber
         assessWeekNotes = AssessWeekRepository.getAssessWeekData(batchId,weekNumber)
     }
 

@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,10 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Response
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.data.model.Assessment
-import com.revature.caliberdroid.data.model.Grade
-import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.databinding.FragmentWeekSelectionBinding
 import org.json.JSONException
 import org.json.JSONObject
@@ -72,11 +70,10 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
             Grade(9, "",18,3,3)
         )
 
-//        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, assessments, grades)
-//        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, arrayListOf(),
-//            arrayListOf())
+        val week1 = AssessWeekNotes(1, 93.2f, "They did so super duper awesome really good and great", batch, MutableLiveData<List<Assessment>>(assessments), MutableLiveData<List<Grade>>(grades),MutableLiveData<List<Note>>())
+        val week2 = AssessWeekNotes(2, 88.8f, "not quite as good as last week, let's hope they don't totally blow it moving forward", batch, MutableLiveData<List<Assessment>>(), MutableLiveData<List<Grade>>(),MutableLiveData<List<Note>>())
 
-//        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
+        (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(arrayListOf(week1,week2)).commit()
 
         binding.btnWeekselectionAddweek.setOnClickListener(View.OnClickListener {
 

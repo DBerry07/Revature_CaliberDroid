@@ -29,7 +29,7 @@ object LocationsFieldValidator {
     ): Boolean{
 //company name field validation
         if( FieldValidator.isEmptyString(companyName.text.toString()) ){
-            validationString.clear().append("Company name cannot be empty!")
+            validationString.clear().append("Company name cannot be empty.")
             return false
         }
 
@@ -40,7 +40,7 @@ object LocationsFieldValidator {
 
 //address validation
         if( FieldValidator.isEmptyString(address.text.toString()) ){
-            validationString.clear().append("Address cannot be empty!")
+            validationString.clear().append("Address cannot be empty.")
             return false
         }
 
@@ -51,7 +51,7 @@ object LocationsFieldValidator {
 
 //city field validation
         if( FieldValidator.isEmptyString(city.text.toString()) ){
-            validationString.clear().append("City cannot be empty!")
+            validationString.clear().append("City cannot be empty.")
             return false
         }
 
@@ -62,7 +62,7 @@ object LocationsFieldValidator {
 
 //zip code validation
         if( FieldValidator.isEmptyString(zipCode.text.toString()) ){
-            validationString.clear().append("ZipCode cannot be empty!")
+            validationString.clear().append("ZipCode cannot be empty.")
             return false
         }
 
@@ -75,7 +75,7 @@ object LocationsFieldValidator {
         if(state != null){
 //state validation
             if( FieldValidator.isEmptyString(state.text.toString()) ){
-                validationString.clear().append("State cannot be empty!")
+                validationString.clear().append("State cannot be empty.")
                 return false
             }
 

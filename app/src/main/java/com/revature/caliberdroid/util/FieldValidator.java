@@ -8,7 +8,10 @@ import java.util.regex.Pattern;
 public class FieldValidator {
 
     public static boolean isValidEmail(String input){
-
+        String regex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+        if(matcher.matches()) return true;
         return false;
     }
 
@@ -24,14 +27,6 @@ public class FieldValidator {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         if(matcher.matches()) return true;
-        return false;
-    }
-
-    public static boolean isValidTwoLetterState(ArrayList<String> statesList, String input){
-        return false;
-    }
-
-    public static boolean isValidState(ArrayList<String> stateList, String input){
         return false;
     }
 

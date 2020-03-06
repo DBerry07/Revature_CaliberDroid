@@ -1,20 +1,23 @@
 package com.revature.caliberdroid.ui.trainees
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.repository.TraineeRepository
+import org.json.JSONObject
 
 
 class TraineeViewModel : ViewModel() {
 
-    private var traineesLiveData: LiveData<List<Trainee>>? = null
+    lateinit var traineesLiveData: LiveData< List<Trainee> >
 
-    fun getTrainees(): LiveData<List<Trainee>>? {
-        return traineesLiveData
+    fun getTrainees(batchId : Long){
+        traineesLiveData = TraineeRepository.getTrainees(batchId)
     }
 
-    private fun loadTrainees() {
-        // Do an asynchronous operation to fetch trainees
+    fun postTrainee(jsonObject: JSONObject){
+        TraineeRepository.postTrainee(jsonObject)
     }
 
 }

@@ -144,8 +144,9 @@ object JSONParser {
                     getString("degree"),
                     getString("major"),
                     getString("techScreenerName"),
-                    getLong("techScreenScore"),
-                    getString("projectCompletetion"),
+                    //Had to alter techScreenScore from getLong to get to allow null from API
+                    get("techScreenScore"),
+                    getString("projectCompletion"),
                     getString("flagStatus"),
                     getString("flagNotes"),
                     getString("flagAuthor"),

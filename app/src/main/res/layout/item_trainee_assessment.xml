@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="grade"
+            type="com.revature.caliberdroid.data.model.Grade" />
+        <variable
+            name="assessment"
+            type="com.revature.caliberdroid.data.model.Assessment" />
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -6,10 +15,13 @@
     <TextView
         android:id="@+id/tv_trainee_assessment_item_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@{assessment.assessmentType}"/>
 
     <TextView
         android:id="@+id/tv_trainee_assessment_item_grade"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@{grade.score}"/>
 </LinearLayout>
+</layout>

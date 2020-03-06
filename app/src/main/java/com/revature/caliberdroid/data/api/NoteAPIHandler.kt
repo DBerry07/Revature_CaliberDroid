@@ -5,6 +5,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.data.model.Note
 import com.revature.caliberdroid.data.parser.JSONParser
 import org.json.JSONObject
@@ -12,16 +13,16 @@ import timber.log.Timber
 
 object NoteAPIHandler {
 
-    fun getAssessBatchOverallNote(liveData: MutableLiveData<Note>,batchId: Long,weekNumber: Int){
+    fun getAssessBatchOverallNote(assessWeekNotes: AssessWeekNotes){
         val queue = Volley.newRequestQueue(APIHandler.context)
 
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/batch/$batchId/$weekNumber/note"
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/batch/${assessWeekNotes.batch!!.batchID}/${assessWeekNotes.weekNumber}/note"
         val objectRequest = JsonObjectRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener<JSONObject> { response ->
-                liveData.postValue(JSONParser.parseNote(response))
+                assessWeekNotes.batchNote=JSONParser.parseNote(response)
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )

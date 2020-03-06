@@ -62,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/batch_notes_hint"
             android:inputType="textMultiLine"
-            android:text="@{assessWeekModel.assessWeekNotes.batchNote}"
+            android:text="@{assessWeekModel.assessWeekNotes.batchNote.noteContent}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchnoteslabel" />

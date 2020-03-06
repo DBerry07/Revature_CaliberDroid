@@ -101,16 +101,10 @@ object APIHandler {
         AuditAPIHandler.getSkillCategories(context, liveData, batch, weekNumber)
     }
 
-    fun getAssessments(liveData: MutableLiveData<List<Assessment>>,batchId:Long,weekNumber:Int) {
-        AssessmentAPIHandler.getAssessments(liveData,batchId,weekNumber)
-    }
-
-    fun getGrades(liveData: MutableLiveData<List<Grade>>, batchId:Long, weekNumber:Int) {
-        GradeAPIHandler.getGrades(liveData,batchId,weekNumber)
-    }
-
-    fun getAssessBatchOverallNote(liveData: MutableLiveData<Note>,batchId:Long, weekNumber:Int){
-        NoteAPIHandler.getAssessBatchOverallNote(liveData,batchId,weekNumber)
+    fun getAssessWeekNotes(assessWeekNotes: AssessWeekNotes) {
+        GradeAPIHandler.getGrades(assessWeekNotes)
+        AssessmentAPIHandler.getAssessments(assessWeekNotes)
+        NoteAPIHandler.getAssessBatchOverallNote(assessWeekNotes)
     }
 
     fun getTraineeNotes(liveData: MutableLiveData<List<Note>>, batchId:Long, weekNumber:Int) {

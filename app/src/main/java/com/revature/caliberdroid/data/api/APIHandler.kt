@@ -18,22 +18,51 @@ object APIHandler {
 
     lateinit var context: Context
 
-    fun getBatches(liveData: MutableLiveData<List<Batch>>) {
+    fun getBatchesByYear(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int
+    ) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/?year=2020&quarter=1"
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/$selectedYear"
         // Request a string response from the provided URL.
         val batchesRequest = JsonArrayRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener { response ->
-                // Display the first 500 characters of the response string.
                 Timber.d(response.toString())
                 liveData.postValue(JSONParser.parseBatches(response))
             },
             Response.ErrorListener {
                     error -> Timber.d(error.toString())
+            })
+
+        queue.add(batchesRequest)
+    }
+
+    fun getBatchesByYearAndQuarter(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int,
+        selectedQuarter: Int
+    ) {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(context)
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/?year=$selectedYear&quarter=$selectedQuarter"
+        Timber.d(url)
+        // Request a string response from the provided URL.
+        val batchesRequest = VolleyJsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                liveData.postValue(JSONParser.parseBatches(response))
+            },
+            Response.ErrorListener { error ->
+                Timber.d(error.toString())
             })
 
         queue.add(batchesRequest)

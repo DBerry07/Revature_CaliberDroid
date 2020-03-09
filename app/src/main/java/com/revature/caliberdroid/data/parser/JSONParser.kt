@@ -1,38 +1,39 @@
 package com.revature.caliberdroid.data.parser
 
 import com.revature.caliberdroid.data.model.*
-import com.revature.caliberdroid.data.model.AuditWeekNotes
-import com.revature.caliberdroid.data.model.Batch
 import org.json.JSONArray
 import org.json.JSONObject
 
 object JSONParser {
 
-    fun parseBatches(response: JSONArray): List<Batch> {
+    fun parseBatches(response: JSONArray?): List<Batch> {
 
         val batchList = ArrayList<Batch>()
 
-        var batch: Batch
-        val length = response.length() - 1
-        for (i in 0 .. length) {
-            response.getJSONObject(i).apply {
-                batch = Batch(
-                    batchID = getLong("batchId"),
-                    _trainingName = getString("trainingName"),
-                    trainingType = getString("trainingType"),
-                    skillType = getString("skillType"),
-                    trainerName = getString("trainer"),
-                    coTrainerName = getString("coTrainer"),
-                    locationID = getLong("locationId"),
-                    location = getString("location"),
-                    _startDate = getLong("startDate"),
-                    _endDate = getLong("endDate"),
-                    goodGrade = getInt("goodGrade"),
-                    passingGrade = getInt("passingGrade"),
-                    weeks = getInt("weeks"))
-            }
+        if (response != null) {
+            var batch: Batch
+            val length = response.length() - 1
+            for (i in 0..length) {
+                response.getJSONObject(i).apply {
+                    batch = Batch(
+                        batchID = getLong("batchId"),
+                        _trainingName = getString("trainingName"),
+                        trainingType = getString("trainingType"),
+                        skillType = getString("skillType"),
+                        trainerName = getString("trainer"),
+                        coTrainerName = getString("coTrainer"),
+                        locationID = getLong("locationId"),
+                        location = getString("location"),
+                        _startDate = getLong("startDate"),
+                        _endDate = getLong("endDate"),
+                        goodGrade = getInt("goodGrade"),
+                        passingGrade = getInt("passingGrade"),
+                        weeks = getInt("weeks")
+                    )
+                }
 
-            batchList.add(batch)
+                batchList.add(batch)
+            }
         }
 
         return batchList

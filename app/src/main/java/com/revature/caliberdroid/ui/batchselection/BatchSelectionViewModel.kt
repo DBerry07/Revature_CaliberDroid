@@ -16,10 +16,16 @@ class BatchSelectionViewModel : ViewModel() {
             field = value
             getBatches()
         }
-    var selectedQuarter = quarters[0][1].toString().toInt()
+    var _selectedQuarter = quarters[0]
         set(value) {
             field = value
-            getBatches()
+            if (selectedYear != null) {
+                getBatches()
+            }
+        }
+    val selectedQuarter: Int
+        get() {
+            return _selectedQuarter[1].toString().toInt()
         }
 
     fun getBatches() {

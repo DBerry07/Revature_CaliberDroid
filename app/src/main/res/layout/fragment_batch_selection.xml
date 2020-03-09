@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_batch_selection_select_year" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
+    <Spinner
         android:id="@+id/spinner_batch_selection_select_year"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:hint="@string/spinner_year_hint"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
+    <Spinner
         android:id="@+id/spinner_batch_selection_select_quarter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentBatchSelectionBinding
 import com.revature.caliberdroid.ui.batchselection.BatchSelectionAdapter
 import com.revature.caliberdroid.ui.batchselection.BatchSelectionAdapter.OnItemClickListener
+import timber.log.Timber
 import java.util.*
 
 class BatchSelectionFragment : Fragment() {
@@ -21,8 +21,9 @@ class BatchSelectionFragment : Fragment() {
     private var _binding: FragmentBatchSelectionBinding? = null
     private val binding
         get() = _binding!!
-    private val batchSelectionViewModel: BatchSelectionViewModel by activityViewModels()
-    private var arrayAdapter: ArrayAdapter<Int>? = null
+    private val viewModel: BatchSelectionViewModel by activityViewModels()
+    private var yearsArrayAdapter: ArrayAdapter<Int>? = null
+    private var quartersArrayAdapter: ArrayAdapter<String>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +31,9 @@ class BatchSelectionFragment : Fragment() {
     ): View? {
         _binding = FragmentBatchSelectionBinding.inflate(inflater)
 
-        batchSelectionViewModel.getData()
+        viewModel.getData()
 
-        initializeSpinner()
+        initializeSpinners()
         initializeRecyclerView()
 
         subscribeToBatchesViewModel()
@@ -42,7 +43,8 @@ class BatchSelectionFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        arrayAdapter = null
+        yearsArrayAdapter = null
+        quartersArrayAdapter = null
         _binding = null
     }
 
@@ -52,32 +54,48 @@ class BatchSelectionFragment : Fragment() {
     }
 
     private fun subscribeToBatchesViewModel() {
-        batchSelectionViewModel.batches.observe(viewLifecycleOwner, Observer {
+        viewModel.batches.observe(viewLifecycleOwner, Observer {
             (binding.recyclerviewBatchSelectionDisplayBatches.adapter as BatchSelectionAdapter).edit()
                 .replaceAll(it)
                 .commit()
         })
 
-        batchSelectionViewModel.validYears.observe(viewLifecycleOwner, Observer {
-            arrayAdapter?.apply {
+        viewModel.validYears.observe(viewLifecycleOwner, Observer {
+            yearsArrayAdapter?.apply {
                 notifyDataSetChanged()
-                binding.spinnerBatchSelectionSelectYear.apply {
-                    selectedIndex = count
+                if (it.size > 0) {
+                    binding.spinnerBatchSelectionSelectYear.apply {
+                        viewModel.selectedYear = it.max()
+                        selectedIndex = it.indexOf(viewModel.selectedYear)
+                    }
                 }
             }
         })
     }
 
-    private fun initializeSpinner() {
-        val arrayAdapter = ArrayAdapter(
+    private fun initializeSpinners() {
+        yearsArrayAdapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            batchSelectionViewModel.validYears.value!!
+            viewModel.validYears.value!!
         )
 
-        binding.spinnerBatchSelectionSelectYear.setAdapter(arrayAdapter)
+        quartersArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            viewModel.quarters
+        )
+
+        binding.spinnerBatchSelectionSelectYear.setAdapter(yearsArrayAdapter!!)
         binding.spinnerBatchSelectionSelectYear.setOnItemSelectedListener { view, position, id, item ->
-            Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show()
+            viewModel.selectedYear = item as Int
+            Timber.d("Clicked $item at position: $position")
+        }
+
+        binding.spinnerBatchSelectionSelectQuarter.setAdapter(quartersArrayAdapter!!)
+        binding.spinnerBatchSelectionSelectQuarter.setOnItemSelectedListener { view, position, id, item ->
+            viewModel.selectedQuarter = (item as String)[1].toString().toInt()
+            Timber.d("Clicked $item at position: $position")
         }
     }
 

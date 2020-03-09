@@ -22,13 +22,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_batch_selection_select_week"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_batch_selection_select_quarter"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/spinner_year_hint"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner_batch_selection_select_week"
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/spinner_batch_selection_select_quarter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -37,5 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/spinner_batch_selection_select_year"
+        android:hint="@string/select_a_quarter"
         app:layout_constraintTop_toTopOf="@+id/spinner_batch_selection_select_year" />
 </androidx.constraintlayout.widget.ConstraintLayout>

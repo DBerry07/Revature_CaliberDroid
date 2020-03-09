@@ -18,7 +18,7 @@ class AssessWeekViewModel : ViewModel() {
     lateinit var batchAssessWeekNotes: MutableLiveData<ArrayList<AssessWeekLiveData>>
     lateinit var trainees: MutableLiveData<List<Trainee>>
     lateinit var batch: Batch
-    lateinit var saveNoteThread: Thread
+    var saveNoteThread: Thread? = null
 
 //    fun initWeekData() {
 //        var batchId:Long = assessWeekNotes.batch!!.batchID
@@ -42,30 +42,32 @@ class AssessWeekViewModel : ViewModel() {
     }
 
     fun saveBatchNote(note: Note) {
+        if (saveNoteThread != null) saveNoteThread!!.interrupt()
         Timber.d("saving note")
-        saveNoteThread.interrupt()
     }
 
     fun startDelayedSaveThread(note: Note, saveFunction: (note: Note) -> Unit) {
-        when (saveNoteThread.state) {
+
+        if (saveNoteThread == null) saveNoteThread = getNewDelayedSaveThread(note, saveFunction)
+
+        when (saveNoteThread!!.state) {
 
             Thread.State.NEW -> {
                 Timber.d("new thread")
-                saveNoteThread = getNewDelayedSaveThread(note, saveFunction)
-                saveNoteThread.start()
+                saveNoteThread!!.start()
             }
 
             Thread.State.TERMINATED -> {
                 Timber.d("finished")
                 saveNoteThread = getNewDelayedSaveThread(note, saveFunction)
-                saveNoteThread.start()
+                saveNoteThread!!.start()
             }
 
             else -> {
                 Timber.d("running")
-                saveNoteThread.interrupt()
+                saveNoteThread!!.interrupt()
                 saveNoteThread = getNewDelayedSaveThread(note, saveFunction)
-                saveNoteThread.start()
+                saveNoteThread!!.start()
             }
         }
     }

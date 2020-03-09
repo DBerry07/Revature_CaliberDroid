@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
+        android:id="@+id/frameLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,11 +35,27 @@
             android:layout_marginTop="16dp" />
     </FrameLayout>
 
-    <Button
-        android:id="@+id/btn_goto_trainees"
+    <TextView
+        android:id="@+id/manage_batches_number_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/manageBatch_noOfBatches"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_manage_batches_no_of_batches_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
+        app:layout_constraintStart_toEndOf="@+id/manage_batches_number_label" />
+
+    <Spinner
+        android:id="@+id/spinner_manageBatches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -30,6 +30,7 @@ data class Batch (
 
     val startDate get() = DateConverter.getDate(_startDate)
     val endDate get() = DateConverter.getDate(_endDate)
+    val dates: String get() = "$startDate - $endDate"
 
     var trainingName: String
     @Bindable get() = _trainingName!!

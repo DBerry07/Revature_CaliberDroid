@@ -15,7 +15,11 @@ import com.revature.caliberdroid.adapter.trainers.TiersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditTrainerBinding
+import kotlinx.android.synthetic.main.fragment_settings_add_trainer.*
+import kotlinx.android.synthetic.main.fragment_settings_add_trainer.inTrainerFields
+import kotlinx.android.synthetic.main.fragment_settings_edit_trainer.*
 import kotlinx.android.synthetic.main.include_trainer_fields.*
+import kotlinx.android.synthetic.main.include_trainer_fields.view.*
 import timber.log.Timber
 
 class EditTrainerFragment : Fragment() {

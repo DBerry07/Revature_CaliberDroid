@@ -2,34 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create_batch_dialog_layout"
-    android:layout_width="400dp"
-    android:layout_height="600dp">
-
-    <ImageView
-        android:id="@+id/create_batch_dialog_header_background"
-        android:layout_width="400dp"
-        android:layout_height="50dp"
-        android:background="@color/Revature_Orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/batch_dialog_img_description" />
-
-    <TextView
-        android:id="@+id/tv_create_batch_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/btn_manage_batch_create_batch"
-        android:textColor="@color/icon_plus_background"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/fragment_create_batch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/et_create_batch_name_input"
@@ -37,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:inputType="text"
         android:paddingStart="4dp"
@@ -47,7 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_name"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_name"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -56,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="text"
@@ -68,7 +44,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_trainer"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_trainer"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -77,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="text"
@@ -89,7 +65,26 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_location"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_location"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/et_create_batch_training_type_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="36dp"
         android:autofillHints=""
+        android:background="@drawable/textview_border"
+        android:fontFamily="sans-serif"
+        android:inputType="text"
+        android:paddingStart="4dp"
+        android:paddingEnd="1dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_training_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_training_type"
+        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_training_type"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -98,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="text"
@@ -109,7 +105,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_skill"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_skill"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -118,6 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="date"
@@ -129,7 +125,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_start"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_start"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -138,6 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="date"
@@ -149,7 +145,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_end"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_end"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -158,6 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="number"
@@ -169,7 +165,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_good_grade"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_good_grade"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <EditText
@@ -178,6 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="36dp"
+        android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
         android:inputType="number"
@@ -189,7 +185,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_passing_grade"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_passing_grade"
-        android:autofillHints=""
         tools:ignore="LabelFor" />
 
     <TextView
@@ -201,7 +196,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_header" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_create_batch_trainer"
@@ -223,6 +218,17 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_skill"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_training_type" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_training_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Training Type:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer" />
 
     <TextView

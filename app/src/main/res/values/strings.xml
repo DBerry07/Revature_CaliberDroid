@@ -10,7 +10,7 @@
     <string name="button_cancel">Cancel</string>
     <string name="save">Save</string>
 
-<!--  Menu Items -->
+    <!--  Menu Items -->
     <string name="menu_quality_audit">Quality Audit</string>
     <string name="menu_assess_batch">Assess Batch</string>
     <string name="menu_manage_batch">Manage Batch</string>
@@ -89,9 +89,9 @@
         <item>ROLE_PANEL</item>
         <item>ROLE_STAGING</item>
     </string-array>
-<!-- END SETTINGS -->
+    <!-- END SETTINGS -->
 
-<!-- Manage Batches -->
+    <!-- Manage Batches -->
     <string name="batch_dialog_heading_name">Batch Name:</string>
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>
@@ -100,7 +100,7 @@
     <string name="batch_dialog_heading_end_date">End Date:</string>
     <string name="batch_dialog_heading_good_grade">Good Grade:</string>
     <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
-    <string name="batch_dialog_create_button">Create</string>
+    <string name="batch_dialog_create_button">Update</string>
     <string name="batch_dialog_img_description">Dialog Header background color block</string>
     <string name="textview_default">default</string>
     <string name="batch_info_header_end_date">End Date:</string>
@@ -135,4 +135,10 @@
     <string name="batch_row_batch_name_header">Batch Name:</string>
     <string name="batch_info_co_trainer_heading">Co-Trainer:</string>
     <string name="batch_info_training_type_heading">Training type:</string>
+    <string name="batchRow_datesHeader">Date: </string>
+    <string name="createBatch_skillHeader">Skill Focus:</string>
+    <string name="createBatch_locationHeader">Location:</string>
+    <string name="createBatch_trainingTypeHeader">Training Type:</string>
+    <string name="manageBatch_noOfBatches">No. of Batches:</string>
+    <string name="btn_editBatch_update">Create</string>
 </resources>

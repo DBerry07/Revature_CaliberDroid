@@ -35,6 +35,10 @@ class TraineeFragment : Fragment() {
 
     private val model: TraineeViewModel by viewModels()
 
+    //Moved declaration here because I need access to it outside of observe function
+    private lateinit var traineeAdapter: TraineeAdapter
+    private lateinit var myTrainees: List<Trainee>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,9 +65,9 @@ class TraineeFragment : Fragment() {
         model.traineesLiveData.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
 
             //Sorts trainees by (last) name
-            var myTrainees = trainees.sortedBy { trainee: Trainee -> trainee.name }
+            myTrainees = trainees.sortedBy { trainee: Trainee -> trainee.name }
 
-            var traineeAdapter = TraineeAdapter(myTrainees)
+            traineeAdapter = TraineeAdapter(myTrainees)
             recyclerView.layoutManager = traineeLayoutManager
             recyclerView.adapter = traineeAdapter
         })
@@ -74,6 +78,27 @@ class TraineeFragment : Fragment() {
             val navController = Navigation.findNavController(view)
             //Pass currently selected branch to add trainee
             navController.navigate(TraineeFragmentDirections.actionTraineeFragmentToAddTraineeFragment(currentBatch))
+        }
+
+        binding.swtActiveTrainees.setOnCheckedChangeListener { buttonView, isChecked ->
+            Timber.d("State of switch: $isChecked")
+            if(isChecked){
+                val activeTraineesList: ArrayList<Trainee> = ArrayList()
+                var currentTrainee: Trainee
+                for( i in 0 until myTrainees.size){
+                    currentTrainee = myTrainees.get(i)
+                    if( currentTrainee.trainingStatus?.toLowerCase().equals("dropped")){
+                        Timber.d("This trainee is dropped/inactive: $currentTrainee")
+                        continue
+                    }
+                    activeTraineesList.add(currentTrainee)
+                }
+                traineeAdapter.trainees = activeTraineesList
+                traineeAdapter.notifyDataSetChanged()
+            }else{
+                traineeAdapter.trainees = myTrainees
+                traineeAdapter.notifyDataSetChanged()
+            }
         }
 
         // Inflate the layout for this fragment

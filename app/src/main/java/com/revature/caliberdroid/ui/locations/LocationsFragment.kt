@@ -20,7 +20,6 @@ import com.revature.caliberdroid.adapter.locations.listeners.EditLocationStatusI
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
-import timber.log.Timber
 
 
 class LocationsFragment : Fragment(){
@@ -28,7 +27,7 @@ class LocationsFragment : Fragment(){
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
-    lateinit var adapter:LocationsAdapter
+    lateinit var rvAdapter:LocationsAdapter
     var locationsFromAPI = ArrayList<Location>()
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -47,9 +46,9 @@ class LocationsFragment : Fragment(){
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
                     locationsFromAPI = locations
-                    adapter = LocationsAdapter(EditLocationListener(), EditLocationStatusListener())
-                    adapter.sortedList.addAll(locationsFromAPI)
-                    rvLocations.adapter = adapter
+                    rvAdapter = LocationsAdapter(EditLocationListener(), EditLocationStatusListener())
+                    rvAdapter.sortedList.addAll(locationsFromAPI)
+                    rvLocations.adapter = rvAdapter
 
                     for (location in locations) {
                         Log.d("Locations", "Location: ${location.toString()}")
@@ -68,7 +67,7 @@ class LocationsFragment : Fragment(){
                 override fun onQueryTextSubmit(query: String?): Boolean {return false}
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    adapter.replaceAll( filterLocations(locationsFromAPI, newText) )
+                    rvAdapter.replaceAll( filterLocations(locationsFromAPI, newText) )
                     return true
                 }
 

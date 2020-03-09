@@ -18,18 +18,14 @@ class LocationsAdapter(val editListener:EditLocationInterface, val editLocationS
 
 //Need to implement data binding in recycler view adapter
     class LocationsViewHolder(binding: ItemSettingsLocationBinding) : RecyclerView.ViewHolder(binding.root){
-        var mBinding:ItemSettingsLocationBinding
-
-        init{
-            mBinding = binding
-        }
+        val mBinding:ItemSettingsLocationBinding = binding
 
         fun bind(item: Location){
             mBinding.model = item
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsAdapter.LocationsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding:ItemSettingsLocationBinding = ItemSettingsLocationBinding.inflate(layoutInflater,parent,false)
         return LocationsViewHolder(binding)
@@ -49,8 +45,7 @@ class LocationsAdapter(val editListener:EditLocationInterface, val editLocationS
         imageActiveStatus.setOnClickListener{
             editLocationStatusListener.editLocationStatus(location,imageActiveStatus)
         }
-        val model: Location = sortedList.get(position)
-        holder.bind(model)
+        holder.bind( sortedList.get(position) )
     }
 
     private fun setActiveStatusImage(location:Location, imgView: ImageView){
@@ -84,7 +79,6 @@ class LocationsAdapter(val editListener:EditLocationInterface, val editLocationS
     }
 
     fun replaceAll(_models: ArrayList<Location>){
-        Timber.d("Updated, filtered locations: $_models")
         sortedList.beginBatchedUpdates()
         var count:Int = sortedList.size() - 1
         while(count >= 0){

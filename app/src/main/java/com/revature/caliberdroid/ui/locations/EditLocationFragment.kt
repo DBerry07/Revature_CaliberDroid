@@ -99,7 +99,7 @@ class EditLocationFragment : Fragment() {
                     location.zipcode = inLocationFields.etZipCode.text.toString()
 
                     Timber.d("Updated location: ${location.toString()}")
-                    LocationRepository.editLocation(location)
+                    LocationsViewModel.editLocation(location)
 
                     findNavController().navigateUp()
                 } else {

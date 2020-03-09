@@ -69,7 +69,7 @@ class AddTrainerFragment : Fragment() {
                         ""
                     )
                     Timber.d("New trainer: ${trainerToCreate.toString()}")
-                    TrainerRepository.addTrainer(trainerToCreate)
+                    TrainersViewModel.addTrainer(trainerToCreate)
                     findNavController().navigateUp()
                 }else{
                     Timber.d("Validation of fields failed: "+validationString.toString())

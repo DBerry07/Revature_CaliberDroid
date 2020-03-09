@@ -85,7 +85,7 @@ class EditTrainerFragment : Fragment() {
                     trainer.tier = selectedTier
 
                     Timber.d("Updated trainer: ${trainer.toString()}")
-                    TrainerRepository.editTrainer(trainer)
+                    TrainersViewModel.editTrainer(trainer)
 
                     findNavController().navigateUp()
                 }else{

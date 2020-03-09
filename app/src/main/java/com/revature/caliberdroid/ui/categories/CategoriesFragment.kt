@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -18,9 +17,11 @@ import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsCategoriesBinding
 import com.revature.caliberdroid.util.DialogInvalidInput
-import kotlinx.android.synthetic.main.fragment_settings_categories.*
 import timber.log.Timber
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class CategoriesFragment : Fragment() {
     var _binding: FragmentSettingsCategoriesBinding? = null
@@ -49,7 +50,7 @@ class CategoriesFragment : Fragment() {
             categoriesViewModel.categoryLiveData.observe(
                 viewLifecycleOwner,
                 Observer { categories ->
-                    sortCategories(categories)
+                    divideActiveAndInactiveCategories(categories)
                     rvActiveCategories.adapter = CategoriesAdapter(
                         activeCategories,
                         EditCategoriesOnClickListener(),
@@ -93,7 +94,8 @@ class CategoriesFragment : Fragment() {
         return binding.root
     }
 
-    fun sortCategories(categories: ArrayList<Category>) {
+    fun divideActiveAndInactiveCategories(_categories: ArrayList<Category>) {
+        val categories = sortCategories(_categories)
         activeCategories.clear()
         inactiveCategories.clear()
         for (category in categories) {
@@ -105,6 +107,18 @@ class CategoriesFragment : Fragment() {
         }
     }
 
+    private fun sortCategories(categories: ArrayList<Category>): ArrayList<Category>{
+        Collections.sort(categories, object: Comparator<Category>{
+            override fun compare(o1: Category?, o2: Category?): Int {
+                return if(o1 != null && o2 != null){
+                    o1.skillCategory.toLowerCase().compareTo(o2.skillCategory.toLowerCase())
+                }else{
+                    0
+                }
+            }
+        })
+        return categories
+    }
     inner class ToggleCategoryStatusOnClickListener : ToggleCategoryListenerInterface {
         override fun onToggleCategory(category: Category) {
             category.active = !category.active

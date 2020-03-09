@@ -29,9 +29,6 @@
         <argument
             android:name="auditWeekNotesSelected"
             app:argType="com.revature.caliberdroid.data.model.AuditWeekNotes" />
-        <action
-            android:id="@+id/action_qualityAuditOverallFragment_to_qualityAuditBatchSelectionFragment"
-            app:popUpTo="@id/qualityAuditBatchSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/qualityAuditTraineesFragment"

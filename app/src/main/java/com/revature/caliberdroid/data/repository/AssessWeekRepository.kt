@@ -3,43 +3,37 @@ package com.revature.caliberdroid.data.repository
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.*
+import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 
 object AssessWeekRepository {
 
-    fun getAssessBatchOverallNote(batchId: Long,weekNumber: Int): MutableLiveData<Note> {
-        val liveData = MutableLiveData<Note>()
+    fun getAssessWeekData(batch: Batch,weekNumber: Int): AssessWeekLiveData {
+        var assessWeekNotes = AssessWeekNotes(weekNumber,batch)
 
-        APIHandler.getAssessBatchOverallNote(liveData,batchId,weekNumber)
+        APIHandler.getAssessWeekNotes(assessWeekNotes)
 
-        return liveData
-    }
+        var liveData = AssessWeekLiveData()
 
-    fun getAssessWeekData(batchId: Long,weekNumber: Int): MutableLiveData<AssessWeekNotes> {
-        var assessWeekNotes = AssessWeekNotes(weekNumber,0f,"",null, getAssessments(batchId,weekNumber),
-            getGrades(batchId,weekNumber), getTraineeNotes(batchId,weekNumber))
-        var liveData = MutableLiveData<AssessWeekNotes>()
         liveData.value = assessWeekNotes
         return liveData
     }
 
-    fun getAssessments(batchId:Long,weekNumber:Int): MutableLiveData<List<Assessment>> {
-        val liveData = MutableLiveData<List<Assessment>>()
 
-        APIHandler.getAssessments(liveData,batchId,weekNumber)
+    fun getBatchAssessWeekNotes(batch:Batch):MutableLiveData<ArrayList<AssessWeekLiveData>> {
+        var liveData = MutableLiveData<ArrayList<AssessWeekLiveData>>()
 
-        return liveData
-    }
+        liveData.value = ArrayList()
 
-    fun getGrades(batchId:Long,weekNumber:Int): MutableLiveData<List<Grade>> {
-        val liveData = MutableLiveData<List<Grade>>()
-
-        APIHandler.getGrades(liveData,batchId,weekNumber)
+        for(i in 1..batch.weeks) {
+            liveData.value!!.add(getAssessWeekData(batch,i))
+        }
 
         return liveData
     }
 
     fun getTraineeNotes(batchId:Long,weekNumber:Int): MutableLiveData<List<Note>> {
         val liveData = MutableLiveData<List<Note>>()
+        liveData.postValue(arrayListOf())
 
         APIHandler.getTraineeNotes(liveData,batchId,weekNumber)
 
@@ -48,6 +42,7 @@ object AssessWeekRepository {
 
     fun getTrainees(batchId: Long): MutableLiveData<List<Trainee>> {
         val liveData = MutableLiveData<List<Trainee>>()
+        liveData.postValue(arrayListOf())
 
         APIHandler.getTrainees(liveData,batchId)
 

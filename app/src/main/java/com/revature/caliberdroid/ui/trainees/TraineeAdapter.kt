@@ -30,20 +30,21 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var item = trainees.get(position)
-        holder.name.setText(item.name)
-        holder.email.setText(item.email)
-        holder.phone.setText(item.phoneNumber)
-        holder.skype.setText(item.skypeId)
-        holder.profile.setText(item.profileUrl)
-        holder.college.setText(item.college)
-        holder.major.setText(item.major)
-        holder.recruiter.setText(item.recruiterName)
-        holder.project.setText(item.projectCompletion)
-        holder.screener.setText(item.techScreenerName)
-        holder.status.setText(item.trainingStatus)
+        val item = trainees.get(position)
+        holder.name.text = item.name
+        holder.email.text = item.email
+        holder.phone.text = item.phoneNumber
+        holder.skype.text = item.skypeId
+        holder.profile.text = item.profileUrl
+        holder.college.text = item.college
+        holder.major.text = item.major
+        holder.recruiter.text = item.recruiterName
+        holder.project.text = item.projectCompletion
+        holder.screener.text = item.techScreenerName
+        holder.status.text = item.trainingStatus
 
-        var mDetectorCompat = GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
+        val mDetectorCompat =
+            GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
         holder.itemView.setOnTouchListener { v, event ->
             //textView?.setText(event.toString())
             mDetectorCompat.onTouchEvent(event)
@@ -56,7 +57,7 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         }
 
         holder.btnDelete.setOnClickListener {
-            var pop = PopupWindow()
+            val pop = PopupWindow()
             pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
         }
 
@@ -136,13 +137,13 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.details.visibility = View.VISIBLE
-                holder.isExpanded = !holder.isExpanded;
+                holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
                 holder.details.visibility = View.GONE
-                holder.isExpanded = !holder.isExpanded;
+                holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)
             }
@@ -159,8 +160,8 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
             velocityX: Float,
             velocityY: Float
         ): Boolean {
-            var differY = e2!!.getY() - e1!!.getY()
-            var differX = e2!!.getX() - e1!!.getX()
+            val differY = e2!!.y - e1!!.y
+            val differX = e2.x - e1.x
 
             if (Math.abs(differX) > differY) {
                 if (Math.abs(differX) > SWIPE_THRESHOLD) {

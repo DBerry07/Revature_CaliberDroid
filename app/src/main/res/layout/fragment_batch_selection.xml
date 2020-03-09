@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout_batch_selection"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,13 +23,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_batch_selection_select_week"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_batch_selection_select_quarter"
         app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/spinner_year_hint"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner_batch_selection_select_week"
+        android:id="@+id/spinner_batch_selection_select_quarter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,5 +38,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/spinner_batch_selection_select_year"
+        android:hint="@string/select_a_quarter"
         app:layout_constraintTop_toTopOf="@+id/spinner_batch_selection_select_year" />
 </androidx.constraintlayout.widget.ConstraintLayout>

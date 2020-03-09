@@ -13,12 +13,17 @@ import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.data.model.TraineeWithNotes
 import com.revature.caliberdroid.data.parser.AuditParser
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONArray
 import timber.log.Timber
 
 object AuditAPIHandler {
 
-    fun getAuditWeekNotes(context: Context, liveData: MutableLiveData<ArrayList<AuditWeekNotes>>, batch: Batch) {
+    fun getAuditWeekNotes(
+        context: Context,
+        liveData: MutableLiveData<ArrayList<WeekLiveData>>,
+        batch: Batch
+    ) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/notes/overall/${batch.batchID}"
@@ -49,10 +54,10 @@ object AuditAPIHandler {
 
                     liveData.value?.get(i - 1).apply {
                         if (!auditWeekNotes.overallNotes.equals("null")) {
-                            this?.overallNotes = auditWeekNotes.overallNotes
+                            this?.value?.overallNotes = auditWeekNotes.overallNotes
                         }
                         if (!auditWeekNotes.overallStatus.equals("null")) {
-                            this?.overallStatus = auditWeekNotes.overallStatus
+                            this?.value?.overallStatus = auditWeekNotes.overallStatus
                         }
                     }
                 },

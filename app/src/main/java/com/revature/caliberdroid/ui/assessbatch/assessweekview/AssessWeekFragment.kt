@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
-import com.google.android.material.tabs.TabLayout
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAssessWeekBinding
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 
 class AssessWeekFragment : Fragment() {
@@ -21,7 +18,6 @@ class AssessWeekFragment : Fragment() {
     private val assessWeekViewModel: AssessWeekViewModel by activityViewModels()
     private var _assessWeekBinding: FragmentAssessWeekBinding? = null
     private val assessWeekBinding get() = _assessWeekBinding!!
-    private val args: AssessWeekFragmentArgs by navArgs()
 
     companion object {
         fun newInstance() = AssessWeekFragment()
@@ -34,15 +30,7 @@ class AssessWeekFragment : Fragment() {
 
         _assessWeekBinding = FragmentAssessWeekBinding.inflate(inflater)
 
-        var assessWeekNotesSelected = args.assessWeekNotesSelected
-
-        assessWeekNotesSelected.batch!!.trainees = arrayListOf(
-            Trainee(1, "1", "Charles Mersereau"),
-            Trainee(2, "2", "Gavin Mitchell"),
-            Trainee(3,"3", "Thiago Barbosa")
-        )
-
-        assessWeekViewModel.assessWeekNotes.postValue(args.assessWeekNotesSelected)
+        assessWeekViewModel.loadTrainees()
 
         val viewPager = assessWeekBinding.viewpagerWeekview
         assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)

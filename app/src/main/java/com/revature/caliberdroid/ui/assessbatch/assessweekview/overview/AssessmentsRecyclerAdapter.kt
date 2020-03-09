@@ -2,12 +2,11 @@ package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.ItemAssessweekoverviewAssessmentBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 class AssessmentsRecyclerAdapter(
     val context: Context,
@@ -21,15 +20,15 @@ class AssessmentsRecyclerAdapter(
         return AssessmentViewHolder(ItemAssessweekoverviewAssessmentBinding.inflate(LayoutInflater.from(context)), onItemClickListener)
     }
 
-    override fun getItemCount(): Int = assessWeekViewModel.assessWeekNotes.value!!.assessments.value!!.size
+    override fun getItemCount(): Int = assessWeekViewModel.assessWeekNotes.assessments.size
 
     override fun onBindViewHolder(holder: AssessmentViewHolder, position: Int) {
-        holder.binding.assessment = assessWeekViewModel.assessWeekNotes.value!!.assessments.value!![position]
+        holder.binding.assessment = assessWeekViewModel.assessWeekNotes.assessments[position]
 
         holder.binding.average = 95f
 
         holder.binding.btnAsssessmentsrecyclerTraineegrades.setOnClickListener {
-            onItemClickListener.onAssessmentClicked(assessWeekViewModel.assessWeekNotes.value!!.assessments.value!![position])
+            onItemClickListener.onAssessmentClicked(assessWeekViewModel.assessWeekNotes.assessments[position])
         }
     }
 

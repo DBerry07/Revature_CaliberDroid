@@ -75,4 +75,7 @@ dependencies {
     // Transitions
     def transition_version = "1.3.1"
     implementation "androidx.transition:transition:$transition_version"
+
+    // MaterialSpinner
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
 }

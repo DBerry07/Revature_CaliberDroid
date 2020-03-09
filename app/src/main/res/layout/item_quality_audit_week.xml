@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <import type="com.revature.caliberdroid.util.AuditStatusConverter" />
+
         <variable
-            name="auditWeekNotes"
-            type="com.revature.caliberdroid.data.model.AuditWeekNotes"/>
+            name="weekLiveData"
+            type="com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -29,7 +30,7 @@
                 android:id="@+id/tv_auditweek_weeknumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/week_number(auditWeekNotes.weekNumber)}"
+                android:text="@{@string/week_number(weekLiveData.weekNumber)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,14 +54,14 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintStart_toEndOf="@+id/tv_auditweek_overall_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_auditweek_weeknumber"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(weekLiveData.overallStatus)}" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{@string/overall_qc_feedback(auditWeekNotes.weekNumber)}"
+                android:text="@{@string/overall_qc_feedback(weekLiveData.weekNumber)}"
                 app:layout_constraintStart_toStartOf="@+id/tv_auditweek_overall_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_auditweek_overall_label" />
 
@@ -77,8 +78,8 @@
                     android:id="@+id/tv_auditweek_overall_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{auditWeekNotes.overallNotes}"
-                    android:hint="@{@string/overall_qc_feedback_hint(auditWeekNotes.weekNumber)}"/>
+                    android:hint="@{@string/overall_qc_feedback_hint(weekLiveData.weekNumber)}"
+                    android:text="@{weekLiveData.overallNotes}" />
             </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

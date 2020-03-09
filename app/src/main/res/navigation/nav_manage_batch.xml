@@ -48,9 +48,12 @@
         android:id="@+id/addTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.AddTraineeFragment"
         android:label="AddTraineeFragment" >
-        <action
-            android:id="@+id/action_addTraineeFragment_to_traineeFragment"
-            app:destination="@id/traineeFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_addTraineeFragment_to_traineeFragment"-->
+<!--            app:destination="@id/traineeFragment" />-->
+        <argument
+            android:name="currentBatch"
+            app:argType="com.revature.caliberdroid.data.model.Batch" />
     </fragment>
     <fragment
         android:id="@+id/switchTraineeFragment"

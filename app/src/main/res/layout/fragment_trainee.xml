@@ -21,6 +21,26 @@
         android:text="ADD TRAINEE"
         android:drawablePadding="-5dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="right|end"
+        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvActiveTrainees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Active Trainees Only"
+            />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/swtActiveTrainees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:thumbTint="@color/trainee_switch_active_status"
+            app:trackTint="@color/trainee_switch_track_active_status"
+            />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/TM_recycler"
         android:layout_width="match_parent"

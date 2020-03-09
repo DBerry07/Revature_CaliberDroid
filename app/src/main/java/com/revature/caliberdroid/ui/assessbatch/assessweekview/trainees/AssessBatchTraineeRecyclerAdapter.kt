@@ -1,28 +1,22 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Note
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
 import com.revature.caliberdroid.databinding.ItemAssessBatchTraineeBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
 import kotlinx.android.synthetic.main.item_assess_batch_trainee.view.*
 import timber.log.Timber
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekViewModel: AssessWeekViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

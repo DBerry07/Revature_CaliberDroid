@@ -28,6 +28,7 @@
     <string name="dialog_add_week_message">Are you sure you want to add a week? This action can not be undone.</string>
     <string name="add_categories">Add categories</string>
     <string name="spinner_year_hint">Select a year</string>
+    <string name="select_a_quarter">Select a quarter</string>
 
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>

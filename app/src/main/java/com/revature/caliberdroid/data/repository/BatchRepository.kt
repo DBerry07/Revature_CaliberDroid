@@ -4,21 +4,34 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 
 object BatchRepository {
 
-    fun getBatches(): LiveData<List<Batch>> {
+    fun getBatchesByYearAndQuarter(selectedYear: Int): LiveData<List<Batch>> {
 
         val liveData = MutableLiveData<List<Batch>>()
 
-        APIHandler.getBatches(liveData)
+        APIHandler.getBatchesByYear(liveData, selectedYear)
 
         return liveData
     }
 
-    fun addWeek(batch: Batch, listLiveData: MutableLiveData<ArrayList<WeekLiveData>>) {
-        APIHandler.addWeek(batch, listLiveData)
+    fun getBatchesByYearAndQuarter(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int,
+        selectedQuarter: Int
+    ) {
+        APIHandler.getBatchesByYearAndQuarter(liveData, selectedYear, selectedQuarter)
+    }
+
+    fun addWeekFromAudit(batch: Batch, listLiveData: MutableLiveData<ArrayList<WeekLiveData>>) {
+        APIHandler.addWeekFromAudit(batch, listLiveData)
+    }
+
+    fun addWeekFromAssess(batch: Batch, listLiveData: MutableLiveData<ArrayList<AssessWeekLiveData>>) {
+        APIHandler.addWeekFromAssess(batch, listLiveData)
     }
 
     fun getValidYears(): LiveData<List<Int>> {

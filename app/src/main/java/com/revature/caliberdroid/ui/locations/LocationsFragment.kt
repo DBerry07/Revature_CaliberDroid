@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +17,9 @@ import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface
+import com.revature.caliberdroid.adapter.locations.listeners.EditLocationStatusInterface
 import com.revature.caliberdroid.data.model.Location
+import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
 
 
@@ -43,7 +46,7 @@ class LocationsFragment : Fragment(){
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
 
-                    rvLocations.adapter = LocationsAdapter(locations, EditLocationListener())
+                    rvLocations.adapter = LocationsAdapter(locations, EditLocationListener(), EditLocationStatusListener())
                     for (location in locations) {
                         Log.d("Locations", "Location: ${location.toString()}")
                     }
@@ -64,6 +67,20 @@ class LocationsFragment : Fragment(){
         override fun onEditLocation(location: Location){
             locationsViewModel.selectedLocationLiveData.value = location
             navController?.navigate(R.id.action_locationsFragment_to_editLocationFragment)
+        }
+    }
+
+    inner class EditLocationStatusListener: EditLocationStatusInterface {
+        override fun editLocationStatus(location: Location, statusImageView: ImageView) {
+            location.active = !location.active
+            if(location.active){
+                statusImageView.setImageResource(R.drawable.ic_active_green)
+                statusImageView.setBackgroundResource(R.drawable.background_active_status)
+            }else{
+                statusImageView.setImageResource(R.drawable.ic_inactive_red)
+                statusImageView.setBackgroundResource(R.drawable.background_inactive_status)
+            }
+            LocationRepository.editLocation(location)
         }
     }
 }

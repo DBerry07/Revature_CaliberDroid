@@ -22,6 +22,7 @@ import com.revature.caliberdroid.util.DialogInvalidInput
 import com.revature.caliberdroid.util.FieldValidator
 import kotlinx.android.synthetic.main.fragment_settings_add_location.*
 import kotlinx.android.synthetic.main.include_location_fields.view.*
+import kotlinx.android.synthetic.main.item_settings_location.*
 import timber.log.Timber
 
 
@@ -106,6 +107,8 @@ class EditLocationFragment : Fragment() {
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                 }
             }
+
+
         }
         return binding.root
     }

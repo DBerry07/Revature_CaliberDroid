@@ -18,7 +18,6 @@ import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
-import kotlinx.android.synthetic.main.item_quality_audit_trainee.*
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
@@ -46,8 +45,8 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         assessWeekOverviewBinding.etAssessweekBatchnotes.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                if ((v as EditText).text.toString() == assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
-                    var note = assessWeekViewModel.assessWeekNotes.batchNote
+                if ((v as EditText).text.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
+                    var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
                     note.noteContent = (v as EditText).text.toString()
                     assessWeekViewModel.saveBatchNote(note)
                 }
@@ -55,9 +54,9 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
         })
 
         assessWeekOverviewBinding.etAssessweekBatchnotes.addTextChangedListener {
-            if ((it as EditText).text.toString() == assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
-                var note = assessWeekViewModel.assessWeekNotes.batchNote
-                note.noteContent = (it as EditText).text.toString()
+            if (it.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
+                var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
+                note.noteContent = it.toString()
                 assessWeekViewModel.startDelayedSaveThread(note, assessWeekViewModel::saveBatchNote)
             }
         }

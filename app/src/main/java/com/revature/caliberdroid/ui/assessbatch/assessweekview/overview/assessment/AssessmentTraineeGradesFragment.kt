@@ -1,6 +1,5 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
-import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.databinding.FragmentAssessmentTraineeGradesBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 class AssessmentTraineeGradesFragment : Fragment() {
 

@@ -2,7 +2,6 @@ package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +15,7 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 

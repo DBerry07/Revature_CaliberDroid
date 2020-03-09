@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
@@ -67,7 +68,7 @@ object APIHandler {
         queue.add(batchesRequest)
     }
 
-    fun addWeek(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
+    fun addWeekFromAudit(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: WeekLiveData
@@ -82,6 +83,31 @@ object APIHandler {
                     batch.weeks += 1
                     data = WeekLiveData()
                     data.value = AuditWeekNotes(batch.weeks)
+                    this.add(data)
+                })
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            })
+
+        queue.add(addWeekRequest)
+    }
+
+    fun addWeekFromAssess(batch: Batch, liveData: MutableLiveData<ArrayList<AssessWeekLiveData>>) {
+        val queue = Volley.newRequestQueue(context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        lateinit var data: AssessWeekLiveData
+
+        val addWeekRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            JSONParser.getBatchJSONObject(batch).apply { put("weeks", getInt("weeks") + 1) },
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                liveData.postValue(liveData.value!!.apply {
+                    batch.weeks += 1
+                    data = AssessWeekLiveData()
+                    data.value = AssessWeekNotes(batch.weeks, batch)
                     this.add(data)
                 })
             },

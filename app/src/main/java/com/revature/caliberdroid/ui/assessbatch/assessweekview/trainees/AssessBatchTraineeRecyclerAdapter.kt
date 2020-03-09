@@ -73,7 +73,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
 
 
         fun bind(trainee:Trainee,note:Note,grades:List<Grade>,assessments:List<Assessment>) {
-            var mAdapter = TraineeAssessmentsRecycleAdapter(grades, assessments,context)
+            var mAdapter = TraineeAssessmentsRecycleAdapter(grades, assessments,trainee.traineeId,context)
             var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
             binding.recycleAssessBatchTraineesAssessments.layoutManager = linearLayoutManager
             binding.recycleAssessBatchTraineesAssessments.adapter = mAdapter
@@ -81,7 +81,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             binding.traineeNote = note
             var oldText = binding.etAssessBatchTraineesNote.text.toString()
             binding.etAssessBatchTraineesNote.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if(!hasFocus and !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
+                if(!hasFocus && !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
                     Timber.d("putting note"+(binding.traineeNote as Note).toString())
                     AssessWeekRepository.putTraineeNote(binding.traineeNote as Note)
                 } else {

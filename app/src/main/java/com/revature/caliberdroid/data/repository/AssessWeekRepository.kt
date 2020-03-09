@@ -49,4 +49,8 @@ object AssessWeekRepository {
         return liveData
     }
 
+    fun putTraineeNote(note: Note) {
+        APIHandler.putTraineeNote(note)
+    }
+
 }

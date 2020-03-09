@@ -1,25 +1,34 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Note
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.repository.AssessWeekRepository
 import com.revature.caliberdroid.databinding.ItemAssessBatchTraineeBinding
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
 import kotlinx.android.synthetic.main.item_assess_batch_trainee.view.*
+import timber.log.Timber
 
 class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekViewModel: AssessWeekViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return TraineeViewHolder(
-            ItemAssessBatchTraineeBinding.inflate(LayoutInflater.from(context)), context!!)
+            ItemAssessBatchTraineeBinding.inflate(LayoutInflater.from(context)),assessWeekViewModel, context!!)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -58,11 +67,14 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 return note
             }
         }
+        if(traineeNote.weekNumber==0) {
+            traineeNote = Note(-1L,"","TRAINEE",assessWeekViewModel.assessWeekNotes.weekNumber,assessWeekViewModel.assessWeekNotes.batch!!.batchID,traineeId)
+        }
         return traineeNote
     }
 
     class TraineeViewHolder constructor(
-        val binding: ItemAssessBatchTraineeBinding, val context: Context
+        val binding: ItemAssessBatchTraineeBinding, val assessWeekViewModel: AssessWeekViewModel, val context: Context
     ): RecyclerView.ViewHolder(binding.root) {
 
 
@@ -73,8 +85,38 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             binding.recycleAssessBatchTraineesAssessments.adapter = mAdapter
             binding.trainee = trainee
             binding.traineeNote = note
+            var oldText = binding.etAssessBatchTraineesNote.text.toString()
+            binding.etAssessBatchTraineesNote.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus and !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
+                    Timber.d("putting note"+(binding.traineeNote as Note).toString())
+                    AssessWeekRepository.putTraineeNote(binding.traineeNote as Note)
+                } else {
+                    oldText = v.et_assess_batch_trainees_note.text.toString()
+                }
+            }
+            binding.etAssessBatchTraineesNote.addTextChangedListener(object : TextWatcher {
+
+                override fun afterTextChanged(s: Editable) {}
+
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {
+                    (binding.traineeNote as Note).noteContent = binding.etAssessBatchTraineesNote.text.toString()
+                }
+            })
+
+            binding.root.isFocusable = true
+            binding.root.isFocusableInTouchMode = true
+            binding.root.setOnClickListener {
+                Timber.d("clicking on away")
+                it.requestFocus()
+            }
+
+            }
         }
 
     }
 
-}

@@ -119,6 +119,11 @@ object APIHandler {
         TraineeAPIHandler.postTrainee(jsonObject)
     }
 
+    fun putTraineeNote(note:Note) {
+        Timber.d(note.toString())
+        NoteAPIHandler.putTraineeNote(note)
+    }
+
     fun getLocations(liveData: MutableLiveData< ArrayList<Location> >){
         LocationsAPI.getLocations(liveData)
     }

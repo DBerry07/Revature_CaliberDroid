@@ -46,4 +46,43 @@ object NoteAPIHandler {
 
         queue.add(objectRequest)
     }
+
+    fun putTraineeNote(traineeNote: Note){
+        val queue = Volley.newRequestQueue(APIHandler.context)
+
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/note"
+
+        lateinit var jsonBody:JSONObject
+        if(traineeNote.noteId==-1L){
+            jsonBody = JSONObject(
+                " {\"noteContent\": \"" + traineeNote.noteContent + "\", " +
+                        "\"noteType\": \"" + traineeNote.noteType + "\", " +
+                        "\"weekNumber\": " + traineeNote.weekNumber + ", " +
+                        "\"batchId\": " + traineeNote.batchId + ", " +
+                        "\"traineeId\": " + traineeNote.traineeId + "} "
+            )
+
+        } else {
+             jsonBody = JSONObject(
+                " {\"noteId\": " + traineeNote.noteId + ", " +
+                        "\"noteContent\": \"" + traineeNote.noteContent + "\", " +
+                        "\"noteType\": \"" + traineeNote.noteType + "\", " +
+                        "\"weekNumber\": " + traineeNote.weekNumber + ", " +
+                        "\"batchId\": " + traineeNote.batchId + ", " +
+                        "\"traineeId\": " + traineeNote.traineeId + "} "
+            )
+        }
+
+        val objectRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            jsonBody,
+            Response.Listener { response ->
+                traineeNote.noteId = JSONParser.parseNote(response).noteId
+            },
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
+
+        queue.add(objectRequest)
+    }
 }

@@ -13,7 +13,6 @@ import com.revature.caliberdroid.databinding.ItemTraineeAssessmentBinding
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 
 class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var items : List<Grade> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
@@ -24,13 +23,13 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is AssessmentViewHolder ->{
-                holder.bind(items.get(position),getAssessmentForGrade(items.get(position).assessmentId!!)!!)
+                holder.bind(grades.get(position),getAssessmentForGrade(grades.get(position).assessmentId!!)!!)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return grades.size
     }
 
     fun getAssessmentForGrade(assessmentId:Long) : Assessment? {

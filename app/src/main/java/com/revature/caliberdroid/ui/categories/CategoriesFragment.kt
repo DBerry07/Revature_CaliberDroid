@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -16,8 +17,10 @@ import com.revature.caliberdroid.adapter.categories.listeners.ToggleCategoryList
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsCategoriesBinding
+import com.revature.caliberdroid.util.DialogInvalidInput
 import kotlinx.android.synthetic.main.fragment_settings_categories.*
 import timber.log.Timber
+import java.lang.StringBuilder
 
 class CategoriesFragment : Fragment() {
     var _binding: FragmentSettingsCategoriesBinding? = null
@@ -27,6 +30,7 @@ class CategoriesFragment : Fragment() {
     val inactiveCategories: ArrayList<Category> = ArrayList()
     lateinit var addCategoryDialogView: View
     lateinit var editCategoryDialogView: View
+    val validationString = StringBuilder()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,25 +62,30 @@ class CategoriesFragment : Fragment() {
                     )
                 })
             btnAddCategory.setOnClickListener {
-                var builder: AlertDialog.Builder = AlertDialog.Builder(context);
+                val builder: AlertDialog.Builder = AlertDialog.Builder(context);
                 addCategoryDialogView = LayoutInflater.from(context).inflate(
                     R.layout.dialog_add_category,
                     view!!.findViewById(android.R.id.content)
                 )
+                val etField = addCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
                 builder.setView(addCategoryDialogView)
                     .setPositiveButton(R.string.btn_add,
                         DialogInterface.OnClickListener { dialog, id ->
-                            var etField = addCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
-                            var entry:String = etField.text.toString()
-                            CategoryRepository.addCategory(entry,categoriesViewModel.categoryLiveData)
+                            val entry = etField.text.toString()
+                            if( CategoriesFieldValidator.validateFields(validationString,entry) ){
+                                Timber.d("Category validation passed")
+                                CategoryRepository.addCategory(entry,categoriesViewModel.categoryLiveData)
+                            }else{
+                                Timber.d("Category validation failed")
+                            }
                         }
                     )
                     .setNegativeButton(R.string.btn_cancel,
                         DialogInterface.OnClickListener { dialog, id ->
-
+                            DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                         }
                     )
-                var alertDialog: AlertDialog = builder.create();
+                val alertDialog: AlertDialog = builder.create()
                 alertDialog.show()
             }
         }
@@ -110,11 +119,18 @@ class CategoriesFragment : Fragment() {
                 R.layout.dialog_edit_category,
                 view!!.findViewById(android.R.id.content)
             )
+            val etField = editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
             builder.setView(editCategoryDialogView)
                 .setPositiveButton(R.string.btn_confirm,
                     DialogInterface.OnClickListener { dialog, id ->
-                        category.skillCategory = editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField).text.toString()
-                        CategoryRepository.editCategory(category,categoriesViewModel.categoryLiveData)
+                        val entry = etField.text.toString()
+                        if(CategoriesFieldValidator.validateFields(validationString,entry)){
+                            category.skillCategory = entry
+                            CategoryRepository.editCategory(category,categoriesViewModel.categoryLiveData)
+                        }else{
+                            Timber.d("Category validation failed")
+                            DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
+                        }
                     }
                 )
                 .setNegativeButton(R.string.btn_cancel,

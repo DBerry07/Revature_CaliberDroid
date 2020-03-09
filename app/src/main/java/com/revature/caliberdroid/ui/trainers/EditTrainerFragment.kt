@@ -1,20 +1,24 @@
 package com.revature.caliberdroid.ui.trainers
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.adapter.trainers.TiersAdapter
+import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.TrainerRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditTrainerBinding
+import com.revature.caliberdroid.util.DialogInvalidInput
 import kotlinx.android.synthetic.main.include_trainer_fields.*
 import timber.log.Timber
 
@@ -24,6 +28,7 @@ class EditTrainerFragment : Fragment() {
     private val trainersViewModel: TrainersViewModel by activityViewModels()
     private lateinit var trainer: Trainer
     private var selectedTier: String = ""
+    private val validationString = StringBuilder()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,10 @@ class EditTrainerFragment : Fragment() {
         val context = getContext()!!
         val list_of_items = resources.getStringArray(R.array.trainer_tiers)
         binding.apply {
-            val adapter = TiersAdapter(context, list_of_items)
+            val adapter = SettingsSpinnerItemAdapter(
+                context,
+                list_of_items
+            )
 
             val spinner: Spinner = inTrainerFields.spnTier
             spinner.adapter = adapter
@@ -54,17 +62,36 @@ class EditTrainerFragment : Fragment() {
             inTrainerFields.etFullName.setText(trainer.name)
             inTrainerFields.etEmail.setText(trainer.email)
             inTrainerFields.etTitle.setText(trainer.title)
+            Timber.d("This is the selected trainer's tier: "+trainer.tier)
+            for(i in 0 until inTrainerFields.spnTier.count){
+                Timber.d("Running through list of spinner: "+inTrainerFields.spnTier.getItemAtPosition(i).toString())
+                if( inTrainerFields.spnTier.getItemAtPosition(i).equals(trainer.tier) ){
+                    inTrainerFields.spnTier.setSelection(i)
+                }
+            }
 
             btnEditTrainer.setOnClickListener {
-                trainer.name = etFullName.text.toString()
-                trainer.email = etEmail.text.toString()
-                trainer.title = etTitle.text.toString()
-                trainer.tier = selectedTier
+                if(
+                    TrainersFieldValidator.validateFields(
+                        validationString,
+                        inTrainerFields.etFullName,
+                        inTrainerFields.etEmail,
+                        inTrainerFields.etTitle
+                    )
+                ){
+                    trainer.name = etFullName.text.toString()
+                    trainer.email = etEmail.text.toString()
+                    trainer.title = etTitle.text.toString()
+                    trainer.tier = selectedTier
 
-                Timber.d("Updated trainer: ${trainer.toString()}")
-                TrainerRepository.editTrainer(trainer)
+                    Timber.d("Updated trainer: ${trainer.toString()}")
+                    TrainerRepository.editTrainer(trainer)
 
-                findNavController().navigateUp()
+                    findNavController().navigateUp()
+                }else{
+                    Timber.d("Validation of fields failed: "+validationString.toString())
+                    DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
+                }
             }
         }
 

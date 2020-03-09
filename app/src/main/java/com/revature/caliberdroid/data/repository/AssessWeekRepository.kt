@@ -49,4 +49,8 @@ object AssessWeekRepository {
         return liveData
     }
 
+    fun saveBatchNote(note: Note) {
+        APIHandler.putAssessBatchOverallNote(note)
+    }
+
 }

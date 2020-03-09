@@ -209,4 +209,8 @@ object APIHandler {
     fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.editCategory(category,liveData)
     }
+
+    fun putAssessBatchOverallNote(note: Note) {
+        NoteAPIHandler.putAssessBatchOverallNote(note)
+    }
 }

@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,7 @@ import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
+import kotlinx.android.synthetic.main.item_quality_audit_trainee.*
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
@@ -36,6 +39,28 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
         _assessWeekOverviewBinding = FragmentAssessWeekOverviewBinding.inflate(inflater)
 
         assessWeekOverviewBinding.assessWeekModel = assessWeekViewModel
+
+        assessWeekOverviewBinding.root.setOnClickListener(View.OnClickListener {
+            assessWeekOverviewBinding.etAssessweekBatchnotes.clearFocus()
+        })
+
+        assessWeekOverviewBinding.etAssessweekBatchnotes.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                if ((v as EditText).text.toString() == assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
+                    var note = assessWeekViewModel.assessWeekNotes.batchNote
+                    note.noteContent = (v as EditText).text.toString()
+                    assessWeekViewModel.saveBatchNote(note)
+                }
+            }
+        })
+
+        assessWeekOverviewBinding.etAssessweekBatchnotes.addTextChangedListener {
+            if ((it as EditText).text.toString() == assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
+                var note = assessWeekViewModel.assessWeekNotes.batchNote
+                note.noteContent = (it as EditText).text.toString()
+                assessWeekViewModel.startDelayedSaveThread(note, assessWeekViewModel::saveBatchNote)
+            }
+        }
 
         assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener(View.OnClickListener {
 

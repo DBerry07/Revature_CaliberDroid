@@ -22,7 +22,7 @@ object NoteAPIHandler {
             url,
             null,
             Response.Listener<JSONObject> { response ->
-                assessWeekNotes.batchNote=JSONParser.parseNote(response)
+                assessWeekNotes.batchNote = JSONParser.parseNote(response)
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )

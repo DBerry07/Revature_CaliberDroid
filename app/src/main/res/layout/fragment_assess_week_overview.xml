@@ -12,6 +12,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_assessweekoverview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.assessbatch.assessweekview.overview.AssessWeekOverviewFragment">
@@ -20,8 +21,8 @@
             android:id="@+id/tv_assessweek_batchinfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/banner_font_size"
             android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
+            android:textSize="@dimen/banner_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

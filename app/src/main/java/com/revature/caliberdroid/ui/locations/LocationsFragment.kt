@@ -7,11 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 
 import com.revature.caliberdroid.R
@@ -21,6 +20,7 @@ import com.revature.caliberdroid.adapter.locations.listeners.EditLocationStatusI
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
+import timber.log.Timber
 
 
 class LocationsFragment : Fragment(){
@@ -28,6 +28,8 @@ class LocationsFragment : Fragment(){
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
+    lateinit var adapter:LocationsAdapter
+    var locationsFromAPI = ArrayList<Location>()
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -40,13 +42,15 @@ class LocationsFragment : Fragment(){
         navController = findNavController()
         locationsViewModel.getLocations()
         _binding = FragmentSettingsLocationsBinding.inflate(layoutInflater)
-
         binding.apply {
             setLifecycleOwner(this@LocationsFragment)
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
+                    locationsFromAPI = locations
+                    adapter = LocationsAdapter(EditLocationListener(), EditLocationStatusListener())
+                    adapter.sortedList.addAll(locationsFromAPI)
+                    rvLocations.adapter = adapter
 
-                    rvLocations.adapter = LocationsAdapter(locations, EditLocationListener(), EditLocationStatusListener())
                     for (location in locations) {
                         Log.d("Locations", "Location: ${location.toString()}")
                     }
@@ -58,6 +62,17 @@ class LocationsFragment : Fragment(){
             btnAddLocation.setOnClickListener{
                 navController?.navigate(R.id.action_locationsFragment_to_addLocationFragment)
             }
+
+            searchViewLocations.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {return false}
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    adapter.replaceAll( filterLocations(locationsFromAPI, newText) )
+                    return true
+                }
+
+            })
         }
 
         return binding.root
@@ -82,5 +97,19 @@ class LocationsFragment : Fragment(){
             }
             LocationRepository.editLocation(location)
         }
+    }
+
+    fun filterLocations(locations:ArrayList<Location> , _query:String?): ArrayList<Location>{
+        val filteredLocations: ArrayList<Location> = ArrayList<Location>()
+        if(_query != null){
+            val query = _query.toLowerCase()
+            for(i in 0 until locations.size){
+                val currentLocation = locations.get(i)
+                if(currentLocation.name.toLowerCase().contains(query)){
+                    filteredLocations.add(currentLocation)
+                }
+            }
+        }
+        return filteredLocations
     }
 }

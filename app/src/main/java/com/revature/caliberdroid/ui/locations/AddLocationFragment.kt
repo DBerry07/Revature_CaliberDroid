@@ -46,9 +46,7 @@ class AddLocationFragment : Fragment() {
             for (i in 0 until FieldValidator.StatesList.size) {
                 states.set(
                     i,
-                    FieldValidator.TwoLetterStatesList.get(i) + " " + FieldValidator.StatesList.get(
-                        i
-                    )
+                    FieldValidator.TwoLetterStatesList.get(i) + " " + FieldValidator.StatesList.get(i)
                 )
             }
             val locationsSpinnerAdapter = LocationSpinnerAdapter(

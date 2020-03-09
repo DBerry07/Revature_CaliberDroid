@@ -2,12 +2,11 @@ package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.ItemAssessweekoverviewAssessmentBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 class AssessmentsRecyclerAdapter(
     val context: Context,

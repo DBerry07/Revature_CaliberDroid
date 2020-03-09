@@ -6,7 +6,7 @@
     <data>
         <variable
             name="assessWeekModel"
-            type="com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel"></variable>
+            type="com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel"></variable>
 
     </data>
 

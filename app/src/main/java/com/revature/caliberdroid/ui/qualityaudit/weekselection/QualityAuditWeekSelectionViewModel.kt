@@ -27,7 +27,7 @@ class QualityAuditWeekSelectionViewModel : ViewModel() {
     }
 
     fun addWeek() {
-        BatchRepository.addWeek(batchSelected, auditWeekNotesLiveData)
+        BatchRepository.addWeekFromAudit(batchSelected, auditWeekNotesLiveData)
     }
 
 }

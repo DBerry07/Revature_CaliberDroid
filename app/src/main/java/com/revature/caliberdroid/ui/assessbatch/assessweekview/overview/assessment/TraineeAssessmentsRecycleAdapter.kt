@@ -9,9 +9,8 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Trainee
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import kotlinx.android.synthetic.main.item_assessment_trainee_grades.view.*
-import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 
 class TraineeAssessmentsRecycleAdapter(
     val assessWeekViewModel: AssessWeekViewModel,

@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAddTraineeBinding
 import org.json.JSONObject
@@ -28,12 +30,17 @@ class AddTraineeFragment() : Fragment() {
     private var batchId : Long? = null
     private val model: TraineeViewModel by viewModels()
 
+    //Get the argument of current batch from TraineeFragment
+    private val args: AddTraineeFragmentArgs by navArgs()
+    private lateinit var currentBatch: Batch
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddTraineeBinding.inflate(layoutInflater, container, false)
         val view = binding.root
+        currentBatch = args.currentBatch
 
         //TODO: Add way to get batch ID from previous trainee list fragment
         batchId = 50
@@ -41,7 +48,10 @@ class AddTraineeFragment() : Fragment() {
         binding.apply {
             TMBtnCreateTrainee.setOnClickListener{
                 createTrainee()
-                    findNavController().navigate(R.id.action_addTraineeFragment_to_traineeFragment)
+                findNavController().navigateUp()
+                //Shouldn't navigate back using the way you have below
+                //This method will create problems when user presses the back button
+                    //findNavController().navigate(AddTraineeFragmentDirections.actionAddTraineeFragmentToTraineeFragment( currentBatch ))
             }
         }
 
@@ -65,7 +75,7 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("techScreenerName", binding.traineeScreener.text.toString())
         jsonObject.put("projectCompletion", "")
         jsonObject.put("name", name)
-        jsonObject.put("batchId", batchId)
+        jsonObject.put("batchId", currentBatch.batchID)
         model.postTrainee(jsonObject)
     }
 

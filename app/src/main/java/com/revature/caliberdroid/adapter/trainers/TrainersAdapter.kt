@@ -1,42 +1,75 @@
 package com.revature.caliberdroid.adapter.trainers
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SortedList
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.data.model.Trainer
+import com.revature.caliberdroid.databinding.ItemSettingsTrainerBinding
+import timber.log.Timber
 
-class TrainersAdapter(val trainers: ArrayList<Trainer>, val editListener: EditTrainerInterface): RecyclerView.Adapter<TrainersAdapter.TrainersViewHolder>(){
+class TrainersAdapter(val editListener: EditTrainerInterface): RecyclerView.Adapter<TrainersAdapter.TrainersViewHolder>(){
+    val sortedList = SortedList<Trainer>(Trainer::class.java, SortedTrainerListCallback(this))
 
-    class TrainersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val tvTrainerName: TextView = itemView.findViewById<TextView>(R.id.tvTrainer)
-        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-        val tvEmail: TextView = itemView.findViewById(R.id.tvEmail)
-        val tvTier: TextView = itemView.findViewById(R.id.tvTier)
-        val imgEdit: ImageView = itemView.findViewById(R.id.imgEdit)
+    class TrainersViewHolder(binding: ItemSettingsTrainerBinding) : RecyclerView.ViewHolder(binding.root){
+        val mBinding: ItemSettingsTrainerBinding = binding
+
+        fun bind(item: Trainer){
+            mBinding.model = item
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainersViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_settings_trainer,parent,false)
-        return TrainersViewHolder(view)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding:ItemSettingsTrainerBinding = ItemSettingsTrainerBinding.inflate(layoutInflater, parent, false)
+        return TrainersViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return trainers.size
+        return sortedList.size()
     }
 
     override fun onBindViewHolder(holder: TrainersViewHolder, position: Int) {
-        val trainer: Trainer = trainers.get(position)
-        holder.tvTrainerName.text = trainer.name
-        holder.tvTitle.text = trainer.title
-        holder.tvEmail.text = trainer.email
-        holder.tvTier.text = trainer.tier
-        holder.imgEdit.setOnClickListener {
+        val trainer: Trainer = sortedList.get(position)
+        holder.mBinding.imgEdit.setOnClickListener {
             editListener.onEditTrainer(trainer)
         }
+        holder.bind( sortedList.get(position) )
+    }
+
+    fun add(model: Trainer){
+        sortedList.add(model)
+    }
+
+    fun remove(model: Trainer){
+        sortedList.remove(model)
+    }
+
+    fun add(models: ArrayList<Trainer>){
+        sortedList.addAll(models)
+    }
+
+    fun remove(models: ArrayList<Trainer>){
+        sortedList.beginBatchedUpdates()
+        for(i in 0 until models.size){
+            sortedList.remove(models.get(i))
+        }
+        sortedList.endBatchedUpdates()
+    }
+
+    fun replaceAll(_models: ArrayList<Trainer>){
+        sortedList.beginBatchedUpdates()
+        var count:Int = sortedList.size() - 1
+        while(count >= 0){
+            val current: Trainer = sortedList.get(count)
+            if( !_models.contains(current) ) {
+                sortedList.remove(current)
+            }
+            count--
+        }
+        sortedList.addAll(_models)
+        sortedList.endBatchedUpdates()
     }
 }

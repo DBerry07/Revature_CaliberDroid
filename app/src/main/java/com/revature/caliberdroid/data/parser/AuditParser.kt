@@ -13,6 +13,7 @@ object AuditParser {
 
         var trainee: Trainee
         val length = response.length()
+
         for(i in 0 until length){
             response.getJSONObject(i).apply {
                 trainee = Trainee(
@@ -37,26 +38,36 @@ object AuditParser {
         lateinit var auditTraineeNotes: AuditTraineeNotes
         val length: Int = traineeWithNotesList.size
         val responseLength = response.length()
-        for(i in 0 until responseLength){
-            response.getJSONObject(i).apply {
-                auditTraineeNotes = AuditTraineeNotes(
-                    getLong("noteId"),
-                    weekNumber,
-                    getString("content"),
-                    getString("technicalStatus"),
-                    batch,
-                    getLong("traineeId")
-                )
-            }
-
-            if (auditTraineeNotes.content.equals("null")) {
-                auditTraineeNotes.content = ""
-            }
-
-            for (j in 0 until length) {
-                if (traineeWithNotesList.get(j).trainee.traineeId.equals(auditTraineeNotes.traineeId)) {
-                    traineeWithNotesList.get(j).auditTraineeNotes = auditTraineeNotes
+        if (responseLength > 0) {
+            for (i in 0 until responseLength) {
+                response.getJSONObject(i).apply {
+                    auditTraineeNotes = AuditTraineeNotes(
+                        getLong("noteId"),
+                        weekNumber,
+                        getString("content"),
+                        getString("technicalStatus"),
+                        batch,
+                        getLong("traineeId")
+                    )
                 }
+
+                if (auditTraineeNotes.content.equals("null")) {
+                    auditTraineeNotes.content = ""
+                }
+
+                for (j in 0 until length) {
+                    if (traineeWithNotesList.get(j).trainee.traineeId.equals(auditTraineeNotes.traineeId)) {
+                        traineeWithNotesList.get(j).auditTraineeNotes = auditTraineeNotes
+                    }
+                }
+            }
+        } else {
+            for (traineeWithNotes in traineeWithNotesList) {
+                traineeWithNotes.auditTraineeNotes = AuditTraineeNotes(
+                    weekNumber,
+                    batch,
+                    traineeWithNotes.trainee.traineeId
+                )
             }
         }
 

@@ -4,7 +4,10 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
-data class AuditTraineeNotes(val noteId: Long, val weekNumber: Int, val batch: Batch, val traineeId: Long) : BaseObservable(), SortedListAdapter.ViewModel{
+data class AuditTraineeNotes(val weekNumber: Int, val batch: Batch, val traineeId: Long) :
+    BaseObservable(), SortedListAdapter.ViewModel {
+
+    var noteId: Long = 0
 
     @Bindable var content: String = ""
         set(value) {
@@ -18,7 +21,15 @@ data class AuditTraineeNotes(val noteId: Long, val weekNumber: Int, val batch: B
             notifyChange()
         }
 
-    constructor(noteId: Long, weekNumber: Int, content: String, technicalStatus: String, batch: Batch, traineeId: Long) : this(noteId, weekNumber, batch, traineeId) {
+    constructor(
+        noteId: Long,
+        weekNumber: Int,
+        content: String,
+        technicalStatus: String,
+        batch: Batch,
+        traineeId: Long
+    ) : this(weekNumber, batch, traineeId) {
+        this.noteId = noteId
         this.content = content
         this.technicalStatus = technicalStatus
     }
@@ -26,7 +37,7 @@ data class AuditTraineeNotes(val noteId: Long, val weekNumber: Int, val batch: B
     override fun <T> isSameModelAs(model: T): Boolean {
         if (model is AuditTraineeNotes) {
             val other = model as AuditTraineeNotes
-            return other.noteId == noteId
+            return traineeId == other.traineeId
         }
         return false
     }

@@ -1,61 +1,117 @@
 package com.revature.caliberdroid.ui.locations
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.AdapterView
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.adapter.locations.LocationSpinnerAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.revature.caliberdroid.data.model.Location
+import com.revature.caliberdroid.data.repository.LocationRepository
+import com.revature.caliberdroid.databinding.FragmentSettingsEditLocationBinding
+import com.revature.caliberdroid.util.DialogInvalidInput
+import com.revature.caliberdroid.util.FieldValidator
+import kotlinx.android.synthetic.main.fragment_settings_add_location.*
+import kotlinx.android.synthetic.main.include_location_fields.view.*
+import kotlinx.android.synthetic.main.item_settings_location.*
+import timber.log.Timber
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EditLocationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class EditLocationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentSettingsEditLocationBinding? = null
+    private val binding get() = _binding!!
+    private val locationsViewModel: LocationsViewModel by activityViewModels()
+    private lateinit var location: Location
+    private var selectedState: String = ""
+    private val validationString = StringBuilder()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_location, container, false)
-    }
+        _binding = FragmentSettingsEditLocationBinding.inflate(layoutInflater)
+        location = locationsViewModel.selectedLocationLiveData.value!!
+        val context = context!!
+        binding.apply {
+            inLocationFields.etCompanyName.setText(location.name)
+            inLocationFields.etStreetAddress.setText(location.address)
+            inLocationFields.etCity.setText(location.city)
+            inLocationFields.etZipCode.setText(location.zipcode)
+            //inLocationFields.etState.setText(location.state)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditLocationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditLocationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+            var states = arrayOfNulls<String>(FieldValidator.StatesList.size)
+            for (i in 0 until FieldValidator.StatesList.size) {
+                states.set(
+                    i,
+                    FieldValidator.TwoLetterStatesList.get(i) + " " + FieldValidator.StatesList.get(
+                        i
+                    )
+                )
+            }
+            val locationsSpinnerAdapter = LocationSpinnerAdapter(
+                context,
+                states
+            )
+            val spinner: Spinner = inLocationFields.spnState
+            spinner.adapter = locationsSpinnerAdapter
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    Timber.d("Item selected: ${spinner.getItemAtPosition(position)}")
+                    selectedState = spinner.getItemAtPosition(position).toString()
+                    Timber.d("Selected state: $selectedState")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
+
+
+
+
+            btnEditLocation.setOnClickListener {
+                if (
+                    LocationsFieldValidator.validateFields(
+                        validationString,
+                        inLocationFields.etCompanyName,
+                        inLocationFields.etCity,
+                        inLocationFields.etZipCode,
+                        inLocationFields.etStreetAddress,
+                        null
+                    )
+                ) {
+                    Timber.d("Entry passed validation.")
+                    location.name = inLocationFields.etCompanyName.text.toString()
+                    location.address = inLocationFields.etStreetAddress.text.toString()
+                    location.city = inLocationFields.etCity.text.toString()
+                    if( !FieldValidator.isEmptyString(selectedState) ){
+                        location.state = selectedState
+                    }
+                    location.zipcode = inLocationFields.etZipCode.text.toString()
+
+                    Timber.d("Updated location: ${location.toString()}")
+                    LocationsViewModel.editLocation(location)
+
+                    findNavController().navigateUp()
+                } else {
+                    Timber.d("Validation of fields failed: "+validationString.toString())
+                    DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
+                }
+            }
+
+
+        }
+        return binding.root
     }
+
+
 }

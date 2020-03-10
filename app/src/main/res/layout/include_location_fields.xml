@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--    Company Name -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company Name"
+        style="@style/settingsFieldHeading"/>
+
+    <EditText
+        android:id="@+id/etCompanyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        style="@style/settingsFieldEditText" />
+
+    <!--    Street Address -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Street Address"
+        style="@style/settingsFieldHeading"/>
+
+    <EditText
+        android:id="@+id/etStreetAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        style="@style/settingsFieldEditText" />
+
+    <!--    City -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/settingsFieldHeading"
+        android:text="City" />
+
+    <EditText
+        android:id="@+id/etCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        style="@style/settingsFieldEditText"/>
+
+    <!--    State -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/settingsFieldHeading"
+        android:text="State" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/etState"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="textPersonName"-->
+<!--        style="@style/settingsFieldEditText"/>-->
+
+    <Spinner
+        android:id="@+id/spnState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        style="@style/settingsField" />
+
+    <!--    Zip Code -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:text="Zipcode"
+        style="@style/settingsFieldHeading"/>
+
+    <EditText
+        android:id="@+id/etZipCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        style="@style/settingsFieldEditText"/>
+
+</LinearLayout>
+</layout>

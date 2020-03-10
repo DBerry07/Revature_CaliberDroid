@@ -4,29 +4,36 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.revature.caliberdroid.BR
+import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
+import com.revature.caliberdroid.util.DateConverter
 
 data class Batch (
     val batchID: Long,
     @Bindable
-    var _trainingName: String? = "",
-    var trainingType: String? = "",
-    var skillType: String? = "",
-    var trainerName: String? = "",
-    var coTrainerName: String? = "",
-    var locationID: Long = 0,
-    var location: String? = "",
-    var startDate: Long = 0,
-    var endDate: Long = 0,
-    var goodGrade: Int = 0,
-    var passingGrade: Int = 0,
-    var weeks: Int = 0) : BaseObservable(), Parcelable {
+    var _trainingName: String?,
+    var trainingType: String?,
+    var skillType: String?,
+    var trainerName: String?,
+    var coTrainerName: String?,
+    var locationID: Long,
+    var location: String?,
+    var _startDate: Long,
+    var _endDate: Long,
+    var goodGrade: Int,
+    var passingGrade: Int,
+    var weeks: Int
+) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
+
+    var trainees: List< Trainee>? = null
+
+    val startDate get() = DateConverter.getDate(_startDate)
+    val endDate get() = DateConverter.getDate(_endDate)
 
     var trainingName: String
     @Bindable get() = _trainingName!!
     set(value) {
         _trainingName = value
-        notifyPropertyChanged(BR.trainingName)
+        notifyChange()
     }
 
     constructor(parcel: Parcel) : this(
@@ -43,11 +50,40 @@ data class Batch (
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
-    ) {
+    )
+
+
+    override fun <T> isSameModelAs(model: T): Boolean {
+        if (model is Batch) {
+            val other = model as Batch
+            return other.batchID == batchID
+        }
+        return false
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun <T> isContentTheSameAs(model: T): Boolean {
+        if (model is Batch) {
+            val other = model as Batch
+            return trainerName == other.trainerName
+        }
+        return false
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(batchID)
+        parcel.writeString(_trainingName)
+        parcel.writeString(trainingType)
+        parcel.writeString(skillType)
+        parcel.writeString(trainerName)
+        parcel.writeString(coTrainerName)
+        parcel.writeLong(locationID)
+        parcel.writeString(location)
+        parcel.writeLong(_startDate)
+        parcel.writeLong(_endDate)
+        parcel.writeInt(goodGrade)
+        parcel.writeInt(passingGrade)
+        parcel.writeInt(weeks)
+        parcel.writeTypedList(trainees)
     }
 
     override fun describeContents(): Int {
@@ -63,4 +99,11 @@ data class Batch (
             return arrayOfNulls(size)
         }
     }
+
+
 }
+
+
+
+
+

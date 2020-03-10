@@ -7,7 +7,7 @@ import com.revature.caliberdroid.data.repository.BatchRepository
 
 class BatchesViewModel : ViewModel() {
 
-    lateinit var batchesLiveData: LiveData<Batch>
+    lateinit var batchesLiveData: LiveData<List<Batch>>
 
     fun getBatches() {
         batchesLiveData = BatchRepository.getBatches()

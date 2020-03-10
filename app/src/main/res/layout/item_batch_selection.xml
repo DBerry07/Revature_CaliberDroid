@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="batch"
+            type= "com.revature.caliberdroid.data.model.Batch"/>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_item_batch_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_item_batch_selection_batch_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{batch.trainerName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_item_batch_selection_batch_skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{batch.skillType}"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_batch_selection_batch_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_batch_selection_batch_name" />
+
+            <TextView
+                android:id="@+id/tv_item_batch_selection_batch_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@{batch.startDate}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_batch_selection_batch_skill"
+                app:layout_constraintTop_toBottomOf="@+id/tv_item_batch_selection_batch_skill" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -107,7 +107,7 @@ data class Trainee(
     override fun <T> isContentTheSameAs(model: T): Boolean {
         if (model is Trainee) {
             val other = model as Trainee
-            return this.equals(other)
+            return this == other
         }
         return false
     }

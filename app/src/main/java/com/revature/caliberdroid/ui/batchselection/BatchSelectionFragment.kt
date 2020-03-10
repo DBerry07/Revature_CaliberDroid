@@ -66,7 +66,7 @@ class BatchSelectionFragment : Fragment(), OnItemSelectedListener {
         viewModel.validYears.observe(viewLifecycleOwner, Observer {
             yearsArrayAdapter?.apply {
                 notifyDataSetChanged()
-                if (it.size > 0) {
+                if (it.isNotEmpty()) {
                     binding.spinnerBatchSelectionSelectYear.apply {
                         if (viewModel.selectedYear == null) {
                             viewModel.selectedYear = it.max()

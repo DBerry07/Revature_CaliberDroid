@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
@@ -144,7 +145,11 @@ object APIHandler {
         queue.add(validYearsRequest)
     }
 
-    fun getTraineesWithNotes(liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
+    fun getTraineesWithNotes(
+        liveData: MutableLiveData<List<TraineeWithNotesLiveData>>,
+        batch: Batch,
+        weekNumber: Int
+    ) {
         AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 

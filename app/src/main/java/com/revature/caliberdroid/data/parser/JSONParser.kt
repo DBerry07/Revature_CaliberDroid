@@ -82,7 +82,7 @@ object JSONParser {
                     getString("assessmentType"),
                     getInt("weekNumber"),
                     getLong("batchId"),
-                    getInt("assessmentCategory"))
+                    getLong("assessmentCategory"))
             }
             assessmentList.add(assessment)
         }

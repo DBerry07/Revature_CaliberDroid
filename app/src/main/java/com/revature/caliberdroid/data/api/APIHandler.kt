@@ -227,6 +227,10 @@ object APIHandler {
         CategoriesAPI.editCategory(category,liveData)
     }
 
+    fun postAssessment(assessment: Assessment) {
+
+    }
+
     fun putAssessBatchOverallNote(note: Note) {
         NoteAPIHandler.putAssessBatchOverallNote(note)
     }

@@ -1,13 +1,12 @@
 package com.revature.caliberdroid.ui.assessbatch
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Note
-import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
 import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import timber.log.Timber
 
@@ -19,6 +18,7 @@ class AssessWeekViewModel : ViewModel() {
     lateinit var trainees: MutableLiveData<List<Trainee>>
     lateinit var batch: Batch
     var saveNoteThread: Thread? = null
+    var categories: MutableLiveData<ArrayList<Category>> = MutableLiveData(arrayListOf())
 
 //    fun initWeekData() {
 //        var batchId:Long = assessWeekNotes.batch!!.batchID
@@ -29,6 +29,20 @@ class AssessWeekViewModel : ViewModel() {
     fun addWeek() {
         BatchRepository.addWeekFromAssess(batch, batchAssessWeekNotes)
         startDelayedSaveThread(Note(), this::saveBatchNote)
+    }
+
+    fun createAssessmentForBatchWeek(assessment: Assessment) {
+        assessment.batchId = batch.batchID
+        assessment.weekNumber = assessWeekNotes.weekNumber
+        AssessWeekRepository.createAssessment(assessment)
+    }
+
+    fun getSkills(): MutableLiveData<ArrayList<Category>> {
+
+        if (categories.value!!.size == 0) {
+            categories = CategoryRepository.getCategories()
+        }
+        return categories
     }
 
     fun loadBatchWeeks(batch: Batch) {

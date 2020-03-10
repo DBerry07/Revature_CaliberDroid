@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_createassessmentdialog_typelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assessment_type_label"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner__createassessmentdialog_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:minWidth="120dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_createassessmentdialog_typelabel"
+        app:layout_constraintStart_toEndOf="@+id/tv_createassessmentdialog_typelabel"
+        app:layout_constraintTop_toTopOf="@+id/tv_createassessmentdialog_typelabel" />
+
+    <TextView
+        android:id="@+id/tv_createassessmentdialog_skilllabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/assessment_skill_label"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner__createassessmentdialog_type" />
+
+    <Spinner
+        android:id="@+id/spinner_createassessmentdialog_skill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:minWidth="150dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_createassessmentdialog_skilllabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_createassessmentdialog_skilllabel"
+        app:layout_constraintTop_toTopOf="@+id/tv_createassessmentdialog_skilllabel" />
+
+    <TextView
+        android:id="@+id/tv_createassessmentdialog_pointslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assessment_points_label"
+        android:textSize="16sp"
+        android:labelFor="@id/et_createassessmentdialog_points"
+        app:layout_constraintBottom_toBottomOf="@+id/et_createassessmentdialog_points"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_createassessmentdialog_points" />
+
+    <EditText
+        android:id="@+id/et_createassessmentdialog_points"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:autofillHints=""
+        android:inputType="number"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_createassessmentdialog_pointslabel"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createassessmentdialog_skilllabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

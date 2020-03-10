@@ -10,7 +10,8 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="end"
-        android:paddingEnd="5dp" />
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp" />
 
     <LinearLayout
         android:layout_width="0dp"

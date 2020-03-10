@@ -47,6 +47,7 @@
     <string name="trainee_name_label">Name:</string>
     <string name="trainee_notes_label">Trainee Notes:</string>
     <string name="trainee_notes_dialog_hint">Add a note for %s</string>
+    <string name="trainee_flag_img_description">Flag for a Trainee</string>
 
     <string name="title_assessments">Assessments</string>
     <string name="title_trainees">Trainees</string>

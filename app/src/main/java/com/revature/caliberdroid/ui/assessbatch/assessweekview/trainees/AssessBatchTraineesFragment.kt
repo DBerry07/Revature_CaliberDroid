@@ -15,6 +15,7 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.databinding.FragmentAssessBatchTraineesBinding
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.TraineeAssessmentsRecycleAdapter
+import com.revature.caliberdroid.util.KeyboardUtil
 import timber.log.Timber
 
 class AssessBatchTraineesFragment : Fragment() {
@@ -34,18 +35,26 @@ class AssessBatchTraineesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater)
+        _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater,container,false)
 
-        initRecyclerView()
+
+        binding.assessWeekModel=assessWeekViewModel
 
         binding.root.isFocusable = true
         binding.root.isFocusableInTouchMode = true
         binding.root.setOnClickListener {
             Timber.d("clicking on away")
+            KeyboardUtil.hideSoftKeyboard(requireContext(),it)
             it.requestFocus()
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
     }
 
     fun initRecyclerView() {
@@ -53,7 +62,14 @@ class AssessBatchTraineesFragment : Fragment() {
         var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
         binding.recycleAssessBatchTrainees.layoutManager = linearLayoutManager
         binding.recycleAssessBatchTrainees.adapter = mAdapter
+
+        //have the recycler view observe the trainees
         assessWeekViewModel.trainees.observe(viewLifecycleOwner, Observer {
+            (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).notifyDataSetChanged()
+        })
+
+        //have the recycler view observe the trainee notes
+        assessWeekViewModel.assessWeekNotes.traineeNotes.observe(viewLifecycleOwner, Observer {
             (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).notifyDataSetChanged()
         })
     }

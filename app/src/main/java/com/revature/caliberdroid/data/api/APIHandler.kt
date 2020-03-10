@@ -13,6 +13,7 @@ import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
+import java.lang.Exception
 
 object APIHandler {
 
@@ -229,5 +230,28 @@ object APIHandler {
 
     fun putAssessBatchOverallNote(note: Note) {
         NoteAPIHandler.putAssessBatchOverallNote(note)
+    }
+
+    fun getAllBatches(liveData: MutableLiveData<ArrayList<Batch>>){
+        val queue = Volley.newRequestQueue(APIHandler.context)
+        val url:String = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/"
+        Timber.d("Url being sent: $url")
+        val request = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                Timber.d("Response: $response")
+                try {
+                    liveData.postValue( JSONParser.parseBatches(response) as ArrayList<Batch> )
+                }catch (e:Exception){
+                    Timber.d("Error resolving liveData: "+e.toString())
+                }
+            },
+            Response.ErrorListener { error ->
+                Timber.d("Error getting bactches: "+error.toString())
+            }
+        )
+        queue.add(request)
     }
 }

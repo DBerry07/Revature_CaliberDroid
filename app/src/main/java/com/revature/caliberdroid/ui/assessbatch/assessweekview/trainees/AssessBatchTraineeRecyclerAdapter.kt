@@ -23,7 +23,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return TraineeViewHolder(
-            ItemAssessBatchTraineeBinding.inflate(LayoutInflater.from(context)),assessWeekViewModel, context!!)
+            ItemAssessBatchTraineeBinding.inflate(LayoutInflater.from(context),parent,false),assessWeekViewModel, context!!)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

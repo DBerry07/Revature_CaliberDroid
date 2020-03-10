@@ -17,7 +17,7 @@ class AssessmentsRecyclerAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AssessmentViewHolder {
-        return AssessmentViewHolder(ItemAssessweekoverviewAssessmentBinding.inflate(LayoutInflater.from(context)), onItemClickListener)
+        return AssessmentViewHolder(ItemAssessweekoverviewAssessmentBinding.inflate(LayoutInflater.from(context),parent,false), onItemClickListener)
     }
 
     override fun getItemCount(): Int = assessWeekViewModel.assessWeekNotes.assessments.size

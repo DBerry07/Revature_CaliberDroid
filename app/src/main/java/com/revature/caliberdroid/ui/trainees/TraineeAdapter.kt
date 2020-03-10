@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.ItemTraineeBinding
+import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
+import timber.log.Timber
 
 
 class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
@@ -52,8 +54,9 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         }
 
         holder.btnSwitch.setOnClickListener {
+            Timber.d("Switching with selected trainee: "+item)
             val navController = Navigation.findNavController(parent)
-            navController.navigate(R.id.action_traineeFragment_to_switchTraineeFragment)
+            navController.navigate(TraineeFragmentDirections.actionTraineeFragmentToSwitchTraineeFragment(item))
         }
 
         holder.btnDelete.setOnClickListener {

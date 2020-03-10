@@ -27,7 +27,7 @@ class LocationsFragment : Fragment(){
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
     private var navController: NavController? = null
-    lateinit var rvAdapter:LocationsAdapter
+    private var rvAdapter:LocationsAdapter = LocationsAdapter(EditLocationListener(), EditLocationStatusListener())
     var locationsFromAPI = ArrayList<Location>()
 
     override fun onCreateView(inflater: LayoutInflater,

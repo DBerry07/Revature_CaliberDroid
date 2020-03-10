@@ -51,7 +51,11 @@
         android:id="@+id/switchTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.SwitchTraineeFragment"
         android:label="fragment_switch_trainee"
-        tools:layout="@layout/fragment_switch_trainee" />
+        tools:layout="@layout/fragment_switch_trainee" >
+        <argument
+            android:name="traineeToSwitch"
+            app:argType="com.revature.caliberdroid.data.model.Trainee" />
+    </fragment>
     <fragment
         android:id="@+id/createBatchFragment"
         android:name="com.revature.caliberdroid.ui.batches.CreateBatchFragment"

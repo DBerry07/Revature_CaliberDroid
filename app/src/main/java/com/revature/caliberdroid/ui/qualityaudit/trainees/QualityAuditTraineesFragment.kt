@@ -1,18 +1,14 @@
 package com.revature.caliberdroid.ui.qualityaudit.trainees
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.TraineeWithNotes
 import com.revature.caliberdroid.databinding.FragmentQualityAuditTraineesBinding
 
@@ -20,7 +16,7 @@ class QualityAuditTraineesFragment : Fragment() {
 
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_AUDIT_TRAINEES: java.util.Comparator<TraineeWithNotes> =
-            Comparator { a, b -> a.trainee.name!!.compareTo(b.trainee.name!!) }
+            Comparator { a, b -> a.trainee.value!!.name!!.compareTo(b.trainee.value!!.name!!) }
     }
 
     private val viewModel: QualityAuditTraineesViewModel by activityViewModels()

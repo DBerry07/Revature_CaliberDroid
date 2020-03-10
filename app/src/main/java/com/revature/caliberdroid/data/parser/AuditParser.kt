@@ -56,17 +56,20 @@ object AuditParser {
                 }
 
                 for (j in 0 until length) {
-                    if (traineeWithNotesList.get(j).trainee.traineeId.equals(auditTraineeNotes.traineeId)) {
-                        traineeWithNotesList.get(j).auditTraineeNotes = auditTraineeNotes
+                    if (traineeWithNotesList.get(j).trainee.value!!.traineeId.equals(
+                            auditTraineeNotes.traineeId
+                        )
+                    ) {
+                        traineeWithNotesList.get(j).auditTraineeNotes.value = auditTraineeNotes
                     }
                 }
             }
         } else {
             for (traineeWithNotes in traineeWithNotesList) {
-                traineeWithNotes.auditTraineeNotes = AuditTraineeNotes(
+                traineeWithNotes.auditTraineeNotes.value = AuditTraineeNotes(
                     weekNumber,
                     batch,
-                    traineeWithNotes.trainee.traineeId
+                    traineeWithNotes.trainee.value!!.traineeId
                 )
             }
         }

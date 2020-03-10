@@ -85,4 +85,41 @@ object NoteAPIHandler {
 
         queue.add(objectRequest)
     }
+
+    fun putAssessBatchOverallNote(note: Note) {
+        val queue = Volley.newRequestQueue(APIHandler.context)
+
+        var requestBody = if (note.noteId != -1L)
+            JSONObject(
+                "{\"noteId\": \"" + note.noteId + "\"," +
+                        "\"noteContent\": \"" + note.noteContent + "\"," +
+                        "\"noteType\": \"BATCH\"" + "," +
+                        "\"weekNumber\": " + note.weekNumber + "," +
+                        "\"batchId\": " + note.batchId + "," +
+                        "\"traineeId \": -1"+"}"
+            ) else
+            JSONObject(
+                "{\"noteContent\": \"" + note.noteContent + "\"," +
+                        "\"noteType\": \"BATCH\"" + "," +
+                        "\"weekNumber\": " + note.weekNumber + "," +
+                        "\"batchId\": " + note.batchId + "," +
+                        "\"traineeId\": -1"+"}"
+            )
+
+        Timber.d(requestBody.toString())
+
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/note"
+        val objectRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            requestBody,
+            Response.Listener<JSONObject> {response ->
+                Timber.d("saving note in note api handler")
+                note.noteId = JSONParser.parseNote(response).noteId
+            },
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
+
+        queue.add(objectRequest)
+    }
 }

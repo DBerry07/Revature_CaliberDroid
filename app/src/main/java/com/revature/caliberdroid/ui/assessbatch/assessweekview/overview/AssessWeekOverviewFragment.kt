@@ -18,6 +18,7 @@ import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
+import com.revature.caliberdroid.util.KeyboardUtil
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
@@ -45,6 +46,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         assessWeekOverviewBinding.etAssessweekBatchnotes.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
+                KeyboardUtil.hideSoftKeyboard(requireContext(),v)
                 if ((v as EditText).text.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
                     var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
                     note.noteContent = (v as EditText).text.toString()

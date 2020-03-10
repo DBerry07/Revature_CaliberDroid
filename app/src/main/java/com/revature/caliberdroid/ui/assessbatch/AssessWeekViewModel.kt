@@ -44,6 +44,8 @@ class AssessWeekViewModel : ViewModel() {
     fun saveBatchNote(note: Note) {
         if (saveNoteThread != null) saveNoteThread!!.interrupt()
         Timber.d("saving note")
+        assessWeekNotes.batchNote.noteContent = note.noteContent
+        AssessWeekRepository.saveBatchNote(assessWeekNotes.batchNote)
     }
 
     fun startDelayedSaveThread(note: Note, saveFunction: (note: Note) -> Unit) {

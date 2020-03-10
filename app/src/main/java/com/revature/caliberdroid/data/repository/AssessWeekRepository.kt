@@ -53,4 +53,8 @@ object AssessWeekRepository {
         APIHandler.putTraineeNote(note)
     }
 
+    fun saveBatchNote(note: Note) {
+        APIHandler.putAssessBatchOverallNote(note)
+    }
+
 }

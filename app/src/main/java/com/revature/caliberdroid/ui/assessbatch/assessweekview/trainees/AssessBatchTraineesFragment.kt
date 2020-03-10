@@ -15,6 +15,7 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.databinding.FragmentAssessBatchTraineesBinding
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.TraineeAssessmentsRecycleAdapter
+import com.revature.caliberdroid.util.KeyboardUtil
 import timber.log.Timber
 
 class AssessBatchTraineesFragment : Fragment() {
@@ -42,6 +43,7 @@ class AssessBatchTraineesFragment : Fragment() {
         binding.root.isFocusableInTouchMode = true
         binding.root.setOnClickListener {
             Timber.d("clicking on away")
+            KeyboardUtil.hideSoftKeyboard(requireContext(),it)
             it.requestFocus()
         }
 

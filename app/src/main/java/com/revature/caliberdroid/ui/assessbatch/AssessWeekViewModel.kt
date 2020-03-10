@@ -48,6 +48,11 @@ class AssessWeekViewModel : ViewModel() {
         AssessWeekRepository.saveBatchNote(assessWeekNotes.batchNote)
     }
 
+    fun saveTraineeNote(note: Note) {
+        if(saveNoteThread != null) saveNoteThread!!.interrupt()
+        AssessWeekRepository.putTraineeNote(note)
+    }
+
     fun startDelayedSaveThread(note: Note, saveFunction: (note: Note) -> Unit) {
 
         if (saveNoteThread == null) saveNoteThread = getNewDelayedSaveThread(note, saveFunction)

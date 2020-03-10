@@ -17,6 +17,7 @@ import com.revature.caliberdroid.databinding.ItemAssessBatchTraineeBinding
 import kotlinx.android.synthetic.main.item_assess_batch_trainee.view.*
 import timber.log.Timber
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
+import com.revature.caliberdroid.util.KeyboardUtil
 
 class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekViewModel: AssessWeekViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -83,7 +84,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             binding.etAssessBatchTraineesNote.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                 if(!hasFocus && !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
                     Timber.d("putting note"+(binding.traineeNote as Note).toString())
-                    AssessWeekRepository.putTraineeNote(binding.traineeNote as Note)
+                    assessWeekViewModel.saveTraineeNote(binding.traineeNote as Note)
                 } else {
                     oldText = v.et_assess_batch_trainees_note.text.toString()
                 }
@@ -99,6 +100,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 override fun onTextChanged(s: CharSequence, start: Int,
                                            before: Int, count: Int) {
                     (binding.traineeNote as Note).noteContent = binding.etAssessBatchTraineesNote.text.toString()
+                    assessWeekViewModel.startDelayedSaveThread(binding.traineeNote as Note, assessWeekViewModel::saveTraineeNote)
                 }
             })
 
@@ -106,6 +108,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             binding.root.isFocusableInTouchMode = true
             binding.root.setOnClickListener {
                 Timber.d("clicking on away")
+                KeyboardUtil.hideSoftKeyboard(context,itemView)
                 it.requestFocus()
             }
 

@@ -10,7 +10,9 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.databinding.ItemTraineeAssessmentBinding
+import com.revature.caliberdroid.util.KeyboardUtil
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
+import timber.log.Timber
 
 class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,var traineeId: Long,val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -59,6 +61,14 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
         fun bind(grade: Grade, assessment: Assessment){
             binding.grade=grade
             binding.assessment = assessment
+
+            binding.root.isFocusableInTouchMode = true
+            binding.root.isFocusable = true
+            binding.root.setOnClickListener {
+                Timber.d("clicking on away")
+                KeyboardUtil.hideSoftKeyboard(binding.root.context,it)
+                it.requestFocus()
+            }
         }
     }
 }

@@ -44,4 +44,16 @@ object BatchRepository {
         return liveData
     }
 
+    fun addBatch(batch: Batch){
+        APIHandler.addBatch(batch)
+    }
+
+    fun editBatch(batch: Batch){
+        APIHandler.editBatch(batch)
+    }
+
+    fun deleteBatch(batch: Batch){
+        APIHandler.deleteBatch(batch)
+    }
+
 }

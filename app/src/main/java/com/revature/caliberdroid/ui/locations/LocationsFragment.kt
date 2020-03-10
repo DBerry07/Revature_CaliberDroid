@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.locations.LocationsAdapter
 import com.revature.caliberdroid.adapter.locations.listeners.EditLocationInterface

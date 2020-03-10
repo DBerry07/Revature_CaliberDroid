@@ -203,6 +203,18 @@ object APIHandler {
         TrainersAPI.editTrainer(trainer)
     }
 
+    fun addBatch(batch: Batch){
+        BatchAPIHandler.addBatch(batch)
+    }
+
+    fun editBatch(batch: Batch){
+        BatchAPIHandler.editBatch(batch)
+    }
+
+    fun deleteBatch(batch: Batch){
+        BatchAPIHandler.deleteBatch(batch)
+    }
+
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
     }

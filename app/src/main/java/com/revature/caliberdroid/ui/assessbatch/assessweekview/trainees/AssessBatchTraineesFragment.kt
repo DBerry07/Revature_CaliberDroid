@@ -35,9 +35,10 @@ class AssessBatchTraineesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater)
+        _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater,container,false)
 
-        initRecyclerView()
+
+        binding.assessWeekModel=assessWeekViewModel
 
         binding.root.isFocusable = true
         binding.root.isFocusableInTouchMode = true
@@ -48,6 +49,12 @@ class AssessBatchTraineesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initRecyclerView()
     }
 
     fun initRecyclerView() {

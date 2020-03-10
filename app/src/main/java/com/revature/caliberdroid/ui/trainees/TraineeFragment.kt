@@ -24,8 +24,6 @@ import timber.log.Timber
  */
 class TraineeFragment : Fragment() {
 
-    var traineeData : ArrayList<HashMap<String, String>> = ArrayList()
-
     private var _binding: FragmentTraineeBinding? = null
     private val binding get() = _binding!!
 
@@ -67,7 +65,7 @@ class TraineeFragment : Fragment() {
             //Sorts trainees by (last) name
             myTrainees = trainees.sortedBy { trainee: Trainee -> trainee.name }
 
-            traineeAdapter = TraineeAdapter(myTrainees)
+            traineeAdapter = TraineeAdapter(myTrainees, batchId)
             recyclerView.layoutManager = traineeLayoutManager
             recyclerView.adapter = traineeAdapter
         })

@@ -1,5 +1,6 @@
 package com.revature.revaturetraineemanagment
 
+import android.os.Handler
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.*
@@ -9,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.ItemTraineeBinding
+import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
 
 
-class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
+class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var trainees = data
+    val batchId = batchID
     lateinit var parent: ViewGroup
     lateinit var pop : PopupWindow
 
@@ -31,17 +34,19 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = trainees.get(position)
-        holder.name.text = item.name
-        holder.email.text = item.email
-        holder.phone.text = item.phoneNumber
-        holder.skype.text = item.skypeId
-        holder.profile.text = item.profileUrl
-        holder.college.text = item.college
-        holder.major.text = item.major
-        holder.recruiter.text = item.recruiterName
-        holder.project.text = item.projectCompletion
-        holder.screener.text = item.techScreenerName
-        holder.status.text = item.trainingStatus
+        holder.name.text = ifNull(item.name)
+        holder.email.text = ifNull(item.email)
+        holder.phone.text = ifNull(item.phoneNumber)
+        holder.skype.text = ifNull(item.skypeId)
+        holder.profile.text = ifNull(item.profileUrl)
+        holder.college.text = ifNull(item.college)
+        holder.major.text = ifNull(item.major)
+        holder.recruiter.text = ifNull(item.recruiterName)
+        holder.project.text = ifNull(item.projectCompletion)
+        holder.screener.text = ifNull(item.techScreenerName)
+        holder.status.text = ifNull(item.trainingStatus)
+        holder.degree.text = ifNull(item.degree)
+        holder.score.text = ifNull(item.techScreenScore.toString())
 
         val mDetectorCompat =
             GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
@@ -59,6 +64,11 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         holder.btnDelete.setOnClickListener {
             val pop = PopupWindow()
             pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
+        }
+
+        holder.btnEdit.setOnClickListener {
+            val navControler = Navigation.findNavController(parent)
+            navControler.navigate(TraineeFragmentDirections.actionTraineeFragmentToEditTraineeFragment(item, batchId = batchId))
         }
 
         /*holder.button.setOnClickListener (View.OnClickListener {
@@ -79,6 +89,15 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         return trainees.size
     }
 
+    fun ifNull(string: String?) : String{
+        if (string.equals("null") || string == null){
+            return ""
+        }
+        else {
+            return string
+        }
+    }
+
     class MyViewHolder(binding: ItemTraineeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var isExpanded = false
@@ -94,7 +113,17 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         var recruiter : TextView
         var project : TextView
         var screener : TextView
+        var degree: TextView
+        var score: TextView
+
         var details : LinearLayout
+        var buffer: LinearLayout
+        var row1: LinearLayout
+        var row2: LinearLayout
+        var row3: LinearLayout
+        var row4: LinearLayout
+        var row5: LinearLayout
+
         var options : LinearLayout
         var arrow : ImageView
         var btnSwitch : Button
@@ -113,8 +142,16 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
             this.recruiter = binding.TMRecruiter
             this.project = binding.TMProject
             this.screener = binding.TMScreener
+            this.degree = binding.TMDegree
+            this.score = binding.TMScore
             this.arrow = binding.TMIvArrow
             this.details = binding.traineeDetails
+            this.buffer = binding.traineeBuffer
+            this.row1 = binding.traineeDetailsRow1
+            this.row2 = binding.traineeDetailsRow2
+            this.row3 = binding.traineeDetailsRow3
+            this.row4 = binding.traineeDetailsRow4
+            this.row5 = binding.traineeDetailsRow5
             this.options = binding.TMOptions
             this.btnSwitch = binding.TMBtnSwitch
             this.btnDelete = binding.TMBtnDelete
@@ -126,6 +163,7 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
     class MyGestureListener(myHolder: MyViewHolder, myPosition: Int, myAdapter: TraineeAdapter): GestureDetector.OnGestureListener {
 
         val SWIPE_THRESHOLD = 0.5
+        val LOAD_DELAY : Long = 50
 
         val holder = myHolder
         val position = myPosition
@@ -137,12 +175,34 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.details.visibility = View.VISIBLE
+                holder.buffer.visibility = View.VISIBLE
+                Handler().postDelayed( {
+                    holder.row1.visibility=View.VISIBLE
+                }, LOAD_DELAY * 1)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.VISIBLE
+                }, LOAD_DELAY * 2)
+                Handler().postDelayed( {
+                    holder.row3.visibility=View.VISIBLE
+                }, LOAD_DELAY * 3)
+                Handler().postDelayed( {
+                    holder.row4.visibility=View.VISIBLE
+                }, LOAD_DELAY * 4)
+                Handler().postDelayed( {
+                    holder.row5.visibility=View.VISIBLE
+                }, LOAD_DELAY * 5)
+
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
                 holder.details.visibility = View.GONE
+                holder.row1.visibility=View.GONE
+                holder.row2.visibility=View.GONE
+                holder.row3.visibility=View.GONE
+                holder.row4.visibility=View.GONE
+                holder.row5.visibility=View.GONE
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)

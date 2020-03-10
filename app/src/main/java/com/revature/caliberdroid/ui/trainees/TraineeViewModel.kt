@@ -20,4 +20,8 @@ class TraineeViewModel : ViewModel() {
         TraineeRepository.postTrainee(jsonObject)
     }
 
+    fun putTrainee(jsonObject: JSONObject){
+        TraineeRepository.putTrainee(jsonObject)
+    }
+
 }

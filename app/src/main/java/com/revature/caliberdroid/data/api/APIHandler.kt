@@ -174,6 +174,10 @@ object APIHandler {
         TraineeAPIHandler.postTrainee(jsonObject)
     }
 
+    fun putTrainee(jsonObject: JSONObject) {
+        TraineeAPIHandler.putTrainee(jsonObject)
+    }
+
     fun putTraineeNote(note:Note) {
         Timber.d(note.toString())
         NoteAPIHandler.putTraineeNote(note)
@@ -230,4 +234,5 @@ object APIHandler {
     fun putAssessBatchOverallNote(note: Note) {
         NoteAPIHandler.putAssessBatchOverallNote(note)
     }
+
 }

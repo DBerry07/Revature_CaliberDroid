@@ -27,7 +27,6 @@ class AddTraineeFragment() : Fragment() {
 
     private var _binding: FragmentAddTraineeBinding? = null
     private val binding get() = _binding!!
-    private var batchId : Long? = null
     private val model: TraineeViewModel by viewModels()
 
     //Get the argument of current batch from TraineeFragment
@@ -41,9 +40,6 @@ class AddTraineeFragment() : Fragment() {
         _binding = FragmentAddTraineeBinding.inflate(layoutInflater, container, false)
         val view = binding.root
         currentBatch = args.currentBatch
-
-        //TODO: Add way to get batch ID from previous trainee list fragment
-        batchId = 50
 
         binding.apply {
             TMBtnCreateTrainee.setOnClickListener{

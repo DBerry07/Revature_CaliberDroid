@@ -52,4 +52,24 @@ object TraineeAPIHandler {
         Toast.makeText(APIHandler.context, "Processing...", Toast.LENGTH_SHORT).show()
     }
 
+    fun putTrainee(traineeData: JSONObject) {
+        Log.d("updateTrainee", traineeData.toString())
+        val queue = Volley.newRequestQueue(APIHandler.context)
+
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/all/trainee/update"
+
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            traineeData,
+            Response.Listener<JSONObject> {response ->
+                Toast.makeText(APIHandler.context, "Trainee updated successfully!", Toast.LENGTH_LONG).show()
+            },
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
+        queue.add(jsonRequest)
+        Toast.makeText(APIHandler.context, "Processing...", Toast.LENGTH_SHORT).show()
+
+    }
+
 }

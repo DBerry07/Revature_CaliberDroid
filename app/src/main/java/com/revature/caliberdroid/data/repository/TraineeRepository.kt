@@ -17,4 +17,8 @@ object TraineeRepository {
         APIHandler.postTrainee(jsonObject)
     }
 
+    fun putTrainee(jsonObject: JSONObject) {
+        APIHandler.putTrainee(jsonObject)
+    }
+
 }

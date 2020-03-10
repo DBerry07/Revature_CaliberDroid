@@ -2,9 +2,9 @@ package com.revature.caliberdroid.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
-import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 
 object QualityAuditRepository {
@@ -21,10 +21,13 @@ object QualityAuditRepository {
     }
 
     fun getTraineesWithNotes(
-        liveData: MutableLiveData<List<AuditTraineeWithNotes>>,
         batch: Batch,
         weekNumber: Int
-    ) {
+    ): MutableLiveData<List<TraineeWithNotesLiveData>> {
+        val liveData = MutableLiveData<List<TraineeWithNotesLiveData>>()
+
         APIHandler.getTraineesWithNotes(liveData, batch, weekNumber)
+
+        return liveData
     }
 }

@@ -45,7 +45,7 @@ data class AuditTraineeNotes(val weekNumber: Int, val batch: Batch, val traineeI
     override fun <T> isContentTheSameAs(model: T): Boolean {
         if (model is AuditTraineeNotes) {
             val other = model as AuditTraineeNotes
-            return technicalStatus == other.technicalStatus && content == other.content
+            return (technicalStatus == other.technicalStatus) && (content == other.content)
         }
         return false
     }

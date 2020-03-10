@@ -4,12 +4,14 @@ import com.revature.caliberdroid.data.model.AuditTraineeNotes
 import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import org.json.JSONArray
 
 object AuditParser {
 
-    fun parseTrainees(response: JSONArray): List<AuditTraineeWithNotes> {
-        val traineeWithNotesList = ArrayList<AuditTraineeWithNotes>()
+    fun parseTrainees(response: JSONArray): List<TraineeWithNotesLiveData> {
+        val traineeWithNotesList = ArrayList<TraineeWithNotesLiveData>()
+
 
         var trainee: Trainee
         val length = response.length()
@@ -27,7 +29,9 @@ object AuditParser {
                     flagAuthor = getString("flagAuthor"),
                     flagTimestamp = getString("flagTimestamp"))
             }
-            traineeWithNotesList.add(AuditTraineeWithNotes(trainee = trainee))
+            val liveData = TraineeWithNotesLiveData()
+            liveData.value = AuditTraineeWithNotes(trainee = trainee)
+            traineeWithNotesList.add(liveData)
         }
 
         return traineeWithNotesList
@@ -35,10 +39,10 @@ object AuditParser {
 
     fun parseTraineeNotes(
         response: JSONArray,
-        traineeWithNotesList: List<AuditTraineeWithNotes>,
+        traineeWithNotesList: List<TraineeWithNotesLiveData>,
         batch: Batch,
         weekNumber: Int
-    ): List<AuditTraineeWithNotes> {
+    ): List<TraineeWithNotesLiveData> {
 
         lateinit var auditTraineeNotes: AuditTraineeNotes
         val length: Int = traineeWithNotesList.size
@@ -61,20 +65,20 @@ object AuditParser {
                 }
 
                 for (j in 0 until length) {
-                    if (traineeWithNotesList.get(j).trainee.value!!.traineeId.equals(
+                    if (traineeWithNotesList.get(j).value!!.trainee!!.traineeId.equals(
                             auditTraineeNotes.traineeId
                         )
                     ) {
-                        traineeWithNotesList.get(j).auditTraineeNotes.value = auditTraineeNotes
+                        traineeWithNotesList.get(j).value!!.auditTraineeNotes = auditTraineeNotes
                     }
                 }
             }
         } else {
             for (traineeWithNotes in traineeWithNotesList) {
-                traineeWithNotes.auditTraineeNotes.value = AuditTraineeNotes(
+                traineeWithNotes.value!!.auditTraineeNotes = AuditTraineeNotes(
                     weekNumber,
                     batch,
-                    traineeWithNotes.trainee.value!!.traineeId
+                    traineeWithNotes.value!!.trainee!!.traineeId
                 )
             }
         }

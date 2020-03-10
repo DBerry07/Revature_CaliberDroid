@@ -1,27 +1,35 @@
 package com.revature.caliberdroid.data.model
 
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.BaseObservable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
-class AuditTraineeWithNotes() : SortedListAdapter.ViewModel {
+class AuditTraineeWithNotes() : BaseObservable(), SortedListAdapter.ViewModel {
 
-    var trainee = MutableLiveData<Trainee>()
-    var auditTraineeNotes = MutableLiveData<AuditTraineeNotes?>()
+    var trainee: Trainee? = null
+        set(value) {
+            field = value
+            notifyChange()
+        }
+    var auditTraineeNotes: AuditTraineeNotes? = null
+        set(value) {
+            field = value
+            notifyChange()
+        }
 
     constructor(trainee: Trainee) : this() {
-        this.trainee.value = trainee
+        this.trainee = trainee
     }
 
     constructor(trainee: Trainee, auditTraineeNotes: AuditTraineeNotes) : this() {
-        this.trainee.value = trainee
-        this.auditTraineeNotes.value = auditTraineeNotes
+        this.trainee = trainee
+        this.auditTraineeNotes = auditTraineeNotes
     }
 
     override fun <T> isSameModelAs(model: T): Boolean {
         if (model is AuditTraineeWithNotes) {
             val other = model as AuditTraineeWithNotes
-            return trainee.value!!.isSameModelAs(other.trainee.value) && auditTraineeNotes.value!!.isSameModelAs(
-                other.auditTraineeNotes.value
+            return trainee!!.isSameModelAs(other.trainee) && auditTraineeNotes!!.isSameModelAs(
+                other.auditTraineeNotes
             )
         }
         return false
@@ -30,8 +38,8 @@ class AuditTraineeWithNotes() : SortedListAdapter.ViewModel {
     override fun <T> isContentTheSameAs(model: T): Boolean {
         if (model is AuditTraineeWithNotes) {
             val other = model as AuditTraineeWithNotes
-            return trainee.value!!.isContentTheSameAs(other.trainee.value) && other.auditTraineeNotes.value!!.isContentTheSameAs(
-                other.auditTraineeNotes.value
+            return trainee!!.isContentTheSameAs(other.trainee) && other.auditTraineeNotes!!.isContentTheSameAs(
+                other.auditTraineeNotes
             )
         }
         return false

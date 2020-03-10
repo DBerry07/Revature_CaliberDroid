@@ -7,12 +7,12 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.data.parser.AuditParser
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import timber.log.Timber
 
@@ -86,7 +86,7 @@ object AuditAPIHandler {
 
     fun getTraineesWithNotes(
         context: Context,
-        liveData: MutableLiveData<List<AuditTraineeWithNotes>>,
+        liveData: MutableLiveData<List<TraineeWithNotesLiveData>>,
         batch: Batch,
         weekNumber: Int
     ) {
@@ -94,7 +94,7 @@ object AuditAPIHandler {
         val queue = Volley.newRequestQueue(context)
         //response is JSONarray of assessments
         var url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/all/trainee/?batch=${batch.batchID}"
-        lateinit var traineeWithNotesList: List<AuditTraineeWithNotes>
+        lateinit var traineeWithNotesList: List<TraineeWithNotesLiveData>
         val traineesArrayRequest = VolleyJsonArrayRequest(
             Request.Method.GET,
             url,

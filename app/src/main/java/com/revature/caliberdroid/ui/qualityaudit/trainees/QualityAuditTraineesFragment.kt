@@ -48,5 +48,4 @@ class QualityAuditTraineesFragment : Fragment() {
                 .commit()
         })
     }
-
 }

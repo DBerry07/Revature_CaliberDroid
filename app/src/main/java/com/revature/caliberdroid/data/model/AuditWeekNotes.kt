@@ -14,7 +14,7 @@ data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAda
             field = value
             notifyChange()
         }
-    @Bindable var overallNotes =  ObservableField<String?>()
+    var overallNotes = ObservableField<String?>()
         set(value) {
             field = value
             notifyChange()

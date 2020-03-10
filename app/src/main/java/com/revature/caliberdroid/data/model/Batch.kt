@@ -3,13 +3,11 @@ package com.revature.caliberdroid.data.model
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.util.DateConverter
 
 data class Batch (
     val batchID: Long,
-    @Bindable
     var _trainingName: String?,
     var trainingType: String?,
     var skillType: String?,
@@ -31,7 +29,7 @@ data class Batch (
     val dates: String get() = "$startDate - $endDate"
 
     var trainingName: String
-    @Bindable get() = _trainingName!!
+        get() = _trainingName!!
     set(value) {
         _trainingName = value
         notifyChange()

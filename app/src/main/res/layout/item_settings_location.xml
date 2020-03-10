@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="model"
+            type="com.revature.caliberdroid.data.model.Location" />
+    </data>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +31,7 @@
                     android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sony"
+                    android:text="@{model.name}"
                     style="@style/settingsHeading"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +52,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/tvLocation"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="This is a line.\n This is another line"/>
+                    android:text="@{model.addressLines}"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
     <!-- RIGHT -->
             <androidx.constraintlayout.widget.ConstraintLayout

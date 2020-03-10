@@ -14,4 +14,16 @@ class LocationsViewModel : ViewModel() {
     fun getLocations(){
         locationsLiveData = LocationRepository.getLocations()
     }
+
+    companion object{
+        fun addLocation(location:Location){
+            LocationRepository.addLocation(location)
+            LocationsViewModel().getLocations()
+        }
+
+        fun editLocation(location:Location){
+            LocationRepository.editLocation(location)
+            LocationsViewModel().getLocations()
+        }
+    }
 }

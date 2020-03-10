@@ -21,4 +21,10 @@ data class Location (
     override fun toString(): String {
         return "Location(locationID=$locationID, name='$name', city='$city', zipcode='$zipcode', address='$address', state='$state', active=$active)"
     }
+
+    fun getAddressLines(): String{
+        var stringText:String = address+"\n"
+        stringText+= city+", "+state+" "+zipcode
+        return stringText
+    }
 }

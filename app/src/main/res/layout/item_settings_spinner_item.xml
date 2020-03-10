@@ -7,7 +7,7 @@
     android:layout_margin="6dp">
 
     <TextView
-        android:id="@+id/tvTrainerTier"
+        android:id="@+id/tvItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"

@@ -70,6 +70,7 @@
 
     <string name="title_active_status">Active</string>
     <string name="title_stale_status">Stale</string>
+    <string name="title_settings_invalid_input">Invalid Input!</string>
 
 
     <string name="btn_add_location">Add Location</string>

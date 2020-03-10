@@ -16,4 +16,16 @@ class TrainersViewModel : ViewModel() {
     fun setSelectedTrainer(trainer:Trainer){
         selectedTrainerLiveData.value = trainer
     }
+
+    companion object{
+        fun editTrainer(trainer: Trainer){
+            TrainerRepository.editTrainer(trainer)
+            TrainersViewModel().getTrainers()
+        }
+
+        fun addTrainer(trainer: Trainer){
+            TrainerRepository.addTrainer(trainer)
+            TrainersViewModel().getTrainers()
+        }
+    }
 }

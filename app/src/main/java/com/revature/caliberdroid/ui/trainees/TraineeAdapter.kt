@@ -163,7 +163,7 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
     class MyGestureListener(myHolder: MyViewHolder, myPosition: Int, myAdapter: TraineeAdapter): GestureDetector.OnGestureListener {
 
         val SWIPE_THRESHOLD = 0.5
-        val LOAD_DELAY : Long = 50
+        val LOAD_DELAY : Long = 25
 
         val holder = myHolder
         val position = myPosition
@@ -197,12 +197,24 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
                 holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
-                holder.details.visibility = View.GONE
-                holder.row1.visibility=View.GONE
-                holder.row2.visibility=View.GONE
-                holder.row3.visibility=View.GONE
-                holder.row4.visibility=View.GONE
-                holder.row5.visibility=View.GONE
+                Handler().postDelayed( {
+                    holder.row5.visibility=View.GONE
+                }, LOAD_DELAY * 1)
+                Handler().postDelayed( {
+                    holder.row4.visibility=View.GONE
+                }, LOAD_DELAY * 2)
+                Handler().postDelayed( {
+                    holder.row3.visibility=View.GONE
+                }, LOAD_DELAY * 3)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.GONE
+                }, LOAD_DELAY * 4)
+                Handler().postDelayed( {
+                    holder.row1.visibility=View.GONE
+                    holder.buffer.visibility=View.GONE
+                    holder.details.visibility = View.GONE
+                }, LOAD_DELAY * 5)
+
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)

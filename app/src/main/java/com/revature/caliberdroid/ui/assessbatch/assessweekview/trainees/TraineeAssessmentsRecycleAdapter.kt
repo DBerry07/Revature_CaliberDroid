@@ -18,7 +18,7 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
-            ItemTraineeAssessmentBinding.inflate(LayoutInflater.from(context))
+            ItemTraineeAssessmentBinding.inflate(LayoutInflater.from(context),parent,false)
         )
     }
 

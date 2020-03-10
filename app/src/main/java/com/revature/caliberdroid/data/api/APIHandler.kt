@@ -144,7 +144,11 @@ object APIHandler {
         queue.add(validYearsRequest)
     }
 
-    fun getTraineesWithNotes(liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
+    fun getTraineesWithNotes(
+        liveData: MutableLiveData<List<AuditTraineeWithNotes>>,
+        batch: Batch,
+        weekNumber: Int
+    ) {
         AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 

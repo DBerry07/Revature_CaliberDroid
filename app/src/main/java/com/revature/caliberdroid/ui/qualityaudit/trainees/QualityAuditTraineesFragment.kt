@@ -9,13 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.revature.caliberdroid.data.model.TraineeWithNotes
+import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.databinding.FragmentQualityAuditTraineesBinding
 
 class QualityAuditTraineesFragment : Fragment() {
 
     companion object {
-        @JvmField val ALPHABETICAL_COMPARATOR_AUDIT_TRAINEES: java.util.Comparator<TraineeWithNotes> =
+        @JvmField
+        val ALPHABETICAL_COMPARATOR_AUDIT_TRAINEES: java.util.Comparator<AuditTraineeWithNotes> =
             Comparator { a, b -> a.trainee.value!!.name!!.compareTo(b.trainee.value!!.name!!) }
     }
 

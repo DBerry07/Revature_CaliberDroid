@@ -8,7 +8,7 @@
 
         <variable
             name="traineeWithNotes"
-            type="com.revature.caliberdroid.data.model.TraineeWithNotes" />
+            type="com.revature.caliberdroid.data.model.AuditTraineeWithNotes" />
         
     </data>
 

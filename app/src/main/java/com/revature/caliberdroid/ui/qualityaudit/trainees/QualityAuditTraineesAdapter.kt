@@ -4,12 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.data.model.TraineeWithNotes
+import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
 
 class QualityAuditTraineesAdapter(context: Context,
-                                  comparator: Comparator<TraineeWithNotes>
-) : SortedListAdapter<TraineeWithNotes>(context, TraineeWithNotes::class.java, comparator) {
+                                  comparator: Comparator<AuditTraineeWithNotes>
+) : SortedListAdapter<AuditTraineeWithNotes>(
+    context,
+    AuditTraineeWithNotes::class.java,
+    comparator
+) {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -19,11 +23,11 @@ class QualityAuditTraineesAdapter(context: Context,
         return TraineeWithNotesViewHolder(ItemQualityAuditTraineeBinding.inflate(inflater,parent,false))
     }
 
-    class TraineeWithNotesViewHolder(val binding: ItemQualityAuditTraineeBinding)
-        : SortedListAdapter.ViewHolder<TraineeWithNotes>(binding.root) {
+    class TraineeWithNotesViewHolder(val binding: ItemQualityAuditTraineeBinding) :
+        SortedListAdapter.ViewHolder<AuditTraineeWithNotes>(binding.root) {
 
 
-        override fun performBind(item: TraineeWithNotes) {
+        override fun performBind(item: AuditTraineeWithNotes) {
             binding.traineeWithNotes = item
         }
 

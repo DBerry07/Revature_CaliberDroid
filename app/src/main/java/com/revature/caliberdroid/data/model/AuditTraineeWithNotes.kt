@@ -3,7 +3,7 @@ package com.revature.caliberdroid.data.model
 import androidx.lifecycle.MutableLiveData
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
-class TraineeWithNotes() : SortedListAdapter.ViewModel {
+class AuditTraineeWithNotes() : SortedListAdapter.ViewModel {
 
     var trainee = MutableLiveData<Trainee>()
     var auditTraineeNotes = MutableLiveData<AuditTraineeNotes?>()
@@ -18,16 +18,18 @@ class TraineeWithNotes() : SortedListAdapter.ViewModel {
     }
 
     override fun <T> isSameModelAs(model: T): Boolean {
-        if (model is TraineeWithNotes) {
-            val other = model as TraineeWithNotes
-            return trainee.value!!.isSameModelAs(other.trainee.value)
+        if (model is AuditTraineeWithNotes) {
+            val other = model as AuditTraineeWithNotes
+            return trainee.value!!.isSameModelAs(other.trainee.value) && auditTraineeNotes.value!!.isSameModelAs(
+                other.auditTraineeNotes.value
+            )
         }
         return false
     }
 
     override fun <T> isContentTheSameAs(model: T): Boolean {
-        if (model is TraineeWithNotes) {
-            val other = model as TraineeWithNotes
+        if (model is AuditTraineeWithNotes) {
+            val other = model as AuditTraineeWithNotes
             return trainee.value!!.isContentTheSameAs(other.trainee.value) && other.auditTraineeNotes.value!!.isContentTheSameAs(
                 other.auditTraineeNotes.value
             )

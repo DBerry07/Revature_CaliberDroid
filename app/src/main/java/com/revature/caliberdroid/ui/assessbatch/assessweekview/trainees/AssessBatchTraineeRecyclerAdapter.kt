@@ -1,6 +1,7 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
 import android.content.Context
+import android.opengl.Visibility
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.data.model.Note
@@ -110,6 +112,14 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 Timber.d("clicking on away")
                 KeyboardUtil.hideSoftKeyboard(context,itemView)
                 it.requestFocus()
+            }
+
+            if(trainee.flagStatus.equals("RED")){
+                binding.imgAssessBatchTraineeFlag.setImageResource(R.drawable.ic_red_flag)
+            } else if(trainee.flagStatus.equals("GREEN")){
+                binding.imgAssessBatchTraineeFlag.setImageResource(R.drawable.ic_green_flag)
+            } else {
+                binding.imgAssessBatchTraineeFlag.visibility = View.GONE
             }
 
             }

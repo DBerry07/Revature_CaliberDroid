@@ -25,7 +25,7 @@ class AssessmentsRecyclerAdapter(
     override fun onBindViewHolder(holder: AssessmentViewHolder, position: Int) {
         holder.binding.assessment = assessWeekViewModel.assessWeekNotes.assessments[position]
 
-        holder.binding.average = 95f
+        holder.binding.average = assessWeekViewModel.getAssessmentAverage(assessWeekViewModel.assessWeekNotes.assessments[position]).toFloat()
 
         holder.binding.btnAsssessmentsrecyclerTraineegrades.setOnClickListener {
             onItemClickListener.onAssessmentClicked(assessWeekViewModel.assessWeekNotes.assessments[position])

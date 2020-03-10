@@ -42,6 +42,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{trainee.name}" />
+
+                <ImageView
+                    android:id="@+id/img_assess_batch_trainee_flag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/trainee_flag_img_description"
+                    app:srcCompat="@drawable/ic_default_flag" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -69,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/editbox_background"
                 android:ems="10"
-                android:gravity="top|left"
+                android:gravity="start|top"
                 android:hint="@{String.format(@string/trainee_notes_dialog_hint,trainee.name)}"
                 android:inputType="textMultiLine"
                 android:lines="6"

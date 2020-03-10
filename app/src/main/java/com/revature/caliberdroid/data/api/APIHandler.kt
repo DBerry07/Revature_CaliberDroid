@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
@@ -17,17 +18,20 @@ object APIHandler {
 
     lateinit var context: Context
 
-    fun getBatches(liveData: MutableLiveData<List<Batch>>) {
+    fun getBatchesByYear(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int
+    ) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
-        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/?year=2020&quarter=1"
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/$selectedYear"
         // Request a string response from the provided URL.
         val batchesRequest = JsonArrayRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener { response ->
-                // Display the first 500 characters of the response string.
                 Timber.d(response.toString())
                 liveData.postValue(JSONParser.parseBatches(response))
             },
@@ -38,7 +42,33 @@ object APIHandler {
         queue.add(batchesRequest)
     }
 
-    fun addWeek(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
+    fun getBatchesByYearAndQuarter(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int,
+        selectedQuarter: Int
+    ) {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(context)
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/?year=$selectedYear&quarter=$selectedQuarter"
+        Timber.d(url)
+        // Request a string response from the provided URL.
+        val batchesRequest = VolleyJsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                liveData.postValue(JSONParser.parseBatches(response))
+            },
+            Response.ErrorListener { error ->
+                Timber.d(error.toString())
+            })
+
+        queue.add(batchesRequest)
+    }
+
+    fun addWeekFromAudit(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: WeekLiveData
@@ -53,6 +83,31 @@ object APIHandler {
                     batch.weeks += 1
                     data = WeekLiveData()
                     data.value = AuditWeekNotes(batch.weeks)
+                    this.add(data)
+                })
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            })
+
+        queue.add(addWeekRequest)
+    }
+
+    fun addWeekFromAssess(batch: Batch, liveData: MutableLiveData<ArrayList<AssessWeekLiveData>>) {
+        val queue = Volley.newRequestQueue(context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        lateinit var data: AssessWeekLiveData
+
+        val addWeekRequest = JsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            JSONParser.getBatchJSONObject(batch).apply { put("weeks", getInt("weeks") + 1) },
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                liveData.postValue(liveData.value!!.apply {
+                    batch.weeks += 1
+                    data = AssessWeekLiveData()
+                    data.value = AssessWeekNotes(batch.weeks, batch)
                     this.add(data)
                 })
             },
@@ -119,6 +174,11 @@ object APIHandler {
         TraineeAPIHandler.postTrainee(jsonObject)
     }
 
+    fun putTraineeNote(note:Note) {
+        Timber.d(note.toString())
+        NoteAPIHandler.putTraineeNote(note)
+    }
+
     fun getLocations(liveData: MutableLiveData< ArrayList<Location> >){
         LocationsAPI.getLocations(liveData)
     }
@@ -143,6 +203,18 @@ object APIHandler {
         TrainersAPI.editTrainer(trainer)
     }
 
+    fun addBatch(batch: Batch){
+        BatchAPIHandler.addBatch(batch)
+    }
+
+    fun editBatch(batch: Batch){
+        BatchAPIHandler.editBatch(batch)
+    }
+
+    fun deleteBatch(batch: Batch){
+        BatchAPIHandler.deleteBatch(batch)
+    }
+
     fun getCategories(liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.getCategories(liveData)
     }
@@ -153,5 +225,9 @@ object APIHandler {
 
     fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>){
         CategoriesAPI.editCategory(category,liveData)
+    }
+
+    fun putAssessBatchOverallNote(note: Note) {
+        NoteAPIHandler.putAssessBatchOverallNote(note)
     }
 }

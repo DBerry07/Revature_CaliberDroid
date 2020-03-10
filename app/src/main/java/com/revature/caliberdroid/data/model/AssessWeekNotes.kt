@@ -6,6 +6,7 @@ import androidx.databinding.BaseObservable
 import androidx.lifecycle.MutableLiveData
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.BR
+import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 
 data class AssessWeekNotes(var weekNumber: Int,
                            var batch: Batch?
@@ -44,12 +45,25 @@ data class AssessWeekNotes(var weekNumber: Int,
         this.grades = grades
     }
 
-    override fun <T : Any?> isContentTheSameAs(model: T): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun <T : kotlin.Any?> isContentTheSameAs(model: T): kotlin.Boolean {
+        if (model is AssessWeekNotes) {
+            val other = model as AssessWeekNotes
+            return weekNumber == other.weekNumber && batch == other.batch
+        }
+        return false
     }
 
-    override fun <T : Any?> isSameModelAs(model: T): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun <T : kotlin.Any?> isSameModelAs(model: T): kotlin.Boolean {
+        if (model is AssessWeekNotes) {
+            val other = model as AssessWeekNotes
+            return weekNumber == other.weekNumber && batch == other.batch
+        }
+        return false
     }
 
 }
+
+
+
+
+

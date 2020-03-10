@@ -4,17 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.navArgs
-import com.google.android.material.tabs.TabLayout
 import com.revature.caliberdroid.R
-import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAssessWeekBinding
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 
 
 class AssessWeekFragment : Fragment() {

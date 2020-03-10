@@ -10,6 +10,6 @@ class BatchesViewModel : ViewModel() {
     lateinit var batchesLiveData: LiveData<List<Batch>>
 
     fun getBatches() {
-        batchesLiveData = BatchRepository.getBatches()
+        batchesLiveData = BatchRepository.getBatchesByYearAndQuarter(2020)
     }
 }

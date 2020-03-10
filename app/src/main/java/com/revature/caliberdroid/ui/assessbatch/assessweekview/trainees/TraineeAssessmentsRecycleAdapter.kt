@@ -12,8 +12,7 @@ import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.databinding.ItemTraineeAssessmentBinding
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 
-class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var items : List<Grade> = ArrayList()
+class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,var traineeId: Long,val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
@@ -24,13 +23,16 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is AssessmentViewHolder ->{
-                holder.bind(items.get(position),getAssessmentForGrade(items.get(position).assessmentId!!)!!)
+                    holder.bind(
+                        getGradeForAssessment(assessments.get(position).assessmentId,traineeId),
+                        assessments.get(position)
+                    )
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return assessments.size
     }
 
     fun getAssessmentForGrade(assessmentId:Long) : Assessment? {
@@ -40,6 +42,15 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
             }
         }
         return null
+    }
+
+    fun getGradeForAssessment(assessmentId: Long, traineeId: Long): Grade {
+        for(grade in grades) {
+            if(grade.assessmentId==assessmentId && grade.traineeId==traineeId){
+                return grade
+            }
+        }
+        return Grade(-1,"",0,assessmentId,traineeId)
     }
 
     class AssessmentViewHolder constructor(

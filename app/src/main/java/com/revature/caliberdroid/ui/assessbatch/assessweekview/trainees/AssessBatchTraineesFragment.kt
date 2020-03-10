@@ -1,6 +1,5 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.databinding.FragmentAssessBatchTraineesBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.TraineeAssessmentsRecycleAdapter
+import timber.log.Timber
 
 class AssessBatchTraineesFragment : Fragment() {
 
@@ -37,6 +37,13 @@ class AssessBatchTraineesFragment : Fragment() {
         _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater)
 
         initRecyclerView()
+
+        binding.root.isFocusable = true
+        binding.root.isFocusableInTouchMode = true
+        binding.root.setOnClickListener {
+            Timber.d("clicking on away")
+            it.requestFocus()
+        }
 
         return binding.root
     }

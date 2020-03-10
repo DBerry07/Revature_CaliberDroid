@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     
     <data>
         <variable
@@ -10,7 +11,7 @@
             type="com.revature.caliberdroid.data.model.Note" />
     </data>
     
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -54,17 +55,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/trainee_notes_label" />
-    
-                <Button
-                    android:id="@+id/btn_assess_batch_trainees_edit_notes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+
             </LinearLayout>
     
-            <TextView
-                android:id="@+id/tv_assess_batch_trainees_notes"
+            <EditText
+                android:id="@+id/et_assess_batch_trainees_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:ems="10"
+                android:gravity="top|left"
+                android:hint="@{String.format(@string/trainee_notes_dialog_hint,trainee.name)}"
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:scrollbars="vertical"
+                android:textSize="14sp"
                 android:text="@{traineeNote.noteContent}" />
     
         </LinearLayout>

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="assessWeekViewModel"
-            type="com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekViewModel"/>
+            type="com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

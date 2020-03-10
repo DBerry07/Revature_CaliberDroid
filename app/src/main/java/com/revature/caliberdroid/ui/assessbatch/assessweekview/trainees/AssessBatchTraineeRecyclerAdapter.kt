@@ -64,7 +64,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 return note
             }
         }
-        if(traineeNote.weekNumber==0) {
+        if(traineeNote.weekNumber==-1) {
             traineeNote = Note(-1L,"","TRAINEE",assessWeekViewModel.assessWeekNotes.weekNumber,assessWeekViewModel.assessWeekNotes.batch!!.batchID,traineeId)
         }
         return traineeNote

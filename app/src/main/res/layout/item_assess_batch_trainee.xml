@@ -79,7 +79,8 @@
                 android:gravity="start|top"
                 android:hint="@{String.format(@string/trainee_notes_dialog_hint,trainee.name)}"
                 android:inputType="textMultiLine"
-                android:lines="6"
+                android:lines="3"
+                android:maxLines="5"
                 android:scrollbars="vertical"
                 android:text="@{traineeNote.noteContent}"
                 android:textSize="14sp" />

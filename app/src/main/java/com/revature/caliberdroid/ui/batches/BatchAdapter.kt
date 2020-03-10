@@ -3,25 +3,17 @@ package com.revature.caliberdroid.ui.batches
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.opengl.Visibility
 import android.os.Build
-import android.text.AlteredCharSequence.make
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.content.contentValuesOf
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation.findNavController
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.BatchRowBinding
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 
@@ -30,7 +22,6 @@ class BatchAdapter(
     comparator: Comparator<Batch>,
     private val onItemListener: OnItemClickListener
 ) : SortedListAdapter<Batch>(context, Batch::class.java, comparator) {
-
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -47,9 +38,10 @@ class BatchAdapter(
         init {
             binding.constraintLayoutBatchRow.setOnClickListener(this)
             binding.btnDeleteBatch.setOnClickListener{ this.removeBatch() }
-            binding.btnEditBatch.setOnClickListener{ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                this.editBatch()
-            }
+            binding.btnEditBatch.setOnClickListener{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    this.editBatch()
+                }
             }
             binding.btnViewAssociates.setOnClickListener{ viewAssociates(this.itemView) }
         }
@@ -87,7 +79,7 @@ class BatchAdapter(
 
         private fun expandCard() {
 
-            if(binding.tvSubItemBatchRowLocationValue.isVisible){
+            if( binding.tvSubItemBatchRowLocationValue.isVisible ){
                 binding.tvSubItemBatchRowLocationValue.visibility = View.GONE
                 binding.tvBatchRowLocationHeader.visibility = View.GONE
                 binding.tvBatchrowGoodgrade.visibility = View.GONE
@@ -100,7 +92,7 @@ class BatchAdapter(
                 binding.tvBatchRowTrainingtypeHeader.visibility = View.GONE
             }
 
-            else{
+            else {
                 binding.tvSubItemBatchRowLocationValue.visibility = View.VISIBLE
                 binding.tvBatchRowLocationHeader.visibility = View.VISIBLE
                 binding.tvBatchrowGoodgrade.visibility = View.VISIBLE
@@ -111,7 +103,6 @@ class BatchAdapter(
                 binding.tvBatchrowCotrainerValue.visibility = View.VISIBLE
                 binding.tvBatchRowTrainingtypeValue.visibility = View.VISIBLE
                 binding.tvBatchRowTrainingtypeHeader.visibility = View.VISIBLE
-
             }
         }
 

@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,15 +16,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
 import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_batches.view.*
-import java.text.DateFormat.getDateInstance
-import java.text.DateFormat.getDateTimeInstance
-import java.time.LocalDateTime
 import java.util.*
 
-class ManageBatchFragment : Fragment(), OnItemClickListener {
+class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentBatchesBinding? = null
     private val binding
@@ -55,6 +55,8 @@ class ManageBatchFragment : Fragment(), OnItemClickListener {
             // Apply the adapter to the spinner
             binding.spinnerManageBatches.adapter = adapter
         }
+        binding.spinnerManageBatches.onItemSelectedListener = this
+
 
         return binding.root
     }
@@ -82,6 +84,15 @@ class ManageBatchFragment : Fragment(), OnItemClickListener {
                 .replaceAll(it)
                 .commit()
         })
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val year = binding.spinnerManageBatches.getItemAtPosition(position).toString().toInt()
+        //BatchRepository.getBatchesByYearAndQuarter(year)
+
     }
 
 }

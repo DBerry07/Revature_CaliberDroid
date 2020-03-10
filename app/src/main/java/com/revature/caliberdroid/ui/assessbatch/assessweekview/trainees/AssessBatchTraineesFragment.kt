@@ -53,7 +53,14 @@ class AssessBatchTraineesFragment : Fragment() {
         var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
         binding.recycleAssessBatchTrainees.layoutManager = linearLayoutManager
         binding.recycleAssessBatchTrainees.adapter = mAdapter
+
+        //have the recycler view observe the trainees
         assessWeekViewModel.trainees.observe(viewLifecycleOwner, Observer {
+            (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).notifyDataSetChanged()
+        })
+
+        //have the recycler view observe the trainee notes
+        assessWeekViewModel.assessWeekNotes.traineeNotes.observe(viewLifecycleOwner, Observer {
             (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).notifyDataSetChanged()
         })
     }

@@ -10,6 +10,7 @@ import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import timber.log.Timber
+import kotlin.math.round
 
 
 class AssessWeekViewModel : ViewModel() {
@@ -69,6 +70,11 @@ class AssessWeekViewModel : ViewModel() {
         AssessWeekRepository.saveBatchNote(assessWeekNotes.batchNote)
     }
 
+    fun saveTraineeNote(note: Note) {
+        if(saveNoteThread != null) saveNoteThread!!.interrupt()
+        AssessWeekRepository.putTraineeNote(note)
+    }
+
     fun startDelayedSaveThread(note: Note, saveFunction: (note: Note) -> Unit) {
 
         if (saveNoteThread == null) saveNoteThread = getNewDelayedSaveThread(note, saveFunction)
@@ -112,5 +118,31 @@ class AssessWeekViewModel : ViewModel() {
         }
         return t
     }
+
+    fun getAssessmentAverage(assessment: Assessment): Double {
+        var totalPoints = 0.0
+        var totalPossible = 0.0
+        for(grade in assessWeekNotes.grades) {
+            if(grade.assessmentId==assessment.assessmentId) {
+                totalPoints += grade.score!!
+                totalPossible += assessment.rawScore!!
+            }
+        }
+        return ((totalPoints/totalPossible)*100).round()
+    }
+
+    fun getWeeklyBatchAverage(assessWeekNotes: AssessWeekNotes): Double {
+        var avgAssessment = 0.0
+        var totalAssessment = 0.0
+        for(assessment in assessWeekNotes.assessments){
+            avgAssessment+=(getAssessmentAverage(assessment)/100.0*assessment.rawScore!!)
+            totalAssessment+=assessment.rawScore!!
+        }
+        var batchAvg = (avgAssessment/totalAssessment).round()
+        assessWeekNotes.batchAverage=batchAvg.toFloat()
+        return batchAvg
+    }
+
+    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 
 }

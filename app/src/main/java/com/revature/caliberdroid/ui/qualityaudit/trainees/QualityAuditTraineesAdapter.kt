@@ -2,23 +2,24 @@ package com.revature.caliberdroid.ui.qualityaudit.trainees
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.databinding.Observable
+import androidx.databinding.Observable.OnPropertyChangedCallback
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.BR
-import com.revature.caliberdroid.data.model.TraineeWithNotes
+import com.revature.caliberdroid.data.model.AuditTraineeNotes
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
-import com.revature.caliberdroid.databinding.ItemQualityAuditWeekBinding
-import com.revature.caliberdroid.util.AuditStatusConverter
+import timber.log.Timber
+
 
 class QualityAuditTraineesAdapter(context: Context,
-                                  comparator: Comparator<TraineeWithNotes>
-) : SortedListAdapter<TraineeWithNotes>(context, TraineeWithNotes::class.java, comparator) {
+                                  comparator: Comparator<TraineeWithNotesLiveData>
+) : SortedListAdapter<TraineeWithNotesLiveData>(
+    context,
+    TraineeWithNotesLiveData::class.java,
+    comparator
+) {
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
@@ -28,13 +29,30 @@ class QualityAuditTraineesAdapter(context: Context,
         return TraineeWithNotesViewHolder(ItemQualityAuditTraineeBinding.inflate(inflater,parent,false))
     }
 
-    class TraineeWithNotesViewHolder(val binding: ItemQualityAuditTraineeBinding)
-        : SortedListAdapter.ViewHolder<TraineeWithNotes>(binding.root) {
+    class TraineeWithNotesViewHolder(
+        val binding: ItemQualityAuditTraineeBinding
+    ) : SortedListAdapter.ViewHolder<TraineeWithNotesLiveData>(binding.root) {
 
 
-        override fun performBind(item: TraineeWithNotes) {
+        override fun performBind(item: TraineeWithNotesLiveData) {
             binding.traineeWithNotes = item
-            binding.imgItemaudittraineeStatus.setImageResource(AuditStatusConverter.getImageResourceID(item.auditTraineeNotes!!.technicalStatus))
+            item.value!!.addOnPropertyChangedCallback(object : OnPropertyChangedCallback() {
+                override fun onPropertyChanged(
+                    sender: Observable,
+                    propertyId: Int
+                ) {
+                    Timber.d("Sender: $sender. Property ID: $propertyId")
+
+                    when (propertyId) {
+                        BR.content -> Snackbar.make(
+                            binding.root,
+                            "New content -> ${(sender as AuditTraineeNotes).content}",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        else -> Timber.d("OnElse")
+                    }
+                }
+            })
         }
 
     }

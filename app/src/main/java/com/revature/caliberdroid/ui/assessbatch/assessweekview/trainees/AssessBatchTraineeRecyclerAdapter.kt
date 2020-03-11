@@ -64,6 +64,8 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 return note
             }
         }
+
+        //check if the note is empty
         if(traineeNote.weekNumber==-1) {
             traineeNote = Note(-1L,"","TRAINEE",assessWeekViewModel.assessWeekNotes.weekNumber,assessWeekViewModel.assessWeekNotes.batch!!.batchID,traineeId)
         }
@@ -84,6 +86,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             binding.traineeNote = note
             var oldText = binding.etAssessBatchTraineesNote.text.toString()
             binding.etAssessBatchTraineesNote.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                KeyboardUtil.hideSoftKeyboard(context,v)
                 if(!hasFocus && !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
                     Timber.d("putting note"+(binding.traineeNote as Note).toString())
                     assessWeekViewModel.saveTraineeNote(binding.traineeNote as Note)

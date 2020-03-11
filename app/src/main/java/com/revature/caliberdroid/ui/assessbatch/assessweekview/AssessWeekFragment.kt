@@ -33,7 +33,7 @@ class AssessWeekFragment : Fragment() {
         assessWeekViewModel.loadTrainees()
 
         val viewPager = assessWeekBinding.viewpagerWeekview
-        assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(requireActivity().supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        assessWeekViewPagerAdapter = AssessWeekViewPagerAdapter(childFragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
         viewPager.adapter = assessWeekViewPagerAdapter
 
         val tabLayout = assessWeekBinding.tabsWeekview

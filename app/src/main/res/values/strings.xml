@@ -56,6 +56,7 @@
     <string name="batch_notes_hint">Notes for overall batch performance</string>
     <string name="button_create_assessment">Create Assessment</string>
     <string name="dialog_create_assessment">Create Assessment</string>
+    <string name="assessment_max_points_error_message">Must be an integer value greater than 0 and less than 1000</string>
     <string name="button_create">Create</string>
     <string name="button_trainee_grades">Trainee grades</string>
 

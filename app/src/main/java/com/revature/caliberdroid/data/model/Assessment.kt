@@ -5,13 +5,13 @@ import android.os.Parcelable
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 
 data class Assessment(
-    val assessmentId:Long,
+    val assessmentId:Long = -1,
     var rawScore:Int? = 0,
     var assessmentTitle:String? = "",
     var assessmentType:String? = "",
-    var weekNumber:Int? = 0,
-    var batchId:Long? = 0,
-    var assessmentCategory:Int? = 0
+    var weekNumber:Int? = -1,
+    var batchId:Long? = -1,
+    var assessmentCategory: Long? = -1
 ): SortedListAdapter.ViewModel, Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
@@ -20,7 +20,7 @@ data class Assessment(
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readValue(Int::class.java.classLoader) as? Int
+        parcel.readValue(Int::class.java.classLoader) as? Long
     ) {
     }
 

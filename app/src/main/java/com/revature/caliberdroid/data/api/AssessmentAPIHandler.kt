@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.data.parser.JSONParser.parseAssessment
 import org.json.JSONArray
+import org.json.JSONObject
 import timber.log.Timber
 
 object AssessmentAPIHandler{
@@ -31,5 +34,26 @@ object AssessmentAPIHandler{
         queue.add(arrayRequest)
     }
 
+    fun postAssessment(assessment: MutableLiveData<Assessment>) {
 
+        val queue = Volley.newRequestQueue(APIHandler.context)
+
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/all/assessment/create"
+
+        val requestBody = JSONObject()
+        requestBody.put("assessmentCategory", assessment.value!!.assessmentCategory)
+        requestBody.put("assessmentType", assessment.value!!.assessmentType)
+        requestBody.put("rawScore", assessment.value!!.rawScore)
+        requestBody.put("batchId", assessment.value!!.batchId)
+        requestBody.put("weekNumber", assessment.value!!.weekNumber)
+        requestBody.put("assessmentTitle", assessment.value!!.assessmentTitle)
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.POST,
+            url,
+            requestBody,
+            Response.Listener { response -> assessment.value = parseAssessment(response) },
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
+    }
 }

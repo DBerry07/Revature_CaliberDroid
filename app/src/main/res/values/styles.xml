@@ -11,12 +11,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-<!--    ThemeOverlay.AppCompat.Dark.ActionBar-->
+
+    <!--    ThemeOverlay.AppCompat.Dark.ActionBar-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-<!--    ThemeOverlay.AppCompat.Light-->
+    <!--    ThemeOverlay.AppCompat.Light-->
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-<!--    Theme.AppCompat.Light.DarkActionBar-->
+
+    <!--    Theme.AppCompat.Light.DarkActionBar-->
     <style name="AddTraineeCard" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="cardCornerRadius">0dp</item>
         <item name="cardElevation">5dp</item>
@@ -52,7 +54,7 @@
         <item name="android:textSize">13sp</item>
     </style>
 
-<!-- SETTINGS -->
+    <!-- SETTINGS -->
 
     <style name="addBtn" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:background">@drawable/background_btn</item>

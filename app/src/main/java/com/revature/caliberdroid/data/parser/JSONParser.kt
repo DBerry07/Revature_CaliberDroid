@@ -69,6 +69,20 @@ object JSONParser {
         return categoryList
     }
 
+    fun parseAssessment(response: JSONObject): Assessment {
+        var assessment: Assessment
+        response.apply {
+            assessment = Assessment(getLong("assessmentId"),
+                getInt("rawScore"),
+                getString("assessmentTitle"),
+                getString("assessmentType"),
+                getInt("weekNumber"),
+                getLong("batchId"),
+                getLong("assessmentCategory"))
+        }
+        return assessment
+    }
+
     fun parseAssessments(response: JSONArray): List<Assessment> {
         val assessmentList = ArrayList<Assessment>()
 
@@ -76,13 +90,7 @@ object JSONParser {
         val length = response.length()
         for(i in 0 until length){
             response.getJSONObject(i).apply {
-                assessment = Assessment(getLong("assessmentId"),
-                    getInt("rawScore"),
-                    getString("assessmentTitle"),
-                    getString("assessmentType"),
-                    getInt("weekNumber"),
-                    getLong("batchId"),
-                    getLong("assessmentCategory"))
+                assessment = parseAssessment(this)
             }
             assessmentList.add(assessment)
         }

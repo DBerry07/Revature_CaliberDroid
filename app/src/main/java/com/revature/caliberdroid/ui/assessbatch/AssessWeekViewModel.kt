@@ -2,6 +2,7 @@ package com.revature.caliberdroid.ui.assessbatch
 
 import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
@@ -34,7 +35,13 @@ class AssessWeekViewModel : ViewModel() {
     fun createAssessmentForBatchWeek(assessment: Assessment) {
         assessment.batchId = batch.batchID
         assessment.weekNumber = assessWeekNotes.weekNumber
-        AssessWeekRepository.createAssessment(assessment)
+        val liveDataAssessment = MutableLiveData(assessment)
+        AssessWeekRepository.createAssessment(liveDataAssessment)
+        liveDataAssessment.observeForever(Observer {
+            if (assessWeekNotes.weekNumber == it.weekNumber && assessWeekNotes.batch!!.batchID == it.batchId) {
+                (assessWeekNotes.assessments as ArrayList).add(it)
+            }
+        })
     }
 
     fun getSkills(): MutableLiveData<ArrayList<Category>> {

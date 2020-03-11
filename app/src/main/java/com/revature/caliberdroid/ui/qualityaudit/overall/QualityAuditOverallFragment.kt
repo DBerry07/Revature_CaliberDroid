@@ -1,6 +1,8 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +14,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.data.repository.CategoryRepository
+import com.revature.caliberdroid.databinding.DialogAddCategoriesBinding
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
 
 class QualityAuditOverallFragment : Fragment() {
@@ -20,6 +26,8 @@ class QualityAuditOverallFragment : Fragment() {
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES: java.util.Comparator<SkillCategory> =
             Comparator { a, b -> a.category.compareTo(b.category) }
+        @JvmField val ALPHABETICAL_COMPARATOR_CATEGORIES: java.util.Comparator<Category> =
+            Comparator { a, b -> a.skillCategory.compareTo(b.skillCategory) }
     }
 
     private var _binding: FragmentQualityAuditOverallBinding? = null
@@ -46,6 +54,10 @@ class QualityAuditOverallFragment : Fragment() {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+
+        binding.btnAuditoverallAddcategories.setOnClickListener(View.OnClickListener {
+            showAddCategoriesDialog(it, inflater)
+        })
 
         setClickListeners()
 
@@ -81,6 +93,39 @@ class QualityAuditOverallFragment : Fragment() {
         }
 
         binding.imgAuditoverallOverallstatus.setOnClickListener {
+
+        }
+    }
+
+    private fun showAddCategoriesDialog(view: View, inflater: LayoutInflater) {
+        binding.btnAuditoverallAddcategories.setOnClickListener {
+
+            val builder = AlertDialog.Builder(view!!.context)
+
+            builder.setTitle(resources.getString(R.string.add_categories))
+
+            val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
+
+            dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_CATEGORIES)
+
+            var categories = CategoryRepository.getCategories()
+
+            categories.observe(viewLifecycleOwner, Observer {
+                (dialogBinding.rvAddcategoriesdialogCategories.adapter as AddCategoryAdapter).edit()
+                    .replaceAll(it)
+                    .commit()
+            })
+
+            builder.setView(dialogBinding.root)
+
+            builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
+
+            })
+
+            builder.setNegativeButton(R.string.button_cancel, null)
+
+            val dialog = builder.create()
+            dialog.show()
 
         }
     }

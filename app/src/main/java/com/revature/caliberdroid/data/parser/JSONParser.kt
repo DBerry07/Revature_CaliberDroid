@@ -183,6 +183,21 @@ object JSONParser {
         return traineeList
     }
 
+    fun getAssessmentJSONObject(assessment: Assessment): JSONObject {
+        val request = JSONObject()
+
+        return request.apply {
+            assessment.apply {
+                put("assessmentCategory", assessment.assessmentCategory)
+                put("assessmentType", assessment.assessmentType)
+                put("rawScore", assessment.rawScore)
+                put("batchId", assessment.batchId)
+                put("weekNumber", assessment.weekNumber)
+                put("assessmentTitle", assessment.assessmentTitle)
+            }
+        }
+    }
+
     fun getBatchJSONObject(batch: Batch) : JSONObject {
         val request = JSONObject()
 

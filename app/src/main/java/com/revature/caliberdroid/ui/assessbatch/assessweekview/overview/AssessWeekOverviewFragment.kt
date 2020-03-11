@@ -1,33 +1,31 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import androidx.annotation.LayoutRes
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Category
-import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.DialogAddAssessmentBinding
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment.SkillArrayAdapter
 import com.revature.caliberdroid.util.KeyboardUtil
-import timber.log.Timber
+import java.text.ParseException
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
@@ -106,9 +104,6 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
         builder.setPositiveButton(R.string.button_create, DialogInterface.OnClickListener { dialog, which ->
             var assessment = Assessment()
 
-            var type = dialogBinding.spinnerCreateassessmentdialogType.selectedItem as String
-            var skill = dialogBinding.spinnerCreateassessmentdialogSkill.selectedItem as Category
-
             assessment.assessmentType = dialogBinding.spinnerCreateassessmentdialogType.selectedItem as String
             assessment.assessmentCategory = (dialogBinding.spinnerCreateassessmentdialogSkill.selectedItem as Category).categoryId
             assessment.rawScore = dialogBinding.etCreateassessmentdialogPoints.text.toString().toInt()
@@ -117,7 +112,48 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
         })
         builder.setNegativeButton(R.string.button_cancel, null)
 
-        builder.show()
+        val dialog = builder.create()
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+
+        val assessmentPointValidator: TextWatcher = object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable?) {
+
+                if (s.toString().isNotEmpty()) {
+
+                    try {
+
+                        var points = s.toString().toInt()
+                        if (points <= 0 || points > 1000) badValue() else goodValue()
+
+                    } catch (e: ParseException) {
+                        badValue()
+                    }
+                } else {
+                    badValue()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+
+            fun badValue() {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+                dialogBinding.tvCreateassessmentdialogPointsvalidationmessage.visibility = View.VISIBLE
+            }
+
+            fun goodValue() {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = true
+                dialogBinding.tvCreateassessmentdialogPointsvalidationmessage.visibility = View.GONE
+            }
+
+        }
+
+        dialogBinding.etCreateassessmentdialogPoints.addTextChangedListener(assessmentPointValidator)
+
     }
 
 }

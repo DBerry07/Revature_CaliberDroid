@@ -72,4 +72,15 @@
         app:layout_constraintStart_toEndOf="@+id/tv_createassessmentdialog_pointslabel"
         app:layout_constraintTop_toBottomOf="@+id/tv_createassessmentdialog_skilllabel" />
 
+    <TextView
+        android:id="@+id/tv_createassessmentdialog_pointsvalidationmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/assessment_max_points_error_message"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/tv_createassessmentdialog_pointslabel"
+        app:layout_constraintTop_toBottomOf="@+id/et_createassessmentdialog_points"
+        style="@style/warningText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

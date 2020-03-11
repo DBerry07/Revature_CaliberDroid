@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.AssessWeekNotes
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.data.parser.JSONParser.getAssessmentJSONObject
 import com.revature.caliberdroid.data.parser.JSONParser.parseAssessment
 import org.json.JSONArray
 import org.json.JSONObject
@@ -18,10 +19,13 @@ import timber.log.Timber
 object AssessmentAPIHandler{
 
     fun getAssessments(assessWeekNotes: AssessWeekNotes) {
+
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(APIHandler.context)
-        //response is JSONarray of assessments
+
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/all/assessment/batch/${assessWeekNotes.batch!!.batchID}/?week=${assessWeekNotes.weekNumber}"
+
+        //response is JSONArray of assessments
         val arrayRequest = JsonArrayRequest(
             Request.Method.GET,
             url,
@@ -29,7 +33,8 @@ object AssessmentAPIHandler{
             Response.Listener<JSONArray> { response ->
                 assessWeekNotes.assessments = JSONParser.parseAssessments(response)
             },
-            Response.ErrorListener { error -> Timber.d(error.toString()) })
+            Response.ErrorListener { error -> Timber.d(error.toString()) }
+        )
 
         queue.add(arrayRequest)
     }
@@ -40,20 +45,19 @@ object AssessmentAPIHandler{
 
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/assessment/all/assessment/create"
 
-        val requestBody = JSONObject()
-        requestBody.put("assessmentCategory", assessment.value!!.assessmentCategory)
-        requestBody.put("assessmentType", assessment.value!!.assessmentType)
-        requestBody.put("rawScore", assessment.value!!.rawScore)
-        requestBody.put("batchId", assessment.value!!.batchId)
-        requestBody.put("weekNumber", assessment.value!!.weekNumber)
-        requestBody.put("assessmentTitle", assessment.value!!.assessmentTitle)
+        val requestBody = getAssessmentJSONObject(assessment.value!!)
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.POST,
             url,
             requestBody,
-            Response.Listener { response -> assessment.value = parseAssessment(response) },
+            Response.Listener { response ->
+                Timber.d(response.toString())
+                assessment.value = parseAssessment(response)
+            },
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )
+
+        queue.add(jsonObjectRequest)
     }
 }

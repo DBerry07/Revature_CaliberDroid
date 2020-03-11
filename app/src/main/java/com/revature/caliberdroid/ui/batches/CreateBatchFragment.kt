@@ -2,6 +2,7 @@ package com.revature.caliberdroid.ui.batches
 
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,19 +62,23 @@ class CreateBatchFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = "Create Batch"
         }
 
+        // put this in spinnerInit()
         trainingTypeAdapter = ArrayAdapter.createFromResource(
             requireContext(), R.array.training_type_array, android.R.layout.simple_spinner_item)
         trainingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerCreateBatchTrainingType.adapter = trainingTypeAdapter
+        //
 
         //spinnerInit()
 
         binding.btnCreateBatchCreate.setOnClickListener {
-            if(batch!=null) {
-                updateBatch()
-            }
-            else{
-                createBatch()
+            if(checkEmptyFields()){
+                if(batch!=null) {
+                    updateBatch()
+                }
+                else{
+                    createBatch()
+                }
             }
         }
 
@@ -84,13 +89,43 @@ class CreateBatchFragment : Fragment() {
         return binding.root
     }
 
+    private fun checkEmptyFields(): Boolean {
+        var result = true
+        if(TextUtils.isEmpty(binding.etCreateBatchNameInput.text)) {
+            binding.etCreateBatchNameInput.error = "Batch Name cannot be empty"
+            result = false
+        }
+        if(TextUtils.isEmpty(binding.etCreateBatchSkillInput.text)) {
+            binding.etCreateBatchSkillInput.error = "Skill focus cannot be empty"
+            result = false
+        }
+        if(TextUtils.isEmpty(binding.etCreateBatchStartInput.text)) {
+            binding.etCreateBatchStartInput.error = "Start date cannot be empty"
+            result = false
+        }
+        if(TextUtils.isEmpty(binding.etCreateBatchEndInput.text)) {
+            binding.etCreateBatchEndInput.error = "End date cannot be empty"
+            result = false
+        }
+        if(TextUtils.isEmpty(binding.etCreateBatchGoodGradeInput.text)) {
+            binding.etCreateBatchGoodGradeInput.error = "Good grade cannot be empty"
+            result = false
+        }
+        if(TextUtils.isEmpty(binding.etCreateBatchPassingGradeInput.text)) {
+            binding.etCreateBatchPassingGradeInput.error = "Passing grade cannot be empty"
+            result = false
+        }
+
+        return result
+    }
+
 
     private fun createBatch() {
+        // creating an empty batch that will be filled with data from the edit text views
         batch = Batch(0,"","","","","",0,"",0,0,0,0,0)
         setBatchValues()
         BatchRepository.addBatch(batch!!)
     }
-
 
     private fun updateBatch() {
         setBatchValues()
@@ -125,6 +160,18 @@ class CreateBatchFragment : Fragment() {
         )
         binding.spinnerCreatebatchLocation.adapter = locationAdapter!!
 
+        /*
+        trainerAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            viewModel.trainers.value!!
+        )
+        binding.spinnerCreatebatchTrainer.adapter = trainerAdapter!!
+
+        binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter!!
+
+         */
+
     }
 
     private fun setExistingValues() {
@@ -138,7 +185,7 @@ class CreateBatchFragment : Fragment() {
         var spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
 
-        // TODO
+        // TODO: Uncomment after getting the api data
         /*
 
         spinnerPosition = locationAdapter.getPosition(batch?.location)

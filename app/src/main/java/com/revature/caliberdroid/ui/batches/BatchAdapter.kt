@@ -79,31 +79,11 @@ class BatchAdapter(
 
         private fun expandCard() {
 
-            if( binding.tvSubItemBatchRowLocationValue.isVisible ){
-                binding.tvSubItemBatchRowLocationValue.visibility = View.GONE
-                binding.tvBatchRowLocationHeader.visibility = View.GONE
-                binding.tvBatchrowGoodgrade.visibility = View.GONE
-                binding.tvBatchrowGoodgradeValue.visibility = View.GONE
-                binding.tvBatchrowPassinggrade.visibility = View.GONE
-                binding.tvBatchrowPassinggradeValue.visibility = View.GONE
-                binding.tvBatchrowCotrainer.visibility = View.GONE
-                binding.tvBatchrowCotrainerValue.visibility = View.GONE
-                binding.tvBatchRowTrainingtypeValue.visibility = View.GONE
-                binding.tvBatchRowTrainingtypeHeader.visibility = View.GONE
+            if( binding.constraintlayoutBatchrowExpandable.isVisible ){
+                binding.constraintlayoutBatchrowExpandable.visibility = View.GONE
                 binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
-            }
-
-            else {
-                binding.tvSubItemBatchRowLocationValue.visibility = View.VISIBLE
-                binding.tvBatchRowLocationHeader.visibility = View.VISIBLE
-                binding.tvBatchrowGoodgrade.visibility = View.VISIBLE
-                binding.tvBatchrowGoodgradeValue.visibility = View.VISIBLE
-                binding.tvBatchrowPassinggrade.visibility = View.VISIBLE
-                binding.tvBatchrowPassinggradeValue.visibility = View.VISIBLE
-                binding.tvBatchrowCotrainer.visibility = View.VISIBLE
-                binding.tvBatchrowCotrainerValue.visibility = View.VISIBLE
-                binding.tvBatchRowTrainingtypeValue.visibility = View.VISIBLE
-                binding.tvBatchRowTrainingtypeHeader.visibility = View.VISIBLE
+            } else {
+                binding.constraintlayoutBatchrowExpandable.visibility = View.VISIBLE
                 binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
             }
         }

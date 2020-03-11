@@ -109,6 +109,16 @@ object JSONParser {
         return gradeList
     }
 
+    fun parseGrade(grade: JSONObject): Grade {
+        grade.apply {
+            return Grade(getLong("gradeId"),
+            getString("dateReceived"),
+            getInt("score"),
+            getLong("assessmentId"),
+            getLong("traineeId"))
+        }
+    }
+
     fun parseNote(note:JSONObject):Note {
         note.apply {
             return Note(getLong("noteId"),

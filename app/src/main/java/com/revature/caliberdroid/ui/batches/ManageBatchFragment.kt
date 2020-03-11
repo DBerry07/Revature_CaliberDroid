@@ -28,41 +28,33 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     private val binding
         get() = _binding!!
     private val viewModel: BatchesViewModel by activityViewModels()
+    private var yearsArrayAdapter: ArrayAdapter<Int>? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentBatchesBinding.inflate(layoutInflater)
 
-        binding.recyclerviewManageBatches.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerviewManageBatches.adapter = BatchAdapter(requireContext(), ALPHABETICAL_COMPARATOR_BATCHES, this)
-        viewModel.getBatches()
+        viewModel.getValidYears()
         subscribeToViewModel()
+
         binding.tvManageBatchesNoOfBatchesValue.text = binding.root.recyclerview_manage_batches.adapter?.itemCount.toString()
         binding.btnManageBatchCreateBatch.setOnClickListener {
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToCreateBatchFragment(null))
         }
 
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.years_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.spinnerManageBatches.adapter = adapter
-        }
-        binding.spinnerManageBatches.onItemSelectedListener = this
-
+        spinnerInit()
+        recyclerViewInit()
 
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        yearsArrayAdapter = null
         _binding = null
     }
 
@@ -84,15 +76,55 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
                 .replaceAll(it)
                 .commit()
         })
+
+        viewModel.validYears.observe(viewLifecycleOwner, Observer {
+            yearsArrayAdapter?.apply {
+                notifyDataSetChanged()
+                if (it.isNotEmpty()) {
+                    binding.spinnerManageBatches.apply {
+                        if (viewModel.selectedYear == null) {
+                            viewModel.selectedYear = it.max()
+                        }
+                        this.setSelection(it.indexOf(viewModel.selectedYear))
+                    }
+                }
+            }
+        })
+    }
+
+    private fun spinnerInit() {
+        yearsArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            viewModel.validYears.value!!
+        )
+        binding.spinnerManageBatches.adapter = yearsArrayAdapter!!
+        binding.spinnerManageBatches.onItemSelectedListener = this
+
+        if (viewModel.selectedYear != null) {
+            binding.spinnerManageBatches.setSelection(
+                yearsArrayAdapter!!.getPosition(
+                    viewModel.selectedYear!!
+                )
+            )
+        }
+    }
+
+    private fun recyclerViewInit() {
+        binding.recyclerviewManageBatches.layoutManager =
+            LinearLayoutManager(context)
+        binding.recyclerviewManageBatches.adapter = BatchAdapter(
+            requireContext(),
+            ALPHABETICAL_COMPARATOR_BATCHES,
+            this
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val year = binding.spinnerManageBatches.getItemAtPosition(position).toString().toInt()
-        //BatchRepository.getBatchesByYearAndQuarter(year)
-
+        viewModel.selectedYear = parent?.getItemAtPosition(position) as Int
     }
 
 }

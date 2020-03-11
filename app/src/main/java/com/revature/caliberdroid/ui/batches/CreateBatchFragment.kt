@@ -1,22 +1,26 @@
 package com.revature.caliberdroid.ui.batches
 
-import android.app.ActionBar
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Location
+import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentCreateBatchBinding
+import java.util.Observer
+
 
 class CreateBatchFragment : Fragment() {
 
@@ -25,16 +29,24 @@ class CreateBatchFragment : Fragment() {
         get() = _binding!!
     private val args: CreateBatchFragmentArgs by navArgs()
     private var batch: Batch? = null
+    private val viewModel: BatchesViewModel by activityViewModels()
+
+    lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
+    private var trainerAdapter: ArrayAdapter<Trainer>? = null
+    private var locationAdapter: ArrayAdapter<Location>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val ab: ActionBar? = activity?.actionBar
 
         activity?.window?.setSoftInputMode(
             WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
         )
+
+        // ViewModel Init
+        viewModel.getLocations()
+        viewModel.getTrainers()
 
         // Inflate the layout for this fragment
         _binding = FragmentCreateBatchBinding.inflate(layoutInflater)
@@ -48,6 +60,13 @@ class CreateBatchFragment : Fragment() {
             binding.btnCreateBatchCreate.text = getString(R.string.btn_editBatch_update)
             (activity as AppCompatActivity).supportActionBar?.title = "Create Batch"
         }
+
+        trainingTypeAdapter = ArrayAdapter.createFromResource(
+            requireContext(), R.array.training_type_array, android.R.layout.simple_spinner_item)
+        trainingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCreateBatchTrainingType.adapter = trainingTypeAdapter
+
+        //spinnerInit()
 
         binding.btnCreateBatchCreate.setOnClickListener {
             if(batch!=null) {
@@ -82,8 +101,9 @@ class CreateBatchFragment : Fragment() {
 
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
-        batch?.trainerName = binding.etCreateBatchNameTrainerInput.text.toString()
-        batch?.location = binding.etCreateBatchLocationInput.text.toString()
+        batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()
+        batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.selectedItem.toString()
+        batch?.location = binding.spinnerCreatebatchLocation.selectedItem.toString()
         batch?.skillType = binding.etCreateBatchSkillInput.text.toString()
         // convert back to timestamps for API
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -91,22 +111,48 @@ class CreateBatchFragment : Fragment() {
             //batch._startDate = DateConverter.getTimestamp(startDate.text.toString())
             //batch._endDate = DateConverter.getTimestamp(endDate.text.toString())
         }
-        batch?.trainingType = binding.etCreateBatchTrainingTypeInput.text.toString()
+        // TODO
+        batch?.trainingType = binding.spinnerCreateBatchTrainingType.selectedItem.toString()
         batch?.goodGrade = binding.etCreateBatchGoodGradeInput.text.toString().toInt()
         batch?.passingGrade = binding.etCreateBatchPassingGradeInput.text.toString().toInt()
     }
 
+    private fun spinnerInit() {
+        locationAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            viewModel.locations.value!!
+        )
+        binding.spinnerCreatebatchLocation.adapter = locationAdapter!!
+
+    }
+
     private fun setExistingValues() {
-        binding.etCreateBatchNameTrainerInput.setText(batch?.trainerName)
         binding.etCreateBatchNameInput.setText(batch?.trainingName)
-        binding.etCreateBatchLocationInput.setText(batch?.location)
         binding.etCreateBatchSkillInput.setText(batch?.skillType)
         binding.etCreateBatchStartInput.setText(batch?.startDate)
         binding.etCreateBatchEndInput.setText(batch?.endDate)
         binding.etCreateBatchGoodGradeInput.setText(batch?.goodGrade.toString())
         binding.etCreateBatchPassingGradeInput.setText(batch?.passingGrade.toString())
-        binding.etCreateBatchTrainingTypeInput.setText(batch?.trainingType)
-    }
+
+        var spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
+        binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
+
+        // TODO
+        /*
+
+        spinnerPosition = locationAdapter.getPosition(batch?.location)
+        binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
+
+        spinnerPosition = trainerAdapter.getPosition(batch?.trainerName)
+        binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
+
+        spinnerPosition = cotrainerAdapter.getPosition(batch?.coTrainerName)
+        binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
+
+        */
+
+}
 
 
 }

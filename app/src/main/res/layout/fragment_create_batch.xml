@@ -11,88 +11,89 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:inputType="text"
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_name"
         app:layout_constraintTop_toTopOf="@+id/tv_create_batch_name"
         tools:ignore="LabelFor" />
 
-    <EditText
-        android:id="@+id/et_create_batch_name_trainer_input"
+    <Spinner
+        android:id="@+id/spinner_createbatch_cotrainer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="text"
+        android:background="@drawable/spinner_border"
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_cotrainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_create_batch_trainer"
+        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_cotrainer" />
+
+    <Spinner
+        android:id="@+id/spinner_createbatch_trainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints=""
+        android:background="@drawable/spinner_border"
+        android:paddingStart="4dp"
+        android:paddingEnd="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_trainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_trainer"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_trainer" />
 
-    <EditText
-        android:id="@+id/et_create_batch_location_input"
+    <Spinner
+        android:id="@+id/spinner_createbatch_location"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="text"
+        android:background="@drawable/spinner_border"
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_location"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_location"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_location" />
 
-    <EditText
-        android:id="@+id/et_create_batch_training_type_input"
+    <Spinner
+        android:id="@+id/spinner_create_batch_training_type"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="text"
+        android:background="@drawable/spinner_border"
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_training_type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_training_type"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_training_type"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_training_type" />
 
     <EditText
         android:id="@+id/et_create_batch_skill_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
@@ -100,7 +101,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_skill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_skill"
@@ -112,7 +113,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
@@ -120,7 +121,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_start"
@@ -132,7 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
@@ -140,7 +141,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_end"
@@ -152,7 +153,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
@@ -160,7 +161,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_good_grade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_good_grade"
@@ -172,7 +173,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:background="@drawable/textview_border"
         android:fontFamily="sans-serif"
@@ -180,7 +181,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="1dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_create_batch_passing_grade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_create_batch_passing_grade"
@@ -194,7 +195,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/batch_dialog_heading_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_trainer"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -205,9 +206,20 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_training_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_location"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name" />
+
+    <TextView
+        android:id="@+id/tv_create_batch_cotrainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="CoTrainer Name:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer" />
 
     <TextView
         android:id="@+id/tv_create_batch_location"
@@ -216,7 +228,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_location"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_skill"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_training_type" />
 
@@ -227,9 +239,9 @@
         android:layout_marginTop="20dp"
         android:text="Training Type:"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_location"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_cotrainer" />
 
     <TextView
         android:id="@+id/tv_create_batch_skill"
@@ -238,7 +250,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_skill"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_start"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_location" />
 
@@ -249,7 +261,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_start_date"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_end"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_skill" />
 
@@ -260,7 +272,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_end_date"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_good_grade"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_start" />
 
@@ -271,7 +283,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_good_grade"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_create_batch_passing_grade"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_end" />
 
@@ -283,7 +295,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/batch_dialog_heading_passing_grade"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_good_grade" />
 

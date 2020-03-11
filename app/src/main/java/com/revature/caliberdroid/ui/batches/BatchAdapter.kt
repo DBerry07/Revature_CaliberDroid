@@ -90,6 +90,7 @@ class BatchAdapter(
                 binding.tvBatchrowCotrainerValue.visibility = View.GONE
                 binding.tvBatchRowTrainingtypeValue.visibility = View.GONE
                 binding.tvBatchRowTrainingtypeHeader.visibility = View.GONE
+                binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
             }
 
             else {
@@ -103,6 +104,7 @@ class BatchAdapter(
                 binding.tvBatchrowCotrainerValue.visibility = View.VISIBLE
                 binding.tvBatchRowTrainingtypeValue.visibility = View.VISIBLE
                 binding.tvBatchRowTrainingtypeHeader.visibility = View.VISIBLE
+                binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
             }
         }
 

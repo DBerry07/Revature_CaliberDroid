@@ -90,7 +90,7 @@ object JSONParser {
         return assessmentList
     }
 
-    fun parseGrades(response: JSONArray): List<Grade> {
+    fun parseGrades(response: JSONArray): ArrayList<Grade> {
         val gradeList = ArrayList<Grade>()
 
         var grade: Grade

@@ -12,7 +12,7 @@ data class AssessWeekNotes(var weekNumber: Int,
                            var batch: Batch?
 ) : BaseObservable(), SortedListAdapter.ViewModel {
 
-    var batchAverage: Float = 0f
+    var batchAverage: Float = calculateBatchAverage()
         set(value) {
             field = value
             notifyChange()
@@ -27,7 +27,7 @@ data class AssessWeekNotes(var weekNumber: Int,
             field = value
             notifyChange()
         }
-    var grades: List<Grade> = arrayListOf()
+    var grades: ArrayList<Grade> = arrayListOf()
         set(value) {
             field = value
             notifyChange()
@@ -60,6 +60,34 @@ data class AssessWeekNotes(var weekNumber: Int,
         }
         return false
     }
+
+    fun calculateBatchAverage(): Float {
+        var avgAssessment = 0.0
+        var totalAssessment = 0.0
+        if(assessments!=null) {
+            for (assessment in assessments) {
+                avgAssessment += (getAssessmentAverage(assessment) / 100.0 * assessment.rawScore!!)
+                totalAssessment += assessment.rawScore!!
+            }
+        }
+        var batchAvg = (avgAssessment/totalAssessment).round().toFloat()
+        batchAverage = batchAvg
+        return batchAvg
+    }
+
+    fun getAssessmentAverage(assessment: Assessment): Double {
+        var totalPoints = 0.0
+        var totalPossible = 0.0
+        for(grade in grades) {
+            if(grade.assessmentId==assessment.assessmentId) {
+                totalPoints += grade.score!!
+                totalPossible += assessment.rawScore!!
+            }
+        }
+        return ((totalPoints/totalPossible)*100).round()
+    }
+
+    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 
 }
 

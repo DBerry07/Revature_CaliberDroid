@@ -174,23 +174,26 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
 
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
-                holder.details.visibility = View.VISIBLE
+                holder.buffer.visibility = View.VISIBLE
+                Handler().postDelayed( {
+                    holder.details.visibility = View.VISIBLE
+                }, LOAD_DELAY * 1)
                 holder.buffer.visibility = View.VISIBLE
                 Handler().postDelayed( {
                     holder.row1.visibility=View.VISIBLE
-                }, LOAD_DELAY * 1)
-                Handler().postDelayed( {
-                    holder.row2.visibility=View.VISIBLE
                 }, LOAD_DELAY * 2)
                 Handler().postDelayed( {
-                    holder.row3.visibility=View.VISIBLE
+                    holder.row2.visibility=View.VISIBLE
                 }, LOAD_DELAY * 3)
                 Handler().postDelayed( {
-                    holder.row4.visibility=View.VISIBLE
+                    holder.row3.visibility=View.VISIBLE
                 }, LOAD_DELAY * 4)
                 Handler().postDelayed( {
-                    holder.row5.visibility=View.VISIBLE
+                    holder.row4.visibility=View.VISIBLE
                 }, LOAD_DELAY * 5)
+                Handler().postDelayed( {
+                    holder.row5.visibility=View.VISIBLE
+                }, LOAD_DELAY * 6)
 
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
@@ -214,7 +217,10 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
                     holder.buffer.visibility=View.GONE
                     holder.details.visibility = View.GONE
                 }, LOAD_DELAY * 5)
-
+                Handler().postDelayed( {
+                    holder.buffer.visibility=View.GONE
+                    holder.details.visibility = View.GONE
+                }, LOAD_DELAY * 6)
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)
@@ -261,9 +267,11 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
         override fun onLongPress(e: MotionEvent?) {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.options.visibility = View.VISIBLE
+                adapter.notifyItemChanged(position)
             }
             else if (!holder.isExpanded && holder.options.visibility == View.VISIBLE){
                 holder.options.visibility = View.GONE
+                adapter.notifyItemChanged(position)
             }
 
 

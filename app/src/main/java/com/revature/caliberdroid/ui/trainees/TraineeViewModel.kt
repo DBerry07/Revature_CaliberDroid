@@ -13,6 +13,7 @@ class TraineeViewModel : ViewModel() {
 
     lateinit var traineesLiveData: LiveData< List<Trainee> >
     val allBatchesLiveData: MutableLiveData< ArrayList<Batch> > = MutableLiveData()
+    val traineeBeingSwitchedLiveData:MutableLiveData< Trainee > = MutableLiveData()
 
     fun getTrainees(batchId : Long){
         traineesLiveData = TraineeRepository.getTrainees(batchId)
@@ -24,6 +25,11 @@ class TraineeViewModel : ViewModel() {
 
     fun getAllBatches(){
         TraineeRepository.getAllBatches(allBatchesLiveData)
+    }
+
+    fun switchTrainee(trainee: Trainee, newBatch: Batch) {
+        traineeBeingSwitchedLiveData.value = trainee
+        TraineeRepository.switchTrainee(traineeBeingSwitchedLiveData, newBatch)
     }
 
 }

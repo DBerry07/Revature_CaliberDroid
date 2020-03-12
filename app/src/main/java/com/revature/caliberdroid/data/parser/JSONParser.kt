@@ -175,6 +175,40 @@ object JSONParser {
         return traineeList
     }
 
+    fun parseSingleTrainee(response: JSONObject): Trainee {
+        var trainee: Trainee
+        val length = response.length()
+        response.apply {
+            trainee = Trainee(getLong("traineeId"),
+                getString("resourceId"),
+                getString("name"),
+                getString("email"),
+                getString("trainingStatus"),
+                getLong("batchId"),
+                getString("phoneNumber"),
+                getString("skypeId"),
+                getString("profileUrl"),
+                getString("recruiterName"),
+                getString("college"),
+                getString("degree"),
+                getString("major"),
+                getString("techScreenerName"),
+                //Had to alter techScreenScore from getLong to get to allow null from API
+                get("techScreenScore"),
+                getString("projectCompletion"),
+                getString("flagStatus"),
+                getString("flagNotes"),
+                /*Switch API returns different keys for:
+                    flagAuthor (flagNoteAuthor, instead)
+                    and flagTimestamp (flagNoteTimeStamp, instead)
+                    */
+                getString("flagNoteAuthor"),
+                getString("flagNoteTimestamp"))
+        }
+
+        return trainee
+    }
+
     fun getBatchJSONObject(batch: Batch) : JSONObject {
         val request = JSONObject()
 

@@ -23,7 +23,6 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
     private val binding get() = _binding!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        LayoutInflater.from(parent.context).inflate(R.layout.item_trainee, parent, false)
         _binding = ItemTraineeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         pop = PopupWindow(parent.context)
 

@@ -22,4 +22,8 @@ object TraineeRepository {
     fun getAllBatches(liveData: MutableLiveData<ArrayList<Batch>>){
         APIHandler.getAllBatches(liveData)
     }
+
+    fun switchTrainee(traineeLiveData: MutableLiveData<Trainee>, newBatch: Batch) {
+        APIHandler.switchTrainee(traineeLiveData, newBatch)
+    }
 }

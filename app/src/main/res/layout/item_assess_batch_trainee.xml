@@ -85,7 +85,7 @@
                 android:background="@android:drawable/editbox_background"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="@{String.format(@string/trainee_notes_dialog_hint,trainee.name)}"
+                android:hint="@{@string/trainee_notes_dialog_hint(trainee.name)}"
                 android:inputType="textMultiLine"
                 android:lines="3"
                 android:maxLines="5"

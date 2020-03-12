@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/traineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.TraineeFragment"
-        android:label="TraineeFragment" >
+        android:label="Trainee">
         <action
             android:id="@+id/action_traineeFragment_to_addTraineeFragment"
             app:destination="@id/addTraineeFragment" />
@@ -42,10 +42,10 @@
     <fragment
         android:id="@+id/addTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.AddTraineeFragment"
-        android:label="AddTraineeFragment" >
-<!--        <action-->
-<!--            android:id="@+id/action_addTraineeFragment_to_traineeFragment"-->
-<!--            app:destination="@id/traineeFragment" />-->
+        android:label="Add Trainee">
+        <!--        <action-->
+        <!--            android:id="@+id/action_addTraineeFragment_to_traineeFragment"-->
+        <!--            app:destination="@id/traineeFragment" />-->
         <argument
             android:name="currentBatch"
             app:argType="com.revature.caliberdroid.data.model.Batch" />
@@ -53,8 +53,12 @@
     <fragment
         android:id="@+id/switchTraineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.SwitchTraineeFragment"
-        android:label="fragment_switch_trainee"
-        tools:layout="@layout/fragment_switch_trainee" />
+        android:label="Switch Trainee"
+        tools:layout="@layout/fragment_switch_trainee">
+        <argument
+            android:name="traineeToSwitch"
+            app:argType="com.revature.caliberdroid.data.model.Trainee" />
+    </fragment>
     <fragment
         android:id="@+id/createBatchFragment"
         android:name="com.revature.caliberdroid.ui.batches.CreateBatchFragment"

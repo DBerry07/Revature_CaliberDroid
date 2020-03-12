@@ -99,8 +99,8 @@
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>
     <string name="batch_dialog_heading_skill">Skill Focus:</string>
-    <string name="batch_dialog_heading_start_date">Start Date:</string>
-    <string name="batch_dialog_heading_end_date">End Date:</string>
+    <string name="batch_dialog_heading_start_date">Start Date: (mmm dd, yyyy)</string>
+    <string name="batch_dialog_heading_end_date">End Date: (mmm dd, yyyy)</string>
     <string name="batch_dialog_heading_good_grade">Good Grade:</string>
     <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
     <string name="batch_dialog_create_button">Update</string>

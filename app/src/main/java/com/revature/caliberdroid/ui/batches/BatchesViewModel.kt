@@ -31,10 +31,6 @@ class BatchesViewModel : ViewModel() {
         validYears = BatchRepository.getValidYears()
     }
 
-    fun getLocations() {
-         locations = LocationRepository.getLocations()
-    }
-
     fun getTrainers() {
         trainers = TrainerRepository.getTrainers()
     }

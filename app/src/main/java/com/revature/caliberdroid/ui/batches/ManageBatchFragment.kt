@@ -70,6 +70,10 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToTraineeFragment(batchClicked))
     }
 
+    override fun onDelete(){
+        findNavController().navigate(R.id.manageBatchFragment)
+    }
+
     private fun subscribeToViewModel() {
         viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()

@@ -3,11 +3,13 @@ package com.revature.caliberdroid.ui.batches
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,21 +22,34 @@ import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentCreateBatchBinding
-import java.util.Observer
+import com.revature.caliberdroid.ui.locations.LocationsViewModel
+import com.revature.caliberdroid.ui.trainers.TrainersViewModel
+import com.revature.caliberdroid.util.DateConverter
+import kotlinx.android.synthetic.main.fragment_create_batch.*
+import kotlinx.android.synthetic.main.fragment_create_batch.view.*
+import timber.log.Timber
 
 
 class CreateBatchFragment : Fragment() {
 
+    // data binding
     private var _binding: FragmentCreateBatchBinding? = null
     private val binding
         get() = _binding!!
     private val args: CreateBatchFragmentArgs by navArgs()
     private var batch: Batch? = null
-    private val viewModel: BatchesViewModel by activityViewModels()
 
-    lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
-    private var trainerAdapter: ArrayAdapter<Trainer>? = null
-    private var locationAdapter: ArrayAdapter<Location>? = null
+    // view models
+    private val locationsViewModel: LocationsViewModel by activityViewModels()
+    private val batchViewModel: BatchesViewModel by activityViewModels()
+    private val trainerViewModel: TrainersViewModel by activityViewModels()
+
+    // spinner adapters and arrays
+    private lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
+    private lateinit var locationAdapter: ArrayAdapter<String>
+    private lateinit var trainerAdapter: ArrayAdapter<String>
+    var locationsFromAPI = ArrayList<String>()
+    var trainersFromAPI = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,42 +61,39 @@ class CreateBatchFragment : Fragment() {
         )
 
         // ViewModel Init
-        viewModel.getLocations()
-        viewModel.getTrainers()
+        locationsViewModel.getLocations()
+        batchViewModel.getTrainers()
+        trainerViewModel.getTrainers()
 
         // Inflate the layout for this fragment
         _binding = FragmentCreateBatchBinding.inflate(layoutInflater)
         batch = args.selectedBatch
 
+        spinnerInit()
+
         binding.btnCreateBatchCancel.setOnClickListener{
             findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
         }
 
+        // Set title for the create batch path
         if(batch == null) {
             binding.btnCreateBatchCreate.text = getString(R.string.btn_editBatch_update)
             (activity as AppCompatActivity).supportActionBar?.title = "Create Batch"
         }
 
-        // put this in spinnerInit()
-        trainingTypeAdapter = ArrayAdapter.createFromResource(
-            requireContext(), R.array.training_type_array, android.R.layout.simple_spinner_item)
-        trainingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerCreateBatchTrainingType.adapter = trainingTypeAdapter
-        //
-
-        //spinnerInit()
-
         binding.btnCreateBatchCreate.setOnClickListener {
             if(checkEmptyFields()){
                 if(batch!=null) {
                     updateBatch()
-                }
-                else{
-                    createBatch()
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        createBatch()
+                    }
                 }
             }
         }
 
+        // if edit batch path fill with the existing values
         if(batch != null) {
             setExistingValues()
         }
@@ -119,12 +131,27 @@ class CreateBatchFragment : Fragment() {
         return result
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createBatch() {
         // creating an empty batch that will be filled with data from the edit text views
-        batch = Batch(0,"","","","","",0,"",0,0,0,0,0)
-        setBatchValues()
+        batch = Batch(
+            0,
+            binding.etCreateBatchNameInput.text.toString(),
+            binding.spinnerCreateBatchTrainingType.selectedItem.toString(),
+            binding.etCreateBatchSkillInput.text.toString(),
+            binding.spinnerCreatebatchTrainer.selectedItem.toString(),
+            binding.spinnerCreatebatchCotrainer.selectedItem.toString(),
+            0,
+            binding.spinnerCreatebatchLocation.selectedItem.toString(),
+            DateConverter.getTimestamp(binding.etCreateBatchStartInput.text.toString()),
+            DateConverter.getTimestamp(binding.etCreateBatchEndInput.text.toString()),
+            binding.etCreateBatchGoodGradeInput.text.toString().toInt(),
+            binding.etCreateBatchPassingGradeInput.text.toString().toInt(),
+            0
+        )
         BatchRepository.addBatch(batch!!)
+        Snackbar.make(view!!,"Batch Created Successfully!", Snackbar.LENGTH_SHORT).show()
+        findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
     }
 
     private fun updateBatch() {
@@ -134,43 +161,55 @@ class CreateBatchFragment : Fragment() {
         findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
     }
 
+
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
         batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()
         batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.selectedItem.toString()
         batch?.location = binding.spinnerCreatebatchLocation.selectedItem.toString()
         batch?.skillType = binding.etCreateBatchSkillInput.text.toString()
-        // convert back to timestamps for API
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // TODO: conversion is all messed up
-            //batch._startDate = DateConverter.getTimestamp(startDate.text.toString())
-            //batch._endDate = DateConverter.getTimestamp(endDate.text.toString())
-        }
-        // TODO
         batch?.trainingType = binding.spinnerCreateBatchTrainingType.selectedItem.toString()
         batch?.goodGrade = binding.etCreateBatchGoodGradeInput.text.toString().toInt()
         batch?.passingGrade = binding.etCreateBatchPassingGradeInput.text.toString().toInt()
     }
 
     private fun spinnerInit() {
-        locationAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            viewModel.locations.value!!
-        )
-        binding.spinnerCreatebatchLocation.adapter = locationAdapter!!
 
-        /*
-        trainerAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_dropdown_item,
-            viewModel.trainers.value!!
-        )
-        binding.spinnerCreatebatchTrainer.adapter = trainerAdapter!!
+        // populate Training Type spinner
+        trainingTypeAdapter = ArrayAdapter.createFromResource(
+            requireContext(), R.array.training_type_array, R.layout.custom_spinner)
+        trainingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCreateBatchTrainingType.adapter = trainingTypeAdapter
 
-        binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter!!
+        // populate Location Spinner
+        locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { locations ->
+            if(locations != null){
+                for (location in locations) {
+                    locationsFromAPI.add(location.getAddressLines())
+                }
+                this.locationAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, locationsFromAPI)
+                this.locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinnerCreatebatchLocation.adapter = locationAdapter
+            } else {
+                Timber.d("locationsViewModel is null")
+            }
+        })
 
-         */
+        // populate Trainer/Co-trainer Spinner
+        trainerViewModel.trainersLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { trainers ->
+            if(trainers != null){
+                trainersFromAPI.add("none")
+                for (trainer in trainers) {
+                    trainersFromAPI.add(trainer.name)
+                }
+                this.trainerAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, trainersFromAPI)
+                this.trainerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinnerCreatebatchTrainer.adapter = trainerAdapter
+                binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter
+            } else {
+                Timber.d("locationsViewModel is null")
+            }
+        })
 
     }
 
@@ -185,21 +224,20 @@ class CreateBatchFragment : Fragment() {
         var spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
 
-        // TODO: Uncomment after getting the api data
-        /*
+        /*   THE ADAPTER AND ARRAY LISTS GET RESET TO NULL AFTER FILLING THE SPINNER
+             FOR SOME REASONS. SO THIS WILL CAUSE AN RUNTIME ERROR
 
-        spinnerPosition = locationAdapter.getPosition(batch?.location)
+        spinnerPosition = this.locationAdapter.getPosition(batch?.location)
         binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
 
-        spinnerPosition = trainerAdapter.getPosition(batch?.trainerName)
+        spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
         binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
 
-        spinnerPosition = cotrainerAdapter.getPosition(batch?.coTrainerName)
+        spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
         binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
 
-        */
+         */
 
 }
-
 
 }

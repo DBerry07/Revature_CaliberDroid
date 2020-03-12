@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.api.APIHandler.context
@@ -58,6 +59,7 @@ class BatchAdapter(
                 builder.setNegativeButton("Yes") { _: DialogInterface?, _: Int ->
                     Snackbar.make(this.itemView,"Batch Deleted Successfully!", Snackbar.LENGTH_SHORT).show()
                     BatchRepository.deleteBatch(this.currentItem)
+                    onItemListener.onDelete()
                 }
 
                 val dialog = builder.create()
@@ -92,6 +94,7 @@ class BatchAdapter(
 
     interface OnItemClickListener {
         fun onBatchClick(batchClicked: Batch, path: Int)
+        fun onDelete()
     }
 
 }

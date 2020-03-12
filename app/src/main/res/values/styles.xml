@@ -144,4 +144,9 @@
     <style name="switchTraineeTextView">
         <item name="android:padding">6dp</item>
     </style>
+
+    <style name="link_text">
+        <item name="android:background">@drawable/link_bottom_border</item>
+        <item name="android:textColor">@color/link_color</item>
+    </style>
 </resources>

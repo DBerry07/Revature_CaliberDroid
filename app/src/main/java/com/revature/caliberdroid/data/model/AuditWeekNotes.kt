@@ -4,33 +4,43 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import androidx.databinding.ObservableField
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
+import com.revature.caliberdroid.BR
+import kotlin.properties.Delegates
 
 data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAdapter.ViewModel, Parcelable {
 
-    @Bindable var overallStatus = ObservableField<String?>()
+    var noteId: Long = -1L
+
+    @Bindable
+    var overallStatus = "Undefined"
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.overallStatus)
+        }
+
+    var overallNotes = ""
         set(value) {
             field = value
             notifyChange()
         }
-    var overallNotes = ObservableField<String?>()
-        set(value) {
-            field = value
-            notifyChange()
-        }
+
+    var batchId by Delegates.notNull<Long>()
 
     constructor(parcel: Parcel) : this(parcel.readInt())
 
-    constructor(weekNumber: Int, overallStatus: String?, overallNotes: String?) : this(weekNumber) {
-        this.overallStatus.set(overallStatus)
-        this.overallNotes.set(overallNotes)
+    constructor(noteId: Long, weekNumber: Int, overallStatus: String, overallNotes: String) : this(
+        weekNumber
+    ) {
+        this.noteId = noteId
+        this.overallStatus = overallStatus
+        this.overallNotes = overallNotes
     }
 
     override fun <T : Any?> isContentTheSameAs(model: T): Boolean {
         if (model is AuditWeekNotes) {
             val other = model as AuditWeekNotes
-            return overallStatus.get() == other.overallStatus.get() && overallNotes.get() == other.overallNotes.get()
+            return overallStatus == other.overallStatus && overallNotes == other.overallNotes
         }
         return false
     }
@@ -38,7 +48,7 @@ data class AuditWeekNotes(val weekNumber: Int) : BaseObservable(), SortedListAda
     override fun <T : Any?> isSameModelAs(model: T): Boolean {
         if (model is AuditWeekNotes) {
             val other = model as AuditWeekNotes
-            return other.weekNumber == weekNumber
+            return weekNumber == other.weekNumber && batchId == other.batchId
         }
         return false
     }

@@ -45,10 +45,13 @@ object JSONParser {
 
         response.apply {
             auditWeekNotes = AuditWeekNotes(
+                noteId = getLong("noteId"),
                 weekNumber = getInt("week"),
                 overallStatus = getString("technicalStatus"),
                 overallNotes = getString("content"))
         }
+
+
 
         return auditWeekNotes
     }

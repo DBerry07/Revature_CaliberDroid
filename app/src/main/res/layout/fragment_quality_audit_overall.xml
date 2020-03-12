@@ -49,7 +49,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_auditoverall_categories"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -110,7 +110,7 @@
                 android:onClick="@{statusHandler::onFaceClick}"
                 android:src="@drawable/ic_launcher_background"
                 app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(auditWeekNotes.overallStatus)}"
-                app:layout_constraintBottom_toTopOf="@+id/tv_auditoverall_overallfeedback"
+                app:layout_constraintBottom_toTopOf="@+id/textinputlayout_auditoverall_overallfeedback"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="@+id/tv_auditoverall_overallstatus_label"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -138,7 +138,7 @@
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tv_auditoverall_overallfeedback"
+                android:id="@+id/textinputlayout_auditoverall_overallfeedback"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -154,6 +154,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_auditoverall_overallfeedback"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -179,7 +180,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_overallfeedback" />
+                app:layout_constraintTop_toBottomOf="@+id/textinputlayout_auditoverall_overallfeedback" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

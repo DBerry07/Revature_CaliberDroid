@@ -144,6 +144,8 @@ class SwitchTraineeFragment : Fragment() {
             )
             val switchTraineeDialogView = switchTraineeBinding.root
             switchTraineeBinding.batch = batch
+            switchTraineeBinding.tvStartDate.text = "Start Date: "+DateConverter.getDate(batch._startDate)
+            switchTraineeBinding.tvEndDate.text = "End Date: "+DateConverter.getDate(batch._endDate)
 
             builder.setView(switchTraineeDialogView)
                 .setPositiveButton(R.string.btn_confirm,

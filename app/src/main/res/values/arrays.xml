@@ -7,4 +7,10 @@
         <item>2022</item>
         <item>2023</item>
     </string-array>
+    <string-array name="assessment_types">
+        <item>Exam</item>
+        <item>Project</item>
+        <item>Verbal</item>
+        <item>Other</item>
+    </string-array>
 </resources>

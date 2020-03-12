@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:gravity="end"
         android:paddingEnd="5dp"
+        android:paddingStart="5dp"
         android:text="@{trainee_name}"/>
 
     <LinearLayout

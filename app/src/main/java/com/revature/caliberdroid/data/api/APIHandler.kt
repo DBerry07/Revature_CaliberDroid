@@ -232,6 +232,10 @@ object APIHandler {
         CategoriesAPI.editCategory(category,liveData)
     }
 
+    fun postAssessment(assessment: MutableLiveData<Assessment>) {
+        AssessmentAPIHandler.postAssessment(assessment)
+    }
+
     fun putAssessBatchOverallNote(note: Note) {
         NoteAPIHandler.putAssessBatchOverallNote(note)
     }

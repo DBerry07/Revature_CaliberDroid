@@ -7,6 +7,10 @@ import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 
 object AssessWeekRepository {
 
+    fun createAssessment(assessment: MutableLiveData<Assessment>) {
+        APIHandler.postAssessment(assessment)
+    }
+
     fun getAssessWeekData(batch: Batch,weekNumber: Int): AssessWeekLiveData {
         var assessWeekNotes = AssessWeekNotes(weekNumber,batch)
 

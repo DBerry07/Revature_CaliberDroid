@@ -1,10 +1,13 @@
 package com.revature.caliberdroid.ui.assessbatch
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
 import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import timber.log.Timber
 import kotlin.math.round
@@ -17,6 +20,7 @@ class AssessWeekViewModel : ViewModel() {
     lateinit var trainees: MutableLiveData<List<Trainee>>
     lateinit var batch: Batch
     var saveNoteThread: Thread? = null
+    var categories: MutableLiveData<ArrayList<Category>> = MutableLiveData(arrayListOf())
 
 //    fun initWeekData() {
 //        var batchId:Long = assessWeekNotes.batch!!.batchID
@@ -27,6 +31,26 @@ class AssessWeekViewModel : ViewModel() {
     fun addWeek() {
         BatchRepository.addWeekFromAssess(batch, batchAssessWeekNotes)
         startDelayedSaveThread(Note(), this::saveBatchNote)
+    }
+
+    fun createAssessmentForBatchWeek(assessment: Assessment) {
+        assessment.batchId = batch.batchID
+        assessment.weekNumber = assessWeekNotes.weekNumber
+        val liveDataAssessment = MutableLiveData(assessment)
+        AssessWeekRepository.createAssessment(liveDataAssessment)
+        liveDataAssessment.observeForever(Observer {
+            if (assessWeekNotes.weekNumber == it.weekNumber && assessWeekNotes.batch!!.batchID == it.batchId) {
+                (assessWeekNotes.assessments as ArrayList).add(it)
+            }
+        })
+    }
+
+    fun getSkills(): MutableLiveData<ArrayList<Category>> {
+
+        if (categories.value!!.size == 0) {
+            categories = CategoryRepository.getCategories()
+        }
+        return categories
     }
 
     fun loadBatchWeeks(batch: Batch) {

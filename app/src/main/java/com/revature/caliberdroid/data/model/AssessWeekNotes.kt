@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.data.model
 
+import android.os.AsyncTask
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
@@ -62,15 +63,41 @@ data class AssessWeekNotes(var weekNumber: Int,
     }
 
     fun calculateBatchAverage(): Float {
-        var avgAssessment = 0.0
-        var totalAssessment = 0.0
+        var totalGrades = 0.0
+        var totalAssessmentRawScores = 0.0
+        // the following code calculates the actual average of the grades,
+        // rather than what the website does which is just averaging the assessment averages
+//        var assessmentCounts = HashMap<Long,Int>()
+//        if(grades != null) {
+//            for (grade in grades) {
+//                totalGrades += grade.score!!
+//                if (assessmentCounts.containsKey(grade.assessmentId)) {
+//                    assessmentCounts.set(
+//                        grade.assessmentId!!,
+//                        assessmentCounts.get(grade.assessmentId as Long)!! + 1
+//                    )
+//                } else {
+//                    assessmentCounts.put(grade.assessmentId!!, 1)
+//                }
+//            }
+//            for (assessment in assessments) {
+//                if (assessment.rawScore != null && assessmentCounts.get(assessment.assessmentId)!=null) {
+//                    totalAssessmentRawScores += (assessmentCounts.get(assessment.assessmentId)!! * assessment.rawScore!!)
+//                }
+//            }
+//        }
+//        var batchAvg = (totalGrades/totalAssessmentRawScores*100).round().toFloat()
+
+        //average of the averages
+        var count =0
+        var totalAverage = 0.0
         if(assessments!=null) {
             for (assessment in assessments) {
-                avgAssessment += (getAssessmentAverage(assessment) / 100.0 * assessment.rawScore!!)
-                totalAssessment += assessment.rawScore!!
+                totalAverage += getAssessmentAverage(assessment)
+                count++
             }
         }
-        var batchAvg = (avgAssessment/totalAssessment).round().toFloat()
+        var batchAvg = (totalAverage/count).round().toFloat()
         batchAverage = batchAvg
         return batchAvg
     }

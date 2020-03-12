@@ -276,8 +276,8 @@ object APIHandler {
         val trainee: Trainee? = traineeLiveData.value
         if(trainee != null){
             //Because the API will not allow null values for this field
-            if(trainee.flagStatus == null){
-                trainee.flagStatus == "NONE"
+            if(trainee.flagStatus == null || trainee?.flagStatus?.trim()?.toLowerCase().equals("null")){
+                trainee.flagStatus = "NONE"
             }
             val url: String =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainee/switch"

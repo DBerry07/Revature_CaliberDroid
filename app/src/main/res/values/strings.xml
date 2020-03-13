@@ -43,6 +43,7 @@
     <string name="assessment_points_label">Points:</string>
     <string name="assessment_batch_avg_label">Batch Average:</string>
     <string name="grade_format">%.2f%%</string>
+    <string name="trainees_grades_label">Trainee Grades:</string>
 
     <string name="trainee_name_label">Name:</string>
     <string name="trainee_notes_label">Trainee Note:</string>

@@ -10,7 +10,7 @@
     </data>
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp">
 
@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:ems="4"
                 android:text="@{grade.score.toString()}"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>

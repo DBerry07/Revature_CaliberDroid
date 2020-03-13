@@ -178,6 +178,10 @@ object APIHandler {
         NoteAPIHandler.getTraineeNotes(liveData,batchId,weekNumber)
     }
 
+    fun putTraineeWithNotes(traineeWithNotes: AuditTraineeWithNotes) {
+        AuditAPIHandler.putTraineeWithNotes(context, traineeWithNotes)
+    }
+
     fun getTrainees(liveData:MutableLiveData<List<Trainee>>,batchId:Long) {
         TraineeAPIHandler.getTrainees(liveData,batchId)
     }

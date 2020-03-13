@@ -8,8 +8,8 @@
         <import type="com.revature.caliberdroid.util.AuditStatusConverter" />
 
         <variable
-            name="statusHandler"
-            type="com.revature.caliberdroid.ui.qualityaudit.overall.QualityAuditOverallFragment.StatusHandler" />
+            name="overallStatusHandler"
+            type="com.revature.caliberdroid.ui.qualityaudit.overall.QualityAuditOverallFragment.OverallStatusHandler" />
 
         <variable
             name="batch"
@@ -21,9 +21,9 @@
 
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/frameLayout2"
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:onClick="@{statusHandler::onFaceClick}"
+                android:onClick="@{overallStatusHandler::onStatusClick}"
                 android:src="@drawable/ic_launcher_background"
                 app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(auditWeekNotes.overallStatus)}"
                 app:layout_constraintBottom_toTopOf="@+id/textinputlayout_auditoverall_overallfeedback"
@@ -116,26 +116,6 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/tv_auditoverall_overallstatus_label"
                 app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_overallstatus_label" />
-
-            <FrameLayout
-                android:id="@+id/framelayout_auditoverall_status_chooser_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="80dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_save"
-                app:layout_constraintEnd_toEndOf="@+id/btn_auditoverall_trainees"
-                app:layout_constraintStart_toStartOf="@+id/btn_auditoverall_trainees"
-                app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus">
-
-                <include
-                    android:id="@+id/include_auditoverall_status_chooser_layout"
-                    layout="@layout/chooser_quality_audit_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textinputlayout_auditoverall_overallfeedback"
@@ -182,9 +162,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textinputlayout_auditoverall_overallfeedback" />
 
+            <FrameLayout
+                android:id="@+id/framelayout_auditoverall_status_chooser_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus">
+
+                <include
+                    android:id="@+id/include_auditoverall_status_chooser_layout"
+                    layout="@layout/chooser_quality_audit_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    <!--    </ScrollView>-->
 
 </layout>
 

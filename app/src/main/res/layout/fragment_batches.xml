@@ -40,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/manageBatch_noOfBatches"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,7 +49,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:text=""
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
         app:layout_constraintStart_toEndOf="@+id/manage_batches_number_label" />
 

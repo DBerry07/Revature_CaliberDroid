@@ -90,6 +90,7 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
 
     private fun subscribeToViewModel() {
         viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvManageBatchesNoOfBatchesValue.text = it.size.toString()
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .replaceAll(it)
                 .commit()
@@ -155,14 +156,17 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .removeAll()
                 .commit()
+            var count: Int = 0
             for(i in it){
                 if(
                     i.trainingName.toLowerCase(Locale.ROOT).contains(newText.toString()) ||
                     i.skillType!!.toLowerCase(Locale.ROOT).contains(newText.toString()))
                 {
                     (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit().add(i).commit()
+                    count++
                 }
             }
+            binding.tvManageBatchesNoOfBatchesValue.text = count.toString()
         })
         return false
     }

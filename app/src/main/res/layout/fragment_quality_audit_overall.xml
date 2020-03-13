@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="com.revature.caliberdroid.util.AuditStatusConverter" />
+
+        <variable
+            name="statusHandler"
+            type="com.revature.caliberdroid.ui.qualityaudit.overall.QualityAuditOverallFragment.StatusHandler" />
+
         <variable
             name="batch"
             type="com.revature.caliberdroid.data.model.Batch" />
@@ -15,134 +21,178 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.qualityaudit.overall.QualityAuditOverallFragment">
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
 
-        <TextView
-            android:id="@+id/tv_auditoverall_batchinfo"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{@string/batch_with_week(batch.trainerName, batch.skillType, auditWeekNotes.weekNumber)}"
-            app:layout_constraintBottom_toTopOf="@+id/rv_auditoverall_categories"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scrollbars="vertical"
+            tools:context=".ui.qualityaudit.overall.QualityAuditOverallFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_auditoverall_categories"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_addcategories"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_batchinfo" />
+            <TextView
+                android:id="@+id/tv_auditoverall_batchinfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@{@string/batch_with_week(batch.trainerName, batch.skillType, auditWeekNotes.weekNumber)}"
+                app:layout_constraintBottom_toTopOf="@+id/rv_auditoverall_categories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btn_auditoverall_addcategories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/add_categories"
-            app:iconGravity="end"
-            app:icon="@drawable/ic_add"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_trainees"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_auditoverall_categories" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_auditoverall_categories"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_addcategories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_batchinfo" />
 
-        <Button
-            android:id="@+id/btn_auditoverall_trainees"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/title_trainees"
-            app:iconGravity="end"
-            app:icon="@drawable/ic_arrow_forward"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_auditoverall_addcategories" />
+            <Button
+                android:id="@+id/btn_auditoverall_addcategories"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add_categories"
+                app:icon="@drawable/ic_add"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_trainees"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_auditoverall_categories" />
 
-        <TextView
-            android:id="@+id/tv_auditoverall_overallstatus_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/overall_qc_status"
-            app:layout_constraintBottom_toTopOf="@+id/img_auditoverall_overallstatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_auditoverall_trainees" />
+            <Button
+                android:id="@+id/btn_auditoverall_trainees"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/title_trainees"
+                app:icon="@drawable/ic_arrow_forward"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toTopOf="@+id/tv_auditoverall_overallstatus_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_auditoverall_addcategories" />
 
-        <ImageView
-            android:id="@+id/img_auditoverall_overallstatus"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintBottom_toTopOf="@+id/tv_auditoverall_overallfeedback_label"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="@+id/tv_auditoverall_overallstatus_label"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/tv_auditoverall_overallstatus_label"
-            app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_overallstatus_label" />
+            <TextView
+                android:id="@+id/tv_auditoverall_overallstatus_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/overall_qc_status"
+                app:layout_constraintBottom_toTopOf="@+id/img_auditoverall_overallstatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_auditoverall_trainees" />
 
-        <TextView
-            android:id="@+id/tv_auditoverall_overallfeedback_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@{@string/overall_qc_feedback(auditWeekNotes.weekNumber)}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_auditoverall_overallfeedback"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus" />
+            <ImageView
+                android:id="@+id/img_auditoverall_overallstatus"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{statusHandler::onFaceClick}"
+                android:src="@drawable/ic_launcher_background"
+                app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(auditWeekNotes.overallStatus)}"
+                app:layout_constraintBottom_toTopOf="@+id/textinputlayout_auditoverall_overallfeedback"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@+id/tv_auditoverall_overallstatus_label"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/tv_auditoverall_overallstatus_label"
+                app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_overallstatus_label" />
 
-        <TextView
-            android:id="@+id/tv_auditoverall_overallfeedback"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:hint="@string/overall_qc_feedback_hint"
-            android:text="@{auditWeekNotes.overallNotes}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_save"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_overallfeedback_label" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_auditoverall_overallfeedback"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/white"
+                android:hint="@{@string/overall_qc_feedback(auditWeekNotes.weekNumber)}"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus">
 
-        <Button
-            android:id="@+id/btn_auditoverall_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/save"
-            app:iconGravity="end"
-            app:icon="@drawable/ic_save_black_24dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_auditoverall_overallfeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:scrollbars="vertical"
+                    android:text="@{auditWeekNotes.overallNotes}"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_auditoverall_save"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/save"
+                app:icon="@drawable/ic_save_black_24dp"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinputlayout_auditoverall_overallfeedback" />
+
+            <FrameLayout
+                android:id="@+id/framelayout_auditoverall_status_chooser_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_save"
+                app:layout_constraintEnd_toEndOf="@+id/btn_auditoverall_trainees"
+                app:layout_constraintStart_toStartOf="@+id/btn_auditoverall_trainees"
+                app:layout_constraintTop_toBottomOf="@+id/img_auditoverall_overallstatus">
+
+                <include
+                    android:id="@+id/include_auditoverall_status_chooser_layout"
+                    layout="@layout/chooser_quality_audit_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    </ScrollView>-->
+
 </layout>
+
+    <!--    android:ems="10"-->
+    <!--    android:gravity="start|top"-->
+    <!--    android:hint="@{@string/overall_qc_feedback_hint(auditWeekNotes.weekNumber)}"-->
+    <!--    android:inputType="textMultiLine"-->
+    <!--    android:lines="6"-->
+    <!--    android:scrollbars="vertical"-->
+    <!--    android:text="@{auditWeekNotes.overallNotes}"-->
+    <!--    android:textSize="14sp"-->

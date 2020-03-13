@@ -45,10 +45,13 @@ object JSONParser {
 
         response.apply {
             auditWeekNotes = AuditWeekNotes(
+                noteId = getLong("noteId"),
                 weekNumber = getInt("week"),
                 overallStatus = getString("technicalStatus"),
                 overallNotes = getString("content"))
         }
+
+
 
         return auditWeekNotes
     }
@@ -69,6 +72,20 @@ object JSONParser {
         return categoryList
     }
 
+    fun parseAssessment(response: JSONObject): Assessment {
+        var assessment: Assessment
+        response.apply {
+            assessment = Assessment(getLong("assessmentId"),
+                getInt("rawScore"),
+                getString("assessmentTitle"),
+                getString("assessmentType"),
+                getInt("weekNumber"),
+                getLong("batchId"),
+                getLong("assessmentCategory"))
+        }
+        return assessment
+    }
+
     fun parseAssessments(response: JSONArray): List<Assessment> {
         val assessmentList = ArrayList<Assessment>()
 
@@ -76,13 +93,7 @@ object JSONParser {
         val length = response.length()
         for(i in 0 until length){
             response.getJSONObject(i).apply {
-                assessment = Assessment(getLong("assessmentId"),
-                    getInt("rawScore"),
-                    getString("assessmentTitle"),
-                    getString("assessmentType"),
-                    getInt("weekNumber"),
-                    getLong("batchId"),
-                    getInt("assessmentCategory"))
+                assessment = parseAssessment(this)
             }
             assessmentList.add(assessment)
         }
@@ -90,7 +101,7 @@ object JSONParser {
         return assessmentList
     }
 
-    fun parseGrades(response: JSONArray): List<Grade> {
+    fun parseGrades(response: JSONArray): ArrayList<Grade> {
         val gradeList = ArrayList<Grade>()
 
         var grade: Grade
@@ -107,6 +118,16 @@ object JSONParser {
         }
 
         return gradeList
+    }
+
+    fun parseGrade(grade: JSONObject): Grade {
+        grade.apply {
+            return Grade(getLong("gradeId"),
+            getString("dateReceived"),
+            getInt("score"),
+            getLong("assessmentId"),
+            getLong("traineeId"))
+        }
     }
 
     fun parseNote(note:JSONObject):Note {
@@ -207,6 +228,21 @@ object JSONParser {
         }
 
         return trainee
+    }
+    
+    fun getAssessmentJSONObject(assessment: Assessment): JSONObject {
+        val request = JSONObject()
+
+        return request.apply {
+            assessment.apply {
+                put("assessmentCategory", assessment.assessmentCategory)
+                put("assessmentType", assessment.assessmentType)
+                put("rawScore", assessment.rawScore)
+                put("batchId", assessment.batchId)
+                put("weekNumber", assessment.weekNumber)
+                put("assessmentTitle", assessment.assessmentTitle)
+            }
+        }
     }
 
     fun getBatchJSONObject(batch: Batch) : JSONObject {

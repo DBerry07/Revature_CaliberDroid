@@ -11,6 +11,7 @@ import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
 import com.revature.caliberdroid.data.parser.TrainerParser
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
@@ -75,6 +76,7 @@ object APIHandler {
         val url =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: WeekLiveData
+        var auditWeekNotes: AuditWeekNotes
 
         val addWeekRequest = JsonObjectRequest(
             Request.Method.PUT,
@@ -85,7 +87,9 @@ object APIHandler {
                 liveData.postValue(liveData.value!!.apply {
                     batch.weeks += 1
                     data = WeekLiveData()
-                    data.value = AuditWeekNotes(batch.weeks)
+                    auditWeekNotes = AuditWeekNotes(batch.weeks)
+                    auditWeekNotes.batchId = batch.batchID
+                    data.value = auditWeekNotes
                     this.add(data)
                 })
             },
@@ -149,16 +153,11 @@ object APIHandler {
     }
 
     fun getTraineesWithNotes(
-        liveData: MutableLiveData<List<TraineeWithNotes>>,
+        liveData: MutableLiveData<List<TraineeWithNotesLiveData>>,
         batch: Batch,
         weekNumber: Int
     ) {
-        AuditAPIHandler.getTraineesWithNotes(
-            context = context,
-            liveData = liveData,
-            batch = batch,
-            weekNumber = weekNumber
-        )
+        AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 
     fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<WeekLiveData>>, batch: Batch) {
@@ -171,6 +170,10 @@ object APIHandler {
         weekNumber: Int
     ) {
         AuditAPIHandler.getSkillCategories(context, liveData, batch, weekNumber)
+    }
+
+    fun putAuditWeekNotes(auditWeekNotes: AuditWeekNotes) {
+        AuditAPIHandler.putAuditWeekNotes(context, auditWeekNotes)
     }
 
     fun getAssessWeekNotes(assessWeekNotes: AssessWeekNotes) {
@@ -246,6 +249,10 @@ object APIHandler {
 
     fun editCategory(category: Category, liveData: MutableLiveData<ArrayList<Category>>) {
         CategoriesAPI.editCategory(category, liveData)
+    }
+
+    fun postAssessment(assessment: MutableLiveData<Assessment>) {
+        AssessmentAPIHandler.postAssessment(assessment)
     }
 
     fun putAssessBatchOverallNote(note: Note) {

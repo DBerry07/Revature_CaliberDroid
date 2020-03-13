@@ -8,11 +8,9 @@ import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -69,6 +67,7 @@ class CreateBatchFragment : Fragment() {
 
         // Inflate the layout for this fragment
         _binding = FragmentCreateBatchBinding.inflate(layoutInflater)
+
         batch = args.selectedBatch
 
         spinnerInit()
@@ -105,8 +104,9 @@ class CreateBatchFragment : Fragment() {
     }
 
     private fun getMonth(month: Int): String? {
-        return DateFormatSymbols().months[month]
+        return DateFormatSymbols().months[month].substring(0, 3)
     }
+
 
     private fun checkEmptyFields(): Boolean {
         var result = true
@@ -233,7 +233,8 @@ class CreateBatchFragment : Fragment() {
                 context!!,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                    binding.etCreateBatchStartInput.setText("${getMonth(month)?.substring(0,3)} $day, $year")
+                    val dateString = "${getMonth(month)} $day, $year"
+                    binding.etCreateBatchStartInput.text = dateString
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -245,7 +246,8 @@ class CreateBatchFragment : Fragment() {
                 context!!,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                    binding.etCreateBatchEndInput.setText("${getMonth(month)?.substring(0,3)} $day, $year")
+                    val dateString = "${getMonth(month)} $day, $year"
+                    binding.etCreateBatchEndInput.text = dateString
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -254,12 +256,14 @@ class CreateBatchFragment : Fragment() {
     }
 
     private fun setExistingValues() {
-        binding.etCreateBatchNameInput.setText(batch?.trainingName)
-        binding.etCreateBatchSkillInput.setText(batch?.skillType)
-        binding.etCreateBatchStartInput.setText(batch?.startDate)
-        binding.etCreateBatchEndInput.setText(batch?.endDate)
-        binding.etCreateBatchGoodGradeInput.setText(batch?.goodGrade.toString())
-        binding.etCreateBatchPassingGradeInput.setText(batch?.passingGrade.toString())
+        binding.run {
+            etCreateBatchNameInput.setText(batch?.trainingName)
+            etCreateBatchSkillInput.setText(batch?.skillType)
+            etCreateBatchStartInput.text = batch?.startDate
+            etCreateBatchEndInput.text = batch?.endDate
+            etCreateBatchGoodGradeInput.setText(batch?.goodGrade.toString())
+            etCreateBatchPassingGradeInput.setText(batch?.passingGrade.toString())
+        }
 
         val spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)

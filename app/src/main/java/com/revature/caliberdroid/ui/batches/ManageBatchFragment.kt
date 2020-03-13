@@ -1,14 +1,17 @@
 package com.revature.caliberdroid.ui.batches
 
+import android.app.SearchManager
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.SearchView
 import androidx.annotation.RequiresApi
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -16,19 +19,24 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
 import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
+import kotlinx.android.synthetic.main.fragment_batches.*
 import kotlinx.android.synthetic.main.fragment_batches.view.*
+import kotlinx.android.synthetic.main.fragment_batches.view.recyclerview_manage_batches
 import java.util.*
 
-class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener {
+
+class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener,
+    SearchView.OnQueryTextListener {
 
     private var _binding: FragmentBatchesBinding? = null
     private val binding
         get() = _binding!!
     private val viewModel: BatchesViewModel by activityViewModels()
     private var yearsArrayAdapter: ArrayAdapter<Int>? = null
+    lateinit var batchAdapter: BatchAdapter
+    var batchesFromAPI: List<Batch>? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -37,9 +45,11 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     ): View? {
 
         _binding = FragmentBatchesBinding.inflate(layoutInflater)
-
         viewModel.getValidYears()
         subscribeToViewModel()
+
+        // set up search bar
+        setHasOptionsMenu(true)
 
         binding.tvManageBatchesNoOfBatchesValue.text = binding.root.recyclerview_manage_batches.adapter?.itemCount.toString()
         binding.btnManageBatchCreateBatch.setOnClickListener {
@@ -50,6 +60,17 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
         recyclerViewInit()
 
         return binding.root
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+        Log.d("debug", "Menu Inflater")
+        inflator.inflate(R.menu.search_bar, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+
     }
 
     override fun onDestroyView() {
@@ -129,6 +150,15 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         viewModel.selectedYear = parent?.getItemAtPosition(position) as Int
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        //Log.d("search", newText)
+        return false
     }
 
 }

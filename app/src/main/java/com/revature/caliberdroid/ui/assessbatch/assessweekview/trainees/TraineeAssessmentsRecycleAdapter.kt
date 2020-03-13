@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.GradeAPIHandler
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
 import com.revature.caliberdroid.databinding.ItemTraineeAssessmentBinding
+import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.util.KeyboardUtil
 import kotlinx.android.synthetic.main.item_trainee_assessment.view.*
 import timber.log.Timber
 
-class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,var traineeId: Long,val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments: List<Assessment>,var traineeId: Long,val context: Context,var assessWeekViewModel: AssessWeekViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AssessmentViewHolder(
@@ -27,7 +29,8 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
             is AssessmentViewHolder ->{
                     holder.bind(
                         getGradeForAssessment(assessments.get(position).assessmentId,traineeId),
-                        assessments.get(position)
+                        assessments.get(position),
+                        assessWeekViewModel
                     )
             }
         }
@@ -58,9 +61,24 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
     class AssessmentViewHolder constructor(
         val binding: ItemTraineeAssessmentBinding
     ): RecyclerView.ViewHolder(binding.root){
-        fun bind(grade: Grade, assessment: Assessment){
+        fun bind(grade: Grade, assessment: Assessment,assessWeekViewModel: AssessWeekViewModel){
             binding.grade=grade
             binding.assessment = assessment
+
+            var oldGrade = grade.score!!
+            binding.tvTraineeAssessmentItemGrade.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                if(!hasFocus && Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())!=oldGrade){
+                    (binding.grade as Grade).score = Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
+                    Timber.d(grade.toString())
+                    if((binding.grade as Grade).gradeId < 1 ) {
+                        assessWeekViewModel.assessWeekNotes.grades.add((binding.grade as Grade))
+                    }
+                    GradeAPIHandler.putGrade(binding.grade as Grade)
+                    Timber.d("putting grade")
+                } else {
+                    oldGrade = Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
+                }
+            }
 
             binding.root.isFocusableInTouchMode = true
             binding.root.isFocusable = true

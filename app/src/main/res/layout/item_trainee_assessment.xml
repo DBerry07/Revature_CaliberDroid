@@ -8,26 +8,44 @@
             name="assessment"
             type="com.revature.caliberdroid.data.model.Assessment" />
     </data>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_trainee_assessment_item_label"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="@{assessment.assessmentType}"/>
+        android:layout_marginEnd="16dp">
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=": " />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_trainee_assessment_item_label"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@{assessment.assessmentType}" />-->
 
-    <TextView
-        android:id="@+id/tv_trainee_assessment_item_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{grade.score.toString()}"/>
-</LinearLayout>
+        <!--        <TextView-->
+        <!--            android:id="@+id/textView17"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text=": " />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_trainee_assessment_item_grade"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@{grade.score.toString()}" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinputlayout_trainee_assessment_item_grade"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="@{@string/trainee_assessment_type_and_points(assessment.assessmentType,assessment.rawScore)}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_trainee_assessment_item_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="@{grade.score.toString()}"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 </layout>

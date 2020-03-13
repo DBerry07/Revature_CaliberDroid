@@ -5,47 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--    Company Name -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Company Name"
-        style="@style/settingsFieldHeading"/>
 
-    <EditText
-        android:id="@+id/etCompanyName"
+
+    <!--    Company Name -->
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        style="@style/settingsFieldEditText" />
+        style="@style/settingsMaterialEditText"
+        android:hint="Company Name"
+        android:background="@color/white">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=" "
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--    Street Address -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Street Address"
-        style="@style/settingsFieldHeading"/>
-
-    <EditText
-        android:id="@+id/etStreetAddress"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        style="@style/settingsFieldEditText" />
+        style="@style/settingsMaterialEditText"
+        android:hint="Street Address"
+        android:background="@color/white">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etStreetAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=" "
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--    City -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/settingsFieldHeading"
-        android:text="City" />
-
-    <EditText
-        android:id="@+id/etCity"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        style="@style/settingsFieldEditText"/>
+        style="@style/settingsMaterialEditText"
+        android:hint="City"
+        android:background="@color/white">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=" "
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!--    State -->
     <TextView
@@ -53,14 +61,6 @@
         android:layout_height="wrap_content"
         style="@style/settingsFieldHeading"
         android:text="State" />
-
-<!--    <EditText-->
-<!--        android:id="@+id/etState"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:inputType="textPersonName"-->
-<!--        style="@style/settingsFieldEditText"/>-->
-
     <Spinner
         android:id="@+id/spnState"
         android:layout_width="match_parent"
@@ -69,19 +69,20 @@
         style="@style/settingsField" />
 
     <!--    Zip Code -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:text="Zipcode"
-        style="@style/settingsFieldHeading"/>
-
-    <EditText
-        android:id="@+id/etZipCode"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        style="@style/settingsFieldEditText"/>
+        style="@style/settingsMaterialEditText"
+        android:hint="Zipcode"
+        android:background="@color/white">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etZipCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=" "
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
 </layout>

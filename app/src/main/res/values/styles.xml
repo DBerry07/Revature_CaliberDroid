@@ -95,11 +95,14 @@
     </style>
 
     <style name="settingsFieldHeading">
+        <item name="android:padding">10dp</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="settingsField">
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
     </style>
 
@@ -118,6 +121,10 @@
 
     <style name="settingsDialogFieldEditText">
             <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="settingsMaterialEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_margin">15dp</item>
     </style>
 
     <style name="activeCircle">

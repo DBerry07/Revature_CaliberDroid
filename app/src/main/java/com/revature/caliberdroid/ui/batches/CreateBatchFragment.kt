@@ -1,5 +1,9 @@
 package com.revature.caliberdroid.ui.batches
 
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -18,16 +22,15 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentCreateBatchBinding
 import com.revature.caliberdroid.ui.locations.LocationsViewModel
 import com.revature.caliberdroid.ui.trainers.TrainersViewModel
 import com.revature.caliberdroid.util.DateConverter
-import kotlinx.android.synthetic.main.fragment_create_batch.*
-import kotlinx.android.synthetic.main.fragment_create_batch.view.*
 import timber.log.Timber
+import java.text.DateFormatSymbols
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CreateBatchFragment : Fragment() {
@@ -44,7 +47,6 @@ class CreateBatchFragment : Fragment() {
     private val batchViewModel: BatchesViewModel by activityViewModels()
     private val trainerViewModel: TrainersViewModel by activityViewModels()
 
-    // spinner adapters and arrays
     private lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
     private lateinit var locationAdapter: ArrayAdapter<String>
     private lateinit var trainerAdapter: ArrayAdapter<String>
@@ -70,6 +72,7 @@ class CreateBatchFragment : Fragment() {
         batch = args.selectedBatch
 
         spinnerInit()
+        datePickerInit()
 
         binding.btnCreateBatchCancel.setOnClickListener{
             findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
@@ -99,6 +102,10 @@ class CreateBatchFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun getMonth(month: Int): String? {
+        return DateFormatSymbols().months[month]
     }
 
     private fun checkEmptyFields(): Boolean {
@@ -215,6 +222,37 @@ class CreateBatchFragment : Fragment() {
 
     }
 
+    private fun datePickerInit() {
+        val cal = Calendar.getInstance()
+        val y = cal.get(Calendar.YEAR)
+        val m = cal.get(Calendar.MONTH)
+        val d = cal.get(Calendar.DAY_OF_MONTH)
+
+        binding.etCreateBatchStartInput.setOnClickListener {
+            val dpd = DatePickerDialog(
+                context!!,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                    binding.etCreateBatchStartInput.setText("${getMonth(month)?.substring(0,3)} $day, $year")
+                }, y, m, d
+            )
+            dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dpd.show()
+        }
+
+        binding.etCreateBatchEndInput.setOnClickListener {
+            val dpd = DatePickerDialog(
+                context!!,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                    binding.etCreateBatchEndInput.setText("${getMonth(month)?.substring(0,3)} $day, $year")
+                }, y, m, d
+            )
+            dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dpd.show()
+        }
+    }
+
     private fun setExistingValues() {
         binding.etCreateBatchNameInput.setText(batch?.trainingName)
         binding.etCreateBatchSkillInput.setText(batch?.skillType)
@@ -223,7 +261,7 @@ class CreateBatchFragment : Fragment() {
         binding.etCreateBatchGoodGradeInput.setText(batch?.goodGrade.toString())
         binding.etCreateBatchPassingGradeInput.setText(batch?.passingGrade.toString())
 
-        var spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
+        val spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
 
         /*   THE ADAPTER AND ARRAY LISTS GET RESET TO NULL AFTER FILLING THE SPINNER

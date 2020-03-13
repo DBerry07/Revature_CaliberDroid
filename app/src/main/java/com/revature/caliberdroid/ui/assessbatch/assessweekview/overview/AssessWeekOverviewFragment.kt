@@ -3,21 +3,29 @@ package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
+import com.revature.caliberdroid.data.model.Category
+import com.revature.caliberdroid.databinding.DialogAddAssessmentBinding
 import com.revature.caliberdroid.databinding.FragmentAssessWeekOverviewBinding
-import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
+import com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment.SkillArrayAdapter
+import com.revature.caliberdroid.util.KeyboardUtil
+import java.text.ParseException
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener {
 
@@ -45,6 +53,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         assessWeekOverviewBinding.etAssessweekBatchnotes.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
+                KeyboardUtil.hideSoftKeyboard(requireContext(),v)
                 if ((v as EditText).text.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
                     var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
                     note.noteContent = (v as EditText).text.toString()
@@ -61,18 +70,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
             }
         }
 
-        assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener(View.OnClickListener {
-
-            val builder = AlertDialog.Builder(it.context)
-
-            builder.setTitle(resources.getString(R.string.dialog_create_assessment))
-            builder.setPositiveButton(R.string.button_create, DialogInterface.OnClickListener { dialog, which ->
-
-            })
-            builder.setNegativeButton(R.string.button_cancel, null)
-
-            builder.show()
-        })
+        assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener(View.OnClickListener { showCreateAssessmentDialog(it, inflater) })
 
         assessWeekOverviewBinding.rvAssessweekAssessments.layoutManager = LinearLayoutManager(requireContext())
         assessWeekOverviewBinding.rvAssessweekAssessments.adapter = AssessmentsRecyclerAdapter(requireContext(), assessWeekViewModel, this)
@@ -88,4 +86,74 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
     override fun onAssessmentClicked(assessment: Assessment) {
         findNavController().navigate(AssessWeekFragmentDirections.actionAssessWeekViewFragmentToAssessmentTraineeGradesFragment(assessment.assessmentId))
     }
+
+    private fun showCreateAssessmentDialog(view: View, inflater: LayoutInflater) {
+
+        val builder = AlertDialog.Builder(view.context)
+
+        builder.setTitle(resources.getString(R.string.dialog_create_assessment))
+
+        val dialogBinding = DialogAddAssessmentBinding.inflate(inflater)
+        dialogBinding.spinnerCreateassessmentdialogType.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.assessment_types))
+        var skills = assessWeekViewModel.getSkills()
+        skills.observe(viewLifecycleOwner, Observer {
+            dialogBinding.spinnerCreateassessmentdialogSkill.adapter = SkillArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, skills.value!!)
+        })
+        builder.setView(dialogBinding.root)
+
+        builder.setPositiveButton(R.string.button_create, DialogInterface.OnClickListener { dialog, which ->
+            var assessment = Assessment()
+
+            assessment.assessmentType = dialogBinding.spinnerCreateassessmentdialogType.selectedItem as String
+            assessment.assessmentCategory = (dialogBinding.spinnerCreateassessmentdialogSkill.selectedItem as Category).categoryId
+            assessment.rawScore = dialogBinding.etCreateassessmentdialogPoints.text.toString().toInt()
+
+            assessWeekViewModel.createAssessmentForBatchWeek(assessment)
+        })
+        builder.setNegativeButton(R.string.button_cancel, null)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+
+        val assessmentPointValidator: TextWatcher = object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable?) {
+
+                if (s.toString().isNotEmpty()) {
+
+                    try {
+
+                        var points = s.toString().toInt()
+                        if (points <= 0 || points > 1000) badValue() else goodValue()
+
+                    } catch (e: ParseException) {
+                        badValue()
+                    }
+                } else {
+                    badValue()
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+
+            fun badValue() {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
+                dialogBinding.tvCreateassessmentdialogPointsvalidationmessage.visibility = View.VISIBLE
+            }
+
+            fun goodValue() {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = true
+                dialogBinding.tvCreateassessmentdialogPointsvalidationmessage.visibility = View.GONE
+            }
+
+        }
+
+        dialogBinding.etCreateassessmentdialogPoints.addTextChangedListener(assessmentPointValidator)
+
+    }
+
 }

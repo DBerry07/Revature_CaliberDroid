@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/almost_white">
+
+        <ImageView
+            android:id="@+id/img_chooserstatus_undefined"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_chooserstatus_poor"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_undefined" />
+
+        <ImageView
+            android:id="@+id/img_chooserstatus_poor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_chooserstatus_undefined"
+            app:layout_constraintEnd_toStartOf="@+id/img_chooserstatus_average"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_chooserstatus_undefined"
+            app:layout_constraintTop_toTopOf="@+id/img_chooserstatus_undefined"
+            app:srcCompat="@drawable/ic_poor_face" />
+
+        <ImageView
+            android:id="@+id/img_chooserstatus_average"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_chooserstatus_poor"
+            app:layout_constraintEnd_toStartOf="@+id/img_chooserstatus_good"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_chooserstatus_poor"
+            app:layout_constraintTop_toTopOf="@+id/img_chooserstatus_poor"
+            app:srcCompat="@drawable/ic_average_face" />
+
+        <ImageView
+            android:id="@+id/img_chooserstatus_good"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_chooserstatus_average"
+            app:layout_constraintEnd_toStartOf="@+id/img_chooserstatus_superstar"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_chooserstatus_average"
+            app:layout_constraintTop_toTopOf="@+id/img_chooserstatus_average"
+            app:srcCompat="@drawable/ic_good_face" />
+
+        <ImageView
+            android:id="@+id/img_chooserstatus_superstar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_chooserstatus_good"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_chooserstatus_good"
+            app:layout_constraintTop_toTopOf="@+id/img_chooserstatus_good"
+            app:srcCompat="@drawable/ic_superstar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

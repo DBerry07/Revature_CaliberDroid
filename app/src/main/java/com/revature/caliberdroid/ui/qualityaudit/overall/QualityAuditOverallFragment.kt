@@ -1,9 +1,12 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -12,7 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
-import com.revature.caliberdroid.util.AuditStatusConverter
+import com.revature.caliberdroid.util.KeyboardUtil
 
 class QualityAuditOverallFragment : Fragment() {
 
@@ -35,6 +38,9 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
+        binding.statusHandler = StatusHandler(requireContext(), binding)
+
+        binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
 
         viewModel.getSkillCategories(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
@@ -43,14 +49,9 @@ class QualityAuditOverallFragment : Fragment() {
         }
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
 
-        binding.btnAuditoverallTrainees.setOnClickListener {
-            findNavController().navigate(QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment(args.batchSelected, args.auditWeekNotesSelected))
-        }
+        setClickListeners()
 
-        binding.btnAuditoverallSave.setOnClickListener {
-        }
-
-        binding.imgAuditoverallOverallstatus.setImageResource(AuditStatusConverter.getImageResourceID(args.auditWeekNotesSelected.overallStatus.get()!!))
+        watchOverallNote()
 
         subscribeToViewModel()
 
@@ -68,5 +69,55 @@ class QualityAuditOverallFragment : Fragment() {
                 .replaceAll(it)
                 .commit()
         })
+    }
+
+    private fun setClickListeners() {
+        binding.btnAuditoverallTrainees.setOnClickListener {
+            findNavController().navigate(
+                QualityAuditOverallFragmentDirections.actionQualityAuditOverallFragmentToQualityAuditTraineesFragment(
+                    args.batchSelected,
+                    args.auditWeekNotesSelected
+                )
+            )
+        }
+
+        binding.btnAuditoverallSave.setOnClickListener {
+        }
+
+        binding.imgAuditoverallOverallstatus.setOnClickListener {
+
+        }
+    }
+
+    private fun watchOverallNote() {
+        binding.etAuditoverallOverallfeedback.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                KeyboardUtil.hideSoftKeyboard(requireContext(), v)
+                viewModel.putAuditWeekNotes(binding.auditWeekNotes!!)
+            }
+        }
+
+        binding.etAuditoverallOverallfeedback.addTextChangedListener {
+            if (binding.auditWeekNotes!!.overallNotes != it.toString()) {
+                binding.auditWeekNotes!!.overallNotes = it.toString()
+                viewModel.startDelayedSaveThread(
+                    binding.auditWeekNotes!!,
+                    viewModel::putAuditWeekNotes
+                )
+            }
+        }
+    }
+
+    class StatusHandler(val context: Context, val binding: FragmentQualityAuditOverallBinding) {
+        fun onFaceClick(view: View) {
+            Toast.makeText(context, "Face clicked", Toast.LENGTH_SHORT).show()
+
+            when (binding.includeAuditoverallStatusChooserLayout.root.visibility) {
+                View.VISIBLE -> binding.includeAuditoverallStatusChooserLayout.root.visibility =
+                    View.GONE
+                else -> binding.includeAuditoverallStatusChooserLayout.root.visibility =
+                    View.VISIBLE
+            }
+        }
     }
 }

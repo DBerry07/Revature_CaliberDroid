@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/assessWeekSelectionFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekSelectionFragment"
-        android:label="Assess Batch"
-        tools:layout="@layout/fragment_week_selection" >
+        android:label="@string/menu_assess_batch"
+        tools:layout="@layout/fragment_week_selection">
         <action
             android:id="@+id/action_assessWeekSelectionFragment_to_assessWeekViewFragment"
             app:destination="@id/assessWeekViewFragment" />
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/assessWeekViewFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragment"
-        android:label="Assess Batch" >
+        android:label="@string/menu_assess_batch">
         <action
             android:id="@+id/action_assessWeekViewFragment_to_assessmentTraineeGradesFragment"
             app:destination="@id/assessmentTraineeGradesFragment" />
@@ -29,8 +29,8 @@
     <fragment
         android:id="@+id/assessBatchSelectionFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.AssessBatchSelectionFragment"
-        android:label="fragment_assess_batch_selection"
-        tools:layout="@layout/fragment_assess_batch_selection" >
+        android:label="@string/menu_assess_batch"
+        tools:layout="@layout/fragment_assess_batch_selection">
         <action
             android:id="@+id/action_assessBatchSelectionFragment_to_assessWeekSelectionFragment"
             app:destination="@id/assessWeekSelectionFragment" />

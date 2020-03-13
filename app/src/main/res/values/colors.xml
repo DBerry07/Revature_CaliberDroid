@@ -5,6 +5,8 @@
     <color name="colorAccent">#0384DA</color>
     <color name="Revature_Orange">#F26925</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="almost_white">#EFEFEF</color>
 
 <!--  Quality Audit  -->
     <color name="green_flag">@android:color/holo_green_dark</color>

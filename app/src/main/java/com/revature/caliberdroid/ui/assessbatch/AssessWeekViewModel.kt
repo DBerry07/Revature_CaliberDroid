@@ -1,15 +1,16 @@
 package com.revature.caliberdroid.ui.assessbatch
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.revature.caliberdroid.data.model.AssessWeekNotes
-import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Note
-import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
 import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import timber.log.Timber
+import kotlin.math.round
 
 
 class AssessWeekViewModel : ViewModel() {
@@ -19,6 +20,7 @@ class AssessWeekViewModel : ViewModel() {
     lateinit var trainees: MutableLiveData<List<Trainee>>
     lateinit var batch: Batch
     var saveNoteThread: Thread? = null
+    var categories: MutableLiveData<ArrayList<Category>> = MutableLiveData(arrayListOf())
 
 //    fun initWeekData() {
 //        var batchId:Long = assessWeekNotes.batch!!.batchID
@@ -29,6 +31,26 @@ class AssessWeekViewModel : ViewModel() {
     fun addWeek() {
         BatchRepository.addWeekFromAssess(batch, batchAssessWeekNotes)
         startDelayedSaveThread(Note(), this::saveBatchNote)
+    }
+
+    fun createAssessmentForBatchWeek(assessment: Assessment) {
+        assessment.batchId = batch.batchID
+        assessment.weekNumber = assessWeekNotes.weekNumber
+        val liveDataAssessment = MutableLiveData(assessment)
+        AssessWeekRepository.createAssessment(liveDataAssessment)
+        liveDataAssessment.observeForever(Observer {
+            if (assessWeekNotes.weekNumber == it.weekNumber && assessWeekNotes.batch!!.batchID == it.batchId) {
+                (assessWeekNotes.assessments as ArrayList).add(it)
+            }
+        })
+    }
+
+    fun getSkills(): MutableLiveData<ArrayList<Category>> {
+
+        if (categories.value!!.size == 0) {
+            categories = CategoryRepository.getCategories()
+        }
+        return categories
     }
 
     fun loadBatchWeeks(batch: Batch) {
@@ -44,6 +66,13 @@ class AssessWeekViewModel : ViewModel() {
     fun saveBatchNote(note: Note) {
         if (saveNoteThread != null) saveNoteThread!!.interrupt()
         Timber.d("saving note")
+        assessWeekNotes.batchNote.noteContent = note.noteContent
+        AssessWeekRepository.saveBatchNote(assessWeekNotes.batchNote)
+    }
+
+    fun saveTraineeNote(note: Note) {
+        if(saveNoteThread != null) saveNoteThread!!.interrupt()
+        AssessWeekRepository.putTraineeNote(note)
     }
 
     fun startDelayedSaveThread(note: Note, saveFunction: (note: Note) -> Unit) {
@@ -89,5 +118,31 @@ class AssessWeekViewModel : ViewModel() {
         }
         return t
     }
+
+    fun getAssessmentAverage(assessment: Assessment): Double {
+        var totalPoints = 0.0
+        var totalPossible = 0.0
+        for(grade in assessWeekNotes.grades) {
+            if(grade.assessmentId==assessment.assessmentId) {
+                totalPoints += grade.score!!
+                totalPossible += assessment.rawScore!!
+            }
+        }
+        return ((totalPoints/totalPossible)*100).round()
+    }
+
+    fun getWeeklyBatchAverage(assessWeekNotes: AssessWeekNotes): Double {
+        var avgAssessment = 0.0
+        var totalAssessment = 0.0
+        for(assessment in assessWeekNotes.assessments){
+            avgAssessment+=(getAssessmentAverage(assessment)/100.0*assessment.rawScore!!)
+            totalAssessment+=assessment.rawScore!!
+        }
+        var batchAvg = (avgAssessment/totalAssessment).round()
+        assessWeekNotes.batchAverage=batchAvg.toFloat()
+        return batchAvg
+    }
+
+    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 
 }

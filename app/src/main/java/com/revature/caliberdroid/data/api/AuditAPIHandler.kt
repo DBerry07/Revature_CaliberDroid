@@ -10,11 +10,11 @@ import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.SkillCategory
-import com.revature.caliberdroid.data.model.TraineeWithNotes
 import com.revature.caliberdroid.data.parser.AuditParser
 import com.revature.caliberdroid.data.parser.JSONParser
+import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
-import org.json.JSONArray
+import org.json.JSONObject
 import timber.log.Timber
 
 object AuditAPIHandler {
@@ -31,34 +31,28 @@ object AuditAPIHandler {
         lateinit var auditWeekNotesRequest: JsonObjectRequest
         lateinit var auditWeekNotes: AuditWeekNotes
 
-        for (i in 1 .. batch.weeks) {
-            auditWeekNotesRequest = JsonObjectRequest(
+        for (week in 1..batch.weeks) {
+            auditWeekNotesRequest = VolleyJsonObjectRequest(
                 Request.Method.GET,
-                "$url/$i",
+                "$url/$week",
                 null,
                 Response.Listener {
-                    Timber.d(it.toString())
-//                    liveData.postValue(liveData.value.apply {
-//                        auditWeekNotes = JSONParser.parseAuditWeekNotes(response = it)
-//                        liveData.value?.get(i - 1).apply {
-//                            if (!auditWeekNotes.overallNotes.equals("null")) {
-//                                this?.value?.overallNotes = auditWeekNotes.overallNotes
-//                            }
-//                            if (!auditWeekNotes.overallStatus.equals("null")) {
-//                                this?.value?.overallStatus = auditWeekNotes.overallStatus
-//                            }
-//
-//                        }
-//                    })
-                    auditWeekNotes = JSONParser.parseAuditWeekNotes(response = it)
+                    Timber.d("Response from GET -> ${it.toString()}")
 
-                    liveData.value?.get(i - 1).apply {
+                    if (it!!.length() > 0) {
+                        auditWeekNotes = JSONParser.parseAuditWeekNotes(response = it)
+                    } else {
+                        auditWeekNotes = AuditWeekNotes(weekNumber = week)
+                    }
+
+                    liveData.value?.get(week - 1).apply {
                         if (!auditWeekNotes.overallNotes.equals("null")) {
                             this?.value?.overallNotes = auditWeekNotes.overallNotes
                         }
                         if (!auditWeekNotes.overallStatus.equals("null")) {
                             this?.value?.overallStatus = auditWeekNotes.overallStatus
                         }
+                        this?.value?.noteId = auditWeekNotes.noteId
                     }
                 },
                 Response.ErrorListener {
@@ -70,6 +64,66 @@ object AuditAPIHandler {
         }
     }
 
+    fun putAuditWeekNotes(context: Context, auditWeekNotes: AuditWeekNotes) {
+
+        val queue = Volley.newRequestQueue(context)
+
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/batch/notes"
+
+        val requestBody =
+            if (auditWeekNotes.noteId == -1L) {
+                JSONObject(
+                    "{" +
+                            "\"week\":${auditWeekNotes.weekNumber}," +
+                            "\"batchId\":${auditWeekNotes.batchId}," +
+                            "\"type\":\"QC_BATCH\"," +
+                            "\"technicalStatus\":\"${auditWeekNotes.overallStatus}\"," +
+                            "\"softSkillStatus\":\"Undefined\"," +
+                            "\"content\":\"${auditWeekNotes.overallNotes}\"" +
+                            "}"
+                )
+            } else {
+                JSONObject(
+                    "{" +
+                            "\"noteId\": ${auditWeekNotes.noteId}," +
+                            "\"content\": \"${auditWeekNotes.overallNotes}\"," +
+                            "\"week\": ${auditWeekNotes.weekNumber}," +
+                            "\"batchId\": ${auditWeekNotes.batchId}," +
+                            "\"trainee\": null," +
+                            "\"traineeId\": 0," +
+                            "\"type\": \"QC_BATCH\"," +
+                            "\"technicalStatus\": \"${auditWeekNotes.overallStatus}\"," +
+                            "\"softSkillStatus\": \"Undefined\"," +
+                            "\"updateTime\": ${System.currentTimeMillis() / 1000}," +
+                            "\"lastSavedBy\": null" +
+                            "}"
+                )
+            }
+
+        val request = VolleyJsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            requestBody,
+            Response.Listener {
+                Timber.d("Response from PUT -> ${it.toString()}")
+                if (auditWeekNotes.noteId == -1L) {
+                    if (it != null) {
+                        auditWeekNotes.noteId = it.getLong("noteId")
+                    }
+                }
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            }
+        )
+
+        Timber.d("Making call to API")
+
+        queue.add(request)
+
+    }
+
     fun getSkillCategories(context: Context, liveData: MutableLiveData<List<SkillCategory>>, batch: Batch, weekNumber: Int) {
 
         val queue = Volley.newRequestQueue(context)
@@ -77,12 +131,12 @@ object AuditAPIHandler {
 
         lateinit var skillCategoriesRequest: JsonArrayRequest
 
-        skillCategoriesRequest = JsonArrayRequest(
+        skillCategoriesRequest = VolleyJsonArrayRequest(
             Request.Method.GET,
             url,
             null,
             Response.Listener {
-                liveData.postValue(JSONParser.parseSkillCategories(response = it))
+                liveData.postValue(JSONParser.parseSkillCategories(response = it!!))
             },
             Response.ErrorListener {
 
@@ -92,29 +146,41 @@ object AuditAPIHandler {
         queue.add(skillCategoriesRequest)
     }
 
-    fun getTraineesWithNotes(context: Context, liveData: MutableLiveData<List<TraineeWithNotes>>, batch: Batch, weekNumber: Int) {
+    fun getTraineesWithNotes(
+        context: Context,
+        liveData: MutableLiveData<List<TraineeWithNotesLiveData>>,
+        batch: Batch,
+        weekNumber: Int
+    ) {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(context)
         //response is JSONarray of assessments
         var url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/all/trainee/?batch=${batch.batchID}"
-        lateinit var traineeWithNotesList: List<TraineeWithNotes>
-        val traineesArrayRequest = JsonArrayRequest(
+        lateinit var traineeWithNotesList: List<TraineeWithNotesLiveData>
+        val traineesArrayRequest = VolleyJsonArrayRequest(
             Request.Method.GET,
             url,
             null,
-            Response.Listener<JSONArray> { response ->
-                Timber.d(response.toString())
-                traineeWithNotesList = AuditParser.parseTrainees(response)
+            Response.Listener { traineesResponse ->
+                Timber.d(traineesResponse.toString())
+                traineeWithNotesList = AuditParser.parseTrainees(traineesResponse!!)
 
                 url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/trainee/notes/${batch.batchID}/$weekNumber"
 
-                val notesArrayRequest = JsonArrayRequest(
+                val notesArrayRequest = VolleyJsonArrayRequest(
                     Request.Method.GET,
                     url,
                     null,
-                    Response.Listener { response ->
-                        Timber.d(response.toString())
-                        liveData.postValue(AuditParser.parseTraineeNotes(response, traineeWithNotesList, batch, weekNumber))
+                    Response.Listener { notesResponse ->
+                        Timber.d("Trainee notes response -> ${notesResponse.toString()}")
+                        liveData.postValue(
+                            AuditParser.parseTraineeNotes(
+                                notesResponse!!,
+                                traineeWithNotesList,
+                                batch,
+                                weekNumber
+                            )
+                        )
                     },
                     Response.ErrorListener { error ->
                         Timber.d(error.toString())
@@ -127,4 +193,6 @@ object AuditAPIHandler {
 
         queue.add(traineesArrayRequest)
     }
+
+
 }

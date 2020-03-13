@@ -1,13 +1,12 @@
 package com.revature.caliberdroid.ui.locations
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -20,6 +19,7 @@ import com.revature.caliberdroid.adapter.locations.listeners.EditLocationStatusI
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
+import timber.log.Timber
 
 
 class LocationsFragment : Fragment(){
@@ -29,10 +29,6 @@ class LocationsFragment : Fragment(){
     private var navController: NavController? = null
     lateinit var rvAdapter:LocationsAdapter
     var locationsFromAPI = ArrayList<Location>()
-
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -51,10 +47,10 @@ class LocationsFragment : Fragment(){
                     rvLocations.adapter = rvAdapter
 
                     for (location in locations) {
-                        Log.d("Locations", "Location: ${location.toString()}")
+                        Timber.d("Location: $location")
                     }
                 } else {
-                    Log.d("Locations", "locationsViewModel is null")
+                    Timber.d("locationsViewModel is null")
                 }
             })
 

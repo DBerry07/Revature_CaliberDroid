@@ -6,11 +6,6 @@
     app:startDestination="@id/manageBatchFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.revature.caliberdroid.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
         android:id="@+id/traineeFragment"
         android:name="com.revature.caliberdroid.ui.trainees.TraineeFragment"
         android:label="Trainee">
@@ -26,6 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/manageBatchFragment"
+        android:theme="@style/ThemeOverlay.AppCompat"
         android:name="com.revature.caliberdroid.ui.batches.ManageBatchFragment"
         android:label="Manage Batch"
         tools:layout="@layout/fragment_manage_batch">
@@ -60,12 +56,12 @@
         android:id="@+id/createBatchFragment"
         android:name="com.revature.caliberdroid.ui.batches.CreateBatchFragment"
         android:label="Edit Batch">
-        <action
-            android:id="@+id/action_createBatchFragment_to_manageBatchFragment"
-            app:destination="@id/manageBatchFragment" />
         <argument
             android:name="selectedBatch"
             app:argType="com.revature.caliberdroid.data.model.Batch"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_createBatchFragment_to_manageBatchFragment"
+            app:popUpTo="@id/manageBatchFragment" />
     </fragment>
 </navigation>

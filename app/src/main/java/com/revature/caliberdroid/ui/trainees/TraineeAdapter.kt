@@ -1,16 +1,25 @@
 package com.revature.revaturetraineemanagment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Handler
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.LayoutInflaterCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.TraineeRepository
 import com.revature.caliberdroid.databinding.ItemTraineeBinding
+import com.revature.caliberdroid.ui.trainees.TraineeFragment
 import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
+import com.revature.caliberdroid.ui.trainees.TraineeViewModel
 import timber.log.Timber
 
 
@@ -26,7 +35,6 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         _binding = ItemTraineeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        pop = PopupWindow(parent.context)
 
         this.parent = parent
         return MyViewHolder(binding)
@@ -63,8 +71,18 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
         }
 
         holder.btnDelete.setOnClickListener {
-            val pop = PopupWindow()
-            pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
+            val builder = AlertDialog.Builder(APIHandler.context)
+            builder.setCancelable(true)
+            builder.setTitle("Are you sure you want to delete ${item.name}?")
+            builder.setPositiveButton("NO") { _: DialogInterface?, _: Int -> }
+            builder.setNegativeButton("Yes") { _: DialogInterface?, _: Int ->
+                TraineeRepository.deleteTrainee(item)
+                Snackbar.make(parent, "Trainee deleted successfully!", Snackbar.LENGTH_LONG).show()
+                notifyItemRemoved(position)
+            }
+
+            val dialog = builder.create()
+            dialog.show()
         }
 
         holder.btnEdit.setOnClickListener {

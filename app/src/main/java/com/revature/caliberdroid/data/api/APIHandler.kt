@@ -1,6 +1,7 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -196,6 +197,10 @@ object APIHandler {
 
     fun putTrainee(jsonObject: JSONObject) {
         TraineeAPIHandler.putTrainee(jsonObject)
+    }
+
+    fun deleteTrainee(trainee : Trainee){
+        TraineeAPIHandler.deleteTrainee(trainee)
     }
 
     fun putTraineeNote(note:Note) {

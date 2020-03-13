@@ -294,14 +294,14 @@
                     android:id="@+id/textView21"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/trainee_project"
+                    android:text="@string/trainee_optional_project"
                     style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trainee_project"
+                    android:hint="@string/trainee_optional_project"
                     android:inputType="textPersonName"
                     style="@style/settingsFieldEditText"/>
 

@@ -8,7 +8,7 @@ import com.revature.caliberdroid.BR
 data class AuditTraineeNotes(val weekNumber: Int, val batch: Batch, val traineeId: Long) :
     BaseObservable(), SortedListAdapter.ViewModel {
 
-    var noteId: Long = 0
+    var noteId: Long = -1L
 
     @Bindable var content: String = ""
         set(value) {

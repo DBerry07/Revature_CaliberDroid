@@ -21,50 +21,65 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_first_name"
+                    style="@style/settingsFieldHeading"
+                    />
+
                 <EditText
                     android:id="@+id/trainee_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="FIrst Name"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_first_name"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_last_name"
+                    style="@style/settingsFieldHeading"
+                    />
 
                 <EditText
                     android:id="@+id/trainee_last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="Last Name"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_last_name"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_email"
+                    style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="Email Address"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/trainee_email"
+                    android:inputType="textEmailAddress"
+                    style="@style/settingsFieldEditText"/>
 
             </LinearLayout>
 
@@ -72,17 +87,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_skype"
+                    style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_skype"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="SkypeID"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_skype"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
 
             </LinearLayout>
 
@@ -90,17 +109,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_phone"
+                    style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/trainee_phone"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    style="@style/settingsFieldEditText"/>
 
             </LinearLayout>
 
@@ -108,6 +131,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_status"
+                    style="@style/settingsFieldHeading"
+                    />
 
                 <Spinner
                     android:id="@+id/trainee_status"
@@ -124,101 +155,132 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_college"
+                    style="@style/settingsFieldHeading"/>
+
                 <EditText
                     android:id="@+id/trainee_college"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="University/College"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_college"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_degree"
+                    style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_degree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/trainee_degree"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_major"
+                    style="@style/settingsFieldHeading"/>
 
                 <EditText
                     android:id="@+id/trainee_major"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/trainee_major"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_profile"
+                    style="@style/settingsFieldHeading"
+                    />
 
                 <EditText
                     android:id="@+id/trainee_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
                     android:hint="@string/trainee_profile"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_recruiter"
+                    style="@style/settingsFieldHeading"
+                    />
 
                 <EditText
                     android:id="@+id/trainee_recruiter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="Recruiter (Optional)"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_recruiter"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_screener"
+                    style="@style/settingsFieldHeading"
+                    />
 
                 <EditText
                     android:id="@+id/trainee_screener"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="Screener (Optional)"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_screener"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -226,16 +288,20 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_project"
+                    style="@style/settingsFieldHeading"/>
+
                 <EditText
                     android:id="@+id/trainee_project"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:ems="10"
-                    android:hint="Project Status (Optional)"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/trainee_project"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
 
             </LinearLayout>
 

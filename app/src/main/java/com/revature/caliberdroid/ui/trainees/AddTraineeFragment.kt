@@ -55,6 +55,9 @@ class AddTraineeFragment() : Fragment() {
     }
 
     fun createTrainee(){
+        if (formCheck() == false){
+            return
+        }
         var name : String = "${binding.traineeLastName.text.toString()}, ${binding.traineeFirstName.text.toString()}"
         var jsonObject = JSONObject()
         jsonObject.put("firstName", binding.traineeFirstName.text.toString())
@@ -77,5 +80,37 @@ class AddTraineeFragment() : Fragment() {
 
     fun phoneFormatting(){
         //TODO: write method that formats phone number into 111-222-1234 format and checks for proper length
+    }
+
+    fun formCheck() : Boolean{
+        if (binding.traineeFirstName.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the First Name field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineeLastName.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the Last Name field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineeCollege.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the College/University field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineeDegree.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the Degree field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineeEmail.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the Email field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineeMajor.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the Major field.", Toast.LENGTH_LONG)
+            return false
+        }
+        if (binding.traineePhone.text.toString().isEmpty()){
+            Toast.makeText(context, "Please fill the Phone Number field.", Toast.LENGTH_LONG)
+            return false
+        }
+        return true
     }
 }

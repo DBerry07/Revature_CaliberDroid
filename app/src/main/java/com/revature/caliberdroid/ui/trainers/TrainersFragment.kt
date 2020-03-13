@@ -39,6 +39,7 @@ class TrainersFragment : Fragment(){
 
             trainersViewModel.trainersLiveData.observe(viewLifecycleOwner, Observer { trainers->
                 trainersFromAPI = trainers
+                binding.trainerCount = trainersFromAPI.size
                 rvAdapter = TrainersAdapter(EditTrainerListener())
                 rvAdapter.sortedList.addAll(trainersFromAPI)
                 rvTrainers.adapter = rvAdapter
@@ -53,7 +54,9 @@ class TrainersFragment : Fragment(){
                 override fun onQueryTextSubmit(query: String?): Boolean {return false}
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    rvAdapter.replaceAll( filterLocations(trainersFromAPI, newText) )
+                    val filteredTrainers: ArrayList<Trainer> = filterTrainers(trainersFromAPI, newText)
+                    binding.trainerCount = filteredTrainers.size
+                    rvAdapter.replaceAll( filteredTrainers )
                     return true
                 }
 
@@ -71,7 +74,7 @@ class TrainersFragment : Fragment(){
         }
     }
 
-    fun filterLocations(trainers:ArrayList<Trainer> , _query:String?): ArrayList<Trainer>{
+    fun filterTrainers(trainers:ArrayList<Trainer>, _query:String?): ArrayList<Trainer>{
         val filteredTrainers: ArrayList<Trainer> = ArrayList()
         if(_query != null){
             val query = _query.toLowerCase()

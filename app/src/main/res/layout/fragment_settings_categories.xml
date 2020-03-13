@@ -39,13 +39,19 @@
             android:layout_height="3dp"
             android:background="@color/dividerGray" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvActiveCategories"
-            style="@style/settingsRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:fadeScrollbars="false">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActiveCategories"
+                style="@style/settingsRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
 
         <TextView
             android:text="@string/title_stale_status"
@@ -59,13 +65,19 @@
             android:layout_height="3dp"
             android:background="@color/dividerGray" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvStaleCategories"
-            style="@style/settingsRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:fadeScrollbars="false">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStaleCategories"
+                style="@style/settingsRecyclerView"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
     </LinearLayout>
 
 </layout>

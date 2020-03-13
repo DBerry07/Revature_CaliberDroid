@@ -18,6 +18,8 @@
 
             <SearchView
                 android:id="@+id/searchViewLocations"
+                android:queryHint="@string/query_hint_settings_location"
+                android:iconifiedByDefault="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button

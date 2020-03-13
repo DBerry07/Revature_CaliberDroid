@@ -168,6 +168,8 @@ class CreateBatchFragment : Fragment() {
         batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.selectedItem.toString()
         batch?.location = binding.spinnerCreatebatchLocation.selectedItem.toString()
         batch?.skillType = binding.etCreateBatchSkillInput.text.toString()
+        batch?._startDate = binding.etCreateBatchStartInput.text.toString().toLong()
+        batch?._endDate = binding.etCreateBatchEndInput.text.toString().toLong()
         batch?.trainingType = binding.spinnerCreateBatchTrainingType.selectedItem.toString()
         batch?.goodGrade = binding.etCreateBatchGoodGradeInput.text.toString().toInt()
         batch?.passingGrade = binding.etCreateBatchPassingGradeInput.text.toString().toInt()

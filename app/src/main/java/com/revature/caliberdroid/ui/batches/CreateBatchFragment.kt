@@ -1,16 +1,16 @@
 package com.revature.caliberdroid.ui.batches
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -169,14 +169,15 @@ class CreateBatchFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
         batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()
         batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.selectedItem.toString()
         batch?.location = binding.spinnerCreatebatchLocation.selectedItem.toString()
         batch?.skillType = binding.etCreateBatchSkillInput.text.toString()
-        batch?._startDate = binding.etCreateBatchStartInput.text.toString().toLong()
-        batch?._endDate = binding.etCreateBatchEndInput.text.toString().toLong()
+        batch?._startDate = DateConverter.getTimestamp(binding.etCreateBatchStartInput.text.toString())
+        batch?._endDate = DateConverter.getTimestamp(binding.etCreateBatchEndInput.text.toString())
         batch?.trainingType = binding.spinnerCreateBatchTrainingType.selectedItem.toString()
         batch?.goodGrade = binding.etCreateBatchGoodGradeInput.text.toString().toInt()
         batch?.passingGrade = binding.etCreateBatchPassingGradeInput.text.toString().toInt()

@@ -52,7 +52,7 @@ object AuditParser {
                 response.getJSONObject(i).apply {
                     auditTraineeNotes = AuditTraineeNotes(
                         getLong("noteId"),
-                        weekNumber,
+                        getInt("week"),
                         getString("content"),
                         getString("technicalStatus"),
                         batch,
@@ -73,13 +73,14 @@ object AuditParser {
                     }
                 }
             }
-        } else {
-            for (traineeWithNotes in traineeWithNotesList) {
-                traineeWithNotes.value!!.auditTraineeNotes = AuditTraineeNotes(
-                    weekNumber,
-                    batch,
-                    traineeWithNotes.value!!.trainee!!.traineeId
-                )
+
+            for (j in 0 until length) {
+                traineeWithNotesList.get(j).value!!.apply {
+                    if (this.auditTraineeNotes == null) {
+                        this.auditTraineeNotes =
+                            AuditTraineeNotes(weekNumber, batch, this.trainee!!.traineeId)
+                    }
+                }
             }
         }
 

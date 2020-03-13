@@ -12,13 +12,17 @@ class QualityAuditWeekSelectionViewModel : ViewModel() {
     lateinit var batchSelected: Batch
 
     lateinit var auditWeekNotesLiveData: MutableLiveData<ArrayList<WeekLiveData>>
+
     fun getAuditWeekNotes() {
         auditWeekNotesLiveData = MutableLiveData()
         lateinit var data: WeekLiveData
+        var auditWeekNotes: AuditWeekNotes
         val auditweekNotesList = ArrayList<WeekLiveData>()
             for (i in 1..batchSelected.weeks) {
                 data = WeekLiveData()
-                data.value = AuditWeekNotes(i)
+                auditWeekNotes = AuditWeekNotes(i)
+                auditWeekNotes.batchId = batchSelected.batchID
+                data.value = auditWeekNotes
                 auditweekNotesList.add(data)
             }
 

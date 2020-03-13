@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
+import com.revature.caliberdroid.util.KeyboardUtil
 
 class QualityAuditOverallFragment : Fragment() {
 
@@ -49,6 +51,8 @@ class QualityAuditOverallFragment : Fragment() {
 
         setClickListeners()
 
+        watchOverallNote()
+
         subscribeToViewModel()
 
         return binding.root
@@ -82,6 +86,25 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.imgAuditoverallOverallstatus.setOnClickListener {
 
+        }
+    }
+
+    private fun watchOverallNote() {
+        binding.etAuditoverallOverallfeedback.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                KeyboardUtil.hideSoftKeyboard(requireContext(), v)
+                viewModel.putAuditWeekNotes(binding.auditWeekNotes!!)
+            }
+        }
+
+        binding.etAuditoverallOverallfeedback.addTextChangedListener {
+            if (binding.auditWeekNotes!!.overallNotes != it.toString()) {
+                binding.auditWeekNotes!!.overallNotes = it.toString()
+                viewModel.startDelayedSaveThread(
+                    binding.auditWeekNotes!!,
+                    viewModel::putAuditWeekNotes
+                )
+            }
         }
     }
 

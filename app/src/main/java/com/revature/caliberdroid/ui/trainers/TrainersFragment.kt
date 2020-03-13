@@ -34,6 +34,7 @@ class TrainersFragment : Fragment(){
         navController = findNavController()
         trainersViewModel.getTrainers()
         _binding = FragmentSettingsTrainersBinding.inflate(layoutInflater)
+        binding.trainerCount = 0
         binding.apply {
             setLifecycleOwner (this@TrainersFragment )
 

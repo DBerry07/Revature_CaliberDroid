@@ -14,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
@@ -43,8 +44,9 @@ class AddTraineeFragment() : Fragment() {
 
         binding.apply {
             TMBtnCreateTrainee.setOnClickListener{
-                createTrainee()
-                findNavController().navigateUp()
+                if (createTrainee()) {
+                    findNavController().navigateUp()
+                }
                 //Shouldn't navigate back using the way you have below
                 //This method will create problems when user presses the back button
                     //findNavController().navigate(AddTraineeFragmentDirections.actionAddTraineeFragmentToTraineeFragment( currentBatch ))
@@ -54,9 +56,9 @@ class AddTraineeFragment() : Fragment() {
         return view
     }
 
-    fun createTrainee(){
+    fun createTrainee() : Boolean{
         if (formCheck() == false){
-            return
+            return false
         }
         var name : String = "${binding.traineeLastName.text.toString()}, ${binding.traineeFirstName.text.toString()}"
         var jsonObject = JSONObject()
@@ -76,41 +78,88 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("name", name)
         jsonObject.put("batchId", currentBatch.batchID)
         model.postTrainee(jsonObject)
-    }
-
-    fun phoneFormatting(){
-        //TODO: write method that formats phone number into 111-222-1234 format and checks for proper length
+        return true
     }
 
     fun formCheck() : Boolean{
+
+        //First Name Checking
         if (binding.traineeFirstName.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the First Name field.", Toast.LENGTH_LONG)
+            Snackbar.make(view!!, "Please fill the First Name field.", Snackbar.LENGTH_LONG).show()
             return false
         }
+        if (!checkName(binding.traineeFirstName.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid first name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        //Last Name Checking
         if (binding.traineeLastName.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the Last Name field.", Toast.LENGTH_LONG)
+            Snackbar.make(view!!, "Please fill the Last Name field.", Snackbar.LENGTH_LONG).show()
             return false
         }
+        if (!checkName(binding.traineeLastName.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid last name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Email Checking
+        if (binding.traineeEmail.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Email field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkEmail(binding.traineeEmail.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid Email.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Phone number checking
+        if (binding.traineePhone.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Phone Number field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkPhone(binding.traineePhone.text.toString())){
+            Snackbar.make(view!!, "Please enter a phone number with format 123-456-7890.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Empty field checking
         if (binding.traineeCollege.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the College/University field.", Toast.LENGTH_LONG)
+            Snackbar.make(view!!, "Please fill the College/University field.", Snackbar.LENGTH_LONG).show()
             return false
         }
         if (binding.traineeDegree.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the Degree field.", Toast.LENGTH_LONG)
-            return false
-        }
-        if (binding.traineeEmail.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the Email field.", Toast.LENGTH_LONG)
+            Snackbar.make(view!!, "Please fill the Degree field.", Snackbar.LENGTH_LONG).show()
             return false
         }
         if (binding.traineeMajor.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the Major field.", Toast.LENGTH_LONG)
+            Snackbar.make(view!!, "Please fill the Major field.", Snackbar.LENGTH_LONG).show()
             return false
         }
-        if (binding.traineePhone.text.toString().isEmpty()){
-            Toast.makeText(context, "Please fill the Phone Number field.", Toast.LENGTH_LONG)
-            return false
-        }
+
         return true
+    }
+
+    fun checkName(name : String): Boolean{
+        val namePattern : Regex = "[a-zA-Z]+".toRegex()
+        if (name.matches(namePattern)){
+            return true
+        }
+        return false
+    }
+
+    fun checkEmail(email : String): Boolean{
+        val emailPattern : Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+        if (email.matches(emailPattern)){
+            return true
+        }
+        return false
+    }
+
+    fun checkPhone(phone : String) : Boolean{
+        val phonePattern : Regex = "[0-9]{3}+-[0-9]{3}+-+[0-9]{4}".toRegex()
+        if (phone.matches(phonePattern)){
+            return true
+        }
+        return false
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAddTraineeBinding
@@ -39,8 +40,9 @@ class EditTraineeFragment : Fragment() {
         binding.apply {
             binding.TMBtnCreateTrainee.setText("Submit Edits")
             binding.TMBtnCreateTrainee.setOnClickListener{
-                updateTrainee(batchID!!)
-                findNavController().navigateUp()
+                if (updateTrainee(batchID!!)) {
+                    findNavController().navigateUp()
+                }
             }
             binding.traineeFirstName.setText(trainee.name.toString().split(",")[1].trim())
             binding.traineeLastName.setText(trainee.name.toString().split(",")[0].trim())
@@ -49,11 +51,22 @@ class EditTraineeFragment : Fragment() {
             binding.traineeMajor.setText(trainee.major)
             binding.traineeEmail.setText(trainee.email)
             binding.traineePhone.setText(trainee.phoneNumber)
-            binding.traineeProfile.setText(trainee.profileUrl)
-            binding.traineeProject.setText(trainee.projectCompletion)
-            binding.traineeRecruiter.setText(trainee.recruiterName)
-            binding.traineeScreener.setText(trainee.techScreenerName)
-            binding.traineeSkype.setText(trainee.skypeId)
+
+            if (!trainee.profileUrl.equals("null") && trainee.profileUrl != null) {
+                binding.traineeProfile.setText(trainee.profileUrl)
+            }
+            if (!trainee.projectCompletion.equals("null") && trainee.projectCompletion != null) {
+                binding.traineeProject.setText(trainee.projectCompletion)
+            }
+            if (!trainee.recruiterName.equals("null") && trainee.recruiterName != null) {
+                binding.traineeRecruiter.setText(trainee.recruiterName)
+            }
+            if (!trainee.techScreenerName.equals("null") && trainee.techScreenerName != null) {
+                binding.traineeScreener.setText(trainee.techScreenerName)
+            }
+            if (!trainee.skypeId.equals("null") && trainee.skypeId != null) {
+                binding.traineeSkype.setText(trainee.skypeId)
+            }
 
             var i = 0
             while (i < binding.traineeStatus.adapter.count) {
@@ -69,7 +82,10 @@ class EditTraineeFragment : Fragment() {
         return view
     }
 
-    fun updateTrainee(batchID: Long){
+    fun updateTrainee(batchID: Long) : Boolean{
+        if (!formCheck()){
+            return false
+        }
         var jsonObject = JSONObject()
         var name = "${binding.traineeLastName.text}, ${binding.traineeFirstName.text}"
 
@@ -98,5 +114,88 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("firstName", binding.traineeFirstName.text.toString())
         jsonObject.put("lastName", binding.traineeLastName.text.toString())
         model.putTrainee(jsonObject)
+        return true
+    }
+
+    fun formCheck() : Boolean{
+
+        //First Name Checking
+        if (binding.traineeFirstName.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the First Name field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkName(binding.traineeFirstName.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid first name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        //Last Name Checking
+        if (binding.traineeLastName.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Last Name field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkName(binding.traineeLastName.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid last name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Email Checking
+        if (binding.traineeEmail.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Email field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkEmail(binding.traineeEmail.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid Email.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Phone number checking
+        if (binding.traineePhone.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Phone Number field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (!checkPhone(binding.traineePhone.text.toString())){
+            Snackbar.make(view!!, "Please enter a phone number with format 123-456-7890.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        //Empty field checking
+        if (binding.traineeCollege.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the College/University field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (binding.traineeDegree.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Degree field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+        if (binding.traineeMajor.text.toString().isEmpty()){
+            Snackbar.make(view!!, "Please fill the Major field.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        return true
+    }
+
+    fun checkName(name : String): Boolean{
+        val namePattern : Regex = "[a-zA-Z]+".toRegex()
+        if (name.matches(namePattern)){
+            return true
+        }
+        return false
+    }
+
+    fun checkEmail(email : String): Boolean{
+        val emailPattern : Regex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+        if (email.matches(emailPattern)){
+            return true
+        }
+        return false
+    }
+
+    fun checkPhone(phone : String) : Boolean{
+        val phonePattern : Regex = "[0-9]{3}+-[0-9]{3}+-+[0-9]{4}".toRegex()
+        if (phone.matches(phonePattern)){
+            return true
+        }
+        return false
     }
 }

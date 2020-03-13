@@ -23,8 +23,9 @@ class TraineeViewModel : ViewModel() {
         TraineeRepository.postTrainee(jsonObject)
     }
 
-    fun putTrainee(jsonObject: JSONObject){
+    fun putTrainee(jsonObject: JSONObject) {
         TraineeRepository.putTrainee(jsonObject)
+    }
 
     fun getAllBatches(){
         TraineeRepository.getAllBatches(allBatchesLiveData)

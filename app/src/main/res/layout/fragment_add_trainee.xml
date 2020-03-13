@@ -83,27 +83,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/trainee_skype"
-                    style="@style/settingsFieldHeading"/>
-
-                <EditText
-                    android:id="@+id/trainee_skype"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/trainee_skype"
-                    android:inputType="textPersonName"
-                    style="@style/settingsFieldEditText"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -223,7 +203,7 @@
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/trainee_profile"
+                    android:text="@string/trainee_optional_profile"
                     style="@style/settingsFieldHeading"
                     />
 
@@ -231,7 +211,7 @@
                     android:id="@+id/trainee_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trainee_profile"
+                    android:hint="@string/trainee_optional_profile"
                     android:inputType="textPersonName"
                     style="@style/settingsFieldEditText"
                     />
@@ -243,10 +223,32 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_optional_skype"
+                    style="@style/settingsFieldHeading"/>
+
+                <EditText
+                    android:id="@+id/trainee_skype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/trainee_optional_skype"
+                    android:inputType="textPersonName"
+                    style="@style/settingsFieldEditText"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
                     android:id="@+id/textView15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/trainee_recruiter"
+                    android:text="@string/trainee_optional_recruiter"
                     style="@style/settingsFieldHeading"
                     />
 
@@ -254,7 +256,7 @@
                     android:id="@+id/trainee_recruiter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trainee_recruiter"
+                    android:hint="@string/trainee_optional_recruiter"
                     android:inputType="textPersonName"
                     style="@style/settingsFieldEditText"
                     />
@@ -269,7 +271,7 @@
                     android:id="@+id/textView19"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/trainee_screener"
+                    android:text="@string/trainee_optional_screener"
                     style="@style/settingsFieldHeading"
                     />
 
@@ -277,7 +279,7 @@
                     android:id="@+id/trainee_screener"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/trainee_screener"
+                    android:hint="@string/trainee_optional_screener"
                     android:inputType="textPersonName"
                     style="@style/settingsFieldEditText"
                     />

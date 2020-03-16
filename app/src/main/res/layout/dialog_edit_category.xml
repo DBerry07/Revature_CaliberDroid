@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
     android:background="@android:color/white">
 
     <TextView
@@ -17,22 +18,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvDialogFieldLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_dialog_name"
-        app:layout_constraintStart_toStartOf="@+id/tvDialogHeader"
-        app:layout_constraintTop_toBottomOf="@+id/tvDialogHeader" />
 
-    <EditText
-        android:id="@+id/tvDialogField"
-        style="@style/settingsDialogFieldEditText"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvDialogFieldLabel"
-        app:layout_constraintStart_toEndOf="@+id/tvDialogFieldLabel" />
+        app:layout_constraintStart_toStartOf="@+id/tvDialogHeader"
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogHeader"
+        style="@style/settingsMaterialEditText"
+        android:hint="@string/label_dialog_name"
+        android:background="@color/white">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvDialogField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,11 +37,13 @@ class LocationsFragment : Fragment(){
         navController = findNavController()
         locationsViewModel.getLocations()
         _binding = FragmentSettingsLocationsBinding.inflate(layoutInflater)
+        binding.locationCount = 0
         binding.apply {
             setLifecycleOwner(this@LocationsFragment)
             locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, Observer { locations->
                 if(locations != null){
                     locationsFromAPI = locations
+                    binding.locationCount = locationsFromAPI.size
                     rvAdapter = LocationsAdapter(EditLocationListener(), EditLocationStatusListener())
                     rvAdapter.sortedList.addAll(locationsFromAPI)
                     rvLocations.adapter = rvAdapter
@@ -63,7 +65,9 @@ class LocationsFragment : Fragment(){
                 override fun onQueryTextSubmit(query: String?): Boolean {return false}
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    rvAdapter.replaceAll( filterLocations(locationsFromAPI, newText) )
+                    val filteredLocations: ArrayList<Location> = filterLocations(locationsFromAPI, newText)
+                    binding.locationCount = filteredLocations.size
+                    rvAdapter.replaceAll( filteredLocations )
                     return true
                 }
 

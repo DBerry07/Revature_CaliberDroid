@@ -11,6 +11,9 @@
         <variable
             name="average"
             type="Float" />
+        <variable
+            name="assessWeekNotes"
+            type="com.revature.caliberdroid.data.model.AssessWeekNotes" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -73,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{@string/grade_format(average)}"
+                android:text="@{@string/grade_format(assessWeekNotes.getAssessmentAverage(assessment))}"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_assessmentsrecycler_averagelabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_assessmentsrecycler_averagelabel" />

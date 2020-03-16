@@ -7,6 +7,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.SkillCategory
@@ -194,5 +195,67 @@ object AuditAPIHandler {
         queue.add(traineesArrayRequest)
     }
 
+    fun putTraineeWithNotes(context: Context, traineeWithNotes: AuditTraineeWithNotes) {
+
+        val queue = Volley.newRequestQueue(context)
+
+        val url =
+            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/qa/audit/trainee/notes"
+
+        val auditTraineeNotes = traineeWithNotes.auditTraineeNotes!!
+
+        val requestBody =
+            if (auditTraineeNotes.noteId == -1L) {
+                JSONObject(
+                    "{" +
+                            "\"technicalStatus\":\"${auditTraineeNotes.technicalStatus}\"," +
+                            "\"softSkillStatus\":\"Undefined\"," +
+                            "\"traineeId\":${auditTraineeNotes.traineeId}," +
+                            "\"batchId\":${auditTraineeNotes.batch.batchID}," +
+                            "\"week\":${auditTraineeNotes.weekNumber}," +
+                            "\"content\":\"${auditTraineeNotes.content}\"," +
+                            "\"type\":\"QC_TRAINEE\"" +
+                            "}"
+                )
+            } else {
+                JSONObject(
+                    "{" +
+                            "\"noteId\": ${auditTraineeNotes.noteId}," +
+                            "\"content\": \"${auditTraineeNotes.content}\"," +
+                            "\"week\": ${auditTraineeNotes.weekNumber}," +
+                            "\"batchId\": ${auditTraineeNotes.batch.batchID}," +
+                            "\"trainee\": null," +
+                            "\"traineeId\": ${auditTraineeNotes.traineeId}," +
+                            "\"type\": \"QC_TRAINEE\"," +
+                            "\"technicalStatus\": \"${auditTraineeNotes.technicalStatus}\"," +
+                            "\"softSkillStatus\": \"Undefined\"," +
+                            "\"updateTime\": ${System.currentTimeMillis() / 1000}," +
+                            "\"lastSavedBy\": null" +
+                            "}"
+                )
+            }
+
+        val request = VolleyJsonObjectRequest(
+            Request.Method.PUT,
+            url,
+            requestBody,
+            Response.Listener {
+                Timber.d("Response from PUT -> ${it.toString()}")
+                if (traineeWithNotes.auditTraineeNotes!!.noteId == -1L) {
+                    if (it != null) {
+                        traineeWithNotes.auditTraineeNotes!!.noteId = it.getLong("noteId")
+                    }
+                }
+            },
+            Response.ErrorListener {
+                Timber.d(it.toString())
+            }
+        )
+
+        Timber.d("Making call to API")
+
+        queue.add(request)
+
+    }
 
 }

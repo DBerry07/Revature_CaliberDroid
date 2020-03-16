@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Grade
@@ -21,64 +22,38 @@ import timber.log.Timber
 import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.util.KeyboardUtil
 
-class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekViewModel: AssessWeekViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AssessBatchTraineeRecyclerAdapter(var context: Context?,
+                                        comparator: Comparator<Trainee>,
+                                        var assessWeekViewModel: AssessWeekViewModel
+) : SortedListAdapter<Trainee>(context!!,Trainee::class.java,comparator) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder<out Trainee> {
         return TraineeViewHolder(
             ItemAssessBatchTraineeBinding.inflate(LayoutInflater.from(context),parent,false),assessWeekViewModel, context!!)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-            is TraineeViewHolder -> {
-                var trainee = assessWeekViewModel.trainees.value!![position]
-                holder.bind(trainee,
-                    getNoteForTrainee(trainee.traineeId),
-                    getGradesForTrainee(trainee.traineeId),
-                    assessWeekViewModel.assessWeekNotes.assessments,
-                    assessWeekViewModel)
-            }
-        }
-    }
-
-    override fun getItemCount(): Int {
-        if(assessWeekViewModel.trainees.value == null){
-            return 0
-        }
-        return assessWeekViewModel.trainees.value!!.size
-    }
-
-    fun getGradesForTrainee(traineeId:Long):List<Grade> {
-        var traineeGrades:ArrayList<Grade> = ArrayList()
-        for(grade in assessWeekViewModel.assessWeekNotes.grades){
-            if(grade.traineeId == traineeId){
-                traineeGrades.add(grade)
-            }
-        }
-        return traineeGrades
-    }
-
-    fun getNoteForTrainee(traineeId: Long):Note {
-        var traineeNote = Note()
-        for(note in assessWeekViewModel.assessWeekNotes.traineeNotes.value!!) {
-            if(note.traineeId == traineeId) {
-                return note
-            }
-        }
-
-        //check if the note is empty
-        if(traineeNote.weekNumber==-1) {
-            traineeNote = Note(-1L,"","TRAINEE",assessWeekViewModel.assessWeekNotes.weekNumber,assessWeekViewModel.assessWeekNotes.batch!!.batchID,traineeId)
-        }
-        return traineeNote
-    }
-
     class TraineeViewHolder constructor(
-        val binding: ItemAssessBatchTraineeBinding, val assessWeekViewModel: AssessWeekViewModel, val context: Context
-    ): RecyclerView.ViewHolder(binding.root) {
+        val binding: ItemAssessBatchTraineeBinding,
+        val assessWeekViewModel: AssessWeekViewModel,
+        val context: Context
+    ): SortedListAdapter.ViewHolder<Trainee>(binding.root) {
+
+        override fun performBind(trainee: Trainee) {
+            bind(trainee,
+            getNoteForTrainee(trainee.traineeId),
+            getGradesForTrainee(trainee.traineeId),
+            assessWeekViewModel.assessWeekNotes.assessments)
+        }
 
 
-        fun bind(trainee:Trainee, note: Note, grades: List<Grade>, assessments: List<Assessment>, assessWeekViewModel: AssessWeekViewModel) {
+        fun bind(trainee:Trainee,
+                 note:Note,
+                 grades: List<Grade>,
+                 assessments: List<Assessment>) {
             var mAdapter = TraineeAssessmentsRecycleAdapter(grades, assessments,trainee.traineeId,context,assessWeekViewModel)
             var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
             binding.recycleAssessBatchTraineesAssessments.layoutManager = linearLayoutManager
@@ -129,7 +104,32 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
             }
 
             }
+
+        fun getGradesForTrainee(traineeId:Long):List<Grade> {
+            var traineeGrades:ArrayList<Grade> = ArrayList()
+            for(grade in assessWeekViewModel.assessWeekNotes.grades){
+                if(grade.traineeId == traineeId){
+                    traineeGrades.add(grade)
+                }
+            }
+            return traineeGrades
         }
 
+        fun getNoteForTrainee(traineeId: Long):Note {
+            var traineeNote = Note()
+            for(note in assessWeekViewModel.assessWeekNotes.traineeNotes.value!!) {
+                if(note.traineeId == traineeId) {
+                    return note
+                }
+            }
+
+            //check if the note is empty
+            if(traineeNote.weekNumber==-1) {
+                traineeNote = Note(-1L,"","TRAINEE",assessWeekViewModel.assessWeekNotes.weekNumber,assessWeekViewModel.assessWeekNotes.batch!!.batchID,traineeId)
+            }
+            return traineeNote
+        }
     }
+
+}
 

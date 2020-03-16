@@ -65,7 +65,7 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("firstName", binding.traineeFirstName.text.toString())
         jsonObject.put("lastName", binding.traineeLastName.text.toString())
         jsonObject.put("email", binding.traineeEmail.text.toString())
-        jsonObject.put("trainingStatus", "Signed")
+        jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
         jsonObject.put("phoneNumber", binding.traineePhone.text.toString())
         jsonObject.put("skypeId", binding.traineeSkype.text.toString())
         jsonObject.put("profileUrl", binding.traineeProfile.text.toString())
@@ -78,6 +78,7 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("name", name)
         jsonObject.put("batchId", currentBatch.batchID)
         model.postTrainee(jsonObject)
+        Snackbar.make(binding.root, "Trainee added successfully!", Snackbar.LENGTH_LONG).show()
         return true
     }
 

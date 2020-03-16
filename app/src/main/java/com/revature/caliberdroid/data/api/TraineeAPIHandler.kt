@@ -47,7 +47,7 @@ object TraineeAPIHandler {
             url,
             traineeData,
             Response.Listener<JSONObject> {response ->
-                    Toast.makeText(APIHandler.context, "Trainee added successfully!", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(APIHandler.context, "Trainee added successfully!", Toast.LENGTH_LONG).show()
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )
@@ -66,7 +66,7 @@ object TraineeAPIHandler {
             url,
             traineeData,
             Response.Listener<JSONObject> {response ->
-                Toast.makeText(APIHandler.context, "Trainee updated successfully!", Toast.LENGTH_LONG).show()
+                //Toast.makeText(APIHandler.context, "Trainee updated successfully!", Toast.LENGTH_LONG).show()
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )

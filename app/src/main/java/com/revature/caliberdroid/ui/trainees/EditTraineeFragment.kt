@@ -114,6 +114,7 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("firstName", binding.traineeFirstName.text.toString())
         jsonObject.put("lastName", binding.traineeLastName.text.toString())
         model.putTrainee(jsonObject)
+        Snackbar.make(binding.root, "Trainee edited successfully!", Snackbar.LENGTH_LONG).show()
         return true
     }
 

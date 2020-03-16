@@ -16,6 +16,7 @@ import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.data.repository.TraineeRepository
+import com.revature.caliberdroid.data.repository.TraineeRepository.getTrainees
 import com.revature.caliberdroid.databinding.ItemTraineeBinding
 import com.revature.caliberdroid.ui.trainees.TraineeFragment
 import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
@@ -23,9 +24,10 @@ import com.revature.caliberdroid.ui.trainees.TraineeViewModel
 import timber.log.Timber
 
 
-class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
+class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: TraineeFragment): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var trainees = data
+    var traineeFragment = fragment
     val batchId = batchID
     lateinit var parent: ViewGroup
     lateinit var pop : PopupWindow
@@ -76,9 +78,13 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
             builder.setTitle("Are you sure you want to delete ${item.name}?")
             builder.setPositiveButton("NO") { _: DialogInterface?, _: Int -> }
             builder.setNegativeButton("Yes") { _: DialogInterface?, _: Int ->
+                Timber.d("Trainee being deleted: $item")
                 TraineeRepository.deleteTrainee(item)
-                Snackbar.make(parent, "Trainee deleted successfully!", Snackbar.LENGTH_LONG).show()
+                Timber.d("# of trainees in list before delete: ${trainees.size}")
+                trainees.removeAt(position)
+                Timber.d("# of trainees in list after delete: ${trainees.size}")
                 notifyItemRemoved(position)
+                Snackbar.make(parent, "Trainee deleted successfully!", Snackbar.LENGTH_LONG).show()
             }
 
             val dialog = builder.create()
@@ -86,8 +92,8 @@ class TraineeAdapter(data : List<Trainee>, batchID : Long): RecyclerView.Adapter
         }
 
         holder.btnEdit.setOnClickListener {
-            val navControler = Navigation.findNavController(parent)
-            navControler.navigate(TraineeFragmentDirections.actionTraineeFragmentToEditTraineeFragment(item, batchId = batchId))
+            val navController = Navigation.findNavController(parent)
+            navController.navigate(TraineeFragmentDirections.actionTraineeFragmentToEditTraineeFragment(item, batchId = batchId))
         }
 
         /*holder.button.setOnClickListener (View.OnClickListener {

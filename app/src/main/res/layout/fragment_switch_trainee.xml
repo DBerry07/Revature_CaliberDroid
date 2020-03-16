@@ -1,170 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data
+        >
+    </data>
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.trainees.SwitchTraineeFragment">
 
-    <androidx.cardview.widget.CardView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AddTraineeCard">
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/trainee_name"
+            style="@style/lessImportantHeader"/>
+
+        <TextView
+            android:id="@+id/TM_switch_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TraineeName"
+            style="@style/importantHeader"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_name"
-                style="@style/lessImportantHeader"/>
-
-            <TextView
-                android:id="@+id/TM_switch_tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TraineeName"
-                style="@style/importantHeader"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView29"
+                    style="@style/lessImportantHeader"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:text="@string/trainee_batch" />
 
-                    <TextView
-                        android:id="@+id/textView27"
-                        style="@style/lessImportantHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/trainee_year" />
-
-                    <TextView
-                        android:id="@+id/TM_switch_tv_year"
-                        style="@style/importantHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="CurrentYear" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/TM_switch_tv_batch"
+                    style="@style/importantHeader"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView28"
-                        style="@style/lessImportantHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/trainee_quarter" />
-
-                    <TextView
-                        android:id="@+id/TM_switch_tv_quarter"
-                        style="@style/importantHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="CurrentQuarter" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="CurrentBatch" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView29"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_batch"
-                style="@style/lessImportantHeader"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/TM_switch_tv_batch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CurrentBatch"
-                style="@style/importantHeader"/>
+                <TextView
+                    android:id="@+id/textView27"
+                    style="@style/lessImportantHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/trainee_year" />
+
+                <TextView
+                    android:id="@+id/TM_switch_tv_year"
+                    style="@style/importantHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CurrentYear" />
+            </LinearLayout>
+
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/AddTraineeCard">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/tvBatchesAvailableHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="NewYear" />
+                    android:text="Batches this Year" />
 
-                <Spinner
-                    android:id="@+id/spinner3"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvBatches"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"/>
+
+
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="NewQuarter" />
-
-                <Spinner
-                    android:id="@+id/spinner4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="NewBatch" />
-
-            <Spinner
-                android:id="@+id/spinner5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        </ScrollView>
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 </LinearLayout>
+</layout>

@@ -2,12 +2,11 @@ package com.revature.caliberdroid.ui.batches
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.SearchView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,53 +15,60 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
 import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_batches.view.*
 import java.util.*
 
-class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener {
+
+class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener,
+    SearchView.OnQueryTextListener {
 
     private var _binding: FragmentBatchesBinding? = null
     private val binding
         get() = _binding!!
     private val viewModel: BatchesViewModel by activityViewModels()
+    private var yearsArrayAdapter: ArrayAdapter<Int>? = null
+    private val batches: ArrayList<Batch>? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBatchesBinding.inflate(layoutInflater)
 
-        binding.recyclerviewManageBatches.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerviewManageBatches.adapter = BatchAdapter(requireContext(), ALPHABETICAL_COMPARATOR_BATCHES, this)
-        viewModel.getBatches()
+        _binding = FragmentBatchesBinding.inflate(layoutInflater)
+        viewModel.getValidYears()
         subscribeToViewModel()
+
+        // set up search bar
+        setHasOptionsMenu(true)
+
         binding.tvManageBatchesNoOfBatchesValue.text = binding.root.recyclerview_manage_batches.adapter?.itemCount.toString()
         binding.btnManageBatchCreateBatch.setOnClickListener {
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToCreateBatchFragment(null))
         }
 
-        ArrayAdapter.createFromResource(
-            context!!,
-            R.array.years_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            binding.spinnerManageBatches.adapter = adapter
-        }
-        binding.spinnerManageBatches.onItemSelectedListener = this
-
+        spinnerInit()
+        recyclerViewInit()
 
         return binding.root
     }
 
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+        Log.d("debug", "Menu Inflater")
+        inflator.inflate(R.menu.search_bar, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        yearsArrayAdapter = null
         _binding = null
     }
 
@@ -78,21 +84,87 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToTraineeFragment(batchClicked))
     }
 
+    override fun onDelete(){
+        findNavController().navigate(R.id.manageBatchFragment)
+    }
+
     private fun subscribeToViewModel() {
         viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .replaceAll(it)
                 .commit()
         })
+
+        viewModel.validYears.observe(viewLifecycleOwner, Observer {
+            yearsArrayAdapter?.apply {
+                notifyDataSetChanged()
+                if (it.isNotEmpty()) {
+                    binding.spinnerManageBatches.apply {
+                        if (viewModel.selectedYear == null) {
+                            viewModel.selectedYear = it.max()
+                        }
+                        this.setSelection(it.indexOf(viewModel.selectedYear))
+                    }
+                }
+            }
+        })
+    }
+
+    private fun spinnerInit() {
+        yearsArrayAdapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            viewModel.validYears.value!!
+        )
+        binding.spinnerManageBatches.adapter = yearsArrayAdapter!!
+        binding.spinnerManageBatches.onItemSelectedListener = this
+
+        if (viewModel.selectedYear != null) {
+            binding.spinnerManageBatches.setSelection(
+                yearsArrayAdapter!!.getPosition(
+                    viewModel.selectedYear!!
+                )
+            )
+        }
+    }
+
+    private fun recyclerViewInit() {
+        binding.recyclerviewManageBatches.layoutManager =
+            LinearLayoutManager(context)
+        binding.recyclerviewManageBatches.adapter = BatchAdapter(
+            requireContext(),
+            ALPHABETICAL_COMPARATOR_BATCHES,
+            this
+        )
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val year = binding.spinnerManageBatches.getItemAtPosition(position).toString().toInt()
-        //BatchRepository.getBatchesByYearAndQuarter(year)
+        viewModel.selectedYear = parent?.getItemAtPosition(position) as Int
+    }
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        // filter based on Batch Names and Skill Types
+        viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+            (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
+                .removeAll()
+                .commit()
+            for(i in it){
+                if(
+                    i.trainingName.toLowerCase(Locale.ROOT).contains(newText.toString()) ||
+                    i.skillType!!.toLowerCase(Locale.ROOT).contains(newText.toString()))
+                {
+                    (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit().add(i).commit()
+                }
+            }
+        })
+        return false
     }
 
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.api.APIHandler.context
@@ -58,6 +59,7 @@ class BatchAdapter(
                 builder.setNegativeButton("Yes") { _: DialogInterface?, _: Int ->
                     Snackbar.make(this.itemView,"Batch Deleted Successfully!", Snackbar.LENGTH_SHORT).show()
                     BatchRepository.deleteBatch(this.currentItem)
+                    onItemListener.onDelete()
                 }
 
                 val dialog = builder.create()
@@ -79,30 +81,12 @@ class BatchAdapter(
 
         private fun expandCard() {
 
-            if( binding.tvSubItemBatchRowLocationValue.isVisible ){
-                binding.tvSubItemBatchRowLocationValue.visibility = View.GONE
-                binding.tvBatchRowLocationHeader.visibility = View.GONE
-                binding.tvBatchrowGoodgrade.visibility = View.GONE
-                binding.tvBatchrowGoodgradeValue.visibility = View.GONE
-                binding.tvBatchrowPassinggrade.visibility = View.GONE
-                binding.tvBatchrowPassinggradeValue.visibility = View.GONE
-                binding.tvBatchrowCotrainer.visibility = View.GONE
-                binding.tvBatchrowCotrainerValue.visibility = View.GONE
-                binding.tvBatchRowTrainingtypeValue.visibility = View.GONE
-                binding.tvBatchRowTrainingtypeHeader.visibility = View.GONE
-            }
-
-            else {
-                binding.tvSubItemBatchRowLocationValue.visibility = View.VISIBLE
-                binding.tvBatchRowLocationHeader.visibility = View.VISIBLE
-                binding.tvBatchrowGoodgrade.visibility = View.VISIBLE
-                binding.tvBatchrowGoodgradeValue.visibility = View.VISIBLE
-                binding.tvBatchrowPassinggrade.visibility = View.VISIBLE
-                binding.tvBatchrowPassinggradeValue.visibility = View.VISIBLE
-                binding.tvBatchrowCotrainer.visibility = View.VISIBLE
-                binding.tvBatchrowCotrainerValue.visibility = View.VISIBLE
-                binding.tvBatchRowTrainingtypeValue.visibility = View.VISIBLE
-                binding.tvBatchRowTrainingtypeHeader.visibility = View.VISIBLE
+            if( binding.constraintlayoutBatchrowExpandable.isVisible ){
+                binding.constraintlayoutBatchrowExpandable.visibility = View.GONE
+                binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
+            } else {
+                binding.constraintlayoutBatchrowExpandable.visibility = View.VISIBLE
+                binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
             }
         }
 
@@ -110,6 +94,7 @@ class BatchAdapter(
 
     interface OnItemClickListener {
         fun onBatchClick(batchClicked: Batch, path: Int)
+        fun onDelete()
     }
 
 }

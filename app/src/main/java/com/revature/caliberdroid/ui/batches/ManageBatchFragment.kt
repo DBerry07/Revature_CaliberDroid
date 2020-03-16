@@ -56,10 +56,9 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     }
 
 
-
-    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         Log.d("debug", "Menu Inflater")
-        inflator.inflate(R.menu.search_bar, menu)
+        inflater.inflate(R.menu.search_bar, menu)
 
         val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
         searchView.setOnQueryTextListener(this)

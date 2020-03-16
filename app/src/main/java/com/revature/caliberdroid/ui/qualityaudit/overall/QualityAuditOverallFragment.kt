@@ -40,18 +40,12 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
-        val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
-        binding.overallStatusHandler = statusHandler
-        binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
-
-        binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
 
         viewModel.getSkillCategories(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
-        binding.rvAuditoverallCategories.layoutManager = LinearLayoutManager(requireContext()).apply {
-            orientation = LinearLayoutManager.HORIZONTAL
-        }
-        binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+        initStatusChooser()
+
+        initRecyclerView()
 
         setClickListeners()
 
@@ -65,6 +59,23 @@ class QualityAuditOverallFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initRecyclerView() {
+        binding.rvAuditoverallCategories.layoutManager =
+            LinearLayoutManager(requireContext()).apply {
+                orientation = LinearLayoutManager.HORIZONTAL
+            }
+        binding.rvAuditoverallCategories.adapter =
+            SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+    }
+
+    private fun initStatusChooser() {
+        val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
+        binding.overallStatusHandler = statusHandler
+        binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
+
+        binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
     }
 
     private fun subscribeToViewModel() {
@@ -88,8 +99,8 @@ class QualityAuditOverallFragment : Fragment() {
         binding.btnAuditoverallSave.setOnClickListener {
         }
 
-        binding.imgAuditoverallOverallstatus.setOnClickListener {
-
+        binding.root.setOnClickListener {
+            binding.root.clearFocus()
         }
     }
 

@@ -1,18 +1,25 @@
 package com.revature.caliberdroid.data.api
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainer
+import com.revature.caliberdroid.util.DateConverter
 import org.json.JSONObject
 import timber.log.Timber
 import java.lang.Exception
 
 object BatchAPIHandler {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun addBatch(batch: Batch) {
+        val tempStartDate = DateConverter.getDate(batch._startDate)
+        val tempEndDate = DateConverter.getDate(batch._endDate)
+
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update/"
         Timber.d("Url being sent: $url")
@@ -22,12 +29,11 @@ object BatchAPIHandler {
                         "\"skillType\": \"" + batch.skillType + "\", " +
                         "\"trainer\": \"" + batch.trainerName + "\"," +
                         "\"coTrainer\": \"" + batch.coTrainerName + "\"," +
-                        "\"locationId\": " + batch.locationID + ", " +
-                        "\"startDate\": \"" + batch._startDate + "\", " +
-                        "\"endDate\": \"" + batch._endDate + "\", " +
+                        "\"startDate\": \"" + DateConverter.postDateString(tempStartDate) + "\", " +
+                        "\"endDate\": \"" + DateConverter.postDateString(tempEndDate) + "\", " +
                         "\"goodGrade\": " + batch.goodGrade + ", " +
                         "\"passingGrade\": " + batch.passingGrade + ", " +
-                        "\"location\": \"" + batch.location + "\", "
+                        "\"location\": \"" + batch.location + "\" }"
             )
         Timber.d("Request being sent: ${jsonBody.toString()}")
         val request = JsonObjectRequest(
@@ -48,7 +54,10 @@ object BatchAPIHandler {
         queue.add(request)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun editBatch(batch: Batch) {
+        val tempStartDate = DateConverter.getDate(batch._startDate)
+        val tempEndDate = DateConverter.getDate(batch._endDate)
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update/"
@@ -63,8 +72,8 @@ object BatchAPIHandler {
                     "\"coTrainer\": \"" + batch.coTrainerName + "\"," +
                     "\"locationId\": " + batch.locationID + "," +
                     "\"location\": \"" + batch.location + "\"," +
-                    "\"startDate\": " + batch._startDate + "," +
-                    "\"endDate\": " + batch._endDate + "," +
+                    "\"startDate\": \"" + DateConverter.postDateString(tempStartDate) + "\"," +
+                    "\"endDate\": \"" + DateConverter.postDateString(tempEndDate) + "\"," +
                     "\"goodGrade\": " + batch.goodGrade + "," +
                     "\"passingGrade\": " + batch.passingGrade + "," +
                     "\"weeks\": " + batch.weeks + " }"

@@ -4,6 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="activeCount"
+            type="Integer" />
+        <variable
+            name="staleCount"
+            type="Integer" />
+    </data>
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -28,7 +36,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="@string/title_active_status"
+            android:text="@{@string/title_active_status+` (`+activeCount+`)`}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/settingsHeading"/>
@@ -39,16 +47,23 @@
             android:layout_height="3dp"
             android:background="@color/dividerGray" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvActiveCategories"
-            style="@style/settingsRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:fadeScrollbars="false"
+            android:backgroundTint="#eee">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActiveCategories"
+                style="@style/settingsRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
 
         <TextView
-            android:text="@string/title_stale_status"
+            android:text="@{@string/title_stale_status+` (`+staleCount+`)`}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/settingsHeading"/>
@@ -59,13 +74,20 @@
             android:layout_height="3dp"
             android:background="@color/dividerGray" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvStaleCategories"
-            style="@style/settingsRecyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:fadeScrollbars="false"
+            android:backgroundTint="#eee">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStaleCategories"
+                style="@style/settingsRecyclerView"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </ScrollView>
     </LinearLayout>
 
 </layout>

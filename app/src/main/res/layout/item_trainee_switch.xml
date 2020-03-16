@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="batch"
+            type="com.revature.caliberdroid.data.model.Batch" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="#eee"
+        android:paddingStart="6dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="6dp">
+
+        <TextView
+            android:id="@+id/tvBatchName"
+            style="@style/importantHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{batch.trainingName+` - `+batch.trainerName}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_dark"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

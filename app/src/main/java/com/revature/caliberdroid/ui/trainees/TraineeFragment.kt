@@ -49,6 +49,7 @@ class TraineeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         //Set the selected batch in order to make API call for trainees
         currentBatch = args.BatchSelected
         Timber.d("Selected batch: $currentBatch")

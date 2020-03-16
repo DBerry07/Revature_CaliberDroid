@@ -18,10 +18,12 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.data.repository.CategoryRepository
+import com.revature.caliberdroid.databinding.DialogAddAssessmentBinding
 import com.revature.caliberdroid.databinding.DialogAddCategoriesBinding
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
+import timber.log.Timber
 
-class QualityAuditOverallFragment : Fragment() {
+class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceClickListener {
 
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES: java.util.Comparator<SkillCategory> =
@@ -55,8 +57,58 @@ class QualityAuditOverallFragment : Fragment() {
         }
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
 
+//        viewModel.loadCategories()
+//        viewModel.categories.observe(viewLifecycleOwner, Observer {
+//            binding.mssAuditoverallAddcatagories.setItems(it)
+//        })
+
         binding.btnAuditoverallAddcategories.setOnClickListener(View.OnClickListener {
-            showAddCategoriesDialog(it, inflater)
+
+            val builder = AlertDialog.Builder(requireContext())
+
+
+            viewModel.loadCategories()
+            viewModel.categories.observe(viewLifecycleOwner, Observer {
+                val itemNames = arrayOfNulls<String>(viewModel.categories.value!!.size)
+                val selection = BooleanArray(viewModel.categories.value!!.size)
+                for (i in it.indices) {
+                    itemNames[i] = (it[i].skillCategory)
+                    selection[i] = false
+                }
+
+                builder.setMultiChoiceItems(itemNames, selection, this)
+            })
+
+            builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+
+            })
+            builder.show()
+
+//            val builder = AlertDialog.Builder(it.context)
+//
+//            builder.setTitle(resources.getString(R.string.add_categories))
+//
+//            val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
+//
+//            dialogBinding.rvAddcategoriesdialogCategories.layoutManager = LinearLayoutManager(requireContext())
+//            viewModel.loadCategories()
+//            viewModel.categories.observe(viewLifecycleOwner, Observer {
+//                dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), viewModel.categories.value!!)
+//            })
+//
+//            builder.setView(dialogBinding.root)
+//
+//            builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
+//
+//            })
+//
+//            builder.setNegativeButton(R.string.button_cancel, null)
+//
+//            val dialog = builder.create()
+//
+//            dialog.setContentView(dialogBinding.root)
+//
+//            dialog.show()
         })
 
         setClickListeners()
@@ -98,36 +150,31 @@ class QualityAuditOverallFragment : Fragment() {
     }
 
     private fun showAddCategoriesDialog(view: View, inflater: LayoutInflater) {
-        binding.btnAuditoverallAddcategories.setOnClickListener {
 
-            val builder = AlertDialog.Builder(view!!.context)
+        val builder = AlertDialog.Builder(view.context)
 
-            builder.setTitle(resources.getString(R.string.add_categories))
+        builder.setTitle(resources.getString(R.string.add_categories))
 
-            val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
+        val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
 
-            dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_CATEGORIES)
+//        dialogBinding.rvAddcategoriesdialogCategories.layoutManager = LinearLayoutManager(requireContext())
+//        viewModel.loadCategories()
+//        viewModel.categories.observe(viewLifecycleOwner, Observer {
+//            dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), viewModel.categories.value!!)
+//        })
 
-            var categories = CategoryRepository.getCategories()
+        builder.setView(dialogBinding.root)
 
-            categories.observe(viewLifecycleOwner, Observer {
-                (dialogBinding.rvAddcategoriesdialogCategories.adapter as AddCategoryAdapter).edit()
-                    .replaceAll(it)
-                    .commit()
-            })
+        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
 
-            builder.setView(dialogBinding.root)
+        })
 
-            builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
+        builder.setNegativeButton(R.string.button_cancel, null)
 
-            })
+        val dialog = builder.create()
 
-            builder.setNegativeButton(R.string.button_cancel, null)
+        dialog.show()
 
-            val dialog = builder.create()
-            dialog.show()
-
-        }
     }
 
     class StatusHandler(val context: Context, val binding: FragmentQualityAuditOverallBinding) {
@@ -141,5 +188,9 @@ class QualityAuditOverallFragment : Fragment() {
                     View.VISIBLE
             }
         }
+    }
+
+    override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
+        Timber.d(viewModel.categories.value!![which].skillCategory)
     }
 }

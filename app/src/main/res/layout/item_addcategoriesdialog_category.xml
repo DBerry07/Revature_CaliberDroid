@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="skillCategory"
+            name="category"
             type="com.revature.caliberdroid.data.model.Category" />
 
     </data>
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="@{skillCategory.skillCategory}"
+            android:text="@{category.skillCategory}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

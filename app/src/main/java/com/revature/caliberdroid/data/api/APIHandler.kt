@@ -153,6 +153,10 @@ object APIHandler {
         AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 
+    fun getActiveCategories(categories: MutableLiveData<ArrayList<Category>>) {
+        CategoriesAPI.getActiveCategories(categories)
+    }
+
     fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<WeekLiveData>>, batch: Batch) {
         AuditAPIHandler.getAuditWeekNotes(context, liveData, batch)
     }

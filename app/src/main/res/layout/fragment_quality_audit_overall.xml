@@ -52,6 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_trainees"
+                app:layout_constraintEnd_toStartOf="@+id/btn_auditoverall_addcategories"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_batchinfo">
 
@@ -63,30 +67,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="36dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/button_add_categories"
                 app:icon="@drawable/ic_add"
                 app:iconGravity="end"
                 app:layout_constraintBottom_toBottomOf="@+id/rv_auditoverall_categories"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/rv_auditoverall_categories"
                 app:layout_constraintTop_toTopOf="@+id/rv_auditoverall_categories" />
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/btn_auditoverall_addcategories"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginEnd="36dp"-->
-<!--                android:background="@color/white"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/rv_auditoverall_categories"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/rv_auditoverall_categories"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/rv_auditoverall_categories"-->
-<!--                app:srcCompat="@drawable/create_batch_icon"-->
-<!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/btn_auditoverall_addcategories"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="10dp"-->
+            <!--                android:layout_marginEnd="36dp"-->
+            <!--                android:background="@color/white"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/rv_auditoverall_categories"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.0"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/rv_auditoverall_categories"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/rv_auditoverall_categories"-->
+            <!--                app:srcCompat="@drawable/create_batch_icon"-->
+            <!--                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>-->
 
             <Button
                 android:id="@+id/btn_auditoverall_trainees"

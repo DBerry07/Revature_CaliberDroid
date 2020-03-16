@@ -3,11 +3,16 @@ package com.revature.caliberdroid.data.repository
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 
 object QualityAuditRepository {
+
+    fun getActiveCategories(categories: MutableLiveData<ArrayList<Category>>) {
+        APIHandler.getActiveCategories(categories)
+    }
 
     fun getAuditWeekNotes(
         batch: Batch,

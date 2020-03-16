@@ -30,16 +30,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_assess_batch_trainees_name_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/trainee_name_label" />
+                    android:text="@string/trainee_name_label"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_assess_batch_trainees_name"
+                    style="@style/assessBatchTraineeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{trainee.name}" />
@@ -56,42 +59,48 @@
                 android:id="@+id/recycle_assess_batch_trainees_assessments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none" />
+                android:scrollbars="horizontal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="right"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_assess_batch_trainees_notes_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/trainee_notes_label" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_assess_batch_trainees_notes_label"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/trainee_notes_label" />-->
 
                 <ImageView
                     android:id="@+id/img_assess_batch_trainee_item_notes_saved"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     app:srcCompat="@drawable/ic_saved_note" />
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/et_assess_batch_trainees_note"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_assess_batch_trainees_note"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="@{@string/trainee_notes_dialog_hint(trainee.name)}"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:maxLines="5"
-                android:scrollbars="vertical"
-                android:text="@{traineeNote.noteContent}"
-                android:textSize="14sp" />
+                android:background="@color/white"
+                android:hint="@{@string/trainee_notes_dialog_hint(traineeNote.weekNumber,trainee.name)}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_assess_batch_trainees_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:scrollbars="vertical"
+                    android:text="@{traineeNote.noteContent}"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

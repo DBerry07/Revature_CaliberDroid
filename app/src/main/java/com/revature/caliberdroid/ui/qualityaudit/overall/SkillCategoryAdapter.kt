@@ -2,10 +2,8 @@ package com.revature.caliberdroid.ui.qualityaudit.overall
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
-import com.revature.caliberdroid.data.model.AuditWeekNotes
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.ItemSkillCategoryBinding
 

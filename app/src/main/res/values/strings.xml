@@ -36,6 +36,8 @@
     <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
+    <string name="button_add_categories">Categories</string>
+    <string name="no_categories_message">No categories added</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>
@@ -43,11 +45,13 @@
     <string name="assessment_points_label">Points:</string>
     <string name="assessment_batch_avg_label">Batch Average:</string>
     <string name="grade_format">%.2f%%</string>
+    <string name="trainees_grades_label">Trainee Grades:</string>
 
     <string name="trainee_name_label">Name:</string>
-    <string name="trainee_notes_label">Trainee Notes:</string>
-    <string name="trainee_notes_dialog_hint">Add a note for %s</string>
+    <string name="trainee_notes_label">Trainee Note:</string>
+    <string name="trainee_notes_dialog_hint">Week %d notes for %s</string>
     <string name="trainee_flag_img_description">Flag for a Trainee</string>
+    <string name="trainee_assessment_type_and_points">%s - %d</string>
 
     <string name="title_assessments">Assessments</string>
     <string name="title_trainees">Trainees</string>

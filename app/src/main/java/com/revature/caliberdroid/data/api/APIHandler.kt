@@ -1,6 +1,9 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -73,8 +76,7 @@ object APIHandler {
 
     fun addWeekFromAudit(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
-        val url =
-            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: WeekLiveData
         var auditWeekNotes: AuditWeekNotes
 
@@ -102,8 +104,7 @@ object APIHandler {
 
     fun addWeekFromAssess(batch: Batch, liveData: MutableLiveData<ArrayList<AssessWeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
-        val url =
-            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: AssessWeekLiveData
 
         val addWeekRequest = JsonObjectRequest(
@@ -124,6 +125,10 @@ object APIHandler {
             })
 
         queue.add(addWeekRequest)
+    }
+
+    fun deleteAuditSkillCategories(skillCategories: ArrayList<SkillCategory>, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
+        AuditAPIHandler.deleteAuditSkillCategories(skillCategories, skillCategoryLiveData)
     }
 
     fun getValidYears(liveData: MutableLiveData<List<Int>>) {
@@ -160,15 +165,15 @@ object APIHandler {
         AuditAPIHandler.getTraineesWithNotes(context = context, liveData =  liveData, batch =  batch, weekNumber = weekNumber)
     }
 
+    fun getActiveCategories(categories: MutableLiveData<ArrayList<Category>>) {
+        CategoriesAPI.getActiveCategories(categories)
+    }
+
     fun getAuditWeekNotes(liveData: MutableLiveData<ArrayList<WeekLiveData>>, batch: Batch) {
         AuditAPIHandler.getAuditWeekNotes(context, liveData, batch)
     }
 
-    fun getSkillCategories(
-        liveData: MutableLiveData<List<SkillCategory>>,
-        batch: Batch,
-        weekNumber: Int
-    ) {
+    fun getSkillCategories(liveData: MutableLiveData<ArrayList<SkillCategory>>, batch: Batch, weekNumber: Int) {
         AuditAPIHandler.getSkillCategories(context, liveData, batch, weekNumber)
     }
 
@@ -190,7 +195,7 @@ object APIHandler {
         AuditAPIHandler.putTraineeWithNotes(context, traineeWithNotes)
     }
 
-    fun getTrainees(liveData: MutableLiveData<List<Trainee>>,batchId: Long) {
+    fun getTrainees(liveData: MutableLiveData<List<Trainee>>, batchId: Long) {
         TraineeAPIHandler.getTrainees(liveData, batchId)
     }
 
@@ -227,10 +232,12 @@ object APIHandler {
         TrainersAPI.editTrainer(trainer)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun addBatch(batch: Batch) {
         BatchAPIHandler.addBatch(batch)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun editBatch(batch: Batch) {
         BatchAPIHandler.editBatch(batch)
     }
@@ -253,6 +260,10 @@ object APIHandler {
 
     fun postAssessment(assessment: MutableLiveData<Assessment>) {
         AssessmentAPIHandler.postAssessment(assessment)
+    }
+
+    fun postAuditSkillCategories(categories: ArrayList<Category>, batch: Batch, weekNumber: Int, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
+        AuditAPIHandler.postAuditSkillCategories(categories, batch, weekNumber, skillCategoryLiveData)
     }
 
     fun putAssessBatchOverallNote(note: Note) {

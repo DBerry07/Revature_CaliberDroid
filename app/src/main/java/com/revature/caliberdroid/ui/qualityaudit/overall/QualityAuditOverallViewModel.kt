@@ -18,6 +18,27 @@ class QualityAuditOverallViewModel : ViewModel() {
     lateinit var batch: Batch
     var weekNumber: Int = -1
 
+    fun getActiveCategoryNames(): Array<String?> {
+        val names = arrayOfNulls<String>(categories.value!!.size)
+        for (i in categories.value!!.indices) {
+            names[i] = categories.value!![i].skillCategory
+        }
+        return names
+    }
+
+    fun getCategoryBooleanArray(): BooleanArray {
+        val booleans = BooleanArray(categories.value!!.size)
+        for (i in categories.value!!.indices) {
+            booleans[i] = false
+            for (alreadySelected in skillCategoryLiveData.value!!) {
+                if (categories.value!![i].categoryId == alreadySelected.categoryId) {
+                    booleans[i] = true
+                }
+            }
+        }
+        return booleans
+    }
+
     fun getSkillCategories(batch: Batch, weekNumber: Int) {
         QualityAuditRepository.getSkillCategories(skillCategoryLiveData, batch, weekNumber)
     }

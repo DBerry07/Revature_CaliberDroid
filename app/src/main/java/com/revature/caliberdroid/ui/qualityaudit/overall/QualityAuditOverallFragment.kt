@@ -104,13 +104,8 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(R.string.add_categories)
 
-        val itemNames = arrayOfNulls<String>(viewModel.categories.value!!.size)
-        val selections = BooleanArray(viewModel.categories.value!!.size)
-
-        for (i in viewModel.categories.value!!.indices) {
-            itemNames[i] = (viewModel.categories.value!![i].skillCategory)
-            selections[i] = false
-        }
+        val itemNames = viewModel.getActiveCategoryNames()
+        val selections = viewModel.getCategoryBooleanArray()
 
         builder.setMultiChoiceItems(itemNames, selections, this)
 

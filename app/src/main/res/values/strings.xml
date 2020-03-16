@@ -96,8 +96,8 @@
         <item>ROLE_STAGING</item>
     </string-array>
 
-    <string name="query_hint_settings_location">Search by Location Name</string>
-    <string name="query_hint_settings_trainer">Search by Trainer Name</string>
+    <string name="query_hint_settings_location">Search Location Name</string>
+    <string name="query_hint_settings_trainer">Search Trainer Name</string>
     <!-- END SETTINGS -->
 
     <!-- Manage Batches -->

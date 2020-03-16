@@ -20,13 +20,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             style="@style/settingsHeaderWrapper">
-
-            <SearchView
-                android:id="@+id/searchViewLocations"
-                android:queryHint="@string/query_hint_settings_location"
-                android:iconifiedByDefault="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/btnAddLocation"
                 app:iconGravity="end"

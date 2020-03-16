@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{@string/grade_format(assessWeekModel.assessWeekNotes.batchAverage)}"
+            android:text="@{@string/grade_format(assessWeekModel.assessWeekNotes.calculateBatchAverage())}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_assessweek_batchaveragelabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_assessweek_batchaveragelabel" />

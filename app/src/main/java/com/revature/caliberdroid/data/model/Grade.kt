@@ -2,43 +2,32 @@ package com.revature.caliberdroid.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.databinding.BaseObservable
 
 data class Grade(
-    val gradeId: Long,
-    var dateReceived: String? = "",
-    var score: Int? = 0,
     var assessmentId: Long? = 0,
-    var traineeId: Long? = 0) : Parcelable {
+    var traineeId: Long? = 0) : BaseObservable() {
 
-    constructor(parcel: Parcel) : this(
-        parcel.readLong(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readValue(Long::class.java.classLoader) as? Long
-    ) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeLong(gradeId)
-        parcel.writeString(dateReceived)
-        parcel.writeValue(score)
-        parcel.writeValue(assessmentId)
-        parcel.writeValue(traineeId)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Grade> {
-        override fun createFromParcel(parcel: Parcel): Grade {
-            return Grade(parcel)
+    var gradeId: Long = -1L
+        set(value) {
+            field = value
+            notifyChange()
+        }
+    var dateReceived: String? = ""
+        set(value) {
+            field = value
+            notifyChange()
+        }
+    var score: Int? = 0
+        set(value) {
+            field = value
+            notifyChange()
         }
 
-        override fun newArray(size: Int): Array<Grade?> {
-            return arrayOfNulls(size)
-        }
+    constructor(gradeId: Long,dateReceived: String, score: Int, assessmentId: Long, traineeId: Long): this(assessmentId,traineeId) {
+        this.gradeId = gradeId
+        this.dateReceived = dateReceived
+        this.score = score
     }
 
 }

@@ -45,10 +45,13 @@ object JSONParser {
 
         response.apply {
             auditWeekNotes = AuditWeekNotes(
+                noteId = getLong("noteId"),
                 weekNumber = getInt("week"),
                 overallStatus = getString("technicalStatus"),
                 overallNotes = getString("content"))
         }
+
+
 
         return auditWeekNotes
     }
@@ -108,7 +111,7 @@ object JSONParser {
         return assessmentList
     }
 
-    fun parseGrades(response: JSONArray): List<Grade> {
+    fun parseGrades(response: JSONArray): ArrayList<Grade> {
         val gradeList = ArrayList<Grade>()
 
         var grade: Grade
@@ -125,6 +128,16 @@ object JSONParser {
         }
 
         return gradeList
+    }
+
+    fun parseGrade(grade: JSONObject): Grade {
+        grade.apply {
+            return Grade(getLong("gradeId"),
+            getString("dateReceived"),
+            getInt("score"),
+            getLong("assessmentId"),
+            getLong("traineeId"))
+        }
     }
 
     fun parseNote(note:JSONObject):Note {

@@ -146,4 +146,14 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/red_flag</item>
     </style>
+
+<!--    assess batch styles -->
+    <style name="assessBatchTraineeName">
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@color/grey_dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:paddingStart">5dp</item>
+    </style>
 </resources>

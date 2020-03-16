@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.data.model
 
+import android.os.AsyncTask
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
@@ -12,7 +13,7 @@ data class AssessWeekNotes(var weekNumber: Int,
                            var batch: Batch?
 ) : BaseObservable(), SortedListAdapter.ViewModel {
 
-    var batchAverage: Float = 0f
+    var batchAverage: Float = calculateBatchAverage()
         set(value) {
             field = value
             notifyChange()
@@ -27,7 +28,7 @@ data class AssessWeekNotes(var weekNumber: Int,
             field = value
             notifyChange()
         }
-    var grades: List<Grade> = arrayListOf()
+    var grades: ArrayList<Grade> = arrayListOf()
         set(value) {
             field = value
             notifyChange()
@@ -60,6 +61,60 @@ data class AssessWeekNotes(var weekNumber: Int,
         }
         return false
     }
+
+    fun calculateBatchAverage(): Float {
+        var totalGrades = 0.0
+        var totalAssessmentRawScores = 0.0
+        // the following code calculates the actual average of the grades,
+        // rather than what the website does which is just averaging the assessment averages
+//        var assessmentCounts = HashMap<Long,Int>()
+//        if(grades != null) {
+//            for (grade in grades) {
+//                totalGrades += grade.score!!
+//                if (assessmentCounts.containsKey(grade.assessmentId)) {
+//                    assessmentCounts.set(
+//                        grade.assessmentId!!,
+//                        assessmentCounts.get(grade.assessmentId as Long)!! + 1
+//                    )
+//                } else {
+//                    assessmentCounts.put(grade.assessmentId!!, 1)
+//                }
+//            }
+//            for (assessment in assessments) {
+//                if (assessment.rawScore != null && assessmentCounts.get(assessment.assessmentId)!=null) {
+//                    totalAssessmentRawScores += (assessmentCounts.get(assessment.assessmentId)!! * assessment.rawScore!!)
+//                }
+//            }
+//        }
+//        var batchAvg = (totalGrades/totalAssessmentRawScores*100).round().toFloat()
+
+        //average of the averages
+        var count =0
+        var totalAverage = 0.0
+        if(assessments!=null) {
+            for (assessment in assessments) {
+                totalAverage += getAssessmentAverage(assessment)
+                count++
+            }
+        }
+        var batchAvg = (totalAverage/count).round().toFloat()
+        batchAverage = batchAvg
+        return batchAvg
+    }
+
+    fun getAssessmentAverage(assessment: Assessment): Double {
+        var totalPoints = 0.0
+        var totalPossible = 0.0
+        for(grade in grades) {
+            if(grade.assessmentId==assessment.assessmentId) {
+                totalPoints += grade.score!!
+                totalPossible += assessment.rawScore!!
+            }
+        }
+        return ((totalPoints/totalPossible)*100).round()
+    }
+
+    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 
 }
 

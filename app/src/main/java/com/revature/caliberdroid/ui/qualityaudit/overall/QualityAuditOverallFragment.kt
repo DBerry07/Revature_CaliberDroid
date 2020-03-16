@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -18,14 +18,15 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
+import com.revature.caliberdroid.ui.qualityaudit.StatusHandler
+import com.revature.caliberdroid.util.KeyboardUtil
+import timber.log.Timber
 
 class QualityAuditOverallFragment : Fragment() {
 
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES: java.util.Comparator<SkillCategory> =
             Comparator { a, b -> a.category.compareTo(b.category) }
-        @JvmField val ALPHABETICAL_COMPARATOR_CATEGORIES: java.util.Comparator<Category> =
-            Comparator { a, b -> a.skillCategory.compareTo(b.skillCategory) }
     }
 
     private var _binding: FragmentQualityAuditOverallBinding? = null
@@ -44,7 +45,9 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
-        binding.statusHandler = StatusHandler(requireContext(), binding)
+        val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
+        binding.overallStatusHandler = statusHandler
+        binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
 
         binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
 
@@ -60,6 +63,8 @@ class QualityAuditOverallFragment : Fragment() {
 
         setClickListeners()
 
+        watchOverallNote()
+
         subscribeToViewModel()
 
         return binding.root
@@ -72,7 +77,6 @@ class QualityAuditOverallFragment : Fragment() {
 
     private fun subscribeToViewModel() {
         viewModel.skillCategoryLiveData.observe(viewLifecycleOwner, Observer {
-            binding.tvAuditoverallNocategoriesmessage.visibility = if (it.size == 0) View.VISIBLE else View.GONE
             (binding.rvAuditoverallCategories.adapter as SkillCategoryAdapter).edit()
                 .replaceAll(it)
                 .commit()
@@ -123,17 +127,53 @@ class QualityAuditOverallFragment : Fragment() {
 
     }
 
-    class StatusHandler(val context: Context, val binding: FragmentQualityAuditOverallBinding) {
-        fun onFaceClick(view: View) {
-            Toast.makeText(context, "Face clicked", Toast.LENGTH_SHORT).show()
+    private fun watchOverallNote() {
+        binding.etAuditoverallOverallfeedback.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                KeyboardUtil.hideSoftKeyboard(requireContext(), v)
+                viewModel.putAuditWeekNotes(binding.auditWeekNotes!!)
+            }
+        }
 
-            when (binding.includeAuditoverallStatusChooserLayout.root.visibility) {
-                View.VISIBLE -> binding.includeAuditoverallStatusChooserLayout.root.visibility =
-                    View.GONE
-                else -> binding.includeAuditoverallStatusChooserLayout.root.visibility =
-                    View.VISIBLE
+        binding.etAuditoverallOverallfeedback.addTextChangedListener {
+            if (binding.auditWeekNotes!!.overallNotes != it.toString()) {
+                binding.auditWeekNotes!!.overallNotes = it.toString()
+                viewModel.startDelayedSaveThread(
+                    binding.auditWeekNotes!!,
+                    viewModel::putAuditWeekNotes
+                )
             }
         }
     }
 
+    class OverallStatusHandler(
+        val context: Context,
+        val binding: FragmentQualityAuditOverallBinding,
+        val viewModel: QualityAuditOverallViewModel
+    ) : StatusHandler {
+        override fun onStatusClick(view: View) {
+            binding.includeAuditoverallStatusChooserLayout.root.visibility =
+                when (binding.includeAuditoverallStatusChooserLayout.root.visibility) {
+                    View.VISIBLE -> View.GONE
+                    else -> View.VISIBLE
+            }
+        }
+
+        override fun onStatusChoiceClick(view: View) {
+            Timber.d("$view clicked")
+            val previous = binding.auditWeekNotes!!.overallStatus
+
+            binding.auditWeekNotes!!.overallStatus = when (view.id) {
+                R.id.img_chooserstatus_undefined -> "Undefined"
+                R.id.img_chooserstatus_poor -> "Poor"
+                R.id.img_chooserstatus_average -> "Average"
+                R.id.img_chooserstatus_good -> "Good"
+                else -> "Superstar"
+            }
+            if (previous != binding.auditWeekNotes!!.overallStatus) {
+                viewModel.putAuditWeekNotes(binding.auditWeekNotes!!)
+            }
+            binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
+        }
+    }
 }

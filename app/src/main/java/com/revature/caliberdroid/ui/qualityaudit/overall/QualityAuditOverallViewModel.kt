@@ -14,6 +14,7 @@ class QualityAuditOverallViewModel : ViewModel() {
     var categories: MutableLiveData<ArrayList<Category>> = MutableLiveData(arrayListOf())
     lateinit var batch: Batch
     var weekNumber: Int = -1
+    var saveAuditWeekNotesThread: Thread? = null
 
     fun getActiveCategoryNames(): Array<String?> {
         val names = arrayOfNulls<String>(categories.value!!.size)
@@ -107,6 +108,63 @@ class QualityAuditOverallViewModel : ViewModel() {
 
         QualityAuditRepository.removeAuditSkillCategories(toDelete, skillCategoryLiveData)
 
+    }
+
+    fun putAuditWeekNotes(auditWeekNotes: AuditWeekNotes) {
+        saveAuditWeekNotesThread?.interrupt()
+        Timber.d("Saving Audit Week Note")
+        QualityAuditRepository.putAuditWeekNotes(auditWeekNotes)
+    }
+
+    fun startDelayedSaveThread(
+        auditWeekNotes: AuditWeekNotes,
+        saveFunction: (auditWeekNotes: AuditWeekNotes) -> Unit
+    ) {
+
+        if (saveAuditWeekNotesThread == null) saveAuditWeekNotesThread =
+            getNewDelayedSaveThread(auditWeekNotes, saveFunction)
+
+        when (saveAuditWeekNotesThread!!.state) {
+
+            Thread.State.NEW -> {
+                Timber.d("new thread")
+                saveAuditWeekNotesThread!!.start()
+            }
+
+            Thread.State.TERMINATED -> {
+                Timber.d("finished")
+                saveAuditWeekNotesThread = getNewDelayedSaveThread(auditWeekNotes, saveFunction)
+                saveAuditWeekNotesThread!!.start()
+            }
+
+            else -> {
+                Timber.d("running")
+                saveAuditWeekNotesThread!!.interrupt()
+                saveAuditWeekNotesThread = getNewDelayedSaveThread(auditWeekNotes, saveFunction)
+                saveAuditWeekNotesThread!!.start()
+            }
+        }
+    }
+
+    fun getNewDelayedSaveThread(
+        auditWeekNotes: AuditWeekNotes,
+        save: (auditWeekNotes: AuditWeekNotes) -> Unit
+    ): Thread {
+
+        val t: Thread = object : Thread() {
+            override fun run() {
+                super.run()
+
+                try {
+                    sleep(5000)
+                    save(auditWeekNotes)
+                } catch (e: InterruptedException) {
+                    Timber.d("stopped thread")
+                    return
+                }
+            }
+        }
+        return t
     }
 
 }

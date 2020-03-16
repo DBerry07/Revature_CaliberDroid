@@ -35,7 +35,8 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 holder.bind(trainee,
                     getNoteForTrainee(trainee.traineeId),
                     getGradesForTrainee(trainee.traineeId),
-                    assessWeekViewModel.assessWeekNotes.assessments)
+                    assessWeekViewModel.assessWeekNotes.assessments,
+                    assessWeekViewModel)
             }
         }
     }
@@ -77,9 +78,9 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
     ): RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(trainee:Trainee,note:Note,grades:List<Grade>,assessments:List<Assessment>) {
-            var mAdapter = TraineeAssessmentsRecycleAdapter(grades, assessments,trainee.traineeId,context)
-            var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context)
+        fun bind(trainee:Trainee, note: Note, grades: List<Grade>, assessments: List<Assessment>, assessWeekViewModel: AssessWeekViewModel) {
+            var mAdapter = TraineeAssessmentsRecycleAdapter(grades, assessments,trainee.traineeId,context,assessWeekViewModel)
+            var linearLayoutManager:RecyclerView.LayoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
             binding.recycleAssessBatchTraineesAssessments.layoutManager = linearLayoutManager
             binding.recycleAssessBatchTraineesAssessments.adapter = mAdapter
             binding.trainee = trainee
@@ -90,6 +91,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
                 if(!hasFocus && !oldText.equals(v.et_assess_batch_trainees_note.text.toString())){
                     Timber.d("putting note"+(binding.traineeNote as Note).toString())
                     assessWeekViewModel.saveTraineeNote(binding.traineeNote as Note)
+                    binding.imgAssessBatchTraineeItemNotesSaved.visibility = View.VISIBLE
                 } else {
                     oldText = v.et_assess_batch_trainees_note.text.toString()
                 }
@@ -104,6 +106,7 @@ class AssessBatchTraineeRecyclerAdapter(var context: Context?,var assessWeekView
 
                 override fun onTextChanged(s: CharSequence, start: Int,
                                            before: Int, count: Int) {
+                    binding.imgAssessBatchTraineeItemNotesSaved.visibility = View.INVISIBLE
                     (binding.traineeNote as Note).noteContent = binding.etAssessBatchTraineesNote.text.toString()
                     assessWeekViewModel.startDelayedSaveThread(binding.traineeNote as Note, assessWeekViewModel::saveTraineeNote)
                 }

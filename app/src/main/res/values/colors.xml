@@ -6,7 +6,7 @@
     <color name="Revature_Orange">#F26925</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="light_grey">#D3D3D3</color>
+    <color name="almost_white">#EFEFEF</color>
 
 <!--  Quality Audit  -->
     <color name="green_flag">@android:color/holo_green_dark</color>

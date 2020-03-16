@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.api.GradeAPIHandler
@@ -51,20 +52,31 @@ class TraineeAssessmentsRecycleAdapter(
 
             //save grade on focus change
             binding.etAssessmentTraineeGradesRowGrade.onFocusChangeListener = View.OnFocusChangeListener{v, hasFocus ->
-                if(!hasFocus && Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())!=oldScore){
-                    grade.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
-                    Timber.d(grade.toString())
-                    if(grade.gradeId < 1 ) {
-                        assessWeekViewModel.assessWeekNotes.grades.add(grade)
+                if(!hasFocus){
+                    if(binding.etAssessmentTraineeGradesRowGrade.text.toString().matches("[0-9]+".toRegex()) &&
+                        Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString()) <= assessment.rawScore!!) {
+                        if(Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString()) != oldScore) {
+
+                            grade.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
+                            Timber.d(grade.toString())
+                            if (grade.gradeId < 1) {
+                                assessWeekViewModel.assessWeekNotes.grades.add(grade)
+                            }
+                            GradeAPIHandler.putGrade(grade)
+                            binding.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
+                            assessmentFragmentBinding.average =
+                                assessWeekViewModel.getAssessmentAverage(assessment).toFloat()
+                            Timber.d("putting grade")
+                        }
+                    } else {
+                        binding.score = oldScore
+                        grade.score = oldScore
+                        Toast.makeText(binding.root.context,"Invalid Grade",Toast.LENGTH_SHORT)
+                        Timber.d("invalid grade")
                     }
-                    GradeAPIHandler.putGrade(grade)
-                    binding.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
-                    assessmentFragmentBinding.average=assessWeekViewModel.getAssessmentAverage(assessment).toFloat()
-                    Timber.d("putting grade")
                 } else {
-                    if(!binding.etAssessmentTraineeGradesRowGrade.text.toString().equals("")) {
-                        oldScore =
-                            Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
+                    if(!binding.etAssessmentTraineeGradesRowGrade.text.toString().matches("[0-9]+".toRegex())) {
+                        oldScore = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
                     }
                 }
             }

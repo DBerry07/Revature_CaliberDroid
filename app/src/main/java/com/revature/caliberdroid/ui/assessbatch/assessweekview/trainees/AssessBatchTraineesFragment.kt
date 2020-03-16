@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -17,6 +18,8 @@ import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.trainees.TraineeAssessmentsRecycleAdapter
 import com.revature.caliberdroid.util.KeyboardUtil
 import timber.log.Timber
+import java.lang.Character.toLowerCase
+import java.util.*
 
 class AssessBatchTraineesFragment : Fragment() {
 
@@ -37,6 +40,8 @@ class AssessBatchTraineesFragment : Fragment() {
     ): View? {
         _binding = FragmentAssessBatchTraineesBinding.inflate(layoutInflater,container,false)
 
+//        // set up search bar
+//        setHasOptionsMenu(true)
 
         binding.assessWeekModel=assessWeekViewModel
 
@@ -74,7 +79,27 @@ class AssessBatchTraineesFragment : Fragment() {
         })
     }
 
-    override fun onDestroyView() {
+//    override fun onQueryTextSubmit(query: String?): Boolean {
+//        return false
+//    }
+//
+//    override fun onQueryTextChange(newText: String?): Boolean {
+//        // filter based on Batch Names and Skill Types
+//        assessWeekViewModel.trainees.observe(viewLifecycleOwner, Observer {
+//            it.
+//            for(i in it){
+//                if(
+//                    i.name!!.toLowerCase(Locale.ROOT).contains(newText!!.toString(),true))
+//                {
+//                    (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).edit().add(i).commit()
+//                }
+//          }
+//      })
+//      return false
+//  }
+
+
+override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

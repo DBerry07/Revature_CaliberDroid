@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.api.GradeAPIHandler
@@ -67,16 +68,28 @@ class TraineeAssessmentsRecycleAdapter(var grades: List<Grade>, var assessments:
 
             var oldGrade = grade.score!!
             binding.tvTraineeAssessmentItemGrade.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                if(!hasFocus && Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())!=oldGrade){
-                    (binding.grade as Grade).score = Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
-                    Timber.d(grade.toString())
-                    if((binding.grade as Grade).gradeId < 1 ) {
-                        assessWeekViewModel.assessWeekNotes.grades.add((binding.grade as Grade))
+                if(!hasFocus){
+                    if(binding.tvTraineeAssessmentItemGrade.text.toString().matches("[0-9]+".toRegex()) &&
+                        Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString()) <= assessment.rawScore!!) {
+
+                        if(Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString()) != oldGrade) {
+                            (binding.grade as Grade).score =
+                                Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
+                            Timber.d(grade.toString())
+                            if ((binding.grade as Grade).gradeId < 1) {
+                                assessWeekViewModel.assessWeekNotes.grades.add((binding.grade as Grade))
+                            }
+                            GradeAPIHandler.putGrade(binding.grade as Grade)
+                            Timber.d("putting grade")
+                        }
+                    } else {
+                        grade.score = oldGrade
+                        Timber.d("invalid grade")
                     }
-                    GradeAPIHandler.putGrade(binding.grade as Grade)
-                    Timber.d("putting grade")
                 } else {
-                    oldGrade = Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
+                    if(binding.tvTraineeAssessmentItemGrade.text.toString().matches("[0-9]+".toRegex())) {
+                            oldGrade = Integer.valueOf(binding.tvTraineeAssessmentItemGrade.text.toString())
+                    }
                 }
             }
 

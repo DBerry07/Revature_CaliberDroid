@@ -1,13 +1,10 @@
 package com.revature.caliberdroid.ui.batches
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -31,7 +28,6 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     private var yearsArrayAdapter: ArrayAdapter<Int>? = null
     private val batches: ArrayList<Batch>? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -155,7 +151,7 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .removeAll()
                 .commit()
-            var count: Int = 0
+            var count = 0
             for(i in it){
                 if(
                     i.trainingName.toLowerCase(Locale.ROOT).contains(newText.toString()) ||

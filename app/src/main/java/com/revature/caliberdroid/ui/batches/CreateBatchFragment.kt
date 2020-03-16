@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -51,7 +50,6 @@ class CreateBatchFragment : Fragment() {
     private var locationsFromAPI = ArrayList<String>()
     private var trainersFromAPI = ArrayList<String>()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -139,7 +137,6 @@ class CreateBatchFragment : Fragment() {
         return result
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createBatch() {
         // creating an empty batch that will be filled with data from the edit text views
         batch = Batch(
@@ -162,7 +159,6 @@ class CreateBatchFragment : Fragment() {
         findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateBatch() {
         setBatchValues()
         BatchRepository.editBatch(batch!!)
@@ -171,7 +167,6 @@ class CreateBatchFragment : Fragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
         batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()

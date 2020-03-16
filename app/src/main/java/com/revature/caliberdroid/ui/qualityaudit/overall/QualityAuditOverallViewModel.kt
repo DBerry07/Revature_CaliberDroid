@@ -1,13 +1,10 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
-import com.revature.caliberdroid.data.repository.BatchRepository
-import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.data.repository.QualityAuditRepository
 import timber.log.Timber
 
@@ -61,11 +58,9 @@ class QualityAuditOverallViewModel : ViewModel() {
                 for (i in skillCategoryLiveData.value!!.indices) {
                     val alreadyAdded = skillCategoryLiveData.value!![i]
                     if (category.categoryId == alreadyAdded.categoryId) {
-                        Timber.d(category.skillCategory + " already added")
                         break
                     } else if (i == (skillCategoryLiveData.value!!.size - 1)) {
                         toAdd.add(category)
-                        Timber.d("need to add: " + category.skillCategory)
                     }
                 }
             }
@@ -85,10 +80,8 @@ class QualityAuditOverallViewModel : ViewModel() {
             // if not it cannot be deleted this way
             var canBeDeleted = false
 
-            Timber.d("Is " + skillCategory.category + " deletable?")
             for (category in this.categories.value!!) {
                 if (skillCategory.categoryId == category.categoryId) {
-                    Timber.d( skillCategory.category + " can be deleted")
                     canBeDeleted = true
                     break
                 }
@@ -103,11 +96,9 @@ class QualityAuditOverallViewModel : ViewModel() {
                     for (i in categories.indices) {
                         val toBeAdded = categories[i]
                         if (skillCategory.categoryId == toBeAdded.categoryId) {
-                            Timber.d(skillCategory.category + " keeping this one")
                             break
                         } else if (i == (categories.size - 1)) {
                             toDelete.add(skillCategory)
-                            Timber.d("need to delete: " + skillCategory.category)
                         }
                     }
                 }

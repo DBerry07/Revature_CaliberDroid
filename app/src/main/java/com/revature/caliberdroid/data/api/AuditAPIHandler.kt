@@ -32,10 +32,8 @@ object AuditAPIHandler {
             url,
             null,
             Response.Listener {
-                Timber.d("successfully deleted: " + skillCategory.category)
                 val copy = skillCategoryLiveData.value!!.clone() as ArrayList<SkillCategory>
                 copy.remove(skillCategory)
-                skillCategoryLiveData.value!!.clear()
                 skillCategoryLiveData.postValue(copy)
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }

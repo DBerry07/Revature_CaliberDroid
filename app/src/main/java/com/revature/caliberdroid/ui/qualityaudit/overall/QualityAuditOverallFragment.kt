@@ -17,13 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
-import com.revature.caliberdroid.data.repository.CategoryRepository
-import com.revature.caliberdroid.databinding.DialogAddAssessmentBinding
-import com.revature.caliberdroid.databinding.DialogAddCategoriesBinding
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
-import timber.log.Timber
 
-class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceClickListener {
+class QualityAuditOverallFragment : Fragment() {
 
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES: java.util.Comparator<SkillCategory> =
@@ -76,6 +72,7 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
 
     private fun subscribeToViewModel() {
         viewModel.skillCategoryLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvAuditoverallNocategoriesmessage.visibility = if (it.size == 0) View.VISIBLE else View.GONE
             (binding.rvAuditoverallCategories.adapter as SkillCategoryAdapter).edit()
                 .replaceAll(it)
                 .commit()
@@ -107,9 +104,9 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
         val itemNames = viewModel.getActiveCategoryNames()
         val selections = viewModel.getCategoryBooleanArray()
 
-        builder.setMultiChoiceItems(itemNames, selections, this)
+        builder.setMultiChoiceItems(itemNames, selections, DialogInterface.OnMultiChoiceClickListener { _, _, _ ->  })
 
-        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
+        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { _, _ ->
 
             val categoriesToAdd: ArrayList<Category> = arrayListOf()
 
@@ -120,7 +117,7 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
             viewModel.updateAuditCategories(categoriesToAdd)
         })
 
-        builder.setCancelable(false)
+        builder.setNegativeButton(R.string.btn_cancel, DialogInterface.OnClickListener { _, _ ->  })
 
         builder.show()
 
@@ -139,7 +136,4 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
         }
     }
 
-    override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
-        Timber.d(viewModel.categories.value!![which].skillCategory + " " + isChecked.toString())
-    }
 }

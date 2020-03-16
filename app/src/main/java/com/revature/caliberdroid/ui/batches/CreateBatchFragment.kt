@@ -48,9 +48,10 @@ class CreateBatchFragment : Fragment() {
     private lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
     private lateinit var locationAdapter: ArrayAdapter<String>
     private lateinit var trainerAdapter: ArrayAdapter<String>
-    var locationsFromAPI = ArrayList<String>()
-    var trainersFromAPI = ArrayList<String>()
+    private var locationsFromAPI = ArrayList<String>()
+    private var trainersFromAPI = ArrayList<String>()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -161,6 +162,7 @@ class CreateBatchFragment : Fragment() {
         findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun updateBatch() {
         setBatchValues()
         BatchRepository.editBatch(batch!!)
@@ -200,6 +202,10 @@ class CreateBatchFragment : Fragment() {
                 this.locationAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, locationsFromAPI)
                 this.locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spinnerCreatebatchLocation.adapter = locationAdapter
+
+                val spinnerPosition = this.locationAdapter.getPosition(batch?.location)
+                binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
+
             } else {
                 Timber.d("locationsViewModel is null")
             }
@@ -216,6 +222,13 @@ class CreateBatchFragment : Fragment() {
                 this.trainerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spinnerCreatebatchTrainer.adapter = trainerAdapter
                 binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter
+
+                var spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
+                binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
+
+                spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
+                binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
+
             } else {
                 Timber.d("locationsViewModel is null")
             }
@@ -269,20 +282,6 @@ class CreateBatchFragment : Fragment() {
         val spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
 
-        /*   THE ADAPTER AND ARRAY LISTS GET RESET TO NULL AFTER FILLING THE SPINNER
-             FOR SOME REASONS. SO THIS WILL CAUSE AN RUNTIME ERROR
-
-        spinnerPosition = this.locationAdapter.getPosition(batch?.location)
-        binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
-
-        spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
-        binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
-
-        spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
-        binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
-
-         */
-
-}
+    }
 
 }

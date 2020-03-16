@@ -75,7 +75,7 @@ class TraineeAssessmentsRecycleAdapter(
                         Timber.d("invalid grade")
                     }
                 } else {
-                    if(!binding.etAssessmentTraineeGradesRowGrade.text.toString().matches("[0-9]+".toRegex())) {
+                    if(binding.etAssessmentTraineeGradesRowGrade.text.toString().matches("[0-9]+".toRegex())) {
                         oldScore = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
                     }
                 }

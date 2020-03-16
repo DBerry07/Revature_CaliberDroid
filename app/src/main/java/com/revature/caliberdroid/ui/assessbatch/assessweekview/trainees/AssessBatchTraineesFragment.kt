@@ -90,7 +90,7 @@ class AssessBatchTraineesFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        // filter based on Batch Names and Skill Types
+        // filter based on trainee name
         assessWeekViewModel.trainees.observe(viewLifecycleOwner, Observer {
             (binding.recycleAssessBatchTrainees.adapter as AssessBatchTraineeRecyclerAdapter).edit()
                 .removeAll()

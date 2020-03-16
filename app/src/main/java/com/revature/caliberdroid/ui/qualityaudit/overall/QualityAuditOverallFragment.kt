@@ -77,6 +77,7 @@ class QualityAuditOverallFragment : Fragment() {
 
     private fun subscribeToViewModel() {
         viewModel.skillCategoryLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvAuditoverallNocategoriesmessage.visibility = if (it.size == 0) View.VISIBLE else View.GONE
             (binding.rvAuditoverallCategories.adapter as SkillCategoryAdapter).edit()
                 .replaceAll(it)
                 .commit()

@@ -37,10 +37,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@{@string/batch_with_week(batch.trainerName, batch.skillType, auditWeekNotes.weekNumber)}"
-                app:layout_constraintBottom_toTopOf="@+id/rv_auditoverall_categories"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_addcategories"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,16 +51,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="5dp"
-                android:scrollbars="horizontal"
+                android:layout_marginEnd="4dp"
                 android:fadeScrollbars="false"
                 android:scrollbarSize="1.5dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_trainees"
+                android:scrollbars="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_auditoverall_addcategories"
                 app:layout_constraintEnd_toStartOf="@+id/btn_auditoverall_addcategories"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_auditoverall_batchinfo">
+                app:layout_constraintTop_toTopOf="@+id/btn_auditoverall_addcategories">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -69,13 +68,14 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/btn_add"
                 app:icon="@drawable/ic_add"
                 app:iconGravity="end"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_auditoverall_categories"
+                app:layout_constraintBottom_toTopOf="@+id/btn_auditoverall_trainees"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/rv_auditoverall_categories"
@@ -87,6 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/title_trainees"
                 app:icon="@drawable/ic_arrow_forward"
@@ -201,6 +202,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btn_auditoverall_addcategories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/btn_auditoverall_addcategories" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

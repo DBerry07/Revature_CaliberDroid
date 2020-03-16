@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.managebatches
 
 import android.app.AlertDialog
 import android.content.Context
@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.repository.BatchRepository
-import com.revature.caliberdroid.databinding.BatchRowBinding
+import com.revature.caliberdroid.databinding.ItemManageBatchBinding
 import timber.log.Timber
 import java.util.*
 
@@ -29,10 +28,10 @@ class BatchAdapter(
         parent: ViewGroup,
         viewType: Int
     ): BatchViewHolder {
-        return BatchViewHolder(BatchRowBinding.inflate(inflater, parent, false), onItemListener)
+        return BatchViewHolder(ItemManageBatchBinding.inflate(inflater, parent, false), onItemListener)
     }
 
-    class BatchViewHolder(val binding: BatchRowBinding, private val onItemListener: OnItemClickListener)
+    class BatchViewHolder(val binding: ItemManageBatchBinding, private val onItemListener: OnItemClickListener)
         : SortedListAdapter.ViewHolder<Batch>(binding.root),
         View.OnClickListener {
 

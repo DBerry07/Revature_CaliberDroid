@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.managebatches
 
 import android.os.Bundle
 import android.view.*
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
-import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
+import com.revature.caliberdroid.ui.managebatches.BatchAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_batches.view.*
 import java.util.*
 

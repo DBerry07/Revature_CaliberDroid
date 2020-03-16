@@ -151,4 +151,9 @@
     <string name="manageBatch_noOfBatches">No. of Batches:</string>
     <string name="btn_editBatch_update">Create</string>
     <string name="search">Search</string>
+    <string name="batchrow_trainerheader">Trainer:</string>
+    <string name="batchrow_cotrainerheader">Co-Trainer:</string>
+    <string name="batchrow_goodgrade_header">Good Grade:</string>
+    <string name="batchrow_passinggrade_header">Passing Grade:</string>
+    <string name="batchrow_expand_arrow_description">Expand Arrow</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.ui.trainees
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +24,10 @@ class TraineeViewModel : ViewModel() {
         TraineeRepository.postTrainee(jsonObject)
     }
 
+    fun putTrainee(jsonObject: JSONObject) {
+        TraineeRepository.putTrainee(jsonObject)
+    }
+
     fun getAllBatches(){
         TraineeRepository.getAllBatches(allBatchesLiveData)
     }
@@ -30,6 +35,10 @@ class TraineeViewModel : ViewModel() {
     fun switchTrainee(trainee: Trainee, newBatch: Batch) {
         traineeBeingSwitchedLiveData.value = trainee
         TraineeRepository.switchTrainee(traineeBeingSwitchedLiveData, newBatch)
+    }
+
+    fun deleteTrainee(trainee: Trainee){
+        TraineeRepository.deleteTrainee(trainee)
     }
 
 }

@@ -1,16 +1,21 @@
 package com.revature.caliberdroid.ui.trainees
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
@@ -24,35 +29,37 @@ import timber.log.Timber
  */
 class TraineeFragment : Fragment() {
 
-    var traineeData : ArrayList<HashMap<String, String>> = ArrayList()
-
     private var _binding: FragmentTraineeBinding? = null
     private val binding get() = _binding!!
 
     //Get the argument of select batch from BatchesInfoFragment
     private val args: TraineeFragmentArgs by navArgs()
     private lateinit var currentBatch: Batch
+    private var batchId : Long? = null
 
     private val model: TraineeViewModel by viewModels()
 
     //Moved declaration here because I need access to it outside of observe function
     private lateinit var traineeAdapter: TraineeAdapter
-    private lateinit var myTrainees: List<Trainee>
+    private lateinit var myTrainees: ArrayList<Trainee>
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var traineeLayoutManager : LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         //Set the selected batch in order to make API call for trainees
         currentBatch = args.BatchSelected
         Timber.d("Selected batch: $currentBatch")
 
         _binding = FragmentTraineeBinding.inflate(layoutInflater, container, false)
         val view = binding.root
-        var batchId : Long = currentBatch.batchID
-        model.getTrainees(batchId)
-        var traineeLayoutManager = LinearLayoutManager(view.context)
-        var recyclerView = view.TM_recycler
+        batchId = currentBatch.batchID
+        model.getTrainees(batchId!!)
+        traineeLayoutManager = LinearLayoutManager(view.context)
+        recyclerView = view.TM_recycler
 
         recyclerView.layoutManager = traineeLayoutManager
 
@@ -60,17 +67,8 @@ class TraineeFragment : Fragment() {
         (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         recyclerView.setHasFixedSize(false);
 
-
-
-        model.traineesLiveData.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
-
-            //Sorts trainees by (last) name
-            myTrainees = trainees.sortedBy { trainee: Trainee -> trainee.name }
-
-            traineeAdapter = TraineeAdapter(myTrainees)
-            recyclerView.layoutManager = traineeLayoutManager
-            recyclerView.adapter = traineeAdapter
-        })
+        hideKeyboard()
+        updateTrainees()
 
         val button : Button = view.MB_btn_goto_add_trainee
 
@@ -108,6 +106,28 @@ class TraineeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun hideKeyboard(){
+        val input = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.hideSoftInputFromWindow(activity!!.currentFocus?.windowToken, 0)
+    }
+
+    fun updateTrainees(){
+        model.traineesLiveData.observe(viewLifecycleOwner, Observer<List<Trainee>>{ trainees ->
+
+            //Sorts trainees by (last) name
+            myTrainees = ArrayList(trainees.sortedBy { trainee: Trainee -> trainee.name!!.toUpperCase() })
+
+            traineeAdapter = TraineeAdapter(myTrainees, batchId!!, this)
+            recyclerView.layoutManager = traineeLayoutManager
+            recyclerView.adapter = traineeAdapter
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateTrainees()
     }
 
 }

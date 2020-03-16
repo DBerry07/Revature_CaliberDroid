@@ -53,14 +53,24 @@ object JSONParser {
         return auditWeekNotes
     }
 
-    fun parseSkillCategories(response: JSONArray) : List<SkillCategory> {
+    fun parseSkillCategory(response: JSONObject): SkillCategory {
+        var skillCategory: SkillCategory
+
+        response.apply {
+            skillCategory = SkillCategory(getLong("id"), getLong ("categoryId"), getString("skillCategory"))
+        }
+
+        return skillCategory
+    }
+
+    fun parseSkillCategories(response: JSONArray) : ArrayList<SkillCategory> {
         val categoryList = ArrayList<SkillCategory>()
 
         var skillCategory: SkillCategory
         val length = response.length() - 1
         for (i in 0 .. length) {
             response.getJSONObject(i).apply {
-                skillCategory = SkillCategory(getLong("categoryId"), getString("skillCategory"))
+                skillCategory = SkillCategory(getLong("id"), getLong ("categoryId"), getString("skillCategory"))
             }
 
             categoryList.add(skillCategory)

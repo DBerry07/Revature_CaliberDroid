@@ -44,11 +44,16 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
     ): View? {
         _binding = FragmentQualityAuditOverallBinding.inflate(inflater)
 
+        viewModel.loadCategories()
+
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
         binding.statusHandler = StatusHandler(requireContext(), binding)
 
         binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
+
+        viewModel.batch = args.batchSelected
+        viewModel.weekNumber = args.auditWeekNotesSelected.weekNumber
 
         viewModel.getSkillCategories(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
@@ -56,60 +61,6 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
             orientation = LinearLayoutManager.HORIZONTAL
         }
         binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
-
-//        viewModel.loadCategories()
-//        viewModel.categories.observe(viewLifecycleOwner, Observer {
-//            binding.mssAuditoverallAddcatagories.setItems(it)
-//        })
-
-        binding.btnAuditoverallAddcategories.setOnClickListener(View.OnClickListener {
-
-            val builder = AlertDialog.Builder(requireContext())
-
-
-            viewModel.loadCategories()
-            viewModel.categories.observe(viewLifecycleOwner, Observer {
-                val itemNames = arrayOfNulls<String>(viewModel.categories.value!!.size)
-                val selection = BooleanArray(viewModel.categories.value!!.size)
-                for (i in it.indices) {
-                    itemNames[i] = (it[i].skillCategory)
-                    selection[i] = false
-                }
-
-                builder.setMultiChoiceItems(itemNames, selection, this)
-            })
-
-            builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
-
-            })
-            builder.show()
-
-//            val builder = AlertDialog.Builder(it.context)
-//
-//            builder.setTitle(resources.getString(R.string.add_categories))
-//
-//            val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
-//
-//            dialogBinding.rvAddcategoriesdialogCategories.layoutManager = LinearLayoutManager(requireContext())
-//            viewModel.loadCategories()
-//            viewModel.categories.observe(viewLifecycleOwner, Observer {
-//                dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), viewModel.categories.value!!)
-//            })
-//
-//            builder.setView(dialogBinding.root)
-//
-//            builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
-//
-//            })
-//
-//            builder.setNegativeButton(R.string.button_cancel, null)
-//
-//            val dialog = builder.create()
-//
-//            dialog.setContentView(dialogBinding.root)
-//
-//            dialog.show()
-        })
 
         setClickListeners()
 
@@ -141,39 +92,42 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
             )
         }
 
-        binding.btnAuditoverallSave.setOnClickListener {
-        }
+        binding.btnAuditoverallAddcategories.setOnClickListener { showAddCategoriesDialog() }
 
-        binding.imgAuditoverallOverallstatus.setOnClickListener {
+        binding.btnAuditoverallSave.setOnClickListener { }
 
-        }
+        binding.imgAuditoverallOverallstatus.setOnClickListener { }
     }
 
-    private fun showAddCategoriesDialog(view: View, inflater: LayoutInflater) {
+    private fun showAddCategoriesDialog() {
 
-        val builder = AlertDialog.Builder(view.context)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.add_categories)
 
-        builder.setTitle(resources.getString(R.string.add_categories))
+        val itemNames = arrayOfNulls<String>(viewModel.categories.value!!.size)
+        val selections = BooleanArray(viewModel.categories.value!!.size)
 
-        val dialogBinding = DialogAddCategoriesBinding.inflate(inflater)
+        for (i in viewModel.categories.value!!.indices) {
+            itemNames[i] = (viewModel.categories.value!![i].skillCategory)
+            selections[i] = false
+        }
 
-//        dialogBinding.rvAddcategoriesdialogCategories.layoutManager = LinearLayoutManager(requireContext())
-//        viewModel.loadCategories()
-//        viewModel.categories.observe(viewLifecycleOwner, Observer {
-//            dialogBinding.rvAddcategoriesdialogCategories.adapter = AddCategoryAdapter(requireContext(), viewModel.categories.value!!)
-//        })
-
-        builder.setView(dialogBinding.root)
+        builder.setMultiChoiceItems(itemNames, selections, this)
 
         builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { dialog, which ->
 
+            val categoriesToAdd: ArrayList<Category> = arrayListOf()
+
+            for (i in selections.indices) {
+                if (selections[i]) categoriesToAdd.add(viewModel.categories.value!![i])
+            }
+
+            viewModel.updateAuditCategories(categoriesToAdd)
         })
 
-        builder.setNegativeButton(R.string.button_cancel, null)
+        builder.setCancelable(false)
 
-        val dialog = builder.create()
-
-        dialog.show()
+        builder.show()
 
     }
 
@@ -191,6 +145,6 @@ class QualityAuditOverallFragment : Fragment(), DialogInterface.OnMultiChoiceCli
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
-        Timber.d(viewModel.categories.value!![which].skillCategory)
+        Timber.d(viewModel.categories.value!![which].skillCategory + " " + isChecked.toString())
     }
 }

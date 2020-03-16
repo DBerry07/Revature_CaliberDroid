@@ -2,7 +2,6 @@ package com.revature.caliberdroid.ui.qualityaudit.overall
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -121,9 +120,12 @@ class QualityAuditOverallFragment : Fragment() {
         val itemNames = viewModel.getActiveCategoryNames()
         val selections = viewModel.getCategoryBooleanArray()
 
-        builder.setMultiChoiceItems(itemNames, selections, DialogInterface.OnMultiChoiceClickListener { _, _, _ ->  })
+        builder.setMultiChoiceItems(
+            itemNames,
+            selections
+        ) { _, _, _ -> }
 
-        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { _, _ ->
+        builder.setPositiveButton(R.string.btn_add) { _, _ ->
 
             val categoriesToAdd: ArrayList<Category> = arrayListOf()
 
@@ -132,12 +134,12 @@ class QualityAuditOverallFragment : Fragment() {
             }
 
             viewModel.updateAuditCategories(categoriesToAdd)
-        })
+        }
 
-        builder.setNegativeButton(R.string.btn_cancel, DialogInterface.OnClickListener { _, _ ->  })
+        builder.setNegativeButton(R.string.btn_cancel) { _, _ -> }
 
         builder.show()
-
+    }
 
     private fun watchOverallNote() {
         binding.etAuditoverallOverallfeedback.setOnFocusChangeListener { v, hasFocus ->

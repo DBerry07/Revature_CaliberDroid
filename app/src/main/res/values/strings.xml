@@ -36,6 +36,8 @@
     <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
+    <string name="button_add_categories">Categories</string>
+    <string name="no_categories_message">No categories added</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>

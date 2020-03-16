@@ -1,6 +1,8 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
 import com.revature.caliberdroid.ui.qualityaudit.StatusHandler
@@ -38,6 +41,8 @@ class QualityAuditOverallFragment : Fragment() {
     ): View? {
         _binding = FragmentQualityAuditOverallBinding.inflate(inflater)
 
+        viewModel.loadCategories()
+
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
         val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
@@ -45,6 +50,9 @@ class QualityAuditOverallFragment : Fragment() {
         binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
 
         binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
+
+        viewModel.batch = args.batchSelected
+        viewModel.weekNumber = args.auditWeekNotesSelected.weekNumber
 
         viewModel.getSkillCategories(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
@@ -69,6 +77,7 @@ class QualityAuditOverallFragment : Fragment() {
 
     private fun subscribeToViewModel() {
         viewModel.skillCategoryLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvAuditoverallNocategoriesmessage.visibility = if (it.size == 0) View.VISIBLE else View.GONE
             (binding.rvAuditoverallCategories.adapter as SkillCategoryAdapter).edit()
                 .replaceAll(it)
                 .commit()
@@ -85,12 +94,38 @@ class QualityAuditOverallFragment : Fragment() {
             )
         }
 
-        binding.btnAuditoverallSave.setOnClickListener {
-        }
+        binding.btnAuditoverallAddcategories.setOnClickListener { showAddCategoriesDialog() }
 
-        binding.imgAuditoverallOverallstatus.setOnClickListener {
+        binding.btnAuditoverallSave.setOnClickListener { }
 
-        }
+        binding.imgAuditoverallOverallstatus.setOnClickListener { }
+    }
+
+    private fun showAddCategoriesDialog() {
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.add_categories)
+
+        val itemNames = viewModel.getActiveCategoryNames()
+        val selections = viewModel.getCategoryBooleanArray()
+
+        builder.setMultiChoiceItems(itemNames, selections, DialogInterface.OnMultiChoiceClickListener { _, _, _ ->  })
+
+        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { _, _ ->
+
+            val categoriesToAdd: ArrayList<Category> = arrayListOf()
+
+            for (i in selections.indices) {
+                if (selections[i]) categoriesToAdd.add(viewModel.categories.value!![i])
+            }
+
+            viewModel.updateAuditCategories(categoriesToAdd)
+        })
+
+        builder.setNegativeButton(R.string.btn_cancel, DialogInterface.OnClickListener { _, _ ->  })
+
+        builder.show()
+
     }
 
     private fun watchOverallNote() {

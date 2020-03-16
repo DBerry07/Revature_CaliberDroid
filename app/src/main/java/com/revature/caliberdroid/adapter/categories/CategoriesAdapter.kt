@@ -1,6 +1,7 @@
 package com.revature.caliberdroid.adapter.categories
 
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.revature.caliberdroid.R
@@ -12,6 +13,7 @@ class CategoriesAdapter(val categories: ArrayList<Category>, val editCategoryLis
 
     class CategoriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val tvCategory:TextView = itemView.findViewById(R.id.tvCategory)
+        val imgStatusIcon:ImageView = itemView.findViewById(R.id.imgStatusIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
@@ -26,14 +28,24 @@ class CategoriesAdapter(val categories: ArrayList<Category>, val editCategoryLis
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
         var category: Category = categories.get(position)
         holder.tvCategory.text = category.skillCategory
+        setStatusIcon(category.active, holder.imgStatusIcon)
         //Edit
-        holder.tvCategory.setOnLongClickListener {
+        holder.itemView.setOnLongClickListener {
             editCategoryListener.onEditCategory(category)
             true
         }
         //Toggle
-        holder.tvCategory.setOnClickListener{
+        holder.itemView.setOnClickListener{
             toggleCategoryClickListener.onToggleCategory(category)
+            setStatusIcon(!category.active, holder.imgStatusIcon)
+        }
+    }
+
+    private fun setStatusIcon(categoryStatus: Boolean, imgView: ImageView){
+        if(!categoryStatus){
+            imgView.setImageResource(R.drawable.ic_add_orange)
+        }else{
+            imgView.setImageResource(R.drawable.ic_remove_red)
         }
     }
 }

@@ -45,6 +45,8 @@ class CategoriesFragment : Fragment() {
     ): View? {
         categoriesViewModel.getCategories()
         _binding = FragmentSettingsCategoriesBinding.inflate(layoutInflater)
+        binding.activeCount = 0
+        binding.staleCount = 0
         binding.apply {
             setLifecycleOwner(this@CategoriesFragment)
             categoriesViewModel.categoryLiveData.observe(
@@ -90,7 +92,6 @@ class CategoriesFragment : Fragment() {
                 alertDialog.show()
             }
         }
-
         return binding.root
     }
 
@@ -105,6 +106,8 @@ class CategoriesFragment : Fragment() {
                 inactiveCategories.add(category)
             }
         }
+        binding.activeCount = activeCategories.size
+        binding.staleCount = inactiveCategories.size
     }
 
     private fun sortCategories(categories: ArrayList<Category>): ArrayList<Category>{

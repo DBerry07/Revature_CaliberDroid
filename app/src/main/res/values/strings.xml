@@ -97,6 +97,9 @@
         <item>ROLE_PANEL</item>
         <item>ROLE_STAGING</item>
     </string-array>
+
+    <string name="query_hint_settings_location">Search by Location Name</string>
+    <string name="query_hint_settings_trainer">Search by Trainer Name</string>
     <!-- END SETTINGS -->
 
     <!-- Manage Batches -->
@@ -104,8 +107,8 @@
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>
     <string name="batch_dialog_heading_skill">Skill Focus:</string>
-    <string name="batch_dialog_heading_start_date">Start Date:</string>
-    <string name="batch_dialog_heading_end_date">End Date:</string>
+    <string name="batch_dialog_heading_start_date">Start Date: (mmm dd, yyyy)</string>
+    <string name="batch_dialog_heading_end_date">End Date: (mmm dd, yyyy)</string>
     <string name="batch_dialog_heading_good_grade">Good Grade:</string>
     <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
     <string name="batch_dialog_create_button">Update</string>
@@ -149,4 +152,5 @@
     <string name="createBatch_trainingTypeHeader">Training Type:</string>
     <string name="manageBatch_noOfBatches">No. of Batches:</string>
     <string name="btn_editBatch_update">Create</string>
+    <string name="search">Search</string>
 </resources>

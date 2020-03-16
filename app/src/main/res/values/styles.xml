@@ -26,6 +26,7 @@
         <item name="contentPadding">15dp</item>
     </style>
 
+
     <style name="importantHeader">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
@@ -95,11 +96,14 @@
     </style>
 
     <style name="settingsFieldHeading">
+        <item name="android:padding">10dp</item>
         <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="settingsField">
-        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
     </style>
 
@@ -118,6 +122,10 @@
 
     <style name="settingsDialogFieldEditText">
             <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="settingsMaterialEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_margin">15dp</item>
     </style>
 
     <style name="activeCircle">
@@ -140,6 +148,16 @@
     <style name="deleteIcon">
         <item name="android:gravity">center</item>
         <item name="srcCompat">@drawable/ic_delete_red</item>
+    </style>
+
+
+    <style name="switchTraineeTextView">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="link_text">
+        <item name="android:background">@drawable/link_bottom_border</item>
+        <item name="android:textColor">@color/link_color</item>
     </style>
 
     <style name="warningText">

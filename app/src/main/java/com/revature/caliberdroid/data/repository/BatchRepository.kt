@@ -9,13 +9,11 @@ import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 
 object BatchRepository {
 
-    fun getBatchesByYearAndQuarter(selectedYear: Int): LiveData<List<Batch>> {
-
-        val liveData = MutableLiveData<List<Batch>>()
-
+    fun getBatchesByYear(
+        liveData: MutableLiveData<List<Batch>>,
+        selectedYear: Int
+    ) {
         APIHandler.getBatchesByYear(liveData, selectedYear)
-
-        return liveData
     }
 
     fun getBatchesByYearAndQuarter(

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="training_type_array" tools:ignore="ExtraTranslation">
+        <item>Revature</item>
+        <item>Corporate</item>
+        <item>University</item>
+        <item>Other</item>
+    </string-array>
+</resources>

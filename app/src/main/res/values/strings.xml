@@ -88,7 +88,7 @@
     <string name="btn_add">Add</string>
     <string name="btn_edit">Edit</string>
 
-    <string name="label_dialog_name">Name:</string>
+    <string name="label_dialog_name">Name* </string>
     <string name="title_edit_trainer">Edit Trainer</string>
 
     <string-array name="trainer_tiers">

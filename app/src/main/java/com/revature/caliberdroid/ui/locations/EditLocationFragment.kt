@@ -2,6 +2,7 @@ package com.revature.caliberdroid.ui.locations
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.revature.caliberdroid.R
@@ -103,7 +105,15 @@ class EditLocationFragment : Fragment() {
                     LocationsViewModel.editLocation(location)
 
                     val imgLoadingIcon:ImageView = binding.imgLoadingIcon
-                    val drawable = createLoading(imgLoadingIcon)
+                    //val drawable = createLoading(imgLoadingIcon)
+                    val handler: Handler = Handler()
+                    handler.postDelayed(
+                        Runnable {
+                            Timber.d("Done waiting...")
+                            findNavController().navigateUp()
+                        },
+                        500
+                    )
 
                 } else {
                     Timber.d("Validation of fields failed: "+validationString.toString())

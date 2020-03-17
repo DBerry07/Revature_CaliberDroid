@@ -1,27 +1,21 @@
 package com.revature.caliberdroid.ui.locations
 
-import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Spinner
-import android.widget.TextView
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.revature.caliberdroid.R
-import com.revature.caliberdroid.adapter.SettingsSpinnerItemAdapter
 import com.revature.caliberdroid.adapter.locations.LocationSpinnerAdapter
 import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.data.repository.LocationRepository
-
 import com.revature.caliberdroid.databinding.FragmentSettingsAddLocationBinding
 import com.revature.caliberdroid.util.DialogInvalidInput
 import com.revature.caliberdroid.util.FieldValidator
 import timber.log.Timber
+
 
 class AddLocationFragment : Fragment() {
     private var _binding: FragmentSettingsAddLocationBinding? = null
@@ -90,6 +84,15 @@ class AddLocationFragment : Fragment() {
                     )
                     Timber.d("New location to add: ${locationToCreate.toString()}")
                     LocationsViewModel.addLocation(locationToCreate)
+
+                    val handler: Handler = Handler()
+                    handler.postDelayed(
+                        Runnable {
+                            Timber.d("Done waiting...")
+                            findNavController().navigateUp()
+                        },
+                        500
+                    )
                 } else {
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())

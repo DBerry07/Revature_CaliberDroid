@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAddTraineeBinding
@@ -93,7 +94,7 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("resourceId", if (trainee.resourceId.equals("null")) { null } else { trainee.resourceId })
         jsonObject.put("name", name)
         jsonObject.put("email", binding.traineeEmail.text.toString())
-        jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
+        //jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
         jsonObject.put("batchId", batchID)
         jsonObject.put("phoneNumber", binding.traineePhone.text.toString())
         jsonObject.put("skypeId", binding.traineeSkype.text.toString())
@@ -136,6 +137,11 @@ class EditTraineeFragment : Fragment() {
         }
         if (!checkName(binding.traineeLastName.text.toString())){
             Snackbar.make(view!!, "Please enter a valid last name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (!checkAuto(binding.traineeStatus.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid trainee status.", Snackbar.LENGTH_LONG).show()
             return false
         }
 
@@ -196,6 +202,16 @@ class EditTraineeFragment : Fragment() {
         val phonePattern : Regex = "[0-9]{3}+-[0-9]{3}+-+[0-9]{4}".toRegex()
         if (phone.matches(phonePattern)){
             return true
+        }
+        return false
+    }
+
+    fun checkAuto(autocomplete : String) : Boolean{
+        val array : Array<String> = resources.getStringArray(R.array.TraineeStatus)
+        array.forEach { it ->
+            if (it.equals(autocomplete)){
+                return true
+            }
         }
         return false
     }

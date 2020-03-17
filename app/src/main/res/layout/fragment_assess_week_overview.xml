@@ -48,13 +48,14 @@
 
                     <TextView
                         android:id="@+id/tv_assessweek_batchaveragelabel"
+                        style="@style/globalCardRowLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weekly_batch_average_label" />
 
                     <TextView
                         android:id="@+id/tv_assessweek_batchaverage"
-                        style="@style/littleImportanceHeader"
+                        style="@style/globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"

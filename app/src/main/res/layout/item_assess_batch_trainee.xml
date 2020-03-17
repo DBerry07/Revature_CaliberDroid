@@ -14,12 +14,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_assess_batch_trainee"
+        style="@style/globalCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="vertical"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
         app:contentPadding="5dp">
 
         <LinearLayout
@@ -34,14 +32,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_assess_batch_trainees_name_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/trainee_name_label"
-                    android:visibility="gone" />
-
-                <TextView
                     android:id="@+id/tv_assess_batch_trainees_name"
+                    style="@style/globalCardHeaderText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{trainee.name}" />
@@ -50,6 +42,7 @@
                     android:id="@+id/img_assess_batch_trainee_flag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:contentDescription="@string/trainee_flag_img_description"
                     app:srcCompat="@drawable/ic_default_flag" />
             </LinearLayout>

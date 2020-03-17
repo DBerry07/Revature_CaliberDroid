@@ -13,6 +13,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_item_batch_selection"
+        style="@style/globalCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -22,46 +23,65 @@
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/tv_item_batch_selection_batch_name"
                 style="@style/globalCardHeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@{batch.trainerName}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="5dp"
+                android:text="@{batch.trainerName}" />
 
-            <TextView
-                android:id="@+id/tv_item_batch_selection_batch_skill"
-                style="@style/globalCardRowText"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@{batch.skillType}"
-                app:layout_constraintStart_toStartOf="@+id/tv_item_batch_selection_batch_name"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_batch_selection_batch_name" />
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_item_batch_selection_batch_start_date"
-                style="@style/globalCardRowText"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_item_batch_selection_skill_label"
+                    style="@style/globalCardRowLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/batch_info_heading_skill" />
+
+                <TextView
+                    android:id="@+id/tv_item_batch_selection_batch_skill"
+                    style="@style/globalCardRowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{batch.skillType}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@{batch.startDate}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_item_batch_selection_batch_skill"
-                app:layout_constraintTop_toBottomOf="@+id/tv_item_batch_selection_batch_skill"
-                app:layout_constraintVertical_bias="0.0" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_item_batch_selection_start_label"
+                    style="@style/globalCardRowLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/batch_info_header_start_date" />
+
+                <TextView
+                    android:id="@+id/tv_item_batch_selection_batch_start_date"
+                    style="@style/globalCardRowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{batch.startDate}" />
+            </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

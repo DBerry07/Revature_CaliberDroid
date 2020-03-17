@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="GlobalCardView">
-        <attr name="imgResourceExpandIcon" format="reference"/>
-        <attr name="expandable" format="boolean"/>
-        <attr name="cardHeaderLabel" format="string"/>
-        <attr name="cardHeaderText" format="string"/>
-    </declare-styleable>
 </resources>

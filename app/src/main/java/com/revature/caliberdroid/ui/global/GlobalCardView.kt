@@ -12,35 +12,15 @@ import com.revature.caliberdroid.R
 import timber.log.Timber
 
 class GlobalCardView : LinearLayout {
-    companion object {
-        private val DEFAULT_EXPAND_ICON = R.drawable.ic_expand_arrow
-        private val DEFAULT_EXPANDABLE = false
-    }
 
-    private var imgResourceExpandIcon = DEFAULT_EXPAND_ICON
-    private var expandable = DEFAULT_EXPANDABLE
-
-    private var attrs: AttributeSet? = null
-
-    private lateinit var cardViewContainer:View
-    private lateinit var defaultVisibleRows: LinearLayout
-    private lateinit var expandableView: LinearLayout
-    private lateinit var imgExpandIcon: ImageView
-    private lateinit var tvCardHeaderLabel:TextView
-    private lateinit var tvCardHeaderText:TextView
-
-    private var contentLabelAndTextMap: Map<String,String> = HashMap()
-    private var clickableIconsAndListenersMap: Map<Int, View.OnClickListener> = HashMap()
-
-    //For creating this view programatically
-    constructor(context: Context): super(context){
-
-    }
-
-    //For creating this view in an XML file
+    private  var cardViewContainer:View
+    private  var defaultVisibleRows: LinearLayout
+    private var expandableView: LinearLayout
+    private var imgExpandIcon: ImageView
+    private var tvCardHeaderLabel:TextView
+    private var tvCardHeaderText:TextView
+    
     constructor(context: Context, _attrs: AttributeSet) : super(context, _attrs) {
-        attrs = _attrs
-        setupAttributes(attrs)
     }
 
     init {
@@ -61,31 +41,6 @@ class GlobalCardView : LinearLayout {
         })
     }
 
-    private fun setupAttributes(attrs: AttributeSet?) {
-
-        val typedArray = context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.GlobalCardView,
-            0, 0
-        )
-        expandable = typedArray.getBoolean(
-            R.styleable.GlobalCardView_expandable,
-            DEFAULT_EXPANDABLE
-        )
-        imgResourceExpandIcon = typedArray.getResourceId(
-            R.styleable.GlobalCardView_imgResourceExpandIcon,
-            DEFAULT_EXPAND_ICON
-        )
-
-        val cardHeaderLabel:TextView = findViewById(R.id.tvCardHeaderLabel)
-        cardHeaderLabel.text = typedArray.getText(R.styleable.GlobalCardView_cardHeaderLabel)
-
-        val cardHeaderText:TextView = findViewById(R.id.tvCardHeaderText)
-        cardHeaderText.text = typedArray.getText(R.styleable.GlobalCardView_cardHeaderText)
-
-        typedArray.recycle()
-    }
-
     private fun expandCard() {
         if( expandableView.isVisible ){
             Timber.i("Is Visible")
@@ -97,18 +52,4 @@ class GlobalCardView : LinearLayout {
             imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
         }
     }
-
-    private fun setRightAlignedIcons(_clickableIconsAndListenersMap: Map<Int, View.OnClickListener>){
-        for((key,value) in _clickableIconsAndListenersMap){
-
-        }
-    }
-
-    private fun setRows(_contentLabelAndTextMap: Map<String,String>){
-        for((key,value) in _contentLabelAndTextMap){
-
-        }
-    }
-
-
 }

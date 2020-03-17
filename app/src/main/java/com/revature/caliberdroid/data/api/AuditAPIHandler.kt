@@ -1,8 +1,6 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
-import android.system.Os.remove
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -10,11 +8,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.api.APIHandler.context
-import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
-import com.revature.caliberdroid.data.model.AuditWeekNotes
-import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Category
-import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.AuditParser
 import com.revature.caliberdroid.data.parser.JSONParser
 import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
@@ -234,6 +228,8 @@ object AuditAPIHandler {
                 if (auditWeekNotes.noteId == -1L) {
                     if (it != null) {
                         auditWeekNotes.noteId = it.getLong("noteId")
+                        auditWeekNotes.overallNotes = it.getString("content")
+                        auditWeekNotes.overallStatus = it.getString("technicalStatus")
                     }
                 }
             },

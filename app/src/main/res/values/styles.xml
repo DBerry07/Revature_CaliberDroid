@@ -206,9 +206,18 @@
         <item name="android:layout_marginStart">4dp</item>
     </style>
 
+    <style name="globalCardAlwaysVisible">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="globalCardExpandable">
+        <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
     <style name="globalCardRowWrapper">
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:orientation">vertical</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="globalCardRowLabel">

@@ -38,7 +38,7 @@
 <!--Container of visible rows-->
                 <LinearLayout
                     android:id="@+id/visibleRows"
-                    style="@style/globalCardRowWrapper"
+                    style="@style/globalCardAlwaysVisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
@@ -47,7 +47,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        style="@style/globalCardRowWrapper">
 
                         <TextView
                             android:id="@+id/tvRowLabel"
@@ -68,16 +68,16 @@
 <!--Container of expandable rows-->
                 <LinearLayout
                     android:id="@+id/expandableRows"
-                    style="@style/globalCardRowWrapper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/globalCardExpandable"
                     app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
                     app:layout_constraintTop_toBottomOf="@+id/visibleRows">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        style="@style/globalCardRowWrapper">
 
                         <TextView
                             style="globalCardRowLabel"

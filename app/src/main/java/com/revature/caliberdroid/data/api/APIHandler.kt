@@ -3,6 +3,8 @@ package com.revature.caliberdroid.data.api
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -125,6 +127,10 @@ object APIHandler {
         queue.add(addWeekRequest)
     }
 
+    fun deleteAuditSkillCategory(skillCategory: SkillCategory, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
+        AuditAPIHandler.deleteAuditSkillCategory(skillCategory, skillCategoryLiveData)
+    }
+
     fun deleteAuditSkillCategories(skillCategories: ArrayList<SkillCategory>, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
         AuditAPIHandler.deleteAuditSkillCategories(skillCategories, skillCategoryLiveData)
     }
@@ -189,19 +195,27 @@ object APIHandler {
         NoteAPIHandler.getTraineeNotes(liveData, batchId, weekNumber)
     }
 
-    fun putTraineeWithNotes(traineeWithNotes: AuditTraineeWithNotes) {
-        AuditAPIHandler.putTraineeWithNotes(context, traineeWithNotes)
-    }
-
     fun getTrainees(liveData: MutableLiveData<List<Trainee>>, batchId: Long) {
         TraineeAPIHandler.getTrainees(liveData, batchId)
+    }
+
+    fun putTraineeWithNotes(traineeWithNotes: AuditTraineeWithNotes) {
+        AuditAPIHandler.putTraineeWithNotes(context, traineeWithNotes)
     }
 
     fun postTrainee(jsonObject: JSONObject) {
         TraineeAPIHandler.postTrainee(jsonObject)
     }
 
-    fun putTraineeNote(note: Note) {
+    fun putTrainee(jsonObject: JSONObject) {
+        TraineeAPIHandler.putTrainee(jsonObject)
+    }
+
+    fun deleteTrainee(trainee : Trainee){
+        TraineeAPIHandler.deleteTrainee(trainee)
+    }
+
+    fun putTraineeNote(note:Note) {
         Timber.d(note.toString())
         NoteAPIHandler.putTraineeNote(note)
     }

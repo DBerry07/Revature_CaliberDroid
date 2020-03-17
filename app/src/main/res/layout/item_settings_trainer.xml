@@ -1,87 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.revature.caliberdroid.data.model.Trainer" />
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/globalCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/settingsCard">
+        android:layout_height="wrap_content">
 
-        <!-- WRAPPER -->
+        <!-- LEFT -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/left"
+            style="@style/globalCardConstraintWrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/settingsCardContentWrapper">
+            android:layout_height="wrap_content">
 
-            <!-- LEFT -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/left"
-                android:layout_width="0dp"
+            <!-- Heading -->
+
+            <TextView
+                android:id="@+id/tvTrainerLabel"
+                style="@style/globalCardHeaderLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-                <TextView
-                    android:id="@+id/tvTrainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.name}"
-                    style="@style/settingsHeading"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                android:text="Trainer Name: "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTrainer"
+                style="@style/globalCardHeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTrainerLabel"
+                app:layout_constraintStart_toEndOf="@+id/tvTrainerLabel" />
+
+            <LinearLayout
+                android:id="@+id/visibleRows"
+                style="@style/globalCardAlwaysVisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvTrainerLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvTrainerLabel">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTrainer"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:orientation="vertical">
+                    style="@style/globalCardRowWrapper">
+                    <!--Title-->
+                    <TextView
+                        style="@style/globalCardRowLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title: " />
 
                     <TextView
                         android:id="@+id/tvTitle"
+                        style="globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.title}"/>
+                        android:text="@{model.title}" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Container of expandable rows-->
+            <LinearLayout
+                android:id="@+id/expandableRows"
+                style="@style/globalCardExpandable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/visibleRows"
+                app:layout_constraintTop_toBottomOf="@+id/visibleRows">
+
+                <!--Email-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/globalCardRowWrapper">
+
+                    <TextView
+                        style="globalCardRowLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="E-mail: " />
 
                     <TextView
                         android:id="@+id/tvEmail"
+                        style="globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.email}"/>
+                        android:text="@{model.email}" />
+
+                </LinearLayout>
+
+                <!--Tier-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/globalCardRowWrapper">
+
+                    <TextView
+                        style="globalCardRowLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tier: " />
 
                     <TextView
                         android:id="@+id/tvTier"
+                        style="globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.tier}"/>
+                        android:text="@{model.tier}" />
+
                 </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
             <!-- RIGHT -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/right"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@+id/left"
-                app:layout_constraintBottom_toBottomOf="@+id/left"
-                app:layout_constraintEnd_toEndOf="parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imgEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    style="@style/editIcon"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    app:srcCompat="@drawable/ic_edit_orange" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgExpandIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_expand_arrow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </layout>

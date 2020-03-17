@@ -19,14 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <SearchView
-                android:id="@+id/searchViewTrainers"
-                android:queryHint="@string/query_hint_settings_trainer"
-                android:iconifiedByDefault="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <Button
                 android:id="@+id/btnAddTrainer"
                 app:iconGravity="end"

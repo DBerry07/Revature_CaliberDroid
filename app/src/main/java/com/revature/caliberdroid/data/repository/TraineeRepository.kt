@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.data.repository
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Batch
@@ -18,6 +19,10 @@ object TraineeRepository {
         APIHandler.postTrainee(jsonObject)
     }
 
+    fun putTrainee(jsonObject: JSONObject) {
+        APIHandler.putTrainee(jsonObject)
+    }
+
     //need this to switch trainees between batches
     fun getAllBatches(liveData: MutableLiveData<ArrayList<Batch>>){
         APIHandler.getAllBatches(liveData)
@@ -26,4 +31,9 @@ object TraineeRepository {
     fun switchTrainee(traineeLiveData: MutableLiveData<Trainee>, newBatch: Batch) {
         APIHandler.switchTrainee(traineeLiveData, newBatch)
     }
+
+    fun deleteTrainee(trainee: Trainee){
+        APIHandler.deleteTrainee(trainee)
+    }
+
 }

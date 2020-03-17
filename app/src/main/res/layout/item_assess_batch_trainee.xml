@@ -42,7 +42,6 @@
 
                 <TextView
                     android:id="@+id/tv_assess_batch_trainees_name"
-                    style="@style/assessBatchTraineeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{trainee.name}" />

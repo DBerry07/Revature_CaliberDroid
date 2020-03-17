@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,11 +19,12 @@ import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
 import com.revature.caliberdroid.databinding.FragmentQualityAuditOverallBinding
+import com.revature.caliberdroid.databinding.ItemSkillCategoryBinding
 import com.revature.caliberdroid.ui.qualityaudit.StatusHandler
 import com.revature.caliberdroid.util.KeyboardUtil
 import timber.log.Timber
 
-class QualityAuditOverallFragment : Fragment() {
+class QualityAuditOverallFragment : Fragment(), SkillCategoryAdapter.OnDeleteClickListener {
 
     companion object {
         @JvmField val ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES: java.util.Comparator<SkillCategory> =
@@ -59,7 +61,7 @@ class QualityAuditOverallFragment : Fragment() {
         binding.rvAuditoverallCategories.layoutManager = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
-        binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+        binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES, this)
 
         setClickListeners()
 
@@ -176,5 +178,9 @@ class QualityAuditOverallFragment : Fragment() {
             }
             binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
         }
+    }
+
+    override fun onSkillDeleteClicked(skillCategory: SkillCategory) {
+        viewModel.deleteAuditCategory(skillCategory)
     }
 }

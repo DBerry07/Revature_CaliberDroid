@@ -32,7 +32,7 @@
 
 
             <TextView
-                android:id="@+id/tv_itemaudittrainee_name"
+                android:id="@+id/tv_itemskillcategory_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -46,9 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_itemaudittrainee_name"
-                app:layout_constraintStart_toEndOf="@+id/tv_itemaudittrainee_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_itemaudittrainee_name"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_itemskillcategory_name"
+                app:layout_constraintStart_toEndOf="@+id/tv_itemskillcategory_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_itemskillcategory_name"
                 app:srcCompat="@drawable/ic_default_flag" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -93,7 +93,7 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_itemaudittrainee_name" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_itemskillcategory_name" />
 
             <FrameLayout
                 android:id="@+id/framelayout_itemaudittrainee_status_chooser_container"

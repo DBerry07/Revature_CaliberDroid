@@ -51,6 +51,10 @@ object QualityAuditRepository {
         APIHandler.putTraineeWithNotes(traineeWithNotes)
     }
 
+    fun removeAuditSkillCategory(skillCategory: SkillCategory, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
+        APIHandler.deleteAuditSkillCategory(skillCategory, skillCategoryLiveData)
+    }
+
     fun removeAuditSkillCategories(skillCategories: ArrayList<SkillCategory>, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
         APIHandler.deleteAuditSkillCategories(skillCategories, skillCategoryLiveData)
     }

@@ -87,7 +87,7 @@ class EditTrainerFragment : Fragment() {
 
                     Timber.d("Updated trainer: ${trainer.toString()}")
                     TrainersViewModel.editTrainer(trainer)
-                    
+
                     val handler: Handler = Handler()
                     handler.postDelayed(
                         Runnable {

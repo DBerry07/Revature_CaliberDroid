@@ -167,4 +167,5 @@
     <string name="trainee_recruiter">Recruiter</string>
     <string name="trainee_optional_recruiter">Recruiter (Optional)</string>
     <string name="search">Search</string>
+    <string name="btn_add_trainee">Add Trainee</string>
 </resources>

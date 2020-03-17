@@ -64,8 +64,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="TextView"
-                        android:textAlignment="viewStart" />
+                        android:text="TextView" />
 
                     <ImageView
                         android:id="@+id/TM_iv_arrow"
@@ -415,30 +414,34 @@
                 android:id="@+id/TM_options"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layout_weight="2"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <Button
                     android:id="@+id/TM_btn_delete"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Delete" />
+                    android:text="Delete"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
 
                 <Button
                     android:id="@+id/TM_btn_edit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Edit" />
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="Edit"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
 
                 <Button
                     android:id="@+id/TM_btn_switch"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Switch" />
+                    android:text="Switch"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
             </LinearLayout>
 
         </LinearLayout>

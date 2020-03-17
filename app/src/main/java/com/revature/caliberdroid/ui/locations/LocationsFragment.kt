@@ -1,11 +1,10 @@
 package com.revature.caliberdroid.ui.locations
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.ImageView
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -19,10 +18,11 @@ import com.revature.caliberdroid.adapter.locations.listeners.EditLocationStatusI
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsLocationsBinding
+import kotlinx.android.synthetic.main.fragment_settings_locations.*
 import timber.log.Timber
 
 
-class LocationsFragment : Fragment(){
+class LocationsFragment : Fragment(), SearchView.OnQueryTextListener{
     private var _binding : FragmentSettingsLocationsBinding? = null
     private val binding get() = _binding!!
     private val locationsViewModel: LocationsViewModel by activityViewModels()
@@ -60,20 +60,8 @@ class LocationsFragment : Fragment(){
                 navController?.navigate(R.id.action_locationsFragment_to_addLocationFragment)
             }
 
-            searchViewLocations.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
-                android.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {return false}
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    val filteredLocations: ArrayList<Location> = filterLocations(locationsFromAPI, newText)
-                    binding.locationCount = filteredLocations.size
-                    rvAdapter.replaceAll( filteredLocations )
-                    return true
-                }
-
-            })
         }
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -110,5 +98,24 @@ class LocationsFragment : Fragment(){
             }
         }
         return filteredLocations
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+        inflator.inflate(R.menu.search_bar, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        searchView.queryHint = getString(R.string.query_hint_settings_location)
+        searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        val filteredLocations: ArrayList<Location> = filterLocations(locationsFromAPI, newText)
+        binding.locationCount = filteredLocations.size
+        rvAdapter.replaceAll(filteredLocations)
+        return true
     }
 }

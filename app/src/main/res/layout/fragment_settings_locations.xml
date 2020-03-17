@@ -14,19 +14,18 @@
         android:layout_height="match_parent"
         style="@style/settingsFragmentContentWrapper"
         android:orientation="vertical">
-
+        <com.revature.caliberdroid.ui.global.GlobalCardView
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            app:expandable="false"
+            app:cardHeaderLabel="Set text: "
+            app:cardHeaderText="Text"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             style="@style/settingsHeaderWrapper">
-
-            <SearchView
-                android:id="@+id/searchViewLocations"
-                android:queryHint="@string/query_hint_settings_location"
-                android:iconifiedByDefault="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/btnAddLocation"
                 app:iconGravity="end"

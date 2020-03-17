@@ -2,7 +2,6 @@ package com.revature.caliberdroid.ui.qualityaudit.overall
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,21 +44,15 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.auditWeekNotes = args.auditWeekNotesSelected
         binding.batch = args.batchSelected
-        val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
-        binding.overallStatusHandler = statusHandler
-        binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
-
-        binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
 
         viewModel.batch = args.batchSelected
         viewModel.weekNumber = args.auditWeekNotesSelected.weekNumber
 
         viewModel.getSkillCategories(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
-        binding.rvAuditoverallCategories.layoutManager = LinearLayoutManager(requireContext()).apply {
-            orientation = LinearLayoutManager.HORIZONTAL
-        }
-        binding.rvAuditoverallCategories.adapter = SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+        initStatusChooser()
+
+        initRecyclerView()
 
         setClickListeners()
 
@@ -73,6 +66,23 @@ class QualityAuditOverallFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initRecyclerView() {
+        binding.rvAuditoverallCategories.layoutManager =
+            LinearLayoutManager(requireContext()).apply {
+                orientation = LinearLayoutManager.HORIZONTAL
+            }
+        binding.rvAuditoverallCategories.adapter =
+            SkillCategoryAdapter(requireContext(), ALPHABETICAL_COMPARATOR_SKILL_CATEGORIES)
+    }
+
+    private fun initStatusChooser() {
+        val statusHandler = OverallStatusHandler(requireContext(), binding, viewModel)
+        binding.overallStatusHandler = statusHandler
+        binding.includeAuditoverallStatusChooserLayout.statusHandler = statusHandler
+
+        binding.includeAuditoverallStatusChooserLayout.root.visibility = View.GONE
     }
 
     private fun subscribeToViewModel() {
@@ -98,9 +108,10 @@ class QualityAuditOverallFragment : Fragment() {
 
         binding.btnAuditoverallSave.setOnClickListener { }
 
-        binding.imgAuditoverallOverallstatus.setOnClickListener { }
+        binding.root.setOnClickListener {
+            binding.root.clearFocus()
+        }
     }
-
     private fun showAddCategoriesDialog() {
 
         val builder = AlertDialog.Builder(requireContext())
@@ -109,9 +120,12 @@ class QualityAuditOverallFragment : Fragment() {
         val itemNames = viewModel.getActiveCategoryNames()
         val selections = viewModel.getCategoryBooleanArray()
 
-        builder.setMultiChoiceItems(itemNames, selections, DialogInterface.OnMultiChoiceClickListener { _, _, _ ->  })
+        builder.setMultiChoiceItems(
+            itemNames,
+            selections
+        ) { _, _, _ -> }
 
-        builder.setPositiveButton(R.string.btn_add, DialogInterface.OnClickListener { _, _ ->
+        builder.setPositiveButton(R.string.btn_add) { _, _ ->
 
             val categoriesToAdd: ArrayList<Category> = arrayListOf()
 
@@ -120,12 +134,11 @@ class QualityAuditOverallFragment : Fragment() {
             }
 
             viewModel.updateAuditCategories(categoriesToAdd)
-        })
+        }
 
-        builder.setNegativeButton(R.string.btn_cancel, DialogInterface.OnClickListener { _, _ ->  })
+        builder.setNegativeButton(R.string.btn_cancel) { _, _ -> }
 
         builder.show()
-
     }
 
     private fun watchOverallNote() {

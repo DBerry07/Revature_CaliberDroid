@@ -1,6 +1,8 @@
 package com.revature.caliberdroid.data.api
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,13 +13,12 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.parser.JSONParser
-import com.revature.caliberdroid.data.parser.TrainerParser
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
 import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 import org.json.JSONObject
 import timber.log.Timber
-import java.lang.Exception
+import java.util.*
 
 object APIHandler {
 
@@ -239,10 +240,12 @@ object APIHandler {
         TrainersAPI.editTrainer(trainer)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun addBatch(batch: Batch) {
         BatchAPIHandler.addBatch(batch)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun editBatch(batch: Batch) {
         BatchAPIHandler.editBatch(batch)
     }
@@ -276,8 +279,8 @@ object APIHandler {
     }
 
     fun getAllBatches(liveData: MutableLiveData<ArrayList<Batch>>) {
-        val queue = Volley.newRequestQueue(APIHandler.context)
-        val url: String =
+        val queue = Volley.newRequestQueue(context)
+        val url =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/vp/batch/all/"
         Timber.d("Url being sent: $url")
         val request = JsonArrayRequest(
@@ -289,11 +292,11 @@ object APIHandler {
                 try {
                     liveData.postValue(JSONParser.parseBatches(response) as ArrayList<Batch>)
                 } catch (e: Exception) {
-                    Timber.d("Error resolving liveData: " + e.toString())
+                    Timber.d("Error resolving liveData: $e")
                 }
             },
             Response.ErrorListener { error ->
-                Timber.d("Error getting bactches: " + error.toString())
+                Timber.d("Error getting bactches: $error")
             }
         )
         queue.add(request)
@@ -308,7 +311,7 @@ object APIHandler {
             }
             val url: String =
             "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/user/trainee/switch"
-            val queue = Volley.newRequestQueue(APIHandler.context)
+            val queue = Volley.newRequestQueue(context)
             Timber.d("Url being sent: $url")
             val jsonBody =
                 JSONObject(
@@ -333,7 +336,7 @@ object APIHandler {
                             "\"flagAuthor\": \"" + trainee.flagAuthor + "\", " +
                             "\"flagTimestamp\": \"" + trainee.flagTimestamp + "\"} "
                 )
-            Timber.d("Switch Trainee Request being sent: ${jsonBody.toString()}")
+            Timber.d("Switch Trainee Request being sent: $jsonBody")
             val request = JsonObjectRequest(
                 Request.Method.POST,
                 url,
@@ -343,7 +346,7 @@ object APIHandler {
                     traineeLiveData.postValue( JSONParser.parseSingleTrainee(response) )
                 },
                 Response.ErrorListener { error ->
-                    Timber.e("Error switching trainee: " + error.toString())
+                    Timber.e("Error switching trainee: $error")
                 }
             )
             queue.add(request)

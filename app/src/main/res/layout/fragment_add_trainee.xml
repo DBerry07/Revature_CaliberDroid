@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -57,6 +58,10 @@
             android:paddingStart="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_email"
@@ -263,7 +268,19 @@
                 android:id="@+id/TM_btn_create_trainee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Trainee" />
+                android:hint="@string/trainee_optional_project"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/TM_btn_create_trainee"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/btn_add_trainee" />
 
     </LinearLayout>
 

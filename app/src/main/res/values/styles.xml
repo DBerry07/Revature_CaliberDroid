@@ -166,6 +166,7 @@
 
     <style name="settingsMaterialEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_margin">15dp</item>
+        <item name="android:textSize">@dimen/dialog_text_size</item>
     </style>
 
     <style name="activeCircle">
@@ -267,5 +268,10 @@
     <style name="globalCardRowText">
         <item name="android:textColor">#656565</item>
         <item name="android:layout_marginStart">4dp</item>
+    </style>
+
+    <!-- Dialog Box Styles -->
+    <style name="dialogText">
+        <item name="android:textSize">@dimen/dialog_text_size</item>
     </style>
 </resources>

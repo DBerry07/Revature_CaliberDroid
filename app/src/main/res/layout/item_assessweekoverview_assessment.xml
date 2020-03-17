@@ -17,10 +17,9 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/globalCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardElevation="5dp"
         app:layout_constraintHorizontal_bias="0.5">
 
         <LinearLayout
@@ -37,11 +36,12 @@
 
                 <TextView
                     android:id="@+id/tv_asssesmentsrecycler_typeandskill"
-                    style="@style/importantHeader"
+                    style="@style/globalCardHeaderText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{assessment.assessmentType}"
-                    android:textSize="@dimen/card_title_font_size" />
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@{assessment.assessmentType}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,16 +66,16 @@
 
                 <TextView
                     android:id="@+id/tv_assessmentsrecycler_pointslabel"
+                    style="@style/globalCardRowLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/assessment_points_label" />
 
                 <TextView
                     android:id="@+id/tv_assessmentrecyler_points"
-                    style="@style/littleImportanceHeader"
+                    style="@style/globalCardRowText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="@{Long.toString(assessment.rawScore)}" />
             </LinearLayout>
 
@@ -86,16 +86,16 @@
 
                 <TextView
                     android:id="@+id/tv_assessmentsrecycler_averagelabel"
+                    style="@style/globalCardRowLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/assessment_batch_avg_label" />
 
                 <TextView
                     android:id="@+id/tv_assessmentsrecycler_average"
-                    style="@style/littleImportanceHeader"
+                    style="@style/globalCardRowText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:text="@{@string/grade_format(assessWeekNotes.getAssessmentAverage(assessment))}" />
             </LinearLayout>
 

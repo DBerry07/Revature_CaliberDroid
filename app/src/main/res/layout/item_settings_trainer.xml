@@ -29,7 +29,7 @@
                 style="@style/globalCardHeaderLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trainer Name: "
+                android:text="Name: "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

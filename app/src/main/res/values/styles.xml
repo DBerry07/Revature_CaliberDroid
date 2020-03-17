@@ -19,11 +19,50 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <!--    Theme.AppCompat.Light.DarkActionBar-->
-    <style name="AddTraineeCard" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="cardCornerRadius">0dp</item>
-        <item name="cardElevation">5dp</item>
+    <style name="materialDesignContainer" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:padding">10dp</item>
+        <item name="backgroundColor">@color/grey_dark</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintTextAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="boxStrokeColor">?attr/colorOnSurface</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="cornerSizeTopRight">10dp</item>
+    </style>
+
+    <style name="materialDesignContainerWithHelperText" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:padding">10dp</item>
+        <item name="backgroundColor">@color/grey_dark</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintTextAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="boxStrokeColor">?attr/colorOnSurface</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="cornerSizeTopRight">10dp</item>
+
+        <item name="helperTextEnabled">true</item>
+        <item name="helperTextTextAppearance">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="helperTextTextColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="materialDesignText">
+        <item name="android:text">@string/empty</item>
+        <item name="android:textAppearance">?attr/textAppearanceSubtitle1</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="traineeCard">
+        <item name="cardPreventCornerOverlap">true</item>
         <item name="cardUseCompatPadding">true</item>
-        <item name="contentPadding">15dp</item>
+        <item name="contentPadding">10dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">5dp</item>
     </style>
 
 
@@ -31,6 +70,7 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
     <style name="somewhatImportantHeader">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/black</item>
@@ -83,7 +123,10 @@
     </style>
 
     <style name="settingsHeaderWrapper">
-        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="settingsRecyclerView">
@@ -105,6 +148,10 @@
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+    </style>=
+    <style name="settingsFieldSpinner">
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
 
     <style name="settingsFieldEditText" parent="settingsField">
@@ -126,6 +173,15 @@
 
     <style name="settingsMaterialEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_margin">15dp</item>
+        <item name="android:textSize">@dimen/dialog_text_size</item>
+    </style>
+
+    <style name="settingsLoadingIcon">
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_gravity">right|end</item>
+        <item name="android:layout_marginEnd">13dp</item>
+        <item name="android:layout_marginRight">13dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="activeCircle">
@@ -217,5 +273,10 @@
     <style name="globalCardRowText">
         <item name="android:textColor">#656565</item>
         <item name="android:layout_marginStart">4dp</item>
+    </style>
+
+    <!-- Dialog Box Styles -->
+    <style name="dialogText">
+        <item name="android:textSize">@dimen/dialog_text_size</item>
     </style>
 </resources>

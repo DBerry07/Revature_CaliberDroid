@@ -5,11 +5,14 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAddTraineeBinding
@@ -44,6 +47,16 @@ class EditTraineeFragment : Fragment() {
                     findNavController().navigateUp()
                 }
             }
+
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                context!!,
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.TraineeStatus)
+            )
+            val autoCompleteTextView: AutoCompleteTextView = binding.traineeStatus
+            autoCompleteTextView.threshold = 0
+            autoCompleteTextView.setAdapter(adapter)
+
             binding.traineeFirstName.setText(trainee.name.toString().split(",")[1].trim())
             binding.traineeLastName.setText(trainee.name.toString().split(",")[0].trim())
             binding.traineeCollege.setText(trainee.college)
@@ -67,15 +80,9 @@ class EditTraineeFragment : Fragment() {
             if (!trainee.skypeId.equals("null") && trainee.skypeId != null) {
                 binding.traineeSkype.setText(trainee.skypeId)
             }
-
-            var i = 0
-            while (i < binding.traineeStatus.adapter.count) {
-                if (binding.traineeStatus.adapter.getItem(i).toString().equals(trainee.trainingStatus)) {
-                        binding.traineeStatus.setSelection(i)
-                    }
-                i++
+            if (!trainee.trainingStatus.equals("null") && trainee.trainingStatus != null){
+                binding.traineeStatus.setText(trainee.trainingStatus)
             }
-
 
         }
 
@@ -93,7 +100,7 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("resourceId", if (trainee.resourceId.equals("null")) { null } else { trainee.resourceId })
         jsonObject.put("name", name)
         jsonObject.put("email", binding.traineeEmail.text.toString())
-        jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
+        jsonObject.put("trainingStatus", binding.traineeStatus.text.toString())
         jsonObject.put("batchId", batchID)
         jsonObject.put("phoneNumber", binding.traineePhone.text.toString())
         jsonObject.put("skypeId", binding.traineeSkype.text.toString())
@@ -136,6 +143,11 @@ class EditTraineeFragment : Fragment() {
         }
         if (!checkName(binding.traineeLastName.text.toString())){
             Snackbar.make(view!!, "Please enter a valid last name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (!checkAuto(binding.traineeStatus.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid trainee status.", Snackbar.LENGTH_LONG).show()
             return false
         }
 
@@ -196,6 +208,16 @@ class EditTraineeFragment : Fragment() {
         val phonePattern : Regex = "[0-9]{3}+-[0-9]{3}+-+[0-9]{4}".toRegex()
         if (phone.matches(phonePattern)){
             return true
+        }
+        return false
+    }
+
+    fun checkAuto(autocomplete : String) : Boolean{
+        val array : Array<String> = resources.getStringArray(R.array.TraineeStatus)
+        array.forEach { it ->
+            if (it.equals(autocomplete)){
+                return true
+            }
         }
         return false
     }

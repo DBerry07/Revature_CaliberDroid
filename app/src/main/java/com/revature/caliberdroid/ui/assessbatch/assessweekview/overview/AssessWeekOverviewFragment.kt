@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Assessment
 import com.revature.caliberdroid.data.model.Category
@@ -96,7 +97,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
     private fun showCreateAssessmentDialog(view: View, inflater: LayoutInflater) {
 
-        val builder = AlertDialog.Builder(view.context)
+        val builder = MaterialAlertDialogBuilder(view.context)
 
         builder.setTitle(resources.getString(R.string.dialog_create_assessment))
 

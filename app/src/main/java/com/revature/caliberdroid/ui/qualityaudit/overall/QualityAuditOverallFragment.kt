@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Category
 import com.revature.caliberdroid.data.model.SkillCategory
@@ -115,7 +116,7 @@ class QualityAuditOverallFragment : Fragment(), SkillCategoryAdapter.OnDeleteCli
 
     private fun showAddCategoriesDialog() {
 
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = MaterialAlertDialogBuilder(requireContext())
         builder.setTitle(R.string.add_categories)
 
         val itemNames = viewModel.getActiveCategoryNames()

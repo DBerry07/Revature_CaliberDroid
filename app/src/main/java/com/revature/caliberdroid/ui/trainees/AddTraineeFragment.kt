@@ -1,25 +1,23 @@
 package com.revature.caliberdroid.ui.trainees
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.ListAdapter
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.databinding.FragmentAddTraineeBinding
 import org.json.JSONObject
+import java.util.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -51,6 +49,14 @@ class AddTraineeFragment() : Fragment() {
                 //This method will create problems when user presses the back button
                     //findNavController().navigate(AddTraineeFragmentDirections.actionAddTraineeFragmentToTraineeFragment( currentBatch ))
             }
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                context!!,
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.TraineeStatus)
+            )
+            val autoCompleteTextView: AutoCompleteTextView = binding.traineeStatus
+            autoCompleteTextView.threshold = 0
+            autoCompleteTextView.setAdapter(adapter)
         }
 
         return view
@@ -65,7 +71,7 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("firstName", binding.traineeFirstName.text.toString())
         jsonObject.put("lastName", binding.traineeLastName.text.toString())
         jsonObject.put("email", binding.traineeEmail.text.toString())
-        jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
+        jsonObject.put("trainingStatus", binding.traineeStatus.text.toString())
         jsonObject.put("phoneNumber", binding.traineePhone.text.toString())
         jsonObject.put("skypeId", binding.traineeSkype.text.toString())
         jsonObject.put("profileUrl", binding.traineeProfile.text.toString())
@@ -100,6 +106,11 @@ class AddTraineeFragment() : Fragment() {
         }
         if (!checkName(binding.traineeLastName.text.toString())){
             Snackbar.make(view!!, "Please enter a valid last name.", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        if (!checkAuto(binding.traineeStatus.text.toString())){
+            Snackbar.make(view!!, "Please enter a valid trainee status.", Snackbar.LENGTH_LONG).show()
             return false
         }
 
@@ -160,6 +171,16 @@ class AddTraineeFragment() : Fragment() {
         val phonePattern : Regex = "[0-9]{3}+-[0-9]{3}+-+[0-9]{4}".toRegex()
         if (phone.matches(phonePattern)){
             return true
+        }
+        return false
+    }
+
+    fun checkAuto(autocomplete : String) : Boolean{
+        val array : Array<String> = resources.getStringArray(R.array.TraineeStatus)
+        array.forEach { it ->
+            if (it.equals(autocomplete)){
+                return true
+            }
         }
         return false
     }

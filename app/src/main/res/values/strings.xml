@@ -92,7 +92,7 @@
     <string name="btn_add">Add</string>
     <string name="btn_edit">Edit</string>
 
-    <string name="label_dialog_name">Name:</string>
+    <string name="label_dialog_name">Name* </string>
     <string name="title_edit_trainer">Edit Trainer</string>
 
     <string-array name="trainer_tiers">
@@ -171,4 +171,7 @@
     <string name="trainee_recruiter">Recruiter</string>
     <string name="trainee_optional_recruiter">Recruiter (Optional)</string>
     <string name="search">Search</string>
+    <string name="empty">""</string>
+    <string name="optional">Optional</string>
+    <string name="btn_add_trainee">Add Trainee</string>
 </resources>

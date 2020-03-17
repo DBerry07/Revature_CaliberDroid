@@ -1,7 +1,11 @@
 package com.revature.caliberdroid.adapter.trainers
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import com.revature.caliberdroid.R
@@ -35,6 +39,9 @@ class TrainersAdapter(val editListener: EditTrainerInterface): RecyclerView.Adap
         val trainer: Trainer = sortedList.get(position)
         holder.mBinding.imgEdit.setOnClickListener {
             editListener.onEditTrainer(trainer)
+        }
+        holder.mBinding.left.setOnClickListener {
+            expandCard(holder.mBinding.expandableRows, holder.mBinding.imgExpandIcon)
         }
         holder.bind( sortedList.get(position) )
     }
@@ -71,5 +78,19 @@ class TrainersAdapter(val editListener: EditTrainerInterface): RecyclerView.Adap
         }
         sortedList.addAll(_models)
         sortedList.endBatchedUpdates()
+    }
+
+
+
+    private fun expandCard(expandableView:LinearLayout, imgExpandIcon:ImageView) {
+        if( expandableView.isVisible ){
+            Timber.i("Is Visible")
+            expandableView.visibility = View.GONE
+            imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
+        } else {
+            Timber.i("Not Visible")
+            expandableView.visibility = View.VISIBLE
+            imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
+        }
     }
 }

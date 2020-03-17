@@ -1,21 +1,34 @@
 package com.revature.revaturetraineemanagment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.os.Handler
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.*
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.LayoutInflaterCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.revature.caliberdroid.R
+import com.revature.caliberdroid.data.api.APIHandler
 import com.revature.caliberdroid.data.model.Trainee
+import com.revature.caliberdroid.data.repository.BatchRepository
+import com.revature.caliberdroid.data.repository.TraineeRepository
+import com.revature.caliberdroid.data.repository.TraineeRepository.getTrainees
 import com.revature.caliberdroid.databinding.ItemTraineeBinding
+import com.revature.caliberdroid.ui.trainees.TraineeFragment
 import com.revature.caliberdroid.ui.trainees.TraineeFragmentDirections
+import com.revature.caliberdroid.ui.trainees.TraineeViewModel
 import timber.log.Timber
 
 
-class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
+class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: TraineeFragment): RecyclerView.Adapter<TraineeAdapter.MyViewHolder>() {
 
     var trainees = data
+    var traineeFragment = fragment
+    val batchId = batchID
     lateinit var parent: ViewGroup
     lateinit var pop : PopupWindow
 
@@ -24,7 +37,6 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         _binding = ItemTraineeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        pop = PopupWindow(parent.context)
 
         this.parent = parent
         return MyViewHolder(binding)
@@ -32,17 +44,19 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = trainees.get(position)
-        holder.name.text = item.name
-        holder.email.text = item.email
-        holder.phone.text = item.phoneNumber
-        holder.skype.text = item.skypeId
-        holder.profile.text = item.profileUrl
-        holder.college.text = item.college
-        holder.major.text = item.major
-        holder.recruiter.text = item.recruiterName
-        holder.project.text = item.projectCompletion
-        holder.screener.text = item.techScreenerName
-        holder.status.text = item.trainingStatus
+        holder.name.text = ifNull(item.name)
+        holder.email.text = ifNull(item.email)
+        holder.phone.text = ifNull(item.phoneNumber)
+        holder.skype.text = ifNull(item.skypeId)
+        holder.profile.text = ifNull(item.profileUrl)
+        holder.college.text = ifNull(item.college)
+        holder.major.text = ifNull(item.major)
+        holder.recruiter.text = ifNull(item.recruiterName)
+        holder.project.text = ifNull(item.projectCompletion)
+        holder.screener.text = ifNull(item.techScreenerName)
+        holder.status.text = ifNull(item.trainingStatus)
+        holder.degree.text = ifNull(item.degree)
+        holder.score.text = ifNull(item.techScreenScore.toString())
 
         val mDetectorCompat =
             GestureDetectorCompat(parent.context, MyGestureListener(holder, position, this))
@@ -59,8 +73,27 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         }
 
         holder.btnDelete.setOnClickListener {
-            val pop = PopupWindow()
-            pop.showAtLocation(parent, Gravity.BOTTOM, 10, 10)
+            val builder = AlertDialog.Builder(APIHandler.context)
+            builder.setCancelable(true)
+            builder.setTitle("Are you sure you want to delete ${item.name}?")
+            builder.setPositiveButton("NO") { _: DialogInterface?, _: Int -> }
+            builder.setNegativeButton("Yes") { _: DialogInterface?, _: Int ->
+                Timber.d("Trainee being deleted: $item")
+                TraineeRepository.deleteTrainee(item)
+                Timber.d("# of trainees in list before delete: ${trainees.size}")
+                trainees.removeAt(position)
+                Timber.d("# of trainees in list after delete: ${trainees.size}")
+                notifyItemRemoved(position)
+                Snackbar.make(parent, "Trainee deleted successfully!", Snackbar.LENGTH_LONG).show()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+        holder.btnEdit.setOnClickListener {
+            val navController = Navigation.findNavController(parent)
+            navController.navigate(TraineeFragmentDirections.actionTraineeFragmentToEditTraineeFragment(item, batchId = batchId))
         }
 
         /*holder.button.setOnClickListener (View.OnClickListener {
@@ -81,6 +114,15 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         return trainees.size
     }
 
+    fun ifNull(string: String?) : String{
+        if (string.equals("null") || string == null){
+            return ""
+        }
+        else {
+            return string
+        }
+    }
+
     class MyViewHolder(binding: ItemTraineeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var isExpanded = false
@@ -96,7 +138,17 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         var recruiter : TextView
         var project : TextView
         var screener : TextView
+        var degree: TextView
+        var score: TextView
+
         var details : LinearLayout
+        var buffer: LinearLayout
+        var row1: LinearLayout
+        var row2: LinearLayout
+        var row3: LinearLayout
+        var row4: LinearLayout
+        var row5: LinearLayout
+
         var options : LinearLayout
         var arrow : ImageView
         var btnSwitch : Button
@@ -115,8 +167,16 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
             this.recruiter = binding.TMRecruiter
             this.project = binding.TMProject
             this.screener = binding.TMScreener
+            this.degree = binding.TMDegree
+            this.score = binding.TMScore
             this.arrow = binding.TMIvArrow
             this.details = binding.traineeDetails
+            this.buffer = binding.traineeBuffer
+            this.row1 = binding.traineeDetailsRow1
+            this.row2 = binding.traineeDetailsRow2
+            this.row3 = binding.traineeDetailsRow3
+            this.row4 = binding.traineeDetailsRow4
+            this.row5 = binding.traineeDetailsRow5
             this.options = binding.TMOptions
             this.btnSwitch = binding.TMBtnSwitch
             this.btnDelete = binding.TMBtnDelete
@@ -128,6 +188,7 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
     class MyGestureListener(myHolder: MyViewHolder, myPosition: Int, myAdapter: TraineeAdapter): GestureDetector.OnGestureListener {
 
         val SWIPE_THRESHOLD = 0.5
+        val LOAD_DELAY : Long = 25
 
         val holder = myHolder
         val position = myPosition
@@ -138,13 +199,53 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
 
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
-                holder.details.visibility = View.VISIBLE
+                holder.buffer.visibility = View.VISIBLE
+                Handler().postDelayed( {
+                    holder.details.visibility = View.VISIBLE
+                }, LOAD_DELAY * 1)
+                holder.buffer.visibility = View.VISIBLE
+                Handler().postDelayed( {
+                    holder.row1.visibility=View.VISIBLE
+                }, LOAD_DELAY * 2)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.VISIBLE
+                }, LOAD_DELAY * 3)
+                Handler().postDelayed( {
+                    holder.row3.visibility=View.VISIBLE
+                }, LOAD_DELAY * 4)
+                Handler().postDelayed( {
+                    holder.row4.visibility=View.VISIBLE
+                }, LOAD_DELAY * 5)
+                Handler().postDelayed( {
+                    holder.row5.visibility=View.VISIBLE
+                }, LOAD_DELAY * 6)
+
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
-                holder.details.visibility = View.GONE
+                Handler().postDelayed( {
+                    holder.row5.visibility=View.GONE
+                }, LOAD_DELAY * 1)
+                Handler().postDelayed( {
+                    holder.row4.visibility=View.GONE
+                }, LOAD_DELAY * 2)
+                Handler().postDelayed( {
+                    holder.row3.visibility=View.GONE
+                }, LOAD_DELAY * 3)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.GONE
+                }, LOAD_DELAY * 4)
+                Handler().postDelayed( {
+                    holder.row1.visibility=View.GONE
+                    holder.buffer.visibility=View.GONE
+                    holder.details.visibility = View.GONE
+                }, LOAD_DELAY * 5)
+                Handler().postDelayed( {
+                    holder.buffer.visibility=View.GONE
+                    holder.details.visibility = View.GONE
+                }, LOAD_DELAY * 6)
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)
@@ -191,9 +292,11 @@ class TraineeAdapter(data : List<Trainee>): RecyclerView.Adapter<TraineeAdapter.
         override fun onLongPress(e: MotionEvent?) {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.options.visibility = View.VISIBLE
+                adapter.notifyItemChanged(position)
             }
             else if (!holder.isExpanded && holder.options.visibility == View.VISIBLE){
                 holder.options.visibility = View.GONE
+                adapter.notifyItemChanged(position)
             }
 
 

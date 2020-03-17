@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <androidx.cardview.widget.CardView
+            style="@style/globalCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardViewContainer"
+                style="@style/globalCardConstraintWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+<!-- Heading -->
+                <TextView
+                    android:id="@+id/tvCardHeaderLabel"
+                    style="@style/globalCardHeaderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Label: "
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvCardHeaderText"
+                    style="@style/globalCardHeaderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Text"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvCardHeaderLabel"
+                    app:layout_constraintStart_toEndOf="@+id/tvCardHeaderLabel" />
+
+<!--Container of visible rows-->
+                <LinearLayout
+                    android:id="@+id/visibleRows"
+                    style="@style/globalCardAlwaysVisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCardHeaderText">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/globalCardRowWrapper">
+
+                        <TextView
+                            android:id="@+id/tvRowLabel"
+                            style="globalCardRowLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Label: " />
+
+                        <TextView
+                            android:id="@+id/tvRowText"
+                            style="globalCardRowText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Text" />
+                    </LinearLayout>
+                </LinearLayout>
+
+<!--Container of expandable rows-->
+                <LinearLayout
+                    android:id="@+id/expandableRows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/globalCardExpandable"
+                    app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/visibleRows">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/globalCardRowWrapper">
+
+                        <TextView
+                            style="globalCardRowLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Label: " />
+
+                        <TextView
+                            style="globalCardRowText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Text" />
+
+                    </LinearLayout>
+                </LinearLayout>
+<!-- RIGHT ICONS -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/btn_delete_batch"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="8dp"
+                        app:srcCompat="@drawable/ic_delete_red" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgExpandIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_expand_arrow" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+</merge>

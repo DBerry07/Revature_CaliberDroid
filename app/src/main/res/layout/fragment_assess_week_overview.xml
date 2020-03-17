@@ -17,68 +17,89 @@
         android:layout_height="match_parent"
         tools:context=".ui.assessbatch.assessweekview.overview.AssessWeekOverviewFragment">
 
-        <TextView
-            android:id="@+id/tv_assessweek_batchinfo"
-            android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_assess_batch_overall_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
-            android:textSize="@dimen/banner_font_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_assessweek_batchaveragelabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/weekly_batch_average_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchinfo" />
-
-        <TextView
-            android:id="@+id/tv_assessweek_batchaverage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@{@string/grade_format(assessWeekModel.assessWeekNotes.calculateBatchAverage())}"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_assessweek_batchaveragelabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_assessweek_batchaveragelabel" />
-
-        <TextView
-            android:id="@+id/tv_assessweek_batchnoteslabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/batch_notes_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchaveragelabel" />
-
-        <EditText
-            android:id="@+id/et_assessweek_batchnotes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="@string/batch_notes_hint"
-            android:inputType="textMultiLine"
-            android:text="@{assessWeekModel.assessWeekNotes.batchNote.noteContent}"
+            app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_batchnoteslabel" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_assessweek_batchinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
+                    android:textSize="@dimen/banner_font_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_assessweek_batchaveragelabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weekly_batch_average_label" />
+
+                    <TextView
+                        android:id="@+id/tv_assessweek_batchaverage"
+                        style="@style/littleImportanceHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{@string/grade_format(assessWeekModel.assessWeekNotes.calculateBatchAverage())}" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textinputlayout_assessweek_batchnotes"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/white"
+                    android:hint="@string/batch_notes_label">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_assessweek_batchnotes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:scrollbars="vertical"
+                        android:text="@{assessWeekModel.assessWeekNotes.batchNote.noteContent}"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_assessweek_assessmentssectiontitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:text="@string/title_assessments"
             android:textSize="@dimen/section_title"
             app:layout_constraintEnd_toStartOf="@+id/btn_assessweek_addassessment"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_assessweek_batchnotes" />
+            app:layout_constraintTop_toBottomOf="@+id/card_assess_batch_overall_info" />
 
         <Button
             android:id="@+id/btn_assessweek_addassessment"

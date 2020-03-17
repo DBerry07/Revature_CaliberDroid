@@ -13,12 +13,6 @@
             android:background="@android:color/white"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/settingsHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/title_add_location" />
-
             <include
                 android:id="@+id/inLocationFields"
                 layout="@layout/include_location_fields" />

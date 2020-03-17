@@ -13,12 +13,6 @@
             android:background="@android:color/white"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/settingsHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/title_edit_trainer" />
-
             <include
                 android:id="@+id/inTrainerFields"
                 layout="@layout/include_trainer_fields" />

@@ -135,6 +135,14 @@
         <item name="android:layout_margin">15dp</item>
     </style>
 
+    <style name="settingsLoadingIcon">
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_gravity">right|end</item>
+        <item name="android:layout_marginEnd">13dp</item>
+        <item name="android:layout_marginRight">13dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
     <style name="activeCircle">
         <item name="android:background">@drawable/background_active_status</item>
         <item name="android:gravity">center</item>

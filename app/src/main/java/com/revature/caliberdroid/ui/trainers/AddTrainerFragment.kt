@@ -70,7 +70,6 @@ class AddTrainerFragment : Fragment() {
                     )
                     Timber.d("New trainer: ${trainerToCreate.toString()}")
                     TrainersViewModel.addTrainer(trainerToCreate)
-                    findNavController().navigateUp()
                 }else{
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())

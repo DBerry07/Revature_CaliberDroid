@@ -87,7 +87,6 @@ class EditTrainerFragment : Fragment() {
                     Timber.d("Updated trainer: ${trainer.toString()}")
                     TrainersViewModel.editTrainer(trainer)
 
-                    findNavController().navigateUp()
                 }else{
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())

@@ -1,28 +1,24 @@
 package com.revature.caliberdroid.ui.locations
 
-import android.app.AlertDialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import android.widget.Spinner
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.adapter.locations.LocationSpinnerAdapter
-
 import com.revature.caliberdroid.data.model.Location
-import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.databinding.FragmentSettingsEditLocationBinding
 import com.revature.caliberdroid.util.DialogInvalidInput
 import com.revature.caliberdroid.util.FieldValidator
-import kotlinx.android.synthetic.main.fragment_settings_add_location.*
-import kotlinx.android.synthetic.main.include_location_fields.view.*
-import kotlinx.android.synthetic.main.item_settings_location.*
+import kotlinx.android.synthetic.main.fragment_settings_edit_location.*
 import timber.log.Timber
 
 
@@ -106,7 +102,9 @@ class EditLocationFragment : Fragment() {
                     Timber.d("Updated location: ${location.toString()}")
                     LocationsViewModel.editLocation(location)
 
-                    findNavController().navigateUp()
+                    val imgLoadingIcon:ImageView = binding.imgLoadingIcon
+                    val drawable = createLoading(imgLoadingIcon)
+
                 } else {
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
@@ -119,4 +117,16 @@ class EditLocationFragment : Fragment() {
     }
 
 
+    private fun createLoading(animationView: ImageView): AnimatedVectorDrawableCompat?{
+        val animated = AnimatedVectorDrawableCompat.create(context!!, R.drawable.anim_orange_progress)
+        animated?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+            override fun onAnimationEnd(drawable: Drawable?) {
+                animationView.post { animated.start() }
+            }
+
+        })
+        animationView.setImageDrawable(animated)
+        animated?.start()
+        return animated
+    }
 }

@@ -80,6 +80,7 @@ class CategoriesFragment : Fragment() {
                                 CategoryRepository.addCategory(entry,categoriesViewModel.categoryLiveData)
                             }else{
                                 Timber.d("Category validation failed")
+                                DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                             }
                         }
                     )

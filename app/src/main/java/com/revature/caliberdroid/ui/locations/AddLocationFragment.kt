@@ -90,7 +90,6 @@ class AddLocationFragment : Fragment() {
                     )
                     Timber.d("New location to add: ${locationToCreate.toString()}")
                     LocationsViewModel.addLocation(locationToCreate)
-                    findNavController().navigateUp()
                 } else {
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())

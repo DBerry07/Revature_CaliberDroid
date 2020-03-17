@@ -105,10 +105,10 @@
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>
     <string name="batch_dialog_heading_skill">Skill Focus:</string>
-    <string name="batch_dialog_heading_start_date">Start Date: (mmm dd, yyyy)</string>
-    <string name="batch_dialog_heading_end_date">End Date: (mmm dd, yyyy)</string>
+    <string name="batch_dialog_heading_start_date">Start Date: </string>
+    <string name="batch_dialog_heading_end_date">End Date: </string>
     <string name="batch_dialog_heading_good_grade">Good Grade:</string>
-    <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
+    <string name="batch_dialog_heading_passing_grade">Passing Grade:</string>
     <string name="batch_dialog_create_button">Update</string>
     <string name="batch_dialog_img_description">Dialog Header background color block</string>
     <string name="textview_default">default</string>
@@ -156,4 +156,6 @@
     <string name="batchrow_goodgrade_header">Good Grade:</string>
     <string name="batchrow_passinggrade_header">Passing Grade:</string>
     <string name="batchrow_expand_arrow_description">Expand Arrow</string>
+    <string name="createbatch_cotrainer_header">CoTrainer Name:</string>
+    <string name="dialog_yes">yes</string>
 </resources>

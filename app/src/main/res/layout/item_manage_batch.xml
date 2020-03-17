@@ -40,7 +40,6 @@
                 android:text="@string/batch_row_batch_name_header"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

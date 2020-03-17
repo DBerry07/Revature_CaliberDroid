@@ -164,4 +164,11 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/red_flag</item>
     </style>
+
+    <style name="deleteDialog" parent="Theme.AppCompat.Dialog.Alert">
+
+<!--        <item name="buttonBarPositiveButtonStyle">@style/Widget.AppCompat.Button.ButtonBar.AlertDialog</item>-->
+<!--        <item name="buttonBarNegativeButtonStyle">@style/Widget.AppCompat.Button.ButtonBar.AlertDialog</item>-->
+    </style>
+
 </resources>

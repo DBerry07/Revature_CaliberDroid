@@ -11,7 +11,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:text="@string/btn_manage_batch_create_batch"
         app:icon="@drawable/ic_add"
@@ -23,6 +23,7 @@
         android:id="@+id/frameLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,16 +33,19 @@
             android:id="@+id/recyclerview_manage_batches"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="12dp" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/manage_batches_number_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/manageBatch_noOfBatches"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_manageBatches" />
 
     <TextView
         android:id="@+id/tv_manage_batches_no_of_batches_value"
@@ -49,13 +53,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
-        app:layout_constraintStart_toEndOf="@+id/manage_batches_number_label" />
+        app:layout_constraintBottom_toBottomOf="@+id/manage_batches_number_label"
+        app:layout_constraintStart_toEndOf="@+id/manage_batches_number_label"
+        app:layout_constraintTop_toTopOf="@+id/manage_batches_number_label" />
 
     <Spinner
         android:id="@+id/spinner_manageBatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

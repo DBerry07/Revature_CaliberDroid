@@ -1,5 +1,6 @@
 package com.revature.caliberdroid.ui.qualityaudit.trainees
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.databinding.FragmentQualityAuditTraineesBinding
+import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
+import com.revature.caliberdroid.ui.qualityaudit.StatusHandler
+import timber.log.Timber
 
 class QualityAuditTraineesFragment : Fragment() {
 
@@ -32,7 +37,11 @@ class QualityAuditTraineesFragment : Fragment() {
         _binding = FragmentQualityAuditTraineesBinding.inflate(layoutInflater)
 
         binding.rvAudittraineesTraineeslist.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvAudittraineesTraineeslist.adapter = QualityAuditTraineesAdapter(requireContext(), ALPHABETICAL_COMPARATOR_AUDIT_TRAINEES)
+        binding.rvAudittraineesTraineeslist.adapter = QualityAuditTraineesAdapter(
+            requireContext(),
+            ALPHABETICAL_COMPARATOR_AUDIT_TRAINEES,
+            viewModel
+        )
 
         viewModel.getTraineesWithNotes(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
@@ -47,5 +56,37 @@ class QualityAuditTraineesFragment : Fragment() {
                 .replaceAll(it)
                 .commit()
         })
+    }
+
+    class TraineeStatusHandler(
+        val context: Context,
+        val binding: ItemQualityAuditTraineeBinding,
+        val viewModel: QualityAuditTraineesViewModel
+    ) : StatusHandler {
+        override fun onStatusClick(view: View) {
+            binding.includeItemaudittraineeStatusChooserLayout.root.visibility =
+                when (binding.includeItemaudittraineeStatusChooserLayout.root.visibility) {
+                    View.VISIBLE -> View.GONE
+                    else -> View.VISIBLE
+                }
+        }
+
+        override fun onStatusChoiceClick(view: View) {
+            Timber.d("$view clicked")
+            val previous = binding.traineeWithNotes!!.value!!.auditTraineeNotes!!.technicalStatus
+
+            binding.traineeWithNotes!!.value!!.auditTraineeNotes!!.technicalStatus =
+                when (view.id) {
+                    R.id.img_chooserstatus_undefined -> "Undefined"
+                    R.id.img_chooserstatus_poor -> "Poor"
+                    R.id.img_chooserstatus_average -> "Average"
+                    R.id.img_chooserstatus_good -> "Good"
+                    else -> "Superstar"
+                }
+            if (previous != binding.traineeWithNotes!!.value!!.auditTraineeNotes!!.technicalStatus) {
+                viewModel.putTraineeNotes(binding.traineeWithNotes!!.value!!)
+            }
+            binding.includeItemaudittraineeStatusChooserLayout.root.visibility = View.GONE
+        }
     }
 }

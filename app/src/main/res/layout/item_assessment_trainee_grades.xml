@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="trainee_name"
@@ -8,35 +8,42 @@
             name="score"
             type="Integer" />
     </data>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/tv_assessment_trainee_grades_row_trainee_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="end"
-        android:paddingEnd="5dp"
-        android:paddingStart="5dp"
-        android:text="@{trainee_name}"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
-        <EditText
-            android:id="@+id/et_assessment_trainee_grades_row_grade"
-            android:layout_width="50dp"
+        <TextView
+            android:id="@+id/tv_assessment_trainee_grades_row_trainee_name"
+            style="@style/veryLittleImportantHeader"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="start"
-            android:inputType="numberDecimal"
-            android:text="@{score.toString()}"/>
-    </LinearLayout>
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@{trainee_name}"/>
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinputlayout_assessment_trainee_grades_row_grade"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_assessment_trainee_grades_row_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:ems="3"
+                android:text="@{score.toString()}"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 </layout>

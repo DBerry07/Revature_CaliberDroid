@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.revature.caliberdroid.data.model.Assessment
@@ -39,6 +40,9 @@ class AssessmentTraineeGradesFragment : Fragment() {
         assessmentTraineeGradesBinding.average = assessmentAverage(assessment)
 
         assessmentTraineeGradesBinding.rvAssessmentTraineegrades.layoutManager = LinearLayoutManager(requireContext())
+        assessmentTraineeGradesBinding.rvAssessmentTraineegrades.addItemDecoration(
+            DividerItemDecoration(assessmentTraineeGradesBinding.rvAssessmentTraineegrades.getContext(), DividerItemDecoration.VERTICAL)
+        )
         assessmentTraineeGradesBinding.rvAssessmentTraineegrades.adapter = TraineeAssessmentsRecycleAdapter(assessWeekViewModel,assessmentTraineeGradesBinding, assessment)
 
         return assessmentTraineeGradesBinding.root

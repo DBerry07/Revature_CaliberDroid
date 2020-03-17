@@ -73,8 +73,7 @@ object APIHandler {
 
     fun addWeekFromAudit(batch: Batch, liveData: MutableLiveData<ArrayList<WeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
-        val url =
-            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: WeekLiveData
         var auditWeekNotes: AuditWeekNotes
 
@@ -102,8 +101,7 @@ object APIHandler {
 
     fun addWeekFromAssess(batch: Batch, liveData: MutableLiveData<ArrayList<AssessWeekLiveData>>) {
         val queue = Volley.newRequestQueue(context)
-        val url =
-            "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/batch/all/batch/update"
         lateinit var data: AssessWeekLiveData
 
         val addWeekRequest = JsonObjectRequest(
@@ -164,11 +162,7 @@ object APIHandler {
         AuditAPIHandler.getAuditWeekNotes(context, liveData, batch)
     }
 
-    fun getSkillCategories(
-        liveData: MutableLiveData<List<SkillCategory>>,
-        batch: Batch,
-        weekNumber: Int
-    ) {
+    fun getSkillCategories(liveData: MutableLiveData<List<SkillCategory>>, batch: Batch, weekNumber: Int) {
         AuditAPIHandler.getSkillCategories(context, liveData, batch, weekNumber)
     }
 
@@ -188,6 +182,10 @@ object APIHandler {
 
     fun getTrainees(liveData: MutableLiveData<List<Trainee>>, batchId: Long) {
         TraineeAPIHandler.getTrainees(liveData, batchId)
+    }
+
+    fun putTraineeWithNotes(traineeWithNotes: AuditTraineeWithNotes) {
+        AuditAPIHandler.putTraineeWithNotes(context, traineeWithNotes)
     }
 
     fun postTrainee(jsonObject: JSONObject) {

@@ -54,13 +54,18 @@ class TraineeAssessmentsRecycleAdapter(
                 if(!hasFocus && Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())!=oldScore){
                     grade.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
                     Timber.d(grade.toString())
+                    if(grade.gradeId < 1 ) {
+                        assessWeekViewModel.assessWeekNotes.grades.add(grade)
+                    }
                     GradeAPIHandler.putGrade(grade)
-                    assessWeekViewModel.assessWeekNotes.grades.add(grade)
                     binding.score = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
                     assessmentFragmentBinding.average=assessWeekViewModel.getAssessmentAverage(assessment).toFloat()
                     Timber.d("putting grade")
                 } else {
-                    oldScore = Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
+                    if(!binding.etAssessmentTraineeGradesRowGrade.text.toString().equals("")) {
+                        oldScore =
+                            Integer.valueOf(binding.etAssessmentTraineeGradesRowGrade.text.toString())
+                    }
                 }
             }
         }

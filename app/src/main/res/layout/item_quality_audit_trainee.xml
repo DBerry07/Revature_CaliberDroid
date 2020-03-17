@@ -7,6 +7,10 @@
         <import type="com.revature.caliberdroid.util.AuditStatusConverter" />
 
         <variable
+            name="statusHandler"
+            type="com.revature.caliberdroid.ui.qualityaudit.trainees.QualityAuditTraineesFragment.TraineeStatusHandler" />
+
+        <variable
             name="traineeWithNotes"
             type="com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData" />
         
@@ -28,7 +32,7 @@
 
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_itemaudittrainee_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -38,70 +42,79 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/img_itemaudittrainee_status"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/img_itemaudittrainee_flag"
-                app:layout_constraintDimensionRatio="w,1:1"
-                app:layout_constraintEnd_toStartOf="@+id/img_itemaudittrainee_flag"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/img_itemaudittrainee_flag"
-                app:layout_constraintVertical_bias="0.0"
-                app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(traineeWithNotes.auditTraineeNotes.technicalStatus)}" />
-
-            <ImageView
                 android:id="@+id/img_itemaudittrainee_flag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView3"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_itemaudittrainee_name"
+                app:layout_constraintStart_toEndOf="@+id/tv_itemaudittrainee_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_itemaudittrainee_name"
                 app:srcCompat="@drawable/ic_default_flag" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/notes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-            <EditText
-                android:id="@+id/editText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textinputlayout_itemaudittrainee_notes"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:ems="10"
+                android:background="@color/white"
                 android:hint="@{@string/trainee_qc_feedback_hint(traineeWithNotes.auditTraineeNotes.weekNumber, traineeWithNotes.trainee.name)}"
-                android:inputType="textPersonName"
-                android:maxLines="1"
-                android:text="@={traineeWithNotes.auditTraineeNotes.content}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/img_itemaudittrainee_status">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_itemaudittrainee_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:scrollbars="vertical"
+                    android:text="@={traineeWithNotes.auditTraineeNotes.content}"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/img_itemaudittrainee_status"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="160dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@{traineeWithNotes.auditTraineeNotes.content}"
+                android:layout_marginEnd="160dp"
+                android:onClick="@{statusHandler::onStatusClick}"
+                app:imageResource="@{AuditStatusConverter.INSTANCE.getImageResourceID(traineeWithNotes.auditTraineeNotes.technicalStatus)}"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_itemaudittrainee_name" />
+
+            <FrameLayout
+                android:id="@+id/framelayout_itemaudittrainee_status_chooser_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/img_itemaudittrainee_status">
+
+                <include
+                    android:id="@+id/include_itemaudittrainee_status_chooser_layout"
+                    layout="@layout/chooser_quality_audit_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

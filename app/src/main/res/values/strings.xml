@@ -55,6 +55,7 @@
 
     <string name="title_assessments">Assessments</string>
     <string name="title_trainees">Trainees</string>
+    <string name="title_overall">Overall</string>
     <string name="weekly_batch_average_label">Weekly Batch Average:</string>
     <string name="batch_notes_label">Batch notes</string>
     <string name="batch_notes_hint">Add overall feedback for week %d</string>
@@ -62,7 +63,7 @@
     <string name="dialog_create_assessment">Create Assessment</string>
     <string name="assessment_max_points_error_message">Must be an integer value greater than 0 and less than 1000</string>
     <string name="button_create">Create</string>
-    <string name="button_trainee_grades">Trainee grades</string>
+    <string name="button_trainee_grades">Trainee Grades</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

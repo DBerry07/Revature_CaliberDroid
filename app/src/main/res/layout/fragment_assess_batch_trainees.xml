@@ -15,12 +15,12 @@
     android:orientation="vertical"
     tools:context=".ui.assessbatch.assessweekview.trainees.AssessBatchTraineesFragment" >
 
-    <TextView
-        android:id="@+id/tv_assess_batch_trainees_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
-        android:textSize="@dimen/banner_font_size"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_assess_batch_trainees_title"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"-->
+<!--        android:textSize="@dimen/banner_font_size"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_assess_batch_trainees"

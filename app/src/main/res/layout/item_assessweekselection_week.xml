@@ -42,7 +42,7 @@
                 style="@style/globalCardRowLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/weekly_batch_average_label"
                 app:layout_constraintStart_toStartOf="@+id/tv_assessweekrecycler_weeknumber"
                 app:layout_constraintTop_toBottomOf="@+id/tv_assessweekrecycler_weeknumber" />
@@ -63,7 +63,7 @@
                 style="@style/globalCardRowLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/batch_notes_label"
                 app:layout_constraintStart_toStartOf="@+id/tv_assessweek_averagelabel"
                 app:layout_constraintTop_toBottomOf="@+id/tv_assessweek_averagelabel" />

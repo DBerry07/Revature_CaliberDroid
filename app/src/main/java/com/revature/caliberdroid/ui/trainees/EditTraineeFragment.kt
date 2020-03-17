@@ -68,15 +68,9 @@ class EditTraineeFragment : Fragment() {
             if (!trainee.skypeId.equals("null") && trainee.skypeId != null) {
                 binding.traineeSkype.setText(trainee.skypeId)
             }
-
-            var i = 0
-            while (i < binding.traineeStatus.adapter.count) {
-                if (binding.traineeStatus.adapter.getItem(i).toString().equals(trainee.trainingStatus)) {
-                        binding.traineeStatus.setSelection(i)
-                    }
-                i++
+            if (!trainee.trainingStatus.equals("null") && trainee.trainingStatus != null){
+                binding.traineeStatus.setText(trainee.trainingStatus)
             }
-
 
         }
 
@@ -94,7 +88,7 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("resourceId", if (trainee.resourceId.equals("null")) { null } else { trainee.resourceId })
         jsonObject.put("name", name)
         jsonObject.put("email", binding.traineeEmail.text.toString())
-        //jsonObject.put("trainingStatus", binding.traineeStatus.selectedItem.toString())
+        jsonObject.put("trainingStatus", binding.traineeStatus.text.toString())
         jsonObject.put("batchId", batchID)
         jsonObject.put("phoneNumber", binding.traineePhone.text.toString())
         jsonObject.put("skypeId", binding.traineeSkype.text.toString())

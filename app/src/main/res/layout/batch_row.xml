@@ -10,7 +10,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewContainer"
+        android:id="@+id/cardview_batch_row"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -58,7 +58,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_batch_row_name_header" />
 
             <TextView
-                android:id="@+id/tvRowLabel"
+                android:id="@+id/tv_batch_row_skill_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

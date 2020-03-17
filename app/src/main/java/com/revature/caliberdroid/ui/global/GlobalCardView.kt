@@ -7,30 +7,34 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.revature.caliberdroid.R
 import timber.log.Timber
 
 class GlobalCardView : LinearLayout {
     companion object {
-        private val DEFAULT_MAX_VISIBLE_LINE = 3
         private val DEFAULT_EXPAND_ICON = R.drawable.ic_expand_arrow
         private val DEFAULT_EXPANDABLE = false
     }
 
-    private var maxVisibleLines = DEFAULT_MAX_VISIBLE_LINE
     private var imgResourceExpandIcon = DEFAULT_EXPAND_ICON
     private var expandable = DEFAULT_EXPANDABLE
 
     private var attrs: AttributeSet? = null
 
     private lateinit var cardViewContainer:View
+    private lateinit var defaultVisibleRows: LinearLayout
     private lateinit var expandableView: LinearLayout
     private lateinit var imgExpandIcon: ImageView
+    private lateinit var tvCardHeaderLabel:TextView
+    private lateinit var tvCardHeaderText:TextView
 
-    //For creating this view programmatically
-    constructor(context: Context) : super(context) {
+    private var contentLabelAndTextMap: Map<String,String> = HashMap()
+    private var clickableIconsAndListenersMap: Map<Int, View.OnClickListener> = HashMap()
+
+    //For creating this view programatically
+    constructor(context: Context): super(context){
+
     }
 
     //For creating this view in an XML file
@@ -42,8 +46,13 @@ class GlobalCardView : LinearLayout {
     init {
         orientation = LinearLayout.VERTICAL
         LayoutInflater.from(context).inflate(R.layout.item_template_global_card,this,true)
+        defaultVisibleRows = findViewById(R.id.visibleRows)
         expandableView = findViewById(R.id.expandableRows)
         imgExpandIcon = findViewById(R.id.imgExpandIcon)
+
+        tvCardHeaderLabel = findViewById(R.id.tvCardHeaderLabel)
+        tvCardHeaderText = findViewById(R.id.tvCardHeaderText)
+
         cardViewContainer = findViewById(R.id.cardViewContainer)
         cardViewContainer.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -64,13 +73,14 @@ class GlobalCardView : LinearLayout {
             DEFAULT_EXPANDABLE
         )
         imgResourceExpandIcon = typedArray.getResourceId(
-            R.styleable.GlobalCardView_imgExpandableIcon,
+            R.styleable.GlobalCardView_imgResourceExpandIcon,
             DEFAULT_EXPAND_ICON
         )
-        val cardHeaderLabel:TextView = findViewById(R.id.cardHeaderLabel)
+
+        val cardHeaderLabel:TextView = findViewById(R.id.tvCardHeaderLabel)
         cardHeaderLabel.text = typedArray.getText(R.styleable.GlobalCardView_cardHeaderLabel)
 
-        val cardHeaderText:TextView = findViewById(R.id.cardHeaderText)
+        val cardHeaderText:TextView = findViewById(R.id.tvCardHeaderText)
         cardHeaderText.text = typedArray.getText(R.styleable.GlobalCardView_cardHeaderText)
 
         typedArray.recycle()
@@ -87,4 +97,18 @@ class GlobalCardView : LinearLayout {
             imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
         }
     }
+
+    private fun setRightAlignedIcons(_clickableIconsAndListenersMap: Map<Int, View.OnClickListener>){
+        for((key,value) in _clickableIconsAndListenersMap){
+
+        }
+    }
+
+    private fun setRows(_contentLabelAndTextMap: Map<String,String>){
+        for((key,value) in _contentLabelAndTextMap){
+
+        }
+    }
+
+
 }

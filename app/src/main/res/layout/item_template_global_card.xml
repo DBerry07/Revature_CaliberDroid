@@ -18,7 +18,7 @@
 
 <!-- Heading -->
                 <TextView
-                    android:id="@+id/cardHeaderLabel"
+                    android:id="@+id/tvCardHeaderLabel"
                     style="@style/globalCardHeaderLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -27,13 +27,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/cardHeaderText"
+                    android:id="@+id/tvCardHeaderText"
                     style="@style/globalCardHeaderText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Text"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/cardHeaderLabel"
-                    app:layout_constraintStart_toEndOf="@+id/cardHeaderLabel" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvCardHeaderLabel"
+                    app:layout_constraintStart_toEndOf="@+id/tvCardHeaderLabel" />
 
 <!--Container of visible rows-->
                 <LinearLayout
@@ -41,8 +41,8 @@
                     style="@style/globalCardRowWrapper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/cardHeaderLabel"
-                    app:layout_constraintTop_toBottomOf="@+id/cardHeaderText">
+                    app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCardHeaderText">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
                     style="@style/globalCardRowWrapper"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/cardHeaderLabel"
+                    app:layout_constraintStart_toStartOf="@id/tvCardHeaderLabel"
                     app:layout_constraintTop_toBottomOf="@+id/visibleRows">
 
                     <LinearLayout

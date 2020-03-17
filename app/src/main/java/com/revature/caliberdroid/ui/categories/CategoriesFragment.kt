@@ -85,7 +85,6 @@ class CategoriesFragment : Fragment() {
                     )
                     .setNegativeButton(R.string.btn_cancel,
                         DialogInterface.OnClickListener { dialog, id ->
-                            DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                         }
                     )
                 val alertDialog: AlertDialog = builder.create()

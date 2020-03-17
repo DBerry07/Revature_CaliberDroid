@@ -21,76 +21,85 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardElevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintHorizontal_bias="0.5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:padding="10dp">
 
-            <TextView
-                android:id="@+id/tv_asssesmentsrecycler_typeandskill"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@{assessment.assessmentType}"
-                android:textSize="@dimen/card_title_font_size"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_assessmentsrecycler_pointslabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/assessment_points_label"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_asssesmentsrecycler_typeandskill" />
+                <TextView
+                    android:id="@+id/tv_asssesmentsrecycler_typeandskill"
+                    style="@style/importantHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{assessment.assessmentType}"
+                    android:textSize="@dimen/card_title_font_size" />
 
-            <TextView
-                android:id="@+id/tv_assessmentrecyler_points"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@{Long.toString(assessment.rawScore)}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_assessmentsrecycler_pointslabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/tv_assessmentsrecycler_pointslabel" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_assessmentsrecycler_averagelabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/assessment_batch_avg_label"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_assessmentsrecycler_pointslabel" />
+                    <Button
+                        android:id="@+id/btn_asssessmentsrecycler_traineegrades"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/button_trainee_grades" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_assessmentsrecycler_average"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@{@string/grade_format(assessWeekNotes.getAssessmentAverage(assessment))}"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_assessmentsrecycler_averagelabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_assessmentsrecycler_averagelabel" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_asssessmentsrecycler_traineegrades"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/button_trainee_grades"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_assessmentsrecycler_average" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_assessmentsrecycler_pointslabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_points_label" />
+
+                <TextView
+                    android:id="@+id/tv_assessmentrecyler_points"
+                    style="@style/littleImportanceHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{Long.toString(assessment.rawScore)}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_assessmentsrecycler_averagelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/assessment_batch_avg_label" />
+
+                <TextView
+                    android:id="@+id/tv_assessmentsrecycler_average"
+                    style="@style/littleImportanceHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{@string/grade_format(assessWeekNotes.getAssessmentAverage(assessment))}" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

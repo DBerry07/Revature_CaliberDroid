@@ -23,7 +23,7 @@ data class Location (
     }
 
     fun getAddressLines(): String{
-        var stringText:String = address+"\n"
+        var stringText:String = address
         stringText+= city+", "+state+" "+zipcode
         return stringText
     }

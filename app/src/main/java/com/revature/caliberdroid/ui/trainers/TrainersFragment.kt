@@ -1,11 +1,9 @@
 package com.revature.caliberdroid.ui.trainers
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -16,9 +14,10 @@ import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.adapter.trainers.TrainersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.databinding.FragmentSettingsTrainersBinding
+import timber.log.Timber
 import java.util.ArrayList
 
-class TrainersFragment : Fragment(){
+class TrainersFragment : Fragment(), SearchView.OnQueryTextListener{
     private var _binding: FragmentSettingsTrainersBinding? = null
     private val binding get() = _binding!!
     private val trainersViewModel: TrainersViewModel by activityViewModels()
@@ -50,20 +49,8 @@ class TrainersFragment : Fragment(){
                 findNavController().navigate(R.id.action_trainersFragment_to_addTrainerFragment)
             }
 
-            searchViewTrainers.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
-                android.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {return false}
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    val filteredTrainers: ArrayList<Trainer> = filterTrainers(trainersFromAPI, newText)
-                    binding.trainerCount = filteredTrainers.size
-                    rvAdapter.replaceAll( filteredTrainers )
-                    return true
-                }
-
-            })
         }
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -87,5 +74,24 @@ class TrainersFragment : Fragment(){
             }
         }
         return filteredTrainers
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+        inflator.inflate(R.menu.search_bar, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
+        searchView.queryHint = getString(R.string.query_hint_settings_trainer)
+        searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        val filteredTrainers: ArrayList<Trainer> = filterTrainers(trainersFromAPI, newText)
+        binding.trainerCount = filteredTrainers.size
+        rvAdapter.replaceAll( filteredTrainers )
+        return true
     }
 }

@@ -29,11 +29,14 @@
     <string name="add_categories">Add categories</string>
     <string name="spinner_year_hint">Select a year</string>
     <string name="select_a_quarter">Select a quarter</string>
+    <string name="trainer_name">Trainer Name: %s</string>
+    <string name="skill_type">Skill Type: %s</string>
+    <string name="start_date">Start Date: %s</string>
 
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
     <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
-    <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
+    <string name="overall_qc_feedback_hint">There are no notes for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
     <string name="button_add_categories">Categories</string>

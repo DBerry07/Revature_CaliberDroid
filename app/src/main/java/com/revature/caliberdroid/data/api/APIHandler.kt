@@ -3,8 +3,6 @@ package com.revature.caliberdroid.data.api
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
-import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.Request
 import com.android.volley.Response
@@ -211,6 +209,10 @@ object APIHandler {
         TraineeAPIHandler.putTrainee(jsonObject)
     }
 
+    fun putTrainee(trainee: Trainee) {
+        TraineeAPIHandler.putTrainee(context, trainee)
+    }
+
     fun deleteTrainee(trainee : Trainee){
         TraineeAPIHandler.deleteTrainee(trainee)
     }
@@ -310,7 +312,9 @@ object APIHandler {
         val trainee: Trainee? = traineeLiveData.value
         if(trainee != null){
             //Because the API will not allow null values for this field
-            if(trainee.flagStatus == null || trainee?.flagStatus?.trim()?.toLowerCase().equals("null")){
+            if (trainee.flagStatus == null || trainee.flagStatus?.trim()?.toLowerCase()
+                    .equals("null")
+            ) {
                 trainee.flagStatus = "NONE"
             }
             val url: String =

@@ -10,7 +10,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_batch_row"
+        android:id="@+id/cardViewContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

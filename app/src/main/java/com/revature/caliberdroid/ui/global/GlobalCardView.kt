@@ -2,11 +2,13 @@ package com.revature.caliberdroid.ui.global
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import com.revature.caliberdroid.R
 import timber.log.Timber
 
@@ -23,6 +25,10 @@ class GlobalCardView : LinearLayout {
 
     private var attrs: AttributeSet? = null
 
+    private lateinit var cardViewContainer:View
+    private lateinit var expandableView: LinearLayout
+    private lateinit var imgExpandIcon: ImageView
+
     //For creating this view programmatically
     constructor(context: Context) : super(context) {
     }
@@ -35,10 +41,18 @@ class GlobalCardView : LinearLayout {
 
     init {
         orientation = LinearLayout.VERTICAL
+        LayoutInflater.from(context).inflate(R.layout.item_template_global_card,this,true)
+        expandableView = findViewById(R.id.expandableRows)
+        imgExpandIcon = findViewById(R.id.imgExpandIcon)
+        cardViewContainer = findViewById(R.id.cardViewContainer)
+        cardViewContainer.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                expandCard()
+            }
+        })
     }
 
     private fun setupAttributes(attrs: AttributeSet?) {
-        LayoutInflater.from(context).inflate(R.layout.item_template_global_card,this,true)
 
         val typedArray = context.theme.obtainStyledAttributes(
             attrs,
@@ -63,13 +77,14 @@ class GlobalCardView : LinearLayout {
     }
 
     private fun expandCard() {
-
-        if( binding.constraintlayoutBatchrowExpandable.isVisible ){
-            binding.constraintlayoutBatchrowExpandable.visibility = View.GONE
-            binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
+        if( expandableView.isVisible ){
+            Timber.i("Is Visible")
+            expandableView.visibility = View.GONE
+            imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_expand_arrow)
         } else {
-            binding.constraintlayoutBatchrowExpandable.visibility = View.VISIBLE
-            binding.batchrowArrow.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
+            Timber.i("Not Visible")
+            expandableView.visibility = View.VISIBLE
+            imgExpandIcon.setImageResource(com.revature.caliberdroid.R.drawable.ic_collapse_arrow)
         }
     }
 }

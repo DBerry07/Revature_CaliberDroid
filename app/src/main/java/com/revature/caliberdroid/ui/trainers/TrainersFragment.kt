@@ -14,6 +14,7 @@ import com.revature.caliberdroid.adapter.trainers.listeners.EditTrainerInterface
 import com.revature.caliberdroid.adapter.trainers.TrainersAdapter
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.databinding.FragmentSettingsTrainersBinding
+import timber.log.Timber
 import java.util.ArrayList
 
 class TrainersFragment : Fragment(), SearchView.OnQueryTextListener{

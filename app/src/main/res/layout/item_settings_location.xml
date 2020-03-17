@@ -1,79 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.revature.caliberdroid.data.model.Location" />
     </data>
 
     <androidx.cardview.widget.CardView
+        style="@style/globalCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/settingsCard">
+        android:layout_height="wrap_content">
 
-    <!-- WRAPPER -->
+        <!-- LEFT -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/left"
+            style="@style/globalCardConstraintWrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/settingsCardContentWrapper">
+            android:layout_height="wrap_content">
 
-    <!-- LEFT -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/left"
-                android:layout_width="0dp"
+            <!-- Heading -->
+
+            <ImageView
+                android:id="@+id/imgActiveStatus"
+                style="@style/globalCardHeaderLabel"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/right"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_active_green" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                style="@style/globalCardHeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/imgActiveStatus"
+                app:layout_constraintStart_toEndOf="@+id/imgActiveStatus" />
+
+            <LinearLayout
+                android:id="@+id/visibleRows"
+                style="@style/globalCardRowWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/imgActiveStatus"
+                app:layout_constraintTop_toBottomOf="@+id/imgActiveStatus">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/globalCardRowLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address: " />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        style="globalCardRowText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.addressLines}" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- RIGHT -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imgActiveStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvLocation"
-                    app:srcCompat="@drawable/ic_active_green" />
-
-                <TextView
-                    android:id="@+id/tvLocation"
-                    style="@style/settingsHeading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.name}"
-                    app:layout_constraintStart_toEndOf="@+id/imgActiveStatus"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.addressLines}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- RIGHT -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/right"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@+id/left"
-                app:layout_constraintBottom_toBottomOf="@+id/left"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <ImageView
                     android:id="@+id/imgEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    style="@style/editIcon"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    app:srcCompat="@drawable/ic_edit_orange" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </layout>

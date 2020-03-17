@@ -108,6 +108,10 @@
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+    </style>=
+    <style name="settingsFieldSpinner">
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
 
     <style name="settingsFieldEditText" parent="settingsField">

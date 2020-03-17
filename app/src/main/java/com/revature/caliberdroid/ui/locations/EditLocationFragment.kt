@@ -46,7 +46,7 @@ class EditLocationFragment : Fragment() {
             inLocationFields.etStreetAddress.setText(location.address)
             inLocationFields.etCity.setText(location.city)
             inLocationFields.etZipCode.setText(location.zipcode)
-            //inLocationFields.etState.setText(location.state)
+            selectedState = location.state
 
 
             var states = arrayOfNulls<String>(FieldValidator.StatesList.size)
@@ -73,6 +73,11 @@ class EditLocationFragment : Fragment() {
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
+            }
+
+            val positionOfSelectedState:Int = FieldValidator.TwoLetterStatesList.indexOf(selectedState)
+            if(positionOfSelectedState > -1){
+                spinner.setSelection(positionOfSelectedState)
             }
 
 

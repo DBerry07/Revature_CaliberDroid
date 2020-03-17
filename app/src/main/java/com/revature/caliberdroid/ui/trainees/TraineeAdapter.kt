@@ -148,6 +148,7 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
         var row3: LinearLayout
         var row4: LinearLayout
         var row5: LinearLayout
+        var row6: LinearLayout
 
         var options : LinearLayout
         var arrow : ImageView
@@ -177,6 +178,7 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
             this.row3 = binding.traineeDetailsRow3
             this.row4 = binding.traineeDetailsRow4
             this.row5 = binding.traineeDetailsRow5
+            this.row6 = binding.traineeDetailsRow6
             this.options = binding.TMOptions
             this.btnSwitch = binding.TMBtnSwitch
             this.btnDelete = binding.TMBtnDelete
@@ -200,6 +202,7 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
             if (!holder.isExpanded && holder.options.visibility == View.GONE) {
                 holder.buffer.visibility = View.VISIBLE
+                holder.arrow.visibility = View.INVISIBLE
                 Handler().postDelayed( {
                     holder.details.visibility = View.VISIBLE
                 }, LOAD_DELAY * 1)
@@ -219,33 +222,40 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
                 Handler().postDelayed( {
                     holder.row5.visibility=View.VISIBLE
                 }, LOAD_DELAY * 6)
+                Handler().postDelayed( {
+                    holder.row6.visibility=View.VISIBLE
+                }, LOAD_DELAY * 7)
 
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_collapse_arrow)
             }
             else if (holder.isExpanded) {
-                Handler().postDelayed( {
-                    holder.row5.visibility=View.GONE
+                Handler().postDelayed({
+                  holder.row6.visibility=View.GONE
                 }, LOAD_DELAY * 1)
                 Handler().postDelayed( {
-                    holder.row4.visibility=View.GONE
+                    holder.row5.visibility=View.GONE
                 }, LOAD_DELAY * 2)
                 Handler().postDelayed( {
-                    holder.row3.visibility=View.GONE
+                    holder.row4.visibility=View.GONE
                 }, LOAD_DELAY * 3)
                 Handler().postDelayed( {
-                    holder.row2.visibility=View.GONE
+                    holder.row3.visibility=View.GONE
                 }, LOAD_DELAY * 4)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.GONE
+                }, LOAD_DELAY * 5)
                 Handler().postDelayed( {
                     holder.row1.visibility=View.GONE
                     holder.buffer.visibility=View.GONE
                     holder.details.visibility = View.GONE
-                }, LOAD_DELAY * 5)
+                }, LOAD_DELAY * 6)
                 Handler().postDelayed( {
                     holder.buffer.visibility=View.GONE
                     holder.details.visibility = View.GONE
-                }, LOAD_DELAY * 6)
+                    holder.arrow.visibility=View.VISIBLE
+                }, LOAD_DELAY * 7)
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)

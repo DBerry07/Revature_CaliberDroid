@@ -71,7 +71,7 @@ object TraineeAPIHandler {
             Response.ErrorListener { error -> Timber.d(error.toString()) }
         )
         queue.add(jsonRequest)
-        Toast.makeText(APIHandler.context, "Processing...", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(APIHandler.context, "Processing...", Toast.LENGTH_SHORT).show()
 
     }
 

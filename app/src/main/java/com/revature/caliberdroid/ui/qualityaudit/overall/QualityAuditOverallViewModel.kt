@@ -17,6 +17,10 @@ class QualityAuditOverallViewModel : ViewModel() {
     var weekNumber: Int = -1
     var saveAuditWeekNotesThread: Thread? = null
 
+    fun deleteAuditCategory(skillCategory: SkillCategory) {
+        QualityAuditRepository.removeAuditSkillCategory(skillCategory,skillCategoryLiveData)
+    }
+
     fun getActiveCategoryNames(): Array<String?> {
         val names = arrayOfNulls<String>(categories.value!!.size)
         for (i in categories.value!!.indices) {

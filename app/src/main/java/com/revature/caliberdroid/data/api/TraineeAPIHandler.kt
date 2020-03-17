@@ -105,7 +105,7 @@ object TraineeAPIHandler {
             put("flagNotes", trainee.flagNotes)
             put("flagAuthor", trainee.flagAuthor)
             put("flagTimestamp", trainee.flagTimestamp)
-            put("flagTimestamp", DateConverter.getDate(System.currentTimeMillis() / 1000))
+            put("flagTimeStamp", DateConverter.getDate(System.currentTimeMillis() / 1000))
         }
 
         val jsonRequest = JsonObjectRequest(

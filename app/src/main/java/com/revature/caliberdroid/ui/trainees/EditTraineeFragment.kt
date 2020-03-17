@@ -5,6 +5,8 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -45,6 +47,16 @@ class EditTraineeFragment : Fragment() {
                     findNavController().navigateUp()
                 }
             }
+
+            val adapter: ArrayAdapter<String> = ArrayAdapter(
+                context!!,
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.TraineeStatus)
+            )
+            val autoCompleteTextView: AutoCompleteTextView = binding.traineeStatus
+            autoCompleteTextView.threshold = 0
+            autoCompleteTextView.setAdapter(adapter)
+
             binding.traineeFirstName.setText(trainee.name.toString().split(",")[1].trim())
             binding.traineeLastName.setText(trainee.name.toString().split(",")[0].trim())
             binding.traineeCollege.setText(trainee.college)

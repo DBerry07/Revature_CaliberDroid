@@ -29,16 +29,17 @@
 
             <TextView
                 android:id="@+id/tv_assessweekrecycler_weeknumber"
+                style="@style/globalCardHeaderText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{@string/week_number(assessWeekNotes.weekNumber)}"
-                android:textSize="@dimen/card_title_font_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_assessweek_averagelabel"
+                style="@style/globalCardRowLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -48,6 +49,7 @@
 
             <TextView
                 android:id="@+id/tv_assessweekselection_average"
+                style="@style/globalCardRowText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -59,6 +61,7 @@
 
             <TextView
                 android:id="@+id/tv_assessweekrecycler_noteslabel"
+                style="@style/globalCardRowLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -68,9 +71,11 @@
 
             <TextView
                 android:id="@+id/tv_assessweekrecycler_notes"
+                style="@style/globalCardRowText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:hint="@{@string/batch_notes_hint(assessWeekNotes.weekNumber)}"
                 android:text="@{assessWeekNotes.batchNote.noteContent}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -34,6 +34,23 @@ object CategoriesAPI {
         queue.add(categoriesRequest)
     }
 
+    fun getActiveCategories(liveDataList: MutableLiveData<ArrayList<Category>>) {
+        val queue = Volley.newRequestQueue(APIHandler.context)
+        val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/category/?active=true"
+        val categoriesRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            Response.Listener { response ->
+                liveDataList.postValue(CategoryParser.parseCategoryList(response))
+            },
+            Response.ErrorListener { error ->
+                Log.d("APIHandler", "Error retrieving categories: " + error.toString())
+            }
+        )
+        queue.add(categoriesRequest)
+    }
+
     fun addCategory(skillCategory: String, liveData: MutableLiveData<ArrayList<Category>>) {
         val queue = Volley.newRequestQueue(APIHandler.context)
         val url = "http://caliber-2-dev-alb-315997072.us-east-1.elb.amazonaws.com/category/"

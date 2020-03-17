@@ -40,12 +40,11 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
 
         assessWeekViewModel.loadBatchWeeks(batch)
         assessWeekViewModel.batchAssessWeekNotes.observe(viewLifecycleOwner, Observer {
-
-            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit().replaceAll(assessWeekViewModel.batchAssessWeekNotes.value!!).commit()
-
+            (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter)
+                .edit()
+                .replaceAll(assessWeekViewModel.batchAssessWeekNotes.value!!)
+                .commit()
         })
-
-
 
         binding.btnWeekselectionAddweek.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())

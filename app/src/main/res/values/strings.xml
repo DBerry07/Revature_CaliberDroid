@@ -36,6 +36,8 @@
     <string name="overall_qc_feedback_hint">Start typing to record your overall QC feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
+    <string name="button_add_categories">Categories</string>
+    <string name="no_categories_message">No categories added</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>
@@ -129,20 +131,21 @@
 
     <!--Trainees-->
     <string name="trainee_name">Trainee Name</string>
+    <string name="trainee_first_name">First Name</string>
+    <string name="trainee_last_name">Last Name</string>
     <string name="trainee_email">Email Address</string>
     <string name="trainee_batch">Batch</string>
     <string name="trainee_status">Training Status</string>
-    <string name="trainee_screener">Tech Screener</string>
-    <string name="trainee_recruiter">Recruiter</string>
+
     <string name="trainee_college">College/University</string>
     <string name="trainee_degree">Degree</string>
     <string name="trainee_major">Major</string>
-    <string name="trainee_profile">Profile URL</string>
-    <string name="trainee_skype">Skype ID</string>
+
     <string name="trainee_phone">Phone Number</string>
-    <string name="trainee_project">Project Status</string>
+
     <string name="trainee_year">Assigned Year</string>
     <string name="trainee_quarter">Assigned Quarter</string>
+    <string name="trainee_score">Tech Score</string>
     <string name="batch_row_batch_name_header">Batch Name:</string>
     <string name="batch_info_co_trainer_heading">Co-Trainer:</string>
     <string name="batch_info_training_type_heading">Training type:</string>
@@ -152,5 +155,16 @@
     <string name="createBatch_trainingTypeHeader">Training Type:</string>
     <string name="manageBatch_noOfBatches">No. of Batches:</string>
     <string name="btn_editBatch_update">Create</string>
+
+    <string name="trainee_project">Project Status</string>
+    <string name="trainee_optional_project">Project Status (Optional)</string>
+    <string name="trainee_skype">Skype ID</string>
+    <string name="trainee_optional_skype">Skype ID (Optional)</string>
+    <string name="trainee_profile">Profile URL</string>
+    <string name="trainee_optional_profile">Profile URL (Optional)</string>
+    <string name="trainee_screener">Tech Screener</string>
+    <string name="trainee_optional_screener">Tech Screener (Optional)</string>
+    <string name="trainee_recruiter">Recruiter</string>
+    <string name="trainee_optional_recruiter">Recruiter (Optional)</string>
     <string name="search">Search</string>
 </resources>

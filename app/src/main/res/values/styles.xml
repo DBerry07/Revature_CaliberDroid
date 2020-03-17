@@ -123,7 +123,10 @@
     </style>
 
     <style name="settingsHeaderWrapper">
-        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="settingsRecyclerView">
@@ -145,6 +148,10 @@
         <item name="android:layout_marginLeft">15dp</item>
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+    </style>=
+    <style name="settingsFieldSpinner">
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
     </style>
 
     <style name="settingsFieldEditText" parent="settingsField">
@@ -167,6 +174,14 @@
     <style name="settingsMaterialEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_margin">15dp</item>
         <item name="android:textSize">@dimen/dialog_text_size</item>
+    </style>
+
+    <style name="settingsLoadingIcon">
+        <item name="android:padding">6dp</item>
+        <item name="android:layout_gravity">right|end</item>
+        <item name="android:layout_marginEnd">13dp</item>
+        <item name="android:layout_marginRight">13dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
     <style name="activeCircle">

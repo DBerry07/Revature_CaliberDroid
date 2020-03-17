@@ -2,6 +2,7 @@ package com.revature.caliberdroid.ui.trainers
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -87,7 +88,14 @@ class EditTrainerFragment : Fragment() {
                     Timber.d("Updated trainer: ${trainer.toString()}")
                     TrainersViewModel.editTrainer(trainer)
 
-                    findNavController().navigateUp()
+                    val handler: Handler = Handler()
+                    handler.postDelayed(
+                        Runnable {
+                            Timber.d("Done waiting...")
+                            findNavController().navigateUp()
+                        },
+                        500
+                    )
                 }else{
                     Timber.d("Validation of fields failed: "+validationString.toString())
                     DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())

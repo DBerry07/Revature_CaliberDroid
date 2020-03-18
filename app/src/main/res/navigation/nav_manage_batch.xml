@@ -24,10 +24,9 @@
     </fragment>
     <fragment
         android:id="@+id/manageBatchFragment"
-        android:theme="@style/ThemeOverlay.AppCompat"
         android:name="com.revature.caliberdroid.ui.managebatches.ManageBatchFragment"
         android:label="Manage Batch"
-        tools:layout="@layout/fragment_manage_batch">
+        android:theme="@style/ThemeOverlay.AppCompat">
         <action
             android:id="@+id/action_manageBatchFragment_to_traineeFragment"
             app:destination="@id/traineeFragment" />

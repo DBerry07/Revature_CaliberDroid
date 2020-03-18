@@ -11,6 +11,10 @@
 <!--  Quality Audit  -->
     <color name="green_flag">@android:color/holo_green_dark</color>
     <color name="red_flag">@android:color/holo_red_dark</color>
+    <color name="blue_star">#FF0000FF</color>
+    <color name="poor_face">#FFe80505</color>
+    <color name="average_face">#FFd4db00</color>
+    <color name="good_face">#FF007529</color>
 
 <!-- SETTINGS -->
     <color name="active">#18ff03</color>

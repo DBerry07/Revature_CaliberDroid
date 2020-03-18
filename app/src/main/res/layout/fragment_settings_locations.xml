@@ -18,15 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/settingsHeaderWrapper">
+
             <TextView
                 android:id="@+id/tvLocationCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBaseline_toBaselineOf="@+id/btnAddLocation"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:text="@{`Locations: `+locationCount}"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
             <Button
                 android:id="@+id/btnAddLocation"
                 app:iconGravity="end"

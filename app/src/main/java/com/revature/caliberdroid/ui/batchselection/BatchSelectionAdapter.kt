@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.ItemBatchSelectionBinding
-import com.revature.caliberdroid.ui.batches.BatchSelectionViewModel
 import timber.log.Timber
 import java.util.*
 

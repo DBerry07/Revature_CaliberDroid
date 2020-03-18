@@ -34,11 +34,12 @@
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
     <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
-    <string name="overall_qc_feedback_hint">There are no notes for week %d</string>
+    <string name="overall_qc_feedback_hint">There is no overall feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
     <string name="button_add_categories">Categories</string>
     <string name="no_categories_message">No categories added</string>
+    <string name="empty_trainees">There are no trainees in this batch</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>
@@ -59,7 +60,7 @@
     <string name="title_overall">Overall</string>
     <string name="weekly_batch_average_label">Weekly Batch Average:</string>
     <string name="batch_notes_label">Batch notes</string>
-    <string name="batch_notes_hint">Add overall feedback for week %d</string>
+    <string name="batch_notes_hint">There is no overall feedback for week %d</string>
     <string name="button_create_assessment">New Assessment</string>
     <string name="dialog_create_assessment">Create Assessment</string>
     <string name="assessment_max_points_error_message">Must be an integer value greater than 0 and less than 1000</string>
@@ -155,7 +156,7 @@
     <string name="createBatch_skillHeader">Skill Focus:</string>
     <string name="createBatch_locationHeader">Location:</string>
     <string name="createBatch_trainingTypeHeader">Training Type:</string>
-    <string name="manageBatch_noOfBatches">No. of Batches:</string>
+    <string name="manageBatch_noOfBatches">Batches:</string>
     <string name="btn_editBatch_update">Create</string>
 
     <string name="trainee_project">Project Status</string>
@@ -179,5 +180,6 @@
     <string name="empty">""</string>
     <string name="optional">Optional</string>
     <string name="btn_add_trainee">Add Trainee</string>
+    <string name="btn_update">update</string>
     <string name="createbatch_trainingtype">Training Type:</string>
 </resources>

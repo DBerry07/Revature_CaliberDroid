@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
+import com.revature.caliberdroid.R
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
 import com.revature.caliberdroid.ui.qualityaudit.trainees.QualityAuditTraineesFragment.TraineeStatusHandler
 import com.revature.caliberdroid.util.KeyboardUtil
@@ -58,6 +59,16 @@ class QualityAuditTraineesAdapter(context: Context,
             binding.imgItemaudittraineeFlag.setOnClickListener {
                 showEditFlagDialog(item, viewModel)
             }
+
+            //display red or green flag, or no flag
+            if(item.value!!.trainee!!.flagStatus.equals("RED")){
+                binding.imgItemaudittraineeFlag.setImageResource(R.drawable.ic_red_flag)
+            } else if(item.value!!.trainee!!.flagStatus.equals("GREEN")){
+                binding.imgItemaudittraineeFlag.setImageResource(R.drawable.ic_green_flag)
+            } else {
+                binding.imgItemaudittraineeFlag.visibility = View.GONE
+            }
+
         }
 
         private fun watchOverallNote() {

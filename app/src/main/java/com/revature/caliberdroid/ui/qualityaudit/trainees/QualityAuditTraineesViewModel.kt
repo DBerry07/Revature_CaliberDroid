@@ -12,8 +12,10 @@ class QualityAuditTraineesViewModel : ViewModel() {
 
     lateinit var traineesWithNotesLiveData: MutableLiveData<List<TraineeWithNotesLiveData>>
     var saveAuditWeekNotesThread: Thread? = null
+    lateinit var batch: Batch
+    var weekNumber: Int = -1
 
-    fun getTraineesWithNotes(batch: Batch, weekNumber: Int) {
+    fun getTraineesWithNotes() {
         traineesWithNotesLiveData = QualityAuditRepository.getTraineesWithNotes(batch, weekNumber)
     }
 

@@ -54,6 +54,11 @@ class AssessmentTraineeGradesFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = assessWeekViewModel.batch?.trainerName!!.substringBefore( " ") + " - Week " + assessWeekViewModel.assessWeekNotes.weekNumber
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _assessmentTraineeGradesBinding = null
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }

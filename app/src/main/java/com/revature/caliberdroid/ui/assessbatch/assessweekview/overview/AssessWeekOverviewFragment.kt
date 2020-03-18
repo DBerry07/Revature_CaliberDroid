@@ -1,13 +1,10 @@
 package com.revature.caliberdroid.ui.assessbatch.assessweekview.overview
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.PointerIcon
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -29,7 +26,6 @@ import com.revature.caliberdroid.ui.assessbatch.AssessWeekViewModel
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.AssessWeekFragmentDirections
 import com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment.SkillArrayAdapter
 import com.revature.caliberdroid.util.KeyboardUtil
-import timber.log.Timber
 import java.text.ParseException
 
 class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItemClickListener, AssessmentsRecyclerAdapter.OnEditClickListener {
@@ -52,20 +48,21 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         assessWeekOverviewBinding.assessWeekModel = assessWeekViewModel
 
-        assessWeekOverviewBinding.root.setOnClickListener(View.OnClickListener {
+        assessWeekOverviewBinding.root.setOnClickListener {
             assessWeekOverviewBinding.etAssessweekBatchnotes.clearFocus()
-        })
+        }
 
-        assessWeekOverviewBinding.etAssessweekBatchnotes.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                KeyboardUtil.hideSoftKeyboard(requireContext(),v)
-                if ((v as EditText).text.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
-                    var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
-                    note.noteContent = (v as EditText).text.toString()
-                    assessWeekViewModel.saveBatchNote(note)
+        assessWeekOverviewBinding.etAssessweekBatchnotes.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if (!hasFocus) {
+                    KeyboardUtil.hideSoftKeyboard(requireContext(), v)
+                    if ((v as EditText).text.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
+                        var note = assessWeekViewModel.assessWeekNotes.batchNote.copy()
+                        note.noteContent = v.text.toString()
+                        assessWeekViewModel.saveBatchNote(note)
+                    }
                 }
             }
-        })
 
         assessWeekOverviewBinding.etAssessweekBatchnotes.addTextChangedListener {
             if (it.toString() != assessWeekViewModel.assessWeekNotes.batchNote.noteContent) {
@@ -75,7 +72,12 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
             }
         }
 
-        assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener(View.OnClickListener { showCreateAssessmentDialog(it, inflater) })
+        assessWeekOverviewBinding.btnAssessweekAddassessment.setOnClickListener {
+            showCreateAssessmentDialog(
+                it,
+                inflater
+            )
+        }
 
         assessWeekOverviewBinding.rvAssessweekAssessments.layoutManager = LinearLayoutManager(requireContext())
         assessWeekOverviewBinding.rvAssessweekAssessments.adapter = AssessmentsRecyclerAdapter(requireContext(), assessWeekViewModel, this, this)
@@ -85,7 +87,8 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "" + assessWeekViewModel.batch?.trainerName!!.substringBefore( " ") + " - Week " + assessWeekViewModel.assessWeekNotes.weekNumber
+        (activity as AppCompatActivity).supportActionBar?.title =
+            "" + assessWeekViewModel.batch.trainerName!!.substringBefore(" ") + " - Week " + assessWeekViewModel.assessWeekNotes.weekNumber
     }
 
     override fun onDestroyView() {
@@ -114,7 +117,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         builder.setView(dialogBinding.root)
 
-        builder.setPositiveButton(R.string.button_create, DialogInterface.OnClickListener { dialog, which ->
+        builder.setPositiveButton(R.string.button_create) { dialog, which ->
             var assessment = Assessment()
 
             assessment.assessmentType = dialogBinding.spinnerCreateassessmentdialogType.selectedItem as String
@@ -122,7 +125,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
             assessment.rawScore = dialogBinding.etCreateassessmentdialogPoints.text.toString().toInt()
 
             assessWeekViewModel.createAssessmentForBatchWeek(assessment)
-        })
+        }
         builder.setNegativeButton(R.string.button_cancel, null)
 
         val dialog = builder.create()
@@ -186,7 +189,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         builder.setView(dialogBinding.root)
 
-        builder.setPositiveButton(R.string.btn_confirm, DialogInterface.OnClickListener { dialog, which ->
+        builder.setPositiveButton(R.string.btn_confirm) { dialog, which ->
 
             var changed = false
 
@@ -205,16 +208,16 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
                 changed = true
             }
 
-//            if (changed) assessWeekViewModel.updateAssessmentForBatchWeek(assessment)
+            //            if (changed) assessWeekViewModel.updateAssessmentForBatchWeek(assessment)
 
-        })
+        }
 
         builder.setNegativeButton(R.string.button_cancel, null)
 
-        builder.setNeutralButton(R.string.button_delete, DialogInterface.OnClickListener { dialog, which ->
+        builder.setNeutralButton(R.string.button_delete) { dialog, which ->
             assessWeekViewModel.deleteAssessment(assessment)
             assessWeekOverviewBinding.rvAssessweekAssessments.adapter!!.notifyDataSetChanged()
-        })
+        }
 
         val dialog = builder.create()
         dialog.show()
@@ -224,7 +227,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString().isNotEmpty()) {
                     try {
-                        var points = s.toString().toInt()
+                        val points = s.toString().toInt()
                         if (points <= 0 || points > 1000) badValue() else goodValue()
 
                     } catch (e: ParseException) {

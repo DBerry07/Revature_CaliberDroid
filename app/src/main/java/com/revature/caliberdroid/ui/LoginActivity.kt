@@ -20,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
             val i:Intent = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
+        supportActionBar?.title = "Caliber"
         setContentView(binding.root)
     }
 }

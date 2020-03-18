@@ -86,7 +86,7 @@ class TraineeAssessmentsRecycleAdapter(
     fun getGradeForTrainee(trainee: Trainee): Grade {
 
         for(grade in assessWeekViewModel.assessWeekNotes.grades){
-            if(grade.traineeId==trainee.traineeId){
+            if(grade.traineeId==trainee.traineeId && grade.assessmentId==assessment.assessmentId){
                 return grade
             }
         }

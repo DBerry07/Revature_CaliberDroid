@@ -86,14 +86,14 @@
                     style="@style/globalCardRowWrapper">
 
                     <TextView
-                        style="globalCardRowLabel"
+                        style="@style/globalCardRowLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="E-mail: " />
 
                     <TextView
                         android:id="@+id/tvEmail"
-                        style="globalCardRowText"
+                        style="@style/globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{model.email}" />
@@ -107,14 +107,14 @@
                     style="@style/globalCardRowWrapper">
 
                     <TextView
-                        style="globalCardRowLabel"
+                        style="@style/globalCardRowLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tier: " />
 
                     <TextView
                         android:id="@+id/tvTier"
-                        style="globalCardRowText"
+                        style="@style/globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{model.tier}" />
@@ -135,6 +135,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginEnd="8dp"
+                    android:padding="3dp"
                     app:srcCompat="@drawable/ic_edit_orange" />
             </LinearLayout>
 

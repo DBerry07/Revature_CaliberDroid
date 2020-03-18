@@ -24,11 +24,10 @@
         android:id="@+id/frameLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_manage_batch_create_batch">
+        app:layout_constraintTop_toBottomOf="@+id/manage_batches_number_label">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_manage_batches"
@@ -42,10 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/manageBatch_noOfBatches"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_manageBatches" />
 
@@ -61,24 +58,15 @@
 
     <Spinner
         android:id="@+id/spinner_manageBatches"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="64dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
-        android:text="Select Year: "
-        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_manage_batch_create_batch"
+        app:layout_constraintEnd_toStartOf="@+id/btn_manage_batch_create_batch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_manageBatches" />
+        app:layout_constraintTop_toTopOf="@+id/btn_manage_batch_create_batch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

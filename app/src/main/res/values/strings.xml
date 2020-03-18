@@ -34,7 +34,7 @@
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
     <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
-    <string name="overall_qc_feedback_hint">There are no notes for week %d</string>
+    <string name="overall_qc_feedback_hint">There is no overall feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
     <string name="button_add_categories">Categories</string>
@@ -59,7 +59,7 @@
     <string name="title_overall">Overall</string>
     <string name="weekly_batch_average_label">Weekly Batch Average:</string>
     <string name="batch_notes_label">Batch notes</string>
-    <string name="batch_notes_hint">Add overall feedback for week %d</string>
+    <string name="batch_notes_hint">There is no overall feedback for week %d</string>
     <string name="button_create_assessment">New Assessment</string>
     <string name="dialog_create_assessment">Create Assessment</string>
     <string name="assessment_max_points_error_message">Must be an integer value greater than 0 and less than 1000</string>
@@ -111,10 +111,10 @@
     <string name="batch_dialog_heading_training_name">Trainer Name:</string>
     <string name="batch_dialog_heading_location">Location:</string>
     <string name="batch_dialog_heading_skill">Skill Focus:</string>
-    <string name="batch_dialog_heading_start_date">Start Date: (mmm dd, yyyy)</string>
-    <string name="batch_dialog_heading_end_date">End Date: (mmm dd, yyyy)</string>
+    <string name="batch_dialog_heading_start_date">Start Date: </string>
+    <string name="batch_dialog_heading_end_date">End Date: </string>
     <string name="batch_dialog_heading_good_grade">Good Grade:</string>
-    <string name="batch_dialog_heading_passing_grade">Passsing Grade:</string>
+    <string name="batch_dialog_heading_passing_grade">Passing Grade:</string>
     <string name="batch_dialog_create_button">Update</string>
     <string name="batch_dialog_img_description">Dialog Header background color block</string>
     <string name="textview_default">default</string>
@@ -169,6 +169,13 @@
     <string name="trainee_recruiter">Recruiter</string>
     <string name="trainee_optional_recruiter">Recruiter (Optional)</string>
     <string name="search">Search</string>
+    <string name="batchrow_trainerheader">Trainer:</string>
+    <string name="batchrow_cotrainerheader">Co-Trainer:</string>
+    <string name="batchrow_goodgrade_header">Good Grade:</string>
+    <string name="batchrow_passinggrade_header">Passing Grade:</string>
+    <string name="batchrow_expand_arrow_description">Expand Arrow</string>
+    <string name="createbatch_cotrainer_header">CoTrainer Name:</string>
+    <string name="dialog_yes">yes</string>
     <string name="empty">""</string>
     <string name="optional">Optional</string>
     <string name="btn_add_trainee">Add Trainee</string>

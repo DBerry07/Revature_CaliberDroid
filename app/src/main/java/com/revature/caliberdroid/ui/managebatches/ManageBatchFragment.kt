@@ -1,13 +1,10 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.managebatches
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SearchView
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -16,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.revature.caliberdroid.R
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.databinding.FragmentBatchesBinding
-import com.revature.caliberdroid.ui.batches.BatchAdapter.OnItemClickListener
+import com.revature.caliberdroid.ui.managebatches.BatchAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_batches.view.*
 import java.util.*
 
@@ -31,7 +28,6 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     private var yearsArrayAdapter: ArrayAdapter<Int>? = null
     private val batches: ArrayList<Batch>? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,9 +52,9 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.d("debug", "Menu Inflater")
-        inflater.inflate(R.menu.search_bar, menu)
+
+    override fun onCreateOptionsMenu(menu: Menu, inflator: MenuInflater) {
+        inflator.inflate(R.menu.search_bar, menu)
 
         val searchView: SearchView = menu.findItem(R.id.search_bar).actionView as SearchView
         searchView.setOnQueryTextListener(this)
@@ -89,6 +85,7 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
 
     private fun subscribeToViewModel() {
         viewModel.batchesLiveData.observe(viewLifecycleOwner, Observer {
+            binding.tvManageBatchesNoOfBatchesValue.text = it.size.toString()
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .replaceAll(it)
                 .commit()
@@ -154,14 +151,17 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit()
                 .removeAll()
                 .commit()
+            var count = 0
             for(i in it){
                 if(
                     i.trainingName.toLowerCase(Locale.ROOT).contains(newText.toString()) ||
                     i.skillType!!.toLowerCase(Locale.ROOT).contains(newText.toString()))
                 {
                     (binding.recyclerviewManageBatches.adapter as BatchAdapter).edit().add(i).commit()
+                    count++
                 }
             }
+            binding.tvManageBatchesNoOfBatchesValue.text = count.toString()
         })
         return false
     }

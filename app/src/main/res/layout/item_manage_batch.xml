@@ -40,7 +40,6 @@
                 android:text="@string/batch_row_batch_name_header"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tv_batchrow_trainer_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@{batchModel.trainerName}"
@@ -114,16 +113,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Trainer:"
+                android:text="@string/batchrow_trainerheader"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintStart_toStartOf="@+id/tv_batch_row_start_date_header"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batch_row_start_date_header" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintlayout_batchrow_expandable"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
                 android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_batchrow_trainer">
 
@@ -176,9 +177,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@{batchModel.location}"
                     android:textColor="#656565"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_batch_row_location_header"
                     app:layout_constraintTop_toTopOf="@+id/tv_batch_row_location_header" />
 
@@ -188,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="8dp"
-                    android:text="Co-Trainer:"
+                    android:text="@string/batchrow_cotrainerheader"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -198,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Good Grade:"
+                    android:text="@string/batchrow_goodgrade_header"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/tv_batchrow_cotrainer"
                     app:layout_constraintTop_toBottomOf="@+id/tv_batchrow_cotrainer" />
@@ -208,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Passing Grade:"
+                    android:text="@string/batchrow_passinggrade_header"
                     android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="@+id/tv_batchrow_goodgrade"
                     app:layout_constraintTop_toBottomOf="@+id/tv_batchrow_goodgrade" />
@@ -242,7 +245,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/btn_delete_batch"
                 app:layout_constraintEnd_toStartOf="@+id/btn_delete_batch"
                 app:layout_constraintTop_toTopOf="@+id/btn_delete_batch"
-                app:srcCompat="@drawable/ic_edit_orange" />
+                app:srcCompat="@drawable/ic_edit_orange"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/btn_delete_batch"
@@ -252,7 +256,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_delete_red" />
+                app:srcCompat="@drawable/ic_delete_red"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/btn_view_associates"
@@ -262,7 +267,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/btn_edit_batch"
                 app:layout_constraintEnd_toStartOf="@+id/btn_edit_batch"
                 app:layout_constraintTop_toTopOf="@+id/btn_edit_batch"
-                app:srcCompat="@drawable/people_icon" />
+                app:srcCompat="@drawable/people_icon"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/batchrow_arrow"
@@ -271,7 +277,8 @@
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_expand_arrow" />
+                app:srcCompat="@drawable/ic_expand_arrow"
+                android:contentDescription="@string/batchrow_expand_arrow_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

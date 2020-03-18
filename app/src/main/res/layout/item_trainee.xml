@@ -36,7 +36,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textSize="20sp"/>
 
                     <TextView
                         android:id="@+id/TM_tv_status"
@@ -45,7 +46,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:text="TextView"
-                        android:textAlignment="viewEnd" />
+                        android:textAlignment="viewEnd"
+                        android:textSize="17sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -60,7 +62,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textSize="17sp"/>
 
                     <ImageView
                         android:id="@+id/TM_iv_arrow"
@@ -75,53 +78,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone"
+                    tools:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/trainee_buffer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <TextView
                             android:id="@+id/textView39"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            tools:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/trainee_details_row1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView33"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="0dp"
-                                android:text="@string/trainee_college" />
+                                android:text="@string/trainee_college"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_college"
-                                style="@style/veryLittleImportantHeader"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingLeft="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewStart" />
+                                android:textAlignment="viewStart"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -129,27 +139,29 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:orientation="vertical"
-                            android:textAlignment="viewEnd">
+                            android:textAlignment="viewEnd"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView36"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="0dp"
                                 android:text="@string/trainee_phone"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_phone"
-                                style="@style/veryLittleImportantHeader"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -158,23 +170,26 @@
                         android:id="@+id/trainee_details_row2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView32"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="0dp"
-                                android:text="@string/trainee_major" />
+                                android:text="@string/trainee_major"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_major"
@@ -182,8 +197,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="10dp"
-                                android:text="TextView" />
+                                android:text="TextView"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
 
                         </LinearLayout>
 
@@ -191,16 +208,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView18"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingEnd="0dp"
                                 android:text="@string/trainee_project"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_project"
@@ -208,9 +226,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
 
                         </LinearLayout>
 
@@ -220,21 +240,26 @@
                         android:id="@+id/trainee_details_row3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView20"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/trainee_degree" />
+                                android:text="@string/trainee_degree"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_degree"
@@ -242,26 +267,29 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingLeft="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewStart" />
+                                android:textAlignment="viewStart"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView35"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:paddingStart="0dp"
                                 android:text="@string/trainee_skype"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_skype"
@@ -269,10 +297,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:paddingStart="10dp"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -281,24 +310,27 @@
                         android:id="@+id/trainee_details_row4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView22"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="0dp"
                                 android:text="@string/trainee_score"
-                                android:textAlignment="viewStart" />
+                                android:textAlignment="viewStart"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_score"
@@ -306,27 +338,29 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="10dp"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewStart" />
+                                android:textAlignment="viewStart"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView34"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="0dp"
                                 android:text="@string/trainee_profile"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_profile"
@@ -334,9 +368,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
 
                         </LinearLayout>
 
@@ -346,23 +382,26 @@
                         android:id="@+id/trainee_details_row5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView30"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="0dp"
-                                android:text="@string/trainee_screener" />
+                                android:text="@string/trainee_screener"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_screener"
@@ -370,26 +409,29 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingStart="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewStart" />
+                                android:textAlignment="viewStart"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:visibility="gone">
 
                             <TextView
                                 android:id="@+id/textView31"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="0dp"
                                 android:text="@string/trainee_recruiter"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/black"
+                                tools:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/TM_recruiter"
@@ -397,18 +439,57 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingEnd="10dp"
                                 android:text="TextView"
-                                android:textAlignment="viewEnd" />
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/cardLabelColor"
+                                android:textSize="17sp"
+                                tools:visibility="gone" />
                         </LinearLayout>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/TM_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        tools:visibility="gone">
+
+                        <Button
+                            android:id="@+id/TM_btn_delete"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delete" />
+
+                        <Button
+                            android:id="@+id/TM_btn_edit"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="Edit" />
+
+                        <Button
+                            android:id="@+id/TM_btn_switch"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Switch" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/trainee_details_row6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible"
+                        tools:visibility="gone">
 
                         <TextView
                             android:id="@+id/textView2"
@@ -427,39 +508,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/TM_options"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
 
-                <Button
-                    android:id="@+id/TM_btn_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delete"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
-
-                <Button
-                    android:id="@+id/TM_btn_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Edit"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
-
-                <Button
-                    android:id="@+id/TM_btn_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Switch"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
-            </LinearLayout>
 
         </LinearLayout>
 

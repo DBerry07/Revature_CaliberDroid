@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.managebatches
 
 import android.app.DatePickerDialog
 import android.graphics.Color
@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -48,8 +47,8 @@ class CreateBatchFragment : Fragment() {
     private lateinit var trainingTypeAdapter: ArrayAdapter<CharSequence>
     private lateinit var locationAdapter: ArrayAdapter<String>
     private lateinit var trainerAdapter: ArrayAdapter<String>
-    var locationsFromAPI = ArrayList<String>()
-    var trainersFromAPI = ArrayList<String>()
+    private var locationsFromAPI = ArrayList<String>()
+    private var trainersFromAPI = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -138,7 +137,6 @@ class CreateBatchFragment : Fragment() {
         return result
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createBatch() {
         // creating an empty batch that will be filled with data from the edit text views
         batch = Batch(
@@ -169,7 +167,6 @@ class CreateBatchFragment : Fragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
         batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()
@@ -200,6 +197,10 @@ class CreateBatchFragment : Fragment() {
                 this.locationAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, locationsFromAPI)
                 this.locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spinnerCreatebatchLocation.adapter = locationAdapter
+
+                val spinnerPosition = this.locationAdapter.getPosition(batch?.location)
+                binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
+
             } else {
                 Timber.d("locationsViewModel is null")
             }
@@ -216,6 +217,13 @@ class CreateBatchFragment : Fragment() {
                 this.trainerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 binding.spinnerCreatebatchTrainer.adapter = trainerAdapter
                 binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter
+
+                var spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
+                binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
+
+                spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
+                binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
+
             } else {
                 Timber.d("locationsViewModel is null")
             }
@@ -269,20 +277,6 @@ class CreateBatchFragment : Fragment() {
         val spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
         binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
 
-        /*   THE ADAPTER AND ARRAY LISTS GET RESET TO NULL AFTER FILLING THE SPINNER
-             FOR SOME REASONS. SO THIS WILL CAUSE AN RUNTIME ERROR
-
-        spinnerPosition = this.locationAdapter.getPosition(batch?.location)
-        binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
-
-        spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
-        binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
-
-        spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
-        binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
-
-         */
-
-}
+    }
 
 }

@@ -93,6 +93,16 @@ object AuditParser {
                     }
                 }
             }
+        } else {
+            for (i in 0 until length) {
+                traineeWithNotesList.get(i).value.apply {
+                    this!!.auditTraineeNotes = AuditTraineeNotes(
+                        weekNumber = weekNumber,
+                        batch = batch,
+                        traineeId = this.trainee!!.traineeId
+                    )
+                }
+            }
         }
 
         return traineeWithNotesList

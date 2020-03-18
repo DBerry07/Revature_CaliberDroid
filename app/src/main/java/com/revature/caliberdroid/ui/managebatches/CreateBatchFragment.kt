@@ -5,12 +5,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -142,12 +144,12 @@ class CreateBatchFragment : Fragment() {
         batch = Batch(
             0,
             binding.etCreateBatchNameInput.text.toString(),
-            binding.spinnerCreateBatchTrainingType.selectedItem.toString(),
+            binding.spinnerCreateBatchTrainingType.text.toString(),
             binding.etCreateBatchSkillInput.text.toString(),
-            binding.spinnerCreatebatchTrainer.selectedItem.toString(),
-            binding.spinnerCreatebatchCotrainer.selectedItem.toString(),
+            binding.spinnerCreatebatchTrainer.text.toString(),
+            binding.spinnerCreatebatchCotrainer.text.toString(),
             0,
-            binding.spinnerCreatebatchLocation.selectedItem.toString(),
+            binding.spinnerCreatebatchLocation.text.toString(),
             DateConverter.getTimestamp(binding.etCreateBatchStartInput.text.toString()),
             DateConverter.getTimestamp(binding.etCreateBatchEndInput.text.toString()),
             binding.etCreateBatchGoodGradeInput.text.toString().toInt(),
@@ -169,13 +171,13 @@ class CreateBatchFragment : Fragment() {
 
     private fun setBatchValues() {
         batch?.trainingName = binding.etCreateBatchNameInput.text.toString()
-        batch?.trainerName = binding.spinnerCreatebatchTrainer.selectedItem.toString()
-        batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.selectedItem.toString()
-        batch?.location = binding.spinnerCreatebatchLocation.selectedItem.toString()
+        batch?.trainerName = binding.spinnerCreatebatchTrainer.text.toString()
+        batch?.coTrainerName = binding.spinnerCreatebatchCotrainer.text.toString()
+        batch?.location = binding.spinnerCreatebatchLocation.text.toString()
         batch?.skillType = binding.etCreateBatchSkillInput.text.toString()
         batch?._startDate = DateConverter.getTimestamp(binding.etCreateBatchStartInput.text.toString())
         batch?._endDate = DateConverter.getTimestamp(binding.etCreateBatchEndInput.text.toString())
-        batch?.trainingType = binding.spinnerCreateBatchTrainingType.selectedItem.toString()
+        batch?.trainingType = binding.spinnerCreateBatchTrainingType.text.toString()
         batch?.goodGrade = binding.etCreateBatchGoodGradeInput.text.toString().toInt()
         batch?.passingGrade = binding.etCreateBatchPassingGradeInput.text.toString().toInt()
     }
@@ -186,7 +188,9 @@ class CreateBatchFragment : Fragment() {
         trainingTypeAdapter = ArrayAdapter.createFromResource(
             requireContext(), R.array.training_type_array, R.layout.custom_spinner)
         trainingTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerCreateBatchTrainingType.adapter = trainingTypeAdapter
+        val autoCompleteTextView: AutoCompleteTextView = binding.spinnerCreateBatchTrainingType
+        autoCompleteTextView.threshold = 0
+        autoCompleteTextView.setAdapter(trainingTypeAdapter)
 
         // populate Location Spinner
         locationsViewModel.locationsLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer { locations ->
@@ -196,10 +200,10 @@ class CreateBatchFragment : Fragment() {
                 }
                 this.locationAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, locationsFromAPI)
                 this.locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spinnerCreatebatchLocation.adapter = locationAdapter
 
-                val spinnerPosition = this.locationAdapter.getPosition(batch?.location)
-                binding.spinnerCreatebatchLocation.setSelection(spinnerPosition)
+                val autoCompleteTextView: AutoCompleteTextView = binding.spinnerCreatebatchLocation
+                autoCompleteTextView.threshold = 0
+                autoCompleteTextView.setAdapter(locationAdapter)
 
             } else {
                 Timber.d("locationsViewModel is null")
@@ -215,14 +219,12 @@ class CreateBatchFragment : Fragment() {
                 }
                 this.trainerAdapter = ArrayAdapter<String>(requireContext(), R.layout.custom_spinner, trainersFromAPI)
                 this.trainerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spinnerCreatebatchTrainer.adapter = trainerAdapter
-                binding.spinnerCreatebatchCotrainer.adapter = trainerAdapter
+                var autoCompleteTextView: AutoCompleteTextView = binding.spinnerCreatebatchTrainer
+                autoCompleteTextView.threshold = 0
+                autoCompleteTextView.setAdapter(trainerAdapter)
 
-                var spinnerPosition = this.trainerAdapter.getPosition(batch?.trainerName)
-                binding.spinnerCreatebatchTrainer.setSelection(spinnerPosition)
-
-                spinnerPosition = this.trainerAdapter.getPosition(batch?.coTrainerName)
-                binding.spinnerCreatebatchCotrainer.setSelection(spinnerPosition)
+                autoCompleteTextView = binding.spinnerCreatebatchCotrainer
+                autoCompleteTextView.setAdapter(trainerAdapter)
 
             } else {
                 Timber.d("locationsViewModel is null")
@@ -243,7 +245,7 @@ class CreateBatchFragment : Fragment() {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { _, year, month, day ->
                     val dateString = "${getMonth(month)} $day, $year"
-                    binding.etCreateBatchStartInput.text = dateString
+                    binding.etCreateBatchStartInput.text = Editable.Factory.getInstance().newEditable(dateString)
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -256,7 +258,7 @@ class CreateBatchFragment : Fragment() {
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 DatePickerDialog.OnDateSetListener { _, year, month, day ->
                     val dateString = "${getMonth(month)} $day, $year"
-                    binding.etCreateBatchEndInput.text = dateString
+                    binding.etCreateBatchEndInput.text = Editable.Factory.getInstance().newEditable(dateString)
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -268,15 +270,16 @@ class CreateBatchFragment : Fragment() {
         binding.run {
             etCreateBatchNameInput.setText(batch?.trainingName)
             etCreateBatchSkillInput.setText(batch?.skillType)
-            etCreateBatchStartInput.text = batch?.startDate
-            etCreateBatchEndInput.text = batch?.endDate
+            etCreateBatchStartInput.text = Editable.Factory.getInstance().newEditable(batch?.startDate)
+            etCreateBatchEndInput.text = Editable.Factory.getInstance().newEditable(batch?.endDate)
             etCreateBatchGoodGradeInput.setText(batch?.goodGrade.toString())
             etCreateBatchPassingGradeInput.setText(batch?.passingGrade.toString())
+
+            spinnerCreateBatchTrainingType.setText(batch?.trainingType)
+            spinnerCreatebatchTrainer.setText(batch?.trainerName)
+            spinnerCreatebatchCotrainer.setText(batch?.coTrainerName)
+            spinnerCreatebatchLocation.setText(batch?.location)
         }
-
-        val spinnerPosition: Int = trainingTypeAdapter.getPosition(batch?.trainingType)
-        binding.spinnerCreateBatchTrainingType.setSelection(spinnerPosition)
-
     }
 
 }

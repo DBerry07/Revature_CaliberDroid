@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.data.repository.AssessWeekRepository
+import com.revature.caliberdroid.data.repository.AssessWeekRepository.saveBatchNote
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.data.repository.CategoryRepository
 import com.revature.caliberdroid.ui.assessbatch.weekselection.AssessWeekLiveData
@@ -38,9 +39,16 @@ class AssessWeekViewModel : ViewModel() {
         assessment.weekNumber = assessWeekNotes.weekNumber
         val liveDataAssessment = MutableLiveData(assessment)
         AssessWeekRepository.createAssessment(liveDataAssessment)
+
         liveDataAssessment.observeForever(Observer {
-            if (assessWeekNotes.weekNumber == it.weekNumber && assessWeekNotes.batch!!.batchID == it.batchId) {
-                (assessWeekNotes.assessments as ArrayList).add(it)
+            var alreadyAdded = false
+            for (assessment in assessWeekNotes.assessments) {
+                if (assessment.assessmentId == it.assessmentId) {
+                    alreadyAdded = true
+                }
+            }
+            if (it.assessmentId > 0 && assessWeekNotes.weekNumber == it.weekNumber && assessWeekNotes.batch!!.batchID == it.batchId) {
+                if (!alreadyAdded) (assessWeekNotes.assessments as ArrayList).add(it)
             }
         })
     }

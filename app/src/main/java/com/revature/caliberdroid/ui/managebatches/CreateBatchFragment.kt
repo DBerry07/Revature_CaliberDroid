@@ -269,7 +269,6 @@ class CreateBatchFragment : Fragment() {
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dpd.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(resources.getColor(R.color.white))
             dpd.show()
         }
     }

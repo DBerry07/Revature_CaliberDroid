@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment2"
-        android:name="com.revature.caliberdroid.ui.batches.BatchSelectionFragment"
+        android:name="com.revature.caliberdroid.ui.batchselection.BatchSelectionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

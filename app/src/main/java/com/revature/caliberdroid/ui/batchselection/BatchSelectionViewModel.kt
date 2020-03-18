@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.batchselection
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -39,6 +39,7 @@
     <string name="notes">Notes</string>
     <string name="button_add_categories">Categories</string>
     <string name="no_categories_message">No categories added</string>
+    <string name="empty_trainees">There are no trainees in this batch</string>
 
     <!--    Assess Batch-->
     <string name="assessment_type_label">Type:</string>
@@ -179,4 +180,5 @@
     <string name="empty">""</string>
     <string name="optional">Optional</string>
     <string name="btn_add_trainee">Add Trainee</string>
+    <string name="btn_update">update</string>
 </resources>

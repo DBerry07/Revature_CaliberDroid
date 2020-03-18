@@ -141,7 +141,7 @@ class CategoriesFragment : Fragment() {
             builder.setTitle(R.string.title_edit_category)
             val etField = editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
             builder.setView(editCategoryDialogView)
-                .setPositiveButton(R.string.btn_confirm,
+                .setPositiveButton(R.string.btn_update,
                     DialogInterface.OnClickListener { dialog, id ->
                         val entry = etField.text.toString()
                         if(CategoriesFieldValidator.validateFields(validationString,entry)){

@@ -200,7 +200,7 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
         }
 
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            if (!holder.isExpanded && holder.options.visibility == View.GONE) {
+            if (!holder.isExpanded) {
                 holder.buffer.visibility = View.VISIBLE
                 holder.arrow.visibility = View.INVISIBLE
                 Handler().postDelayed( {
@@ -223,8 +223,12 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
                     holder.row5.visibility=View.VISIBLE
                 }, LOAD_DELAY * 6)
                 Handler().postDelayed( {
-                    holder.row6.visibility=View.VISIBLE
+                    holder.options.visibility = View.VISIBLE
                 }, LOAD_DELAY * 7)
+                Handler().postDelayed( {
+                    holder.row6.visibility=View.VISIBLE
+                }, LOAD_DELAY * 8)
+
 
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
@@ -235,27 +239,30 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
                   holder.row6.visibility=View.GONE
                 }, LOAD_DELAY * 1)
                 Handler().postDelayed( {
-                    holder.row5.visibility=View.GONE
+                    holder.options.visibility = View.GONE
                 }, LOAD_DELAY * 2)
                 Handler().postDelayed( {
-                    holder.row4.visibility=View.GONE
+                    holder.row5.visibility=View.GONE
                 }, LOAD_DELAY * 3)
                 Handler().postDelayed( {
-                    holder.row3.visibility=View.GONE
+                    holder.row4.visibility=View.GONE
                 }, LOAD_DELAY * 4)
                 Handler().postDelayed( {
-                    holder.row2.visibility=View.GONE
+                    holder.row3.visibility=View.GONE
                 }, LOAD_DELAY * 5)
+                Handler().postDelayed( {
+                    holder.row2.visibility=View.GONE
+                }, LOAD_DELAY * 6)
                 Handler().postDelayed( {
                     holder.row1.visibility=View.GONE
                     holder.buffer.visibility=View.GONE
                     holder.details.visibility = View.GONE
-                }, LOAD_DELAY * 6)
+                }, LOAD_DELAY * 7)
                 Handler().postDelayed( {
                     holder.buffer.visibility=View.GONE
                     holder.details.visibility = View.GONE
                     holder.arrow.visibility=View.VISIBLE
-                }, LOAD_DELAY * 7)
+                }, LOAD_DELAY * 8)
                 holder.isExpanded = !holder.isExpanded
                 adapter.notifyItemChanged(position)
                 holder.arrow.setImageResource(R.drawable.ic_expand_arrow)
@@ -300,16 +307,6 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
         }
 
         override fun onLongPress(e: MotionEvent?) {
-            if (!holder.isExpanded && holder.options.visibility == View.GONE) {
-                holder.options.visibility = View.VISIBLE
-                adapter.notifyItemChanged(position)
-            }
-            else if (!holder.isExpanded && holder.options.visibility == View.VISIBLE){
-                holder.options.visibility = View.GONE
-                adapter.notifyItemChanged(position)
-            }
-
-
         }
 
         fun swipeRight(){

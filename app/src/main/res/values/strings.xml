@@ -156,7 +156,7 @@
     <string name="createBatch_skillHeader">Skill Focus:</string>
     <string name="createBatch_locationHeader">Location:</string>
     <string name="createBatch_trainingTypeHeader">Training Type:</string>
-    <string name="manageBatch_noOfBatches">No. of Batches:</string>
+    <string name="manageBatch_noOfBatches">Batches:</string>
     <string name="btn_editBatch_update">Create</string>
 
     <string name="trainee_project">Project Status</string>

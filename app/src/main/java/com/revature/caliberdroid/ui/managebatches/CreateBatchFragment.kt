@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -164,8 +165,14 @@ class CreateBatchFragment : Fragment() {
     private fun updateBatch() {
         setBatchValues()
         BatchRepository.editBatch(batch!!)
+
+        val handler = Handler()
+        handler.postDelayed(
+            {}, 500
+        )
         Snackbar.make(view!!,"Batch Updated Successfully!", Snackbar.LENGTH_SHORT).show()
-        findNavController().navigate(CreateBatchFragmentDirections.actionCreateBatchFragmentToManageBatchFragment())
+        findNavController().navigateUp()
+
     }
 
 
@@ -262,6 +269,7 @@ class CreateBatchFragment : Fragment() {
                 }, y, m, d
             )
             dpd.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dpd.getButton(DatePickerDialog.BUTTON_POSITIVE).setBackgroundColor(resources.getColor(R.color.white))
             dpd.show()
         }
     }

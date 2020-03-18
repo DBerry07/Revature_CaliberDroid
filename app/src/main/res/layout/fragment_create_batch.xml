@@ -132,6 +132,7 @@
                 android:layout_height="match_parent"
                 android:inputType="phone"
                 style="@style/materialDesignText"
+                android:focusable="false"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -152,6 +153,7 @@
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
                 style="@style/materialDesignText"
+                android:focusable="false"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>

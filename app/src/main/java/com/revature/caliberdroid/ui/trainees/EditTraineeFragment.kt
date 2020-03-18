@@ -114,7 +114,7 @@ class EditTraineeFragment : Fragment() {
         jsonObject.put("projectCompletion",binding.traineeProject.text.toString())
         //The Add Trainee API call has no field for "flagStatus", and is initialized as null
         //However, passing "flagStatus" as "null" when editing a trainee results in an error, hence the if statement
-        jsonObject.put("flagStatus", if (trainee.flagStatus.equals("null")) { "NONE" } else { trainee.flagStatus})
+        jsonObject.put("flagStatus", if (trainee.flagStatus.equals("null")) { "NONE" } else { trainee.flagStatus} )
         jsonObject.put("flagNotes", trainee.flagNotes)
         jsonObject.put("flagAuthor", trainee.flagAuthor)
         jsonObject.put("flagTimestamp", trainee.flagTimestamp)

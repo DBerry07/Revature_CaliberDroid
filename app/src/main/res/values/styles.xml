@@ -65,6 +65,13 @@
         <item name="cardElevation">5dp</item>
     </style>
 
+    <style name="traineeSwitchCard">
+        <item name="cardPreventCornerOverlap">true</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="contentPadding">15dp</item>
+        <item name="cardCornerRadius">5dp</item>
+    </style>
+
 
     <style name="importantHeader">
         <item name="android:textSize">20sp</item>

@@ -80,7 +80,7 @@ class AddTraineeFragment() : Fragment() {
         jsonObject.put("degree", binding.traineeDegree.text.toString())
         jsonObject.put("major", binding.traineeMajor.text.toString())
         jsonObject.put("techScreenerName", binding.traineeScreener.text.toString())
-        jsonObject.put("projectCompletion", "")
+        jsonObject.put("projectCompletion", binding.traineeProject.text.toString())
         jsonObject.put("name", name)
         jsonObject.put("batchId", currentBatch.batchID)
         model.postTrainee(jsonObject)

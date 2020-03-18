@@ -4,7 +4,7 @@
         android:viewportWidth="24.0"
         android:viewportHeight="24.0">
     <path
-        android:fillColor="#@color/average_face"
+        android:fillColor="@color/average_face"
         android:pathData="M9,14h6v1.5H9z"/>
     <path
         android:fillColor="@color/average_face"

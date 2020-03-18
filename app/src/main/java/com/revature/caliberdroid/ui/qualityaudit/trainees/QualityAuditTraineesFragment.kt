@@ -67,7 +67,7 @@ class QualityAuditTraineesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title =
-            "${viewModel.batch.trainerName} - ${viewModel.batch.skillType}"
+            "${viewModel.batch.trainerName!!.substringBefore(" ")} - Week ${viewModel.weekNumber}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

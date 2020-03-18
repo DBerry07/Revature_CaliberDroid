@@ -91,6 +91,10 @@ class QualityAuditTraineesFragment : Fragment() {
             (binding.rvAudittraineesTraineeslist.adapter as QualityAuditTraineesAdapter).edit()
                 .replaceAll(it)
                 .commit()
+            binding.tvAudittraineesEmptytrainees.visibility = when (it.size) {
+                0 -> View.VISIBLE
+                else -> View.GONE
+            }
         })
     }
 

@@ -143,7 +143,7 @@ class AssessWeekViewModel : ViewModel() {
                 totalPossible += assessment.rawScore!!
             }
         }
-        return ((totalPoints/totalPossible)*100).round()
+        return if(((totalPoints/totalPossible)*100).round().isNaN()) 0.0 else ((totalPoints/totalPossible)*100).round()
     }
 
     fun getWeeklyBatchAverage(assessWeekNotes: AssessWeekNotes): Double {

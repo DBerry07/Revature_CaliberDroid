@@ -99,7 +99,7 @@ data class AssessWeekNotes(var weekNumber: Int,
         }
         var batchAvg = (totalAverage/count).round().toFloat()
         batchAverage = batchAvg
-        return batchAvg
+        return if(batchAvg.isNaN()) 0.0f else batchAvg
     }
 
     fun getAssessmentAverage(assessment: Assessment): Double {
@@ -111,7 +111,7 @@ data class AssessWeekNotes(var weekNumber: Int,
                 totalPossible += assessment.rawScore!!
             }
         }
-        return ((totalPoints/totalPossible)*100).round()
+        return if(((totalPoints/totalPossible)*100).round().isNaN()) 0.0 else ((totalPoints/totalPossible)*100).round()
     }
 
     fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()

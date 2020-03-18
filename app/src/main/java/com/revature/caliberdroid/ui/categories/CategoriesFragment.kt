@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.revature.caliberdroid.R
 
 import com.revature.caliberdroid.adapter.categories.CategoriesAdapter
@@ -65,11 +66,12 @@ class CategoriesFragment : Fragment() {
                     )
                 })
             btnAddCategory.setOnClickListener {
-                val builder: AlertDialog.Builder = AlertDialog.Builder(context);
+                val builder = MaterialAlertDialogBuilder(context);
                 addCategoryDialogView = LayoutInflater.from(context).inflate(
                     R.layout.dialog_add_category,
                     view!!.findViewById(android.R.id.content)
                 )
+                builder.setTitle(R.string.title_add_category)
                 val etField = addCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
                 builder.setView(addCategoryDialogView)
                     .setPositiveButton(R.string.btn_add,
@@ -80,6 +82,7 @@ class CategoriesFragment : Fragment() {
                                 CategoryRepository.addCategory(entry,categoriesViewModel.categoryLiveData)
                             }else{
                                 Timber.d("Category validation failed")
+                                DialogInvalidInput().showInvalidInputDialog(context,view,validationString.toString())
                             }
                         }
                     )
@@ -87,7 +90,7 @@ class CategoriesFragment : Fragment() {
                         DialogInterface.OnClickListener { dialog, id ->
                         }
                     )
-                val alertDialog: AlertDialog = builder.create()
+                val alertDialog= builder.create()
                 alertDialog.show()
             }
         }
@@ -130,11 +133,12 @@ class CategoriesFragment : Fragment() {
 
     inner class EditCategoriesOnClickListener : EditCategoryListenerInterface {
         override fun onEditCategory(category: Category) {
-            var builder: AlertDialog.Builder = AlertDialog.Builder(context);
+            var builder = MaterialAlertDialogBuilder(context);
             editCategoryDialogView = LayoutInflater.from(context).inflate(
                 R.layout.dialog_edit_category,
                 view!!.findViewById(android.R.id.content)
             )
+            builder.setTitle(R.string.title_edit_category)
             val etField = editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField)
             builder.setView(editCategoryDialogView)
                 .setPositiveButton(R.string.btn_confirm,
@@ -155,7 +159,7 @@ class CategoriesFragment : Fragment() {
                     }
                 )
             editCategoryDialogView.findViewById<EditText>(R.id.tvDialogField).setText(category.skillCategory)
-            var alertDialog: AlertDialog = builder.create();
+            var alertDialog = builder.create();
             alertDialog.show()
         }
     }

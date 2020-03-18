@@ -11,6 +11,10 @@ object AssessWeekRepository {
         APIHandler.postAssessment(assessment)
     }
 
+    fun deleteAssessment(assessment: Assessment) {
+        APIHandler.deleteAssessment(assessment)
+    }
+
     fun getAssessWeekData(batch: Batch,weekNumber: Int): AssessWeekLiveData {
         var assessWeekNotes = AssessWeekNotes(weekNumber,batch)
 

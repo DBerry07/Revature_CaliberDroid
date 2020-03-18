@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="Company Name"
+        android:hint="Company Name*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCompanyName"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="Street Address"
+        android:hint="Street Address*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etStreetAddress"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="City"
+        android:hint="City*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCity"
@@ -56,21 +56,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/settingsFieldHeading"
-        android:text="State" />
+        style="@style/settingsFieldSpinner"
+        android:text="State*" />
     <Spinner
         android:id="@+id/spnState"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dialog"
-        style="@style/settingsField" />
+        style="@style/settingsFieldSpinner" />
 
     <!--    Zip Code -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="Zipcode"
+        android:hint="Zipcode*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etZipCode"

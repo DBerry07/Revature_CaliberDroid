@@ -4,6 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
@@ -51,6 +54,10 @@ class QualityAuditTraineesAdapter(context: Context,
             )
             binding.statusHandler = statusHandler
             binding.includeItemaudittraineeStatusChooserLayout.statusHandler = statusHandler
+
+            binding.imgItemaudittraineeFlag.setOnClickListener {
+                showEditFlagDialog(item, viewModel)
+            }
         }
 
         private fun watchOverallNote() {
@@ -71,6 +78,49 @@ class QualityAuditTraineesAdapter(context: Context,
                 }
             }
         }
+
+        private fun showEditFlagDialog(
+            item: TraineeWithNotesLiveData,
+            viewModel: QualityAuditTraineesViewModel
+        ) {
+
+            val alertDialog = AlertDialog.Builder(binding.root.context)
+            alertDialog.setTitle("Comment for ${item.value!!.trainee!!.name}")
+
+            val editText = EditText(binding.root.context)
+
+            editText.setText(
+                if (item.value!!.trainee!!._flagNotes != "null") {
+                    item.value!!.trainee!!._flagNotes
+                } else {
+                    ""
+                }
+            )
+
+            alertDialog.setView(editText)
+
+            alertDialog.setPositiveButton("Update comment") { _, _ ->
+                Toast.makeText(binding.root.context, "Update clicked", Toast.LENGTH_SHORT).show()
+                item.value!!.trainee!!.flagNotes = editText.text.toString()
+                viewModel.putTrainee(trainee = item.value!!.trainee!!)
+            }
+
+            alertDialog.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(binding.root.context, "Neutral clicked", Toast.LENGTH_SHORT).show()
+            }
+
+            alertDialog.setNegativeButton("Delete comment") { dialog, _ ->
+                Toast.makeText(binding.root.context, "Delete comment clicked", Toast.LENGTH_SHORT)
+                    .show()
+                item.value!!.trainee!!.flagNotes = ""
+                viewModel.putTrainee(item.value!!.trainee!!)
+            }
+
+
+
+            alertDialog.show()
+        }
+
     }
 
 }

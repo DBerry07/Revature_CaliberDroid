@@ -1,13 +1,8 @@
 package com.revature.caliberdroid.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.revature.caliberdroid.data.api.APIHandler
-import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
-import com.revature.caliberdroid.data.model.AuditWeekNotes
-import com.revature.caliberdroid.data.model.Batch
-import com.revature.caliberdroid.data.model.Category
-import com.revature.caliberdroid.data.model.SkillCategory
+import com.revature.caliberdroid.data.model.*
 import com.revature.caliberdroid.ui.qualityaudit.trainees.TraineeWithNotesLiveData
 import com.revature.caliberdroid.ui.qualityaudit.weekselection.WeekLiveData
 
@@ -57,5 +52,9 @@ object QualityAuditRepository {
 
     fun removeAuditSkillCategories(skillCategories: ArrayList<SkillCategory>, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
         APIHandler.deleteAuditSkillCategories(skillCategories, skillCategoryLiveData)
+    }
+
+    fun putTrainee(trainee: Trainee) {
+        APIHandler.putTrainee(trainee)
     }
 }

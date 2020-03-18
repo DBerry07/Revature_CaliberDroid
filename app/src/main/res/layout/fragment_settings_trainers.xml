@@ -14,11 +14,19 @@
         android:orientation="vertical"
         style="@style/settingsFragmentContentWrapper">
 
-        <LinearLayout
-            style="@style/settingsHeaderWrapper"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/settingsHeaderWrapper">
+            <TextView
+                android:id="@+id/tvTrainerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btnAddTrainer"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:text="@{`Trainers: `+trainerCount}"
+                />
             <Button
                 android:id="@+id/btnAddTrainer"
                 app:iconGravity="end"
@@ -26,17 +34,10 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="@string/btn_add_trainer" />
-            <TextView
-                android:id="@+id/tvTrainerCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:text="@{`Number of Trainers: `+trainerCount}"
-                />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/btn_add_trainer"  />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"

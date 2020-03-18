@@ -65,7 +65,7 @@ object GradeAPIHandler {
             url,
             jsonBody,
             Response.Listener { response ->
-                Timber.d("put grade "+grade.score)
+                Timber.d("put grade traineeId: ${grade.traineeId} assessmentId: ${grade.assessmentId} score: ${grade.score}")
                 grade.gradeId = JSONParser.parseGrade(response).gradeId
             },
             Response.ErrorListener { error -> Timber.d(error.toString()) }

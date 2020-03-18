@@ -1,324 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_create_batch"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_create_batch"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_create_batch_name_input"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:inputType="text"
-        android:maxLength="25"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_name"
-        tools:ignore="LabelFor" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinner_createbatch_cotrainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/spinner_border"
-        android:paddingStart="4dp"
-        android:paddingEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_cotrainer"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_cotrainer" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:hint="@string/batch_dialog_heading_name"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
-    <Spinner
-        android:id="@+id/spinner_createbatch_trainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/spinner_border"
-        android:paddingStart="4dp"
-        android:paddingEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_trainer" />
 
-    <Spinner
-        android:id="@+id/spinner_createbatch_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/spinner_border"
-        android:paddingStart="4dp"
-        android:paddingEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_location"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_location" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_name_input"
+                style="@style/materialDesignText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
 
-    <Spinner
-        android:id="@+id/spinner_create_batch_training_type"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/spinner_border"
-        android:paddingStart="4dp"
-        android:paddingEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_training_type"
-        app:layout_constraintTop_toTopOf="@+id/tv_create_batch_training_type" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/et_create_batch_skill_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="text"
-        android:maxLength="20"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_skill"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_skill"
-        tools:ignore="LabelFor" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
 
-    <TextView
-        android:id="@+id/et_create_batch_start_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:maxLength="12"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_start"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_start" />
+            <AutoCompleteTextView
+                android:hint="@string/batch_dialog_heading_training_name"
+                android:id="@+id/spinner_createbatch_trainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/et_create_batch_end_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:maxLength="12"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_end"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_end" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/et_create_batch_good_grade_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="number"
-        android:maxLength="2"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_good_grade"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_good_grade"
-        tools:ignore="LabelFor" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
 
-    <EditText
-        android:id="@+id/et_create_batch_passing_grade_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/textview_border"
-        android:fontFamily="sans-serif"
-        android:inputType="number"
-        android:maxLength="2"
-        android:paddingStart="4dp"
-        android:paddingTop="1dp"
-        android:paddingEnd="1dp"
-        android:paddingBottom="1dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_passing_grade"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_batch_passing_grade"
-        tools:ignore="LabelFor" />
+            <AutoCompleteTextView
+                android:hint="@string/createbatch_cotrainer_header"
+                android:id="@+id/spinner_createbatch_cotrainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tv_create_batch_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/batch_dialog_heading_name"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_create_batch_trainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_training_name"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_name_input" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
 
-    <TextView
-        android:id="@+id/tv_create_batch_cotrainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/createbatch_cotrainer_header"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_createbatch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_createbatch_trainer" />
+            <AutoCompleteTextView
+                android:hint="@string/createbatch_trainingtype"
+                android:id="@+id/spinner_create_batch_training_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tv_create_batch_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_location"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_createbatch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_create_batch_training_type" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_create_batch_training_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Training Type:"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_createbatch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_createbatch_cotrainer" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
 
-    <TextView
-        android:id="@+id/tv_create_batch_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_skill"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_createbatch_trainer"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_createbatch_location" />
+            <AutoCompleteTextView
+                android:hint="@string/batch_dialog_heading_location"
+                android:id="@+id/spinner_createbatch_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tv_create_batch_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_start_date"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_skill"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_skill_input" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_create_batch_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_end_date"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_start"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_start_input" />
 
-    <TextView
-        android:id="@+id/tv_create_batch_good_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_good_grade"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_end"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_end_input" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/batch_dialog_heading_skill"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <TextView
-        android:id="@+id/tv_create_batch_passing_grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/batch_dialog_heading_passing_grade"
-        android:textColor="@color/grey_dark"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_create_batch_good_grade"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_good_grade_input" />
 
-    <Button
-        android:id="@+id/btn_create_batch_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/submit_button_style"
-        android:text="@string/batch_dialog_create_button"
-        android:textColor="@color/icon_plus_background"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_create_batch_cancel"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_passing_grade_input" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_skill_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-    <Button
-        android:id="@+id/btn_create_batch_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/submit_button_style"
-        android:text="@android:string/cancel"
-        android:textColor="@color/icon_plus_background"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_create_batch_create"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_passing_grade_input" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_create_batch_start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/batch_dialog_heading_start_date"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_start_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                style="@style/materialDesignText"
+                android:focusable="false"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_create_batch_end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/batch_dialog_heading_end_date"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_end_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                android:focusable="false"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/batch_dialog_heading_good_grade"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_good_grade_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                style="@style/materialDesignText"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/batch_dialog_heading_passing_grade"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_create_batch_passing_grade_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                style="@style/materialDesignText"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_create_batch_create"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/batch_dialog_create_button" />
+
+        <Button
+            android:id="@+id/btn_create_batch_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-48dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="20dp"
+            android:text="@android:string/cancel" />
+
+    </LinearLayout>
+
+
+</ScrollView>

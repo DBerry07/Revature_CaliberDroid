@@ -2,14 +2,12 @@ package com.revature.caliberdroid.ui.managebatches
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import androidx.core.content.contentValuesOf
 import androidx.core.view.isVisible
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -18,7 +16,6 @@ import com.revature.caliberdroid.data.api.APIHandler.context
 import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.repository.BatchRepository
 import com.revature.caliberdroid.databinding.ItemManageBatchBinding
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 

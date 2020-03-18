@@ -78,7 +78,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="gone"
+                    tools:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/trainee_buffer"
@@ -183,7 +184,6 @@
 
                             <TextView
                                 android:id="@+id/textView32"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -213,7 +213,6 @@
 
                             <TextView
                                 android:id="@+id/textView18"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/trainee_project"
@@ -284,7 +283,6 @@
 
                             <TextView
                                 android:id="@+id/textView35"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -326,7 +324,6 @@
 
                             <TextView
                                 android:id="@+id/textView22"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -357,7 +354,6 @@
 
                             <TextView
                                 android:id="@+id/textView34"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -400,7 +396,6 @@
 
                             <TextView
                                 android:id="@+id/textView30"
-                                style="@style/traineeDetailsHeaderLeft"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -430,7 +425,6 @@
 
                             <TextView
                                 android:id="@+id/textView31"
-                                style="@style/traineeDetailsHeaderRight"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

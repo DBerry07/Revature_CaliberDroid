@@ -203,31 +203,29 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
             if (!holder.isExpanded) {
                 holder.buffer.visibility = View.VISIBLE
                 holder.arrow.visibility = View.INVISIBLE
-                Handler().postDelayed( {
-                    holder.details.visibility = View.VISIBLE
-                }, LOAD_DELAY * 1)
+                holder.details.visibility = View.VISIBLE
                 holder.buffer.visibility = View.VISIBLE
                 Handler().postDelayed( {
                     holder.row1.visibility=View.VISIBLE
-                }, LOAD_DELAY * 2)
+                }, LOAD_DELAY * 1)
                 Handler().postDelayed( {
                     holder.row2.visibility=View.VISIBLE
-                }, LOAD_DELAY * 3)
+                }, LOAD_DELAY * 2)
                 Handler().postDelayed( {
                     holder.row3.visibility=View.VISIBLE
-                }, LOAD_DELAY * 4)
+                }, LOAD_DELAY * 3)
                 Handler().postDelayed( {
                     holder.row4.visibility=View.VISIBLE
-                }, LOAD_DELAY * 5)
+                }, LOAD_DELAY * 4)
                 Handler().postDelayed( {
                     holder.row5.visibility=View.VISIBLE
-                }, LOAD_DELAY * 6)
+                }, LOAD_DELAY * 5)
                 Handler().postDelayed( {
                     holder.options.visibility = View.VISIBLE
-                }, LOAD_DELAY * 7)
+                }, LOAD_DELAY * 6)
                 Handler().postDelayed( {
                     holder.row6.visibility=View.VISIBLE
-                }, LOAD_DELAY * 8)
+                }, LOAD_DELAY * 7)
 
 
                 holder.isExpanded = !holder.isExpanded
@@ -256,7 +254,6 @@ class TraineeAdapter(data : ArrayList<Trainee>, batchID : Long, fragment: Traine
                 Handler().postDelayed( {
                     holder.row1.visibility=View.GONE
                     holder.buffer.visibility=View.GONE
-                    holder.details.visibility = View.GONE
                 }, LOAD_DELAY * 7)
                 Handler().postDelayed( {
                     holder.buffer.visibility=View.GONE

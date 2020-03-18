@@ -125,6 +125,10 @@ object APIHandler {
         queue.add(addWeekRequest)
     }
 
+    fun deleteAssessment(assessment: Assessment) {
+        AssessmentAPIHandler.deleteAssessment(assessment)
+    }
+
     fun deleteAuditSkillCategory(skillCategory: SkillCategory, skillCategoryLiveData: MutableLiveData<ArrayList<SkillCategory>>) {
         AuditAPIHandler.deleteAuditSkillCategory(skillCategory, skillCategoryLiveData)
     }

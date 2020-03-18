@@ -15,7 +15,6 @@ import java.lang.Exception
 
 object BatchAPIHandler {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun addBatch(batch: Batch) {
         val tempStartDate = DateConverter.getDate(batch._startDate)
         val tempEndDate = DateConverter.getDate(batch._endDate)
@@ -54,7 +53,6 @@ object BatchAPIHandler {
         queue.add(request)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun editBatch(batch: Batch) {
         val tempStartDate = DateConverter.getDate(batch._startDate)
         val tempEndDate = DateConverter.getDate(batch._endDate)

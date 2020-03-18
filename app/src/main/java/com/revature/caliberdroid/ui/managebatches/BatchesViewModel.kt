@@ -1,4 +1,4 @@
-package com.revature.caliberdroid.ui.batches
+package com.revature.caliberdroid.ui.managebatches
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,6 @@ import com.revature.caliberdroid.data.model.Batch
 import com.revature.caliberdroid.data.model.Location
 import com.revature.caliberdroid.data.model.Trainer
 import com.revature.caliberdroid.data.repository.BatchRepository
-import com.revature.caliberdroid.data.repository.LocationRepository
 import com.revature.caliberdroid.data.repository.TrainerRepository
 
 class BatchesViewModel : ViewModel() {

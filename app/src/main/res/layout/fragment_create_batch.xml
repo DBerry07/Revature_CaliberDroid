@@ -211,7 +211,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="CoTrainer Name:"
+        android:text="@string/createbatch_cotrainer_header"
         android:textColor="@color/grey_dark"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/spinner_createbatch_trainer"
@@ -298,23 +298,27 @@
         android:id="@+id/btn_create_batch_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/submit_button_style"
         android:text="@string/batch_dialog_create_button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/icon_plus_background"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_create_batch_cancel" />
+        app:layout_constraintStart_toEndOf="@+id/btn_create_batch_cancel"
+        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_passing_grade_input" />
 
     <Button
         android:id="@+id/btn_create_batch_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/submit_button_style"
         android:text="@android:string/cancel"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/icon_plus_background"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_create_batch_create"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_create_batch_passing_grade_input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

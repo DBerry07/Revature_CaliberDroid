@@ -45,6 +45,21 @@ class AssessWeekViewModel : ViewModel() {
         })
     }
 
+    fun deleteAssessment(assessment: Assessment) {
+        (assessWeekNotes.assessments as ArrayList).remove(assessment)
+        AssessWeekRepository.deleteAssessment(assessment)
+    }
+
+    fun findCategoryById(id: Long): Category {
+        var returnCategory = Category(-1,"none", false)
+
+        for (category in categories.value!!) {
+            if (category.categoryId == id) returnCategory = category
+        }
+
+        return returnCategory
+    }
+
     fun getSkills(): MutableLiveData<ArrayList<Category>> {
 
         if (categories.value!!.size == 0) {

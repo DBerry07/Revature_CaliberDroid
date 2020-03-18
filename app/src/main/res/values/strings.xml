@@ -34,7 +34,7 @@
     <!--  Quality Audit  -->
     <string name="overall_qc_status">Overall QC Status:</string>
     <string name="overall_qc_feedback">Overall QC feedback for week %d</string>
-    <string name="overall_qc_feedback_hint">There are no notes for week %d</string>
+    <string name="overall_qc_feedback_hint">There is no overall feedback for week %d</string>
     <string name="trainee_qc_feedback_hint">Week %d notes for %s</string>
     <string name="notes">Notes</string>
     <string name="button_add_categories">Categories</string>
@@ -60,7 +60,7 @@
     <string name="title_overall">Overall</string>
     <string name="weekly_batch_average_label">Weekly Batch Average:</string>
     <string name="batch_notes_label">Batch notes</string>
-    <string name="batch_notes_hint">Add overall feedback for week %d</string>
+    <string name="batch_notes_hint">There is no overall feedback for week %d</string>
     <string name="button_create_assessment">New Assessment</string>
     <string name="dialog_create_assessment">Create Assessment</string>
     <string name="assessment_max_points_error_message">Must be an integer value greater than 0 and less than 1000</string>

@@ -6,29 +6,29 @@
     <group android:id="@+id/top_menu">
         <item
             android:id="@+id/nav_quality_audit"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_superstar"
             android:title="@string/menu_quality_audit" />
         <item
             android:id="@+id/nav_assess_batch"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/assess"
             android:title="@string/menu_assess_batch" />
         <item
             android:id="@+id/nav_manage_batch"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/people_icon"
             android:title="@string/menu_manage_batch" />
     </group>
     <group android:id="@+id/bottom_menu">
         <item
             android:id="@+id/nav_locations"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/location_pin"
             android:title="@string/menu_locations" />
         <item
             android:id="@+id/nav_trainers"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/teacher"
             android:title="@string/menu_trainers" />
         <item
             android:id="@+id/nav_categories"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_categories" />
     </group>
 </menu>

@@ -33,7 +33,7 @@
                 android:layout_gravity="end|right"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/btn_confirm"
+                android:text="@string/btn_update"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon" />
 
 

@@ -52,17 +52,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--    Trainer Tier  -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/settingsFieldSpinner"
-        android:text="Trainer Tier*" />
-    <Spinner
-        android:id="@+id/spnTier"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dialog"
-        style="@style/settingsFieldSpinner"/>
+        style="@style/settingsSpinnerWrapper">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/settingsFieldSpinner"
+            android:text="Trainer Tier*" />
+        <Spinner
+            android:id="@+id/spnTier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            style="@style/settingsFieldSpinner"/>
+    </LinearLayout>
 
 </LinearLayout>
 </layout>

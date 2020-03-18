@@ -31,13 +31,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_assessweek_batchinfo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"-->
+<!--                    android:textSize="@dimen/banner_font_size" />-->
+
                 <TextView
-                    android:id="@+id/tv_assessweek_batchinfo"
+                    android:id="@+id/tv_assessweek_overall_title"
+                    style="@style/globalCardHeaderText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"
-                    android:textSize="@dimen/banner_font_size" />
+                    android:layout_marginStart="10dp"
+                    android:text="@string/title_overall" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -48,13 +56,14 @@
 
                     <TextView
                         android:id="@+id/tv_assessweek_batchaveragelabel"
+                        style="@style/globalCardRowLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weekly_batch_average_label" />
 
                     <TextView
                         android:id="@+id/tv_assessweek_batchaverage"
-                        style="@style/littleImportanceHeader"
+                        style="@style/globalCardRowText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"

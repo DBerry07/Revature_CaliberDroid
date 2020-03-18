@@ -1,12 +1,11 @@
 package com.revature.caliberdroid.ui.batches
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -36,7 +35,10 @@ class BatchSelectionFragment : Fragment(), OnItemSelectedListener {
 
         viewModel.getData()
 
+        setHasOptionsMenu(true)
+
         initializeSpinners()
+
         initializeRecyclerView()
 
         subscribeToBatchesViewModel()
@@ -49,6 +51,33 @@ class BatchSelectionFragment : Fragment(), OnItemSelectedListener {
         yearsArrayAdapter = null
         quartersArrayAdapter = null
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_bar, menu)
+
+        (menu.findItem(R.id.search_bar).actionView as SearchView).apply {
+
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(query: String): Boolean {
+                    val filteredModelList: List<Batch> = filter(viewModel.batches.value!!, query)
+                    (binding.recyclerviewBatchSelectionDisplayBatches.adapter as BatchSelectionAdapter).edit()
+                        .replaceAll(filteredModelList)
+                        .commit()
+                    binding.recyclerviewBatchSelectionDisplayBatches.scrollToPosition(0)
+                    return true
+                }
+            })
+
+            queryHint = "Search by trainer's name"
+
+            binding.root.setOnClickListener { this.clearFocus() }
+        }
     }
 
     companion object {
@@ -131,5 +160,21 @@ class BatchSelectionFragment : Fragment(), OnItemSelectedListener {
                 parent.getItemAtPosition(position) as Int
             else -> viewModel._selectedQuarter = parent?.getItemAtPosition(position) as String
         }
+    }
+
+    private fun filter(
+        models: List<Batch>,
+        query: String
+    ): List<Batch> {
+        val lowerCaseQuery = query.toLowerCase(Locale.ROOT)
+        val filteredModelList: MutableList<Batch> = ArrayList<Batch>()
+        var text: String
+        for (model in models) {
+            text = model.trainerName!!.toLowerCase(Locale.ROOT)
+            if (text.contains(lowerCaseQuery)) {
+                filteredModelList.add(model)
+            }
+        }
+        return filteredModelList
     }
 }

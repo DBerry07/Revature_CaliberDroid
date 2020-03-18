@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,284 +11,254 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/settingsFieldHeading"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_first_name" />
-
-            <EditText
-                android:id="@+id/trainee_first_name"
-                style="@style/settingsFieldEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/trainee_first_name"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <LinearLayout
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trainee_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    style="@style/materialDesignText"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_last_name"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView5"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_last_name" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_last_name"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_last_name"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_email"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView7"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_email" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_email"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_email"
-                android:inputType="textEmailAddress" />
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <LinearLayout
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_phone"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView9"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_phone" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_phone"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_phone"
-                android:inputType="phone" />
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                style="@style/materialDesignText"
+                />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            >
 
-            <TextView
-                android:id="@+id/textView11"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_status" />
-
-            <Spinner
+            <AutoCompleteTextView
+                android:hint="@string/trainee_status"
                 android:id="@+id/trainee_status"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                android:entries="@array/TraineeStatus" />
-        </LinearLayout>
+                android:layout_height="wrap_content"/>
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_college"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView10"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_college" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_college"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_college"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_degree"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView12"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_degree" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_degree"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_degree"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_major"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView13"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_major" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_major"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_major"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_profile"
+            app:helperText="@string/optional"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView14"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_optional_profile" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_profile"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_optional_profile"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_skype"
+            app:helperText="@string/optional"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView8"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_optional_skype" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_skype"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_optional_skype"
-                android:inputType="textPersonName" />
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_recruiter"
+            app:helperText="@string/optional"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView15"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_optional_recruiter" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_recruiter"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_optional_recruiter"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_screener"
+            app:helperText="@string/optional"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView19"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_optional_screener" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_screener"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_optional_screener"
-                android:inputType="textPersonName" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:hint="@string/trainee_project"
+            app:helperText="@string/optional"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <TextView
-                android:id="@+id/textView21"
-                style="@style/settingsFieldHeading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/trainee_optional_project" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/trainee_project"
-                style="@style/settingsFieldEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/trainee_optional_project"
-                android:inputType="textPersonName" />
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                style="@style/materialDesignText"
+                />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/TM_btn_create_trainee"

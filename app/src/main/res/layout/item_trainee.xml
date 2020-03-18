@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="10dp"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
+    style="@style/traineeCard"
     >
 
     <LinearLayout
@@ -70,7 +66,7 @@
                         android:id="@+id/TM_iv_arrow"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:src="@drawable/ic_expand_arrow" />
                 </LinearLayout>
 
@@ -79,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:id="@+id/trainee_buffer"
@@ -406,6 +402,27 @@
                                 android:textAlignment="viewEnd" />
                         </LinearLayout>
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/trainee_details_row6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/empty" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10"
+                            app:srcCompat="@drawable/ic_collapse_arrow" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

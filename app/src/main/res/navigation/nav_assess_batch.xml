@@ -38,8 +38,8 @@
     <fragment
         android:id="@+id/assessmentTraineeGradesFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.assessweekview.overview.assessment.AssessmentTraineeGradesFragment"
-        android:label="@string/menu_assess_batch"
-        tools:layout="@layout/fragment_assessment_trainee_grades" >
+        android:label="@string/button_trainee_grades"
+        tools:layout="@layout/fragment_assessment_trainee_grades">
         <argument
             android:name="assessmentId"
             app:argType="long" />

@@ -2,9 +2,8 @@ package com.revature.caliberdroid.ui.qualityaudit.trainees
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -15,6 +14,8 @@ import com.revature.caliberdroid.databinding.FragmentQualityAuditTraineesBinding
 import com.revature.caliberdroid.databinding.ItemQualityAuditTraineeBinding
 import com.revature.caliberdroid.ui.qualityaudit.StatusHandler
 import timber.log.Timber
+import java.util.*
+import kotlin.Comparator
 
 class QualityAuditTraineesFragment : Fragment() {
 
@@ -43,11 +44,46 @@ class QualityAuditTraineesFragment : Fragment() {
             viewModel
         )
 
+        setHasOptionsMenu(true)
+
         viewModel.getTraineesWithNotes(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
 
         subscribeToViewModel()
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_bar, menu)
+
+        (menu.findItem(R.id.search_bar).actionView as SearchView).apply {
+
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(query: String): Boolean {
+                    val filteredModelList: List<TraineeWithNotesLiveData> =
+                        filter(viewModel.traineesWithNotesLiveData.value!!, query)
+                    (binding.rvAudittraineesTraineeslist.adapter as QualityAuditTraineesAdapter).edit()
+                        .replaceAll(filteredModelList)
+                        .commit()
+                    binding.rvAudittraineesTraineeslist.scrollToPosition(0)
+                    return true
+                }
+            })
+
+            queryHint = "Search by trainer's name"
+
+            binding.root.setOnClickListener { this.clearFocus() }
+        }
     }
 
     private fun subscribeToViewModel() {
@@ -56,6 +92,22 @@ class QualityAuditTraineesFragment : Fragment() {
                 .replaceAll(it)
                 .commit()
         })
+    }
+
+    private fun filter(
+        models: List<TraineeWithNotesLiveData>,
+        query: String
+    ): List<TraineeWithNotesLiveData> {
+        val lowerCaseQuery = query.toLowerCase(Locale.ROOT)
+        val filteredModelList: MutableList<TraineeWithNotesLiveData> = ArrayList()
+        var text: String
+        for (model in models) {
+            text = model.value!!.trainee!!.name!!.toLowerCase(Locale.ROOT)
+            if (text.contains(lowerCaseQuery)) {
+                filteredModelList.add(model)
+            }
+        }
+        return filteredModelList
     }
 
     class TraineeStatusHandler(

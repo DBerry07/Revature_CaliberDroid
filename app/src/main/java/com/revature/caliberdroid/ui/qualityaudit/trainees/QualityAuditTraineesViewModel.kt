@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revature.caliberdroid.data.model.AuditTraineeWithNotes
 import com.revature.caliberdroid.data.model.Batch
+import com.revature.caliberdroid.data.model.Trainee
 import com.revature.caliberdroid.data.repository.QualityAuditRepository
 import timber.log.Timber
 
@@ -20,6 +21,10 @@ class QualityAuditTraineesViewModel : ViewModel() {
         saveAuditWeekNotesThread?.interrupt()
         Timber.d("Saving  Note")
         QualityAuditRepository.putTraineeWithNotes(traineeWithNotes)
+    }
+
+    fun putTrainee(trainee: Trainee) {
+        QualityAuditRepository.putTrainee(trainee)
     }
 
     fun startDelayedSaveThread(

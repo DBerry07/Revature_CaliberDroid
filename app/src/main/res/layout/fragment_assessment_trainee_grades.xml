@@ -42,16 +42,16 @@
 
                         <TextView
                             android:id="@+id/tv_assessment_type_label"
+                            style="@style/globalCardRowLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/assessment_type_label" />
 
                         <TextView
                             android:id="@+id/tv_assessment_type"
-                            style="@style/littleImportanceHeader"
+                            style="@style/globalCardRowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:text="@{assessment.assessmentType}" />
                     </LinearLayout>
 
@@ -63,16 +63,16 @@
 
                         <TextView
                             android:id="@+id/tv_assessment_pointslabel"
+                            style="@style/globalCardRowLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/assessment_points_label" />
 
                         <TextView
                             android:id="@+id/tv_assessment_points"
-                            style="@style/littleImportanceHeader"
+                            style="@style/globalCardRowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:text="@{Integer.toString(assessment.rawScore)}" />
                     </LinearLayout>
 
@@ -92,16 +92,16 @@
 
                         <TextView
                             android:id="@+id/tv_assessment_averagelabel"
+                            style="@style/globalCardRowLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/assessment_batch_avg_label" />
 
                         <TextView
                             android:id="@+id/tv_assessment_average"
-                            style="@style/littleImportanceHeader"
+                            style="@style/globalCardRowText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
                             android:text="@{@string/grade_format(average)}" />
                     </LinearLayout>
 
@@ -109,16 +109,6 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/tv_assessment_traineegrades_label"
-            style="@style/littleImportanceHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/trainees_grades_label" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_assessment_traineegrades"

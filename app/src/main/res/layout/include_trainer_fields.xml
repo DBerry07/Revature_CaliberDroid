@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="Full Name"
+        android:hint="Full Name*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etFullName"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="E-mail"
+        android:hint="E-mail*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/settingsMaterialEditText"
-        android:hint="Title"
+        android:hint="Title*"
         android:background="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTitle"
@@ -55,14 +55,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/settingsFieldHeading"
-        android:text="Trainer Tier" />
+        style="@style/settingsFieldSpinner"
+        android:text="Trainer Tier*" />
     <Spinner
         android:id="@+id/spnTier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spinnerMode="dialog"
-        style="@style/settingsField"/>
+        style="@style/settingsFieldSpinner"/>
 
 </LinearLayout>
 </layout>

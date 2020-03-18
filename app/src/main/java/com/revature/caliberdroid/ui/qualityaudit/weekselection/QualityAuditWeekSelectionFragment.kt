@@ -67,7 +67,8 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = viewModel.batchSelected.trainerName + " - " + viewModel.batchSelected.skillType
+        (activity as AppCompatActivity).supportActionBar?.title =
+            "${viewModel.batchSelected.trainerName} - ${viewModel.batchSelected.skillType}"
     }
 
     override fun onDestroyView() {

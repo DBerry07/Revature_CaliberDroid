@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/qualityAuditBatchSelectionFragment"
         android:name="com.revature.caliberdroid.ui.qualityaudit.QualityAuditBatchSelectionFragment"
-        android:label="Quality Audit - Select a Batch"
+        android:label="Select a Batch"
         tools:layout="@layout/fragment_quality_audit_batch_selection">
         <action
             android:id="@+id/action_qualityAuditBatchSelectionFragment_to_auditWeekSelectionFragment"

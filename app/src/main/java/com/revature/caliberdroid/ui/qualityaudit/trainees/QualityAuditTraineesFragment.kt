@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -37,6 +38,11 @@ class QualityAuditTraineesFragment : Fragment() {
 
         _binding = FragmentQualityAuditTraineesBinding.inflate(layoutInflater)
 
+        viewModel.batch = args.batchSelected
+        viewModel.weekNumber = args.auditWeekNotesSelected.weekNumber
+
+        binding.auditWeekNotes = args.auditWeekNotesSelected
+
         binding.rvAudittraineesTraineeslist.layoutManager = LinearLayoutManager(requireContext())
         binding.rvAudittraineesTraineeslist.adapter = QualityAuditTraineesAdapter(
             requireContext(),
@@ -46,7 +52,7 @@ class QualityAuditTraineesFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        viewModel.getTraineesWithNotes(args.batchSelected, args.auditWeekNotesSelected.weekNumber)
+        viewModel.getTraineesWithNotes()
 
         subscribeToViewModel()
 
@@ -56,6 +62,12 @@ class QualityAuditTraineesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            "${viewModel.batch.trainerName} - ${viewModel.batch.skillType}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

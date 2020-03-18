@@ -1,11 +1,11 @@
 package com.revature.caliberdroid.ui.qualityaudit.overall
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -64,6 +64,12 @@ class QualityAuditOverallFragment : Fragment(), SkillCategoryAdapter.OnDeleteCli
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            "${viewModel.batch.trainerName} - ${viewModel.batch.skillType}"
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -107,7 +113,9 @@ class QualityAuditOverallFragment : Fragment(), SkillCategoryAdapter.OnDeleteCli
 
         binding.btnAuditoverallAddcategories.setOnClickListener { showAddCategoriesDialog() }
 
-        binding.btnAuditoverallSave.setOnClickListener { }
+        binding.btnAuditoverallSave.setOnClickListener {
+            binding.root.clearFocus()
+        }
 
         binding.root.setOnClickListener {
             binding.root.clearFocus()

@@ -29,15 +29,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:orientation="vertical">
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_assessweek_batchinfo"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="20dp"-->
-<!--                    android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"-->
-<!--                    android:textSize="@dimen/banner_font_size" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_assessweek_batchinfo"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="20dp"-->
+                <!--                    android:text="@{@string/batch_with_week(assessWeekModel.assessWeekNotes.batch.trainerName,assessWeekModel.assessWeekNotes.batch.skillType,assessWeekModel.assessWeekNotes.weekNumber)}"-->
+                <!--                    android:textSize="@dimen/banner_font_size" />-->
 
                 <TextView
                     android:id="@+id/tv_assessweek_overall_title"
@@ -51,7 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <TextView

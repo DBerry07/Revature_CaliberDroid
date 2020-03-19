@@ -22,6 +22,7 @@
         android:id="@+id/imgStatusIcon"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

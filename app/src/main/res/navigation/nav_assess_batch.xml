@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/assessBatchSelectionFragment"
         android:name="com.revature.caliberdroid.ui.assessbatch.AssessBatchSelectionFragment"
-        android:label="@string/menu_assess_batch"
+        android:label="Assess - Select a Batch"
         tools:layout="@layout/fragment_assess_batch_selection">
         <action
             android:id="@+id/action_assessBatchSelectionFragment_to_assessWeekSelectionFragment"

@@ -23,6 +23,7 @@ class BatchesViewModel : ViewModel() {
         }
 
     private fun getBatches() {
+        batchesLiveData.value = arrayListOf()
         BatchRepository.getBatchesByYear(batchesLiveData, selectedYear!!)
     }
 

@@ -62,7 +62,7 @@ class BatchAdapter(
             dialogButton1.setOnClickListener {
                 Snackbar.make(this.itemView,"Batch Deleted Successfully!", Snackbar.LENGTH_SHORT).show()
                 BatchRepository.deleteBatch(this.currentItem)
-                onItemListener.onDelete()
+                onItemListener.onDelete(this.currentItem)
                 dialog.dismiss()
             }
 
@@ -115,7 +115,7 @@ class BatchAdapter(
 
     interface OnItemClickListener {
         fun onBatchClick(batchClicked: Batch, path: Int)
-        fun onDelete()
+        fun onDelete(batch: Batch)
     }
 
 }

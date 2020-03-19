@@ -16,6 +16,7 @@ import com.revature.caliberdroid.databinding.FragmentBatchesBinding
 import com.revature.caliberdroid.ui.managebatches.BatchAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_batches.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemSelectedListener,
@@ -40,7 +41,7 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
         // set up search bar
         setHasOptionsMenu(true)
 
-        binding.tvManageBatchesNoOfBatchesValue.text = binding.root.recyclerview_manage_batches.adapter?.itemCount.toString()
+        binding.tvManageBatchesNoOfBatchesValue.text = "0"
         binding.btnManageBatchCreateBatch.setOnClickListener {
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToCreateBatchFragment(null))
         }
@@ -61,6 +62,11 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getValidYears()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         yearsArrayAdapter = null
@@ -79,7 +85,8 @@ class ManageBatchFragment : Fragment(), OnItemClickListener, AdapterView.OnItemS
             findNavController().navigate(ManageBatchFragmentDirections.actionManageBatchFragmentToTraineeFragment(batchClicked))
     }
 
-    override fun onDelete(){
+    override fun onDelete(batch: Batch){
+        (viewModel.batchesLiveData.value as ArrayList).remove(batch)
         findNavController().navigate(R.id.manageBatchFragment)
     }
 

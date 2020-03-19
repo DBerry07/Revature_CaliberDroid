@@ -25,35 +25,26 @@
             <!-- Heading -->
 
             <TextView
-                android:id="@+id/tvTrainerLabel"
+                android:id="@+id/tvTrainer"
                 style="@style/globalCardHeaderLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name: "
+                android:text="@{model.name}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTrainer"
-                style="@style/globalCardHeaderText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{model.name}"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTrainerLabel"
-                app:layout_constraintStart_toEndOf="@+id/tvTrainerLabel" />
 
             <LinearLayout
                 android:id="@+id/visibleRows"
                 style="@style/globalCardAlwaysVisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/tvTrainerLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvTrainerLabel">
+                app:layout_constraintStart_toStartOf="@+id/tvTrainer"
+                app:layout_constraintTop_toBottomOf="@+id/tvTrainer">
 
                 <LinearLayout
+                    style="@style/globalCardRowWrapper"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/globalCardRowWrapper">
+                    android:layout_height="wrap_content">
                     <!--Title-->
                     <TextView
                         style="@style/globalCardRowLabel"

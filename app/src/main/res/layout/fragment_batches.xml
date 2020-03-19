@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:text=""
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/manage_batches_number_label"
         app:layout_constraintStart_toEndOf="@+id/manage_batches_number_label"
         app:layout_constraintTop_toTopOf="@+id/manage_batches_number_label" />
@@ -63,22 +64,21 @@
         android:id="@+id/spinner_manageBatches"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="12dp"
         android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="14dp"
-        android:text="Select Year: "
+        android:text="Select year:"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_manage_batch_create_batch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_manageBatches" />
+        app:layout_constraintTop_toTopOf="@+id/btn_manage_batch_create_batch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -41,6 +41,7 @@ class AssessWeekSelectionFragment : Fragment(), WeekSelectionAdapter.OnItemClick
 
         assessWeekViewModel.loadBatchWeeks(batch)
         assessWeekViewModel.batchAssessWeekNotes.observe(viewLifecycleOwner, Observer {
+            binding.tvWeekselectionNoresults.visibility = if (it.size == 0) View.VISIBLE else View.GONE
             (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter)
                 .edit()
                 .replaceAll(assessWeekViewModel.batchAssessWeekNotes.value!!)

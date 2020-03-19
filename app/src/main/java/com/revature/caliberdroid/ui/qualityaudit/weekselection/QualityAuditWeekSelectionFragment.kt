@@ -87,8 +87,8 @@ class QualityAuditWeekSelectionFragment : Fragment(), OnItemClickListener {
     }
 
     private fun subscribeToViewModel() {
-
         viewModel.auditWeekNotesLiveData.observe(viewLifecycleOwner, Observer { value ->
+            binding.tvWeekselectionNoresults.visibility = if (value.size == 0) View.VISIBLE else View.GONE
             (binding.rvWeekselectionWeeks.adapter as WeekSelectionAdapter).edit()
                 .replaceAll(value)
                 .commit()

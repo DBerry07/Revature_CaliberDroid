@@ -14,9 +14,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/textview_border"
         app:cardCornerRadius="7dp"
         app:cardElevation="7dp"
@@ -278,10 +278,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/batchrow_expand_arrow_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_expand_arrow"
-                android:contentDescription="@string/batchrow_expand_arrow_description" />
+                app:srcCompat="@drawable/ic_expand_arrow" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

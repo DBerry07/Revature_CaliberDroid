@@ -81,6 +81,7 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
 
         assessWeekOverviewBinding.rvAssessweekAssessments.layoutManager = LinearLayoutManager(requireContext())
         assessWeekOverviewBinding.rvAssessweekAssessments.adapter = AssessmentsRecyclerAdapter(requireContext(), assessWeekViewModel, this, this)
+        assessWeekOverviewBinding.tvAssessweekNoassessments.visibility = if (assessWeekViewModel.assessWeekNotes.assessments.isEmpty()) View.VISIBLE else View.GONE
 
         return assessWeekOverviewBinding.root
     }
@@ -124,7 +125,12 @@ class AssessWeekOverviewFragment : Fragment(), AssessmentsRecyclerAdapter.OnItem
             assessment.assessmentCategory = (dialogBinding.spinnerCreateassessmentdialogSkill.selectedItem as Category).categoryId
             assessment.rawScore = dialogBinding.etCreateassessmentdialogPoints.text.toString().toInt()
 
-            assessWeekViewModel.createAssessmentForBatchWeek(assessment)
+            val added = assessWeekViewModel.createAssessmentForBatchWeek(assessment)
+
+            added.observe(viewLifecycleOwner, Observer {
+                assessWeekOverviewBinding.tvAssessweekNoassessments.visibility = if (assessWeekViewModel.assessWeekNotes.assessments.isEmpty()) View.VISIBLE else View.GONE
+                (assessWeekOverviewBinding.rvAssessweekAssessments.adapter as AssessmentsRecyclerAdapter).notifyDataSetChanged()
+            })
         }
         builder.setNegativeButton(R.string.button_cancel, null)
 

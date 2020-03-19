@@ -86,6 +86,7 @@ class BatchSelectionFragment : Fragment(), OnItemSelectedListener {
 
     private fun subscribeToBatchesViewModel() {
         viewModel.batches.observe(viewLifecycleOwner, Observer {
+            binding.tvBatchselectionNobatches.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             (binding.recyclerviewBatchSelectionDisplayBatches.adapter as BatchSelectionAdapter).edit()
                 .replaceAll(it)
                 .commit()

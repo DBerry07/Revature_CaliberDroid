@@ -16,20 +16,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.assessbatch.weekselection.AssessWeekSelectionFragment">
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_weekselection_batchinfo"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:text="@{@string/batch_with_starting_date(batch.trainerName, batch.skillType, batch.startDate)}"-->
-<!--            android:textSize="@dimen/banner_font_size"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
         <Button
             android:id="@+id/btn_weekselection_addweek"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
@@ -55,5 +41,18 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_weekselection_addweek" />
+
+        <TextView
+            android:id="@+id/tv_weekselection_noresults"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/no_weeks_message"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/centerScreenNoResults"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
